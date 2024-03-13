@@ -1,0 +1,30 @@
+required:
+  - messages
+  - maxMessages
+type: object
+properties:
+  messages:
+    type: array
+    items:
+      $ref: 'receiverResponseItem.yaml'
+  maxMessages:
+    type: integer
+    description: maximale Anzahl von Meldungen im Ergebnis
+description: Die bis zu 'maxMessages' ältesten X Meldungen entsprechend der Meldungsabfrage
+example:
+  messages:
+    - messageId: "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"
+      sequenceId: 123456
+      description: Einsatzübergabe am 13.11.2023 um 20:20
+      sentDate: 2023-11-13T20:20:39+00:00
+      timeout: 300
+      source: 1.2.3.4.5.6
+      destination: [1.2.3.4.5.7]
+      payload:
+        schemaId: incident
+        schemaVersion: "1.0"
+        incident: {
+          id: f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454,
+          sentByDispacherAt: 2023-11-13T20:20:39+00:00
+        }
+  maxMessages: 5

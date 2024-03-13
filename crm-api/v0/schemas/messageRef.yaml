@@ -1,0 +1,17 @@
+required:
+  - destination
+  - sequenceId
+type: object
+properties:
+  destination:
+    type: string
+    pattern: "^([0-9]+\\.?)+$"
+    description: Adressat, diese Referenz zeigt auf eine Meldung, die genau an diese OID adressiert wurde, nicht an eine OID aus einem Unterbaum
+  sequenceId:
+    type: integer
+    format: int64
+    description: eine aufsteigende Meldung-Sequence-ID
+description: Meldungsreferenz
+example:
+  destination: 1.2.3.4.5.6
+  sequenceId: 123456

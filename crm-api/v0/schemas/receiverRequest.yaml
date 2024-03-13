@@ -1,0 +1,15 @@
+required:
+  - destination
+type: object
+properties:
+  destination:
+    type: string
+    pattern: "^([0-9]+\\.?)+$"
+    description: Adressat, Meldungen an alle Adressen aus dem OID-Unterbaum des Adressaten werden abgefragt
+  maxMessages:
+    type: integer
+    description: maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert
+description: Meldungsabfrage
+example:
+  destination: 1.2.3.4.5.6
+  maxMessages: 5

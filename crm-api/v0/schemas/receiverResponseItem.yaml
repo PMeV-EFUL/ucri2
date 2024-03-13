@@ -1,0 +1,16 @@
+allOf:
+  - $ref: 'envelope.yaml'
+  - type: object
+    required:
+      - messageId
+      - sequenceId
+      - sentDate
+      - timeout
+    properties:
+      sequenceId:
+        type: integer
+        format: int64
+        description: Meldungs-Sequence-ID
+          Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut.
+          Sequence-ID wird verwendet um die erfolgreiche Verarbeitung einer Meldung durch Commit-Operation zu signalisieren. 
+          Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt.

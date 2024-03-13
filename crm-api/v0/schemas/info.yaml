@@ -1,0 +1,15 @@
+required:
+  - apiVersion
+  - crmProvider
+type: object
+properties:
+  apiVersion:
+    type: string
+    description: CRM API Version
+  crmProvider:
+    type: string
+    description: Hersteller des CRM Moduls
+description: CRM Information
+example:
+  apiVersion: "0.1"
+  crmProvider: "iSE"

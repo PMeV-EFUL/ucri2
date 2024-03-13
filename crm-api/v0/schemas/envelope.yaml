@@ -1,0 +1,66 @@
+required:
+  - source
+  - destination
+  - payload
+type: object
+properties:
+  description:
+    type: string
+    description: Freitext-Beschreibung einer Meldung
+  messageId:
+    type: string
+    format: uuid
+    description: Meldungs-ID - dient der formalen Verarbeitung und Zuordnung der Meldung.
+      Falls nicht übergeben, wird die Meldungs-ID automatisch generiert.
+      Bei der Weiterleitung einer Meldung zwischen CRM (Routing) muss die ursprüngliche Meldungs-ID weitergegeben werden.
+  sentDate:
+    type: string
+    format: date-time
+    description: Sendedatum
+      Falls nicht übergeben, wird das Sendedatum automatisch gesetzt.
+      Bei der Weiterleitung einer Meldung zwischen CRM (Routing) soll das ursprüngliche Sendedatum weitergegeben werden.
+  timeout:
+    type: integer
+    description: Anzahl der Sekunden, welche die Meldung auf der Vermittlungsebene verweilen darf, bevor die Zustellversuche
+      abgebrochen und die Meldung - mit Fehlermeldung an den Sender - verworfen wird. Defaultwert falls nicht definiert.
+      Bei der Weiterleitung einer Meldung zwischen CRM (Routing) soll das ursprüngliche Timeout weitergegeben werden.
+  source:
+    type: string
+    pattern: "^([0-9]+\\.?)+$"
+    description: Sender-Adresse, OID
+  destination:
+    type: array
+    items:
+      type: string
+      pattern: "^([0-9]+\\.?)+$"
+    description: Empfänger-Adressen, OID-Liste
+  tags:
+    type: array
+    items:
+      type: string
+    description: Liste an Zeichenketten, die eine inhaltliche Zusammenführung von Nachrichten zu einem Thema erlauben.
+  payload:
+    type: object
+    description: Meldung auf der Anwendungsebene
+  signatureAlgorithm:
+    type: string
+    description: Der Signaturalgorithmus mit welchem die Prüfsumme der Anwendungsmeldung (payload) errechnet und signiert wurde
+  signature:
+    type: string
+    format: base64
+    description: eine Signatur der Nachricht zur Überprüfung ihrer Authentizität und Unverfälschtheit
+description: Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload
+example:
+  messageId: "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"
+  description: Einsatzübergabe am 13.11.2023 um 20:20
+  sentDate: 2023-11-13T20:20:39+00:00
+  timeout: 300
+  source: 1.2.3.4.5.6
+  destination: [1.2.3.4.5.7]
+  payload:
+    schemaId: incident
+    schemaVersion: "1.0"
+    incident: {
+      id: f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454,
+      sentByDispacherAt: 2023-11-13T20:20:39+00:00
+    }

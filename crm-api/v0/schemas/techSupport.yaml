@@ -1,0 +1,19 @@
+required:
+  - phone
+  - e-mail
+type: object
+properties:
+  phone:
+    type: string
+    description: Telefonnummer des technischen Supports
+  e-mail:
+    type: string
+    description: E-Mail des technischen Supports
+  address:
+    type: string
+    description: Postadresse des technischen Supports
+description: Kontakt zum technischen Support
+example:
+  phone: +49 69 123456
+  e-mail: support@lst-essen.de
+  address: Musterstraße 1, 45133 Essen

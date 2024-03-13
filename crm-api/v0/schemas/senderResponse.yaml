@@ -1,0 +1,7 @@
+allOf:
+  - $ref: 'envelope.yaml'
+  - type: object
+    required:
+      - messageId
+      - sentDate
+      - timeout

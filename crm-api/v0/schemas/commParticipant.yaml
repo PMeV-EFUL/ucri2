@@ -1,0 +1,52 @@
+required:
+  - id
+  - systemName
+  - operatorName
+  - operatorShortName
+  - supportedMessages
+  - techSupport
+type: object
+properties:
+  id:
+    type: string
+    pattern: "^([0-9]+\\.?)+$"
+    description: KT-OID. Beim Anlegen eines KT-Kontos darf KT-OID auf Ebene 9 (CRM) beschränkt sein.
+      In diesem Fall wird die OID um die fortlaufende KT-Nummer (Ebene 10) ergänzt.
+  systemName:
+    type: string
+    description: Systemname
+  operatorName:
+    type: string
+    description: Betreibername
+  operatorShortName:
+    type: string
+    description: Betreibername-Kürzel
+  supportedMessages:
+    type: array
+    items:
+      $ref: 'schemaRef.yaml'
+  techSupport:
+      $ref: 'techSupport.yaml'
+  pubKey:
+    type: string
+    description: Public Key des KT
+  status:
+    type: string
+    enum:
+      - "on"
+      - "off"
+      - "unknown"
+    description: Verfügbarkeitsstatus des KT
+description: Beschreibung eines Kommunikationsteilnehmers
+example:
+  id: 1.2.3.1.276.5.1.58.28.2.1
+  systemName: ELS Essen
+  operatorName: Einsatzleitstelle Essen
+  operatorShortName: ELS E
+  supportedMessages:
+    - schemaId: incident
+      schemaVersion: 0.1
+    - schemaId: incidentAck
+      schemaVersion: 0.2
+  pubKey: "R714k+ssdkiy7893ln..."
+  status: "off"
