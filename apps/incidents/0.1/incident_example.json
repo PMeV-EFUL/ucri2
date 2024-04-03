@@ -1,0 +1,25 @@
+{
+    "$schema": "./incident_schema.json",
+    "schemaId": "incident",
+    "schemaVersion": "0.1",
+    "incident": {
+        "id": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+        "sentByDispatcherAt": "2023-11-13T20:20:39+00:00",
+        "sentByElsAt": "2023-11-13T20:20:39+00:00"
+    },
+    "requestedResources": [
+        {
+            "requestId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+            "resourceType": "KTW"
+        },
+        {
+            "requestId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+            "resourceType": "Sonstwas"
+        }
+    ],
+    "resources": [
+        {
+            "resourceId": "R12345678.12"
+        }
+    ]
+}

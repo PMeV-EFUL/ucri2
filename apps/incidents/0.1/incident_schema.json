@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Einsatzübergabe",
+    "required": [
+        "incident"
+    ],
+    "type": "object",
+    "properties": {
+        "incident": {
+            "title": "Allgemeine Einsatzangaben",
+            "required": [
+                "id",
+                "sentByDispatcherAt",
+                "sentByElsAt"
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "title": "Eindeutige ID des Einsatzes",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "sentByDispatcherAt": {
+                    "title": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "sentByElsAt": {
+                    "title": "Zeitpunkt zu dem das sendende ELS den Einsatz übermittelt hat ",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "requestedResources": {
+            "title": "Die angeforderten Einsatzmittel und/oder Einsatzmitteltypen",
+            "type": "array",
+            "items": {
+                "title": "Definition des angeforderten Einsatzmittels oder Einsatzmitteltypen",
+                "required": [
+                    "requestId",
+                    "resourceType"
+                ],
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "requestId": {
+                        "title": "Eindeutige ID der Anforderung",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "resourceType": {
+                        "title": "Ressourcentyp",
+                        "type": "string",
+                        "enum": ["KTW", "Sonstwas"]
+                    },
+                    "resourceName": {
+                        "title": "Ressourcentyp",
+                        "type": "string",
+                        "maxLength": 10
+                    },
+                    "resourceId": {
+                        "title": "die ID der Ressource der empfangenden Leitstelle",
+                        "type": "string",
+                        "maxLength": 20
+                    }
+                }
+            }
+        },
+        "resources": {
+            "title": "Die am Einsatz beteiligten Ressourcen",
+            "type": "array",
+            "items": {
+                "title": "Definition der am Einsatz beteiligten Ressource",
+                "required": [
+                    "resourceId"
+                ],
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "resourceId": {
+                        "title": "die ID der Ressource",
+                        "type": "string",
+                        "maxLength": 20
+                    }
+                }
+            }
+        }
+    }
+}
