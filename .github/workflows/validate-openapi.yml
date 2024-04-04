@@ -1,0 +1,10 @@
+on: push
+name: Validate API
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: swagger-validator
+      uses: mbowman100/swagger-validator-action@master
+      with:
+        files: api/crm/0.1/crm.yaml
