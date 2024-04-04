@@ -7,7 +7,7 @@ jobs:
     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
     - name: Check out repository code
       uses: actions/checkout@v4
-    - name: swagger-validator
-      uses: mbowman100/swagger-validator-action@master
+    - name: Validate OpenAPI definition
+      uses: char0n/swagger-editor-validate@v1
       with:
-        files: api/crm/0.1/crm.yaml
+        definition-file: api/crm/0.1/crm.yaml
