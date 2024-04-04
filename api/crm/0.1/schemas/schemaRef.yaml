@@ -12,4 +12,4 @@ properties:
 description: Referenz auf eine Meldungsdatenschema
 example:
   schemaId: incident
-  schemaVersion: 0.1
+  schemaVersion: '0.1'

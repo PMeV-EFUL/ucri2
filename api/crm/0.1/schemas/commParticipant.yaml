@@ -50,3 +50,7 @@ example:
       schemaVersion: 0.2
   pubKey: "R714k+ssdkiy7893ln..."
   status: "off"
+  techSupport:
+    phone: "001-555-1234"
+    e-mail: "abc@lst-essen.de"
+
