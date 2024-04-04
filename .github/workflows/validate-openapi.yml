@@ -11,3 +11,4 @@ jobs:
       uses: stoplightio/spectral-action@latest
       with:
         file_glob: api/crm/0.1/crm.yaml
+        spectral_ruleset: api/crm/0.1/.spectral.yaml
