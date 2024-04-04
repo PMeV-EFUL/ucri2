@@ -8,6 +8,6 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v4
     - name: Validate OpenAPI definition
-      uses: char0n/swagger-editor-validate@v1
+      uses: stoplightio/spectral-action@latest
       with:
-        definition-file: api/crm/0.1/crm.yaml
+        file_glob: api/crm/0.1/crm.yaml
