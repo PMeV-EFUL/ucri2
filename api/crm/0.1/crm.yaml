@@ -247,8 +247,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Envelope:
-      $ref: 'schemas/envelope.yaml'
     SenderRequest:
       $ref: 'schemas/senderRequest.yaml'
     SenderResponse:
