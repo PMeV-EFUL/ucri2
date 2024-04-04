@@ -47,7 +47,7 @@ example:
     - schemaId: incident
       schemaVersion: '0.1'
     - schemaId: incidentAck
-      schemaVersion: 0.2
+      schemaVersion: '0.2'
   pubKey: "R714k+ssdkiy7893ln..."
   status: "off"
   techSupport:
