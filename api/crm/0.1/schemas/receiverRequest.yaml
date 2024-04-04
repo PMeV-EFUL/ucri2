@@ -7,7 +7,7 @@ properties:
     pattern: "^([0-9]+\\.?)+$"
     description: Adressat, Meldungen an alle Adressen aus dem OID-Unterbaum des Adressaten werden abgefragt
   maxMessages:
-    type: ixnteger
+    type: integer
     description: maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert
 description: Meldungsabfrage
 example:
