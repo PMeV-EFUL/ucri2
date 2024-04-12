@@ -11,6 +11,6 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 18
-    - run: npm install -g ajv-cli
-    - run: find apps -name '*_schema.json' -print0 | xargs -n 1 -0 ajv compile -s
+    - run: npm install -g ajv-cli ajv-formats
+    - run: find apps -name '*_schema.json' -print0 | xargs -n 1 -0 ajv compile -c ajv-formats -s
 

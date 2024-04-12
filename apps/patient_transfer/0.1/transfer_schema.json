@@ -71,60 +71,61 @@
                     }
                 }
             }
-        }
-    },
-    "patient": {
-        "title": "Patientendaten",
-        "required": [
-            "id",
-            "sentByDispatcherAt",
-            "sentByElsAt"
-        ],
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-            "firstName": {
-                "title": "Vorname",
-                "type": "string"
-            },
-            "lastName": {
-                "title": "Nachname",
-                "type": "string"
-            },
-            "dateOfBirth": {
-                "title": "Geburtsdatum",
-                "type": "date"
-            },
-            "gender": {
-                "title": "Geschlecht",
-                "type": "string"
-            },
-            "diagnosis": {
-                "title": "Diagnose",
-                "type": "string"
-            },
-            "telphoneNumber": {
-                "title": "Telefonnummer",
-                "type": "string"
+        },
+        "patient": {
+            "title": "Patientendaten",
+            "required": [
+                "id",
+                "sentByDispatcherAt",
+                "sentByElsAt"
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "firstName": {
+                    "title": "Vorname",
+                    "type": "string"
+                },
+                "lastName": {
+                    "title": "Nachname",
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "title": "Geburtsdatum",
+                    "type": "string",
+                    "format": "date"
+                },
+                "gender": {
+                    "title": "Geschlecht",
+                    "type": "string"
+                },
+                "diagnosis": {
+                    "title": "Diagnose",
+                    "type": "string"
+                },
+                "telphoneNumber": {
+                    "title": "Telefonnummer",
+                    "type": "string"
+                }
             }
-        }
-    },
-    "informer": {
-        "title": "Meldender/Anrufer",
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-            "firstName": {
-                "title": "Vorname",
-                "type": "string"
-            },
-            "lastName": {
-                "title": "Nachname",
-                "type": "string"
-            },
-            "telphoneNumber": {
-                "title": "Telefonnummer",
-                "type": "string"
+        },
+        "informer": {
+            "title": "Meldender/Anrufer",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "firstName": {
+                    "title": "Vorname",
+                    "type": "string"
+                },
+                "lastName": {
+                    "title": "Nachname",
+                    "type": "string"
+                },
+                "telphoneNumber": {
+                    "title": "Telefonnummer",
+                    "type": "string"
+                }
             }
         }
     }
