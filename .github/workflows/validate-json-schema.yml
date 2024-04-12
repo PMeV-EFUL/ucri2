@@ -1,0 +1,13 @@
+on: push
+name: Validate JSON Schema
+jobs:
+  validate:
+    permissions: write-all
+    runs-on: golang:1.22-bookworm
+    steps:
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+    - name: Check out repository code
+      uses: actions/checkout@v4
+    - run: go install github.com/santhosh-tekuri/jsonschema/cmd/jv@latest
+    - run: find apps -name '*.json' -exec jv {} \; -print
+
