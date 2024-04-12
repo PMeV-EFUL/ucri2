@@ -1,13 +1,16 @@
 on: push
-name: Validate JSON Schema
+name: Validate JSON Schema with ajv
 jobs:
   validate:
     permissions: write-all
-    runs-on: golang:1.22-bookworm
+    runs-on: ubuntu-latest
     steps:
     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
     - name: Check out repository code
       uses: actions/checkout@v4
-    - run: go install github.com/santhosh-tekuri/jsonschema/cmd/jv@latest
-    - run: find apps -name '*.json' -exec jv {} \; -print
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - run: npm install -g ajv-cli
+    - run: find apps -name '*.json' -print0 | xargs -n 1 -0 ajv compile -s
 
