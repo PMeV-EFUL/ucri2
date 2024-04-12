@@ -1,0 +1,209 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/incident_compat/0.1/incident",
+  "title": "Einsatzübergabe",
+  "required": [
+    "Incident"
+  ],
+  "type": "object",
+  "properties": {
+    "items": { "$ref": "#/$defs/Incident" }
+  },
+  "$defs": {
+    "Incident": {
+      "description": "Describes an incident data object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of the incident"
+        },
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Classifications of the incident"
+        },
+        "sharedIncidentId": {
+          "type": "string",
+          "description": "GUID is defined by the sender system before the transfer. Serves to identify the incident on all systems involved."
+        },
+        "sender": {
+          "type": "string",
+          "description": "Identification of the sending control station"
+        },
+        "target": {
+          "type": "string",
+          "description": "Identification of the receiving control station"
+        },
+        "sentByDispatcherAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the transfer was triggered by the dispatcher"
+        },
+        "sentByElsAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the sending dispatching system transmitted the incident"
+        },
+        "requestedResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ResourceRequest"
+          },
+          "description": "The requested input means and/or input means types"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Resource"
+          },
+          "description": "The resources involved in the operation"
+        },
+        "patients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Patient"
+          },
+          "description": "The patients involved in the operation who have not yet been assigned to a resource"
+        },
+        "informers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Informer"
+          },
+          "description": "The informers who called the dispatch center"
+        },
+        "appendices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Appendix"
+          },
+          "description": "Additional attributes of the incident"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Incident"
+          },
+          "description": "The sections of the incident"
+        }
+      }
+    },
+    "ResourceRequest": {
+      "description": "Describes a resource request",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "description": "Unique Id of the resource request",
+          "type": "string"
+        },
+        "resourceType": {
+          "description": "Requested resource type",
+          "type": "string"
+        },
+        "targetId": {
+          "description": "Identification of the receiving control station",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Name of the requested ressource",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ID of the requested resource",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "Describes a resource of an operation.#",
+      "type": "object",
+      "properties": {
+        "incidentId": {
+          "description": "The ID of the incident to which the resource belongs",
+          "type": "string"
+        },
+        "id": {
+          "description": "ID of the ressource",
+          "type": "string"
+        },
+        "appendices": {
+          "description": "Appendices of the ressource",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Appendix"
+          }
+        },
+        "patients": {
+          "description": "List of patients assigned to the resource",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Patient"
+          }
+        }
+      }
+    },
+    "Patient": {
+      "description": "Describes a patient of an incident",
+      "type": "object",
+      "properties": {
+        "incidentId": {
+          "type": "string",
+          "description": "The ID of the incident to which the ressource belongs"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The ID of the resource if the patient is assigned to a resource"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the patient"
+        },
+        "appendices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Appendix"
+          }
+        }
+      }
+    },
+    "Informer": {
+      "description": "Describes an informer of an incident",
+      "type": "object",
+      "properties": {
+        "incidentId": {
+          "type": "string",
+          "description": "The ID of the incident to which the informer belongs"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the informer"
+        },
+        "appendices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Appendix"
+          },
+          "description": "Additional attributes of the informer"
+        }
+      }
+    },
+    "Appendix": {
+      "description": "Describes additional data for a resource, patient, informer or an incident.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the appendix"
+        },
+        "value": {
+          "type": "string",
+          "description": "the value of the appendix"
+        }
+      }
+    }
+  }
+
+}
