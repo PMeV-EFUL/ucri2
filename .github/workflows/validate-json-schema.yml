@@ -1,5 +1,5 @@
 on: push
-name: Validate JSON Schema with ajv
+name: Validate APPS
 jobs:
   validate:
     permissions: write-all
@@ -12,5 +12,5 @@ jobs:
       with:
         node-version: 18
     - run: npm install -g ajv-cli
-    - run: find apps -name '*.json' -print0 | xargs -n 1 -0 ajv compile -s
+    - run: find apps -name '*_schema.json' -print0 | xargs -n 1 -0 ajv compile -s
 

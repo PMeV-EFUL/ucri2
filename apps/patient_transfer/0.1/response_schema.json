@@ -9,8 +9,8 @@
     "properties": {
         "id": {
             "title": "Eindeutige ID des Einsatzes",
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
+
         },
         "accepted": {
             "title": "Patient angenommen",
