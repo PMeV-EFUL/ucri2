@@ -1,1 +1,1 @@
-extends: "oas3-recommended"
+extends: "spectral:oas"
