@@ -10,7 +10,11 @@
         "incident": {
             "title": "Allgemeine Einsatzangaben",
             "required": [
-                "id"
+                "id",
+                "issue",
+                "type",
+                "keyword",
+                "location"
             ],
             "type": "object",
             "additionalProperties": false,
@@ -18,7 +22,7 @@
                 "id": {
                     "title": "Eindeutige ID des Einsatzes",
                     "type": "string",
-                    "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
+                    "format": "uuid"
                 },
                 "issue": {
                     "title": "Beschreibung des Falles",
@@ -34,6 +38,13 @@
                 },
                 "location": {
                     "title": "Einsatzort",
+                    "required": [
+                        "country",
+                        "city",
+                        "postalCode",
+                        "street",
+                        "houseNumber"
+                    ],
                     "type": "object",
                     "properties": {
                         "country": {
@@ -75,9 +86,7 @@
         "patient": {
             "title": "Patientendaten",
             "required": [
-                "id",
-                "sentByDispatcherAt",
-                "sentByElsAt"
+                "lastName"
             ],
             "type": "object",
             "additionalProperties": false,
@@ -111,6 +120,10 @@
         },
         "informer": {
             "title": "Meldender/Anrufer",
+            "required": [
+                "lastName",
+                "telphoneNumber"
+            ],
             "type": "object",
             "additionalProperties": false,
             "properties": {
