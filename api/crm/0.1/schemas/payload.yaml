@@ -1,0 +1,21 @@
+required:
+  - schemaId
+  - schemaVersion
+  - data
+type: object
+properties:
+  schemaId:
+    type: string
+    description: Schema-Bezeichner
+  schemaVersion:
+    type: string
+    description: Schema-Version
+  data:
+    type: string
+    format: base64
+    description: Applikationsspezifische Nachricht, BASE64-enkodiertes JSON Objekt
+description: Applikationsspezifische Nachricht mit Meta-Informationen
+example:
+  schemaId: incident
+  schemaVersion: "0.1"
+  data: eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9

@@ -41,11 +41,8 @@ paths:
               destination: [1.2.3.4.5.7]
               payload:
                 schemaId: incident
-                schemaVersion: "1.0"
-                incident: {
-                  id: f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454,
-                  sentByDispacherAt: 2023-11-13T20:20:39+00:00
-                }
+                schemaVersion: "0.1"
+                data: eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9
         required: true
       responses:
         '200':
