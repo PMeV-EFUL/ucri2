@@ -11,7 +11,3 @@ OpenAPI Spec für CRM
 ### apps
 
 Unterverzeichnisse für verschiedene UCRI-2-Anwendungen
-
-#### incidents
-
-Einsatzaustausch
