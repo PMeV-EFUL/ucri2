@@ -1,0 +1,15 @@
+on: push
+name: Validate API
+jobs:
+  validate:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+    - name: Check out repository code
+      uses: actions/checkout@v4
+    - name: Validate OpenAPI definition
+      uses: stoplightio/spectral-action@v0.8.11
+      with:
+        file_glob: api/crm/0.1/crm.yaml
+        spectral_ruleset: api/crm/0.1/.spectral.yaml

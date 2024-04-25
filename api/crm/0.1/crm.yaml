@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Control Room Module API
   description: |
-    Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer 
+    Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
     wie zum Beispiel Leitstellensysteme, andere technische Knoten, sowie weitere externe Systeme.
   version: "0.1"
 servers:
@@ -41,32 +41,29 @@ paths:
               destination: [1.2.3.4.5.7]
               payload:
                 schemaId: incident
-                schemaVersion: "1.0"
-                incident: {
-                  id: f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454,
-                  sentByDispacherAt: 2023-11-13T20:20:39+00:00
-                }
+                schemaVersion: "0.1"
+                data: eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9
         required: true
       responses:
-        200:
+        '200':
           description: OK, versendete Meldung
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SenderResponse'
-        400:
+        '400':
           description: Bad Request
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        401:
+        '401':
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
@@ -89,25 +86,25 @@ paths:
               $ref: '#/components/schemas/ReceiverRequest'
         required: true
       responses:
-        200:
+        '200':
           description: OK, Ergebnis der Meldungsabfrage
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/ReceiverResponse'
-        400:
+        '400':
           description: Bad Request
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        401:
+        '401':
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
@@ -129,21 +126,21 @@ paths:
               $ref: '#/components/schemas/MessageRef'
         required: true
       responses:
-        204:
+        '204':
           description: No Content
-        400:
+        '400':
           description: Bad Request
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        401:
+        '401':
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
@@ -157,7 +154,7 @@ paths:
       description: Liefert eine Liste aller Kommunikationsteilnehmer.
       operationId: listCommParticipant
       responses:
-        200:
+        '200':
           description: OK, Liste aller Kommunikationsteilnehmer
           content:
             application/json;charset=utf-8:
@@ -168,13 +165,13 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/CommParticipant'
-        401:
+        '401':
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
@@ -195,25 +192,25 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: OK, Informationen zu einem KT
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/CommParticipant'
-        401:
+        '401':
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        404:
+        '404':
           description: Not Found
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
@@ -227,19 +224,19 @@ paths:
       description: Liefert CRM Information
       operationId: info
       responses:
-        200:
+        '200':
           description: OK, CRM Information
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Info'
-        401:
+        '401':
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
@@ -247,8 +244,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Envelope:
-      $ref: 'schemas/envelope.yaml'
     SenderRequest:
       $ref: 'schemas/senderRequest.yaml'
     SenderResponse:

@@ -1,0 +1,145 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://github.com/PMeV-EFUL/ucri2/patient-transfer/0.1/transfer",
+    "title": "Patientenübergabe",
+    "required": [
+        "incident"
+    ],
+    "type": "object",
+    "properties": {
+        "incident": {
+            "title": "Allgemeine Einsatzangaben",
+            "required": [
+                "id",
+                "issue",
+                "type",
+                "keyword",
+                "location"
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "title": "Eindeutige ID des Einsatzes",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "issue": {
+                    "title": "Beschreibung des Falles",
+                    "type": "string"
+                },
+                "type": {
+                    "title": "Einsatzart",
+                    "type": "string"
+                },
+                "keyword": {
+                    "title": "Einsatzstichwort",
+                    "type": "string"
+                },
+                "location": {
+                    "title": "Einsatzort",
+                    "required": [
+                        "country",
+                        "city",
+                        "postalCode",
+                        "street",
+                        "houseNumber"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "country": {
+                            "title": "Land",
+                            "type": "string"
+                        },
+                        "city": {
+                            "title": "Ort",
+                            "type": "string"
+                        },
+                        "postalCode": {
+                            "title": "PLZ",
+                            "type": "string"
+                        },
+                        "object": {
+                            "title": "Objekt",
+                            "type": "string"
+                        },
+                        "street": {
+                            "title": "Strasse",
+                            "type": "string"
+                        },
+                        "houseNumber": {
+                            "title": "Hausnummer",
+                            "type": "string"
+                        },
+                        "longitude": {
+                            "title": "Längengrad",
+                            "type": "number"
+                        },
+                        "latitude": {
+                            "title": "Breitengrad",
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        "patient": {
+            "title": "Patientendaten",
+            "required": [
+                "lastName"
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "firstName": {
+                    "title": "Vorname",
+                    "type": "string"
+                },
+                "lastName": {
+                    "title": "Nachname",
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "title": "Geburtsdatum",
+                    "type": "string",
+                    "format": "date"
+                },
+                "gender": {
+                    "title": "Geschlecht",
+                    "type": "string"
+                },
+                "diagnosis": {
+                    "title": "Diagnose",
+                    "type": "string"
+                },
+                "telphoneNumber": {
+                    "title": "Telefonnummer",
+                    "type": "string"
+                }
+            }
+        },
+        "informer": {
+            "title": "Meldender/Anrufer",
+            "required": [
+                "lastName",
+                "telphoneNumber"
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "firstName": {
+                    "title": "Vorname",
+                    "type": "string"
+                },
+                "lastName": {
+                    "title": "Nachname",
+                    "type": "string"
+                },
+                "telphoneNumber": {
+                    "title": "Telefonnummer",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -26,10 +26,9 @@ properties:
     items:
       $ref: 'schemaRef.yaml'
   techSupport:
-      $ref: 'techSupport.yaml'
-  pubKey:
-    type: string
-    description: Public Key des KT
+    $ref: 'techSupport.yaml'
+  key:
+    $ref: 'jwkRsaPub.yaml'
   status:
     type: string
     enum:
@@ -45,8 +44,15 @@ example:
   operatorShortName: ELS E
   supportedMessages:
     - schemaId: incident
-      schemaVersion: 0.1
+      schemaVersion: '0.1'
     - schemaId: incidentAck
-      schemaVersion: 0.2
-  pubKey: "R714k+ssdkiy7893ln..."
+      schemaVersion: '0.2'
+  key:
+    kty: RSA
+    n: ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx
+    e: AQAB
   status: "off"
+  techSupport:
+    phone: "001-555-1234"
+    e-mail: "abc@lst-essen.de"
+

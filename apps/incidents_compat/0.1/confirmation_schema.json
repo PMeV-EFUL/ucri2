@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://github.com/PMeV-EFUL/ucri2/incident_compat/0.1/confirmation",
+    "title": "Einsatzübergabe",
+    "required": [
+        "Confirmation"
+    ],
+    "type": "object",
+    "properties": {
+        "items": { "$ref": "#/$defs/Confirmation" }
+      },
+      "$defs": {
+        "Confirmation": {
+            "description": "Describes an acknowledgement in the sense of the incident transfer and is only relevant for this.",
+            "type": "object",
+            "properties": {
+              "sharedIncidentId": {
+                "type": "string",
+                "description": "GUID to identify the incident on participating systems."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "ELSAccepted",
+                  "ELSRejected",
+                  "ControlStationAccepted",
+                  "ControlStationRejected"
+                ],
+                "description": "Status of acknowledgement"
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "Time stamp at which the acknowledgement was made."
+              },
+              "cause": {
+                "type": "string",
+                "description": "Reason for acknowledgement in case of error or if the incident was rejected"
+              },
+              "appendices": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/Appendix"
+                },
+                "description": "Additional attributes of the acknowledgement"
+              }
+            }
+          },
+          "Appendix": {
+            "description": "Describes additional data for a resource, patient, informer or an incident.",
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "The key of the appendix"
+              },
+              "value": {
+                "type": "string",
+                "description": "the value of the appendix"
+              }
+            }
+      }
+    }
+}
