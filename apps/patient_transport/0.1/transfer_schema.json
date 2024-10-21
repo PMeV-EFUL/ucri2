@@ -149,7 +149,7 @@
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
-                        "pickup_time": {
+                        "arrival_time": {
                             "title": "Ankunftszeit",
                             "type": "string"
                         },
