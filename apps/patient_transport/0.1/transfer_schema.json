@@ -1,0 +1,244 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://github.com/PMeV-EFUL/ucri2/patient-transport/0.1/transfer",
+    "title": "Patiententransport",
+    "required": [
+        "incident"
+    ],
+    "type": "object",
+    "properties": {
+        "incident": {
+            "title": "Allgemeine Einsatzangaben",
+            "required": [
+                "id",
+                "issue",
+                "type",
+                "keyword",
+                "location",
+                "destination_location"
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "title": "Eindeutige ID des Einsatzes",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "issue": {
+                    "title": "Beschreibung des Falles",
+                    "type": "string"
+                },
+                "type": {
+                    "title": "Einsatzart",
+                    "type": "string"
+                },
+                "keyword": {
+                    "title": "Einsatzstichwort",
+                    "type": "string"
+                },
+                "location": {
+                    "title": "Einsatzort",
+                    "required": [
+                        "country",
+                        "city",
+                        "postalCode",
+                        "street",
+                        "houseNumber"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "country": {
+                            "title": "Land",
+                            "type": "string"
+                        },
+                        "city": {
+                            "title": "Ort",
+                            "type": "string"
+                        },
+                        "postalCode": {
+                            "title": "PLZ",
+                            "type": "string"
+                        },
+                        "object": {
+                            "title": "Objekt",
+                            "type": "string"
+                        },
+                        "street": {
+                            "title": "Strasse",
+                            "type": "string"
+                        },
+                        "houseNumber": {
+                            "title": "Hausnummer",
+                            "type": "string"
+                        },
+                        "longitude": {
+                            "title": "Längengrad",
+                            "type": "number"
+                        },
+                        "latitude": {
+                            "title": "Breitengrad",
+                            "type": "number"
+                        }
+                    }
+                },
+                "destination_location": {
+                    "title": "Zielort",
+                    "required": [
+                        "country",
+                        "city",
+                        "postalCode",
+                        "street",
+                        "houseNumber"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "country": {
+                            "title": "Land",
+                            "type": "string"
+                        },
+                        "city": {
+                            "title": "Ort",
+                            "type": "string"
+                        },
+                        "postalCode": {
+                            "title": "PLZ",
+                            "type": "string"
+                        },
+                        "object": {
+                            "title": "Objekt",
+                            "type": "string"
+                        },
+                        "street": {
+                            "title": "Strasse",
+                            "type": "string"
+                        },
+                        "houseNumber": {
+                            "title": "Hausnummer",
+                            "type": "string"
+                        },
+                        "longitude": {
+                            "title": "Längengrad",
+                            "type": "number"
+                        },
+                        "latitude": {
+                            "title": "Breitengrad",
+                            "type": "number"
+                        }
+                    }
+                },
+                "pickup_time": {
+                    "title": "Abholzeit",
+                    "required": [
+                        "pickup_time"
+                    ],
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "pickup_time": {
+                            "title": "Abholzeit",
+                            "type": "string"
+                        }
+                    }
+                },
+                "arrival_time": {
+                    "title": "Ankunftszeit",
+                    "required": [
+                        "arrival_time"
+                    ],
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "pickup_time": {
+                            "title": "Ankunftszeit",
+                            "type": "string"
+                        },
+                        "fixed_date": {
+                            "title": "Fixtermin",
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "patient": {
+            "title": "Patientendaten",
+            "required": [
+                "firstName",
+                "lastName",
+                "dateOfBirth",
+                "insuranceNumber",
+                "infectious",
+                "typeofTransportation"
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "firstName": {
+                    "title": "Vorname",
+                    "type": "string"
+                },
+                "lastName": {
+                    "title": "Nachname",
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "title": "Geburtsdatum",
+                    "type": "string",
+                    "format": "date"
+                },
+                "gender": {
+                    "title": "Geschlecht",
+                    "type": "string"
+                },
+                "diagnosis": {
+                    "title": "Diagnose",
+                    "type": "string"
+                },
+                "telphoneNumber": {
+                    "title": "Telefonnummer",
+                    "type": "string"
+                },
+                "insuranceNumber": {
+                    "title": "Sozialversicherungsnummer",
+                    "type": "string"
+                },
+                "infectious": {
+                    "title": "infektioes",
+                    "type": "boolean"
+                },
+                "typeofTransportation": {
+                    "title": "Transportart",
+                    "type": "string"
+                }
+            }
+        },
+        "informer": {
+            "title": "Meldender/Anrufer",
+            "required": [
+                "lastName",
+                "telphoneNumber"                
+            ],
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "firstName": {
+                    "title": "Vorname",
+                    "type": "string"
+                },
+                "lastName": {
+                    "title": "Nachname",
+                    "type": "string"
+                },
+                "telphoneNumber": {
+                    "title": "Telefonnummer",
+                    "type": "string"
+                },
+                "additionalInfo": {
+                    "title": "Zusatzinformation",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

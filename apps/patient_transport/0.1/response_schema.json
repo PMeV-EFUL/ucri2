@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://github.com/PMeV-EFUL/ucri2/patient-transport/0.1/response",
+    "title": "Übergabequittung",
+    "required": [
+        "incident"
+    ],
+    "type": "object",
+    "properties": {
+        "id": {
+            "title": "Eindeutige ID des Einsatzes",
+            "type": "string"
+
+        },
+        "accepted": {
+            "title": "Patient angenommen",
+            "type": "boolean"
+        },
+        "arrival_time": {
+            "title": "arrival_time",
+            "type": "string"
+        },
+        "pickup_time": {
+            "title": "pickup_time",
+            "type": "string"
+        },
+        "cause": {
+            "title": "Grund der Ablehnung",
+            "type": "string"
+        }
+    }
+}
