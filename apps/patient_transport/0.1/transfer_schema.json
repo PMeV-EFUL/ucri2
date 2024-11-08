@@ -137,7 +137,8 @@
                     "properties": {
                         "pickup_time": {
                             "title": "Abholzeit",
-                            "type": "string"
+                            "type": "string",
+                            "format": "date-time"
                         }
                     }
                 },
@@ -151,7 +152,8 @@
                     "properties": {
                         "arrival_time": {
                             "title": "Ankunftszeit",
-                            "type": "string"
+                            "type": "string",
+                            "format": "date-time"
                         },
                         "fixed_date": {
                             "title": "Fixtermin",
@@ -189,7 +191,8 @@
                 },
                 "gender": {
                     "title": "Geschlecht",
-                    "type": "string"
+                    "type": "string",
+                    "enum": ["m", "w", "d", "u"]
                 },
                 "diagnosis": {
                     "title": "Diagnose",
