@@ -17,11 +17,13 @@
         },
         "arrival_time": {
             "title": "arrival_time",
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
         },
         "pickup_time": {
             "title": "pickup_time",
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
         },
         "cause": {
             "title": "Grund der Ablehnung",
