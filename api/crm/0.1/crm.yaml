@@ -89,11 +89,17 @@ paths:
         required: true
       responses:
         '200':
-          description: OK, Ergebnis der Meldungsabfrage
+          description: |
+            OK \
+            Mindestens eine und bis zu 'maxMessages' ältesten Meldungen werden geliefert.
           content:
             application/json;charset=utf-8:
               schema:
                 $ref: '#/components/schemas/ReceiverResponse'
+        '204':
+          description: |
+            No Content \
+            Es liegen aktuell keine Nachrichten in der Adressaten-Queue vor.
         '400':
           description: Bad Request
           content:
