@@ -18,6 +18,8 @@ servers:
         description: API base path
 tags:
   - name: Messaging
+    description: Der Messaging Service beinhaltet Funktionen zum Versenden und Empfangen von Nachrichten,
+      die im Rahmen der UCRI Spezifikation spezifiziert sind.
   - name: Registry
   - name: Info
 paths:
@@ -265,7 +267,7 @@ components:
       type: object
       properties:
         code:
-          type: string
+          type: integer
           description: Anwendungsspezifische Fehler-Code
         reason:
           type: string
