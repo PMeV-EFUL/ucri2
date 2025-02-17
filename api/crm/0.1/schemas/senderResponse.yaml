@@ -5,3 +5,4 @@ allOf:
       - messageId
       - sentDate
       - timeout
+      - ack

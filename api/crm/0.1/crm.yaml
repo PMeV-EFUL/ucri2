@@ -33,42 +33,44 @@ paths:
       requestBody:
         description: Zu versendende Meldung
         content:
-          application/json;charset=utf-8:
+          application/json:
             schema:
               $ref: '#/components/schemas/SenderRequest'
             example:
               description: Einsatzübergabe am 13.11.2023 um 20:20
               timeout: 300
+              ack: NACK
               source: 1.2.3.4.5.6
               destination: [1.2.3.4.5.7]
               payload:
                 schemaId: incident
                 schemaVersion: "0.1"
-                data: eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9
+                contentType: application/json
+                data: {"$schema":"./transfer_schema.json","schemaId":"incident","schemaVersion":"0.1","incident":{"issue":"Brandeinsatz","location":{"country":"NRW","city":"Düsseldorf","postalCode":"40210","street":"Musterstrasse","houseNumber":"42"},"id":"550e8400-e29b-41d4-a716-446655440000","type":"Brandeinsatz","keyword":"F 2"}}
         required: true
       responses:
         '200':
           description: OK, versendete Meldung
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/SenderResponse'
         '400':
           description: Bad Request
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
           description: Unauthorized
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /messaging/receive:
@@ -83,7 +85,7 @@ paths:
       requestBody:
         description: Meldungsabfrage
         content:
-          application/json;charset=utf-8:
+          application/json:
             schema:
               $ref: '#/components/schemas/ReceiverRequest'
         required: true
@@ -93,7 +95,7 @@ paths:
             OK \
             Mindestens eine und bis zu 'maxMessages' ältesten Meldungen werden geliefert.
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ReceiverResponse'
         '204':
@@ -103,19 +105,19 @@ paths:
         '400':
           description: Bad Request
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
           description: Unauthorized
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /messaging/commit:
@@ -129,7 +131,7 @@ paths:
       requestBody:
         description: Meldungsreferenz
         content:
-          application/json;charset=utf-8:
+          application/json:
             schema:
               $ref: '#/components/schemas/MessageRef'
         required: true
@@ -139,19 +141,19 @@ paths:
         '400':
           description: Bad Request
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
           description: Unauthorized
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /registry:
@@ -165,7 +167,7 @@ paths:
         '200':
           description: OK, Liste aller Kommunikationsteilnehmer
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -176,13 +178,13 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /registry/{id}:
@@ -203,25 +205,25 @@ paths:
         '200':
           description: OK, Informationen zu einem KT
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/CommParticipant'
         '401':
           description: Unauthorized
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /info:
@@ -235,19 +237,19 @@ paths:
         '200':
           description: OK, CRM Information
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Info'
         '401':
           description: Unauthorized
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
-            application/json;charset=utf-8:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
