@@ -23,9 +23,9 @@ properties:
     type: integer
     description: Anzahl der Sekunden, welche die Meldung auf der Vermittlungsebene verweilen darf, bevor die Zustellversuche
       abgebrochen und die Meldung - mit Fehlermeldung an den Sender - verworfen wird. Defaultwert falls nicht definiert.
-      Die Vermittlungsebene verwendet maximalen Wert falls größerer Wert übergeben wird. 
       Bei der Weiterleitung einer Meldung zwischen CRM (Routing) soll das ursprüngliche Timeout weitergegeben werden.
     default: 3600
+    minimum: 10
     maximum: 86400
   ack:
     type: string
@@ -70,7 +70,7 @@ example:
     schemaId: incident
     schemaVersion: "0.1"
     contentType: application/json
-    data: {"$schema":"./transfer_schema.json","schemaId":"incident","schemaVersion":"0.1","incident":{"issue":"Brandeinsatz","location":{"country":"NRW","city":"Düsseldorf","postalCode":"40210","street":"Musterstrasse","houseNumber":"42"},"id":"550e8400-e29b-41d4-a716-446655440000","type":"Brandeinsatz","keyword":"F 2"}}
+    data: "{\"$schema\":\"./transfer_schema.json\",\"schemaId\":\"incident\",\"schemaVersion\":\"0.1\",\"incident\":{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}}"
   signatur: eyJhbGciOiJSUzI1NiJ9
     .
     eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt
