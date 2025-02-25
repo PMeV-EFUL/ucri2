@@ -18,12 +18,14 @@ example:
       description: Einsatzübergabe am 13.11.2023 um 20:20
       sentDate: 2023-11-13T20:20:39+00:00
       timeout: 300
+      ack: NACK
       source: 1.2.3.4.5.6
       destination: [1.2.3.4.5.7]
       payload:
         schemaId: incident
         schemaVersion: "0.1"
-        data: eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9
+        contentType: application/json
+        data: "{\"$schema\":\"./transfer_schema.json\",\"schemaId\":\"incident\",\"schemaVersion\":\"0.1\",\"incident\":{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}}"
       signatur: eyJhbGciOiJSUzI1NiJ9
         .
         eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt

@@ -1,6 +1,7 @@
 required:
   - schemaId
   - schemaVersion
+  - contentType
   - data
 type: object
 properties:
@@ -10,12 +11,20 @@ properties:
   schemaVersion:
     type: string
     description: Schema-Version
+  contentType:
+    type: string
+    enum:
+      - application/json
+      - application/jose
+    description: Inhalt der übergebenen Nachricht,
+      application/json - unverschlüsselte Nachricht, application/jose - verschlüsselte Nachricht
   data:
     type: string
-    format: base64
-    description: Applikationsspezifische Nachricht, BASE64-enkodiertes JSON Objekt
+    format: binary
+    description: Applikationsspezifische Nachricht, Inhalt entsprechend dem 'contentType'
 description: Applikationsspezifische Nachricht mit Meta-Informationen
 example:
   schemaId: incident
   schemaVersion: "0.1"
-  data: eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9
+  contentType: application/json
+  data: "{\"$schema\":\"./transfer_schema.json\",\"schemaId\":\"incident\",\"schemaVersion\":\"0.1\",\"incident\":{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}}"
