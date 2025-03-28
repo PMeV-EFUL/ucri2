@@ -22,10 +22,11 @@ example:
       source: 1.2.3.4.5.6
       destination: [1.2.3.4.5.7]
       payload:
-        schemaId: incident
-        schemaVersion: "0.1"
+        appId: incident_transfer
+        appVersion: "0.1"
+        schemaId: transfer
         contentType: application/json
-        data: "{\"$schema\":\"./transfer_schema.json\",\"schemaId\":\"incident\",\"schemaVersion\":\"0.1\",\"incident\":{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}}"
+        data: "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
       signatur: eyJhbGciOiJSUzI1NiJ9
         .
         eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt
