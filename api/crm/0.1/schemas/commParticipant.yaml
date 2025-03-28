@@ -3,7 +3,7 @@ required:
   - systemName
   - operatorName
   - operatorShortName
-  - supportedMessages
+  - supportedApps
   - techSupport
 type: object
 properties:
