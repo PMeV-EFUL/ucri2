@@ -3,7 +3,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Ein Einsatz mit Patientendaten",
   "description": "Ein Einsatz mit Patientendaten",
-  "required": [ "sharedIncidentId","sentByDispatcherAt","patients" ],
+  "required": [ "sharedIncidentId","sentByDispatcherAt","patients","missionLocation" ],
   "type": "object",
   "properties": {
     "sharedIncidentId": {
@@ -39,7 +39,7 @@
       "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
     "missionLocation": {
-      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json"
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
     },
     "patients": {
       "type": "array",
@@ -68,6 +68,32 @@
     "IncidentFlashingLights": true,
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "missionLocation": {
+      "coordinate": {
+        "lat": 65.453323,
+        "lon": 14.542343
+      },
+      "address": {
+        "street": "Musterstrasse",
+        "houseNumber": "15b",
+        "postalCode" : "12345",
+        "city": "Musterhausen",
+        "cityDistrict": "Musterberg",
+        "state": "Brandenburg",
+        "country": "DE"
+      },
+      "object": {
+        "name": "Abteilung IV, Haus 3",
+        "additionalInfo": "Campus West"
+      },
+      "superiorObject": {
+        "name": "Krankenhaus Musterstift",
+        "additionalInfo": "Weitere Informationen"
+      },
+      "floor": "3. OG",
+      "room": "412",
+      "additionalInfo": "Weitere Informationen"
+    },
     "patients": [
       {
         "name": "Mustermann",

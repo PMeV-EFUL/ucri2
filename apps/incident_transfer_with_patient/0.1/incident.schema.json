@@ -6,7 +6,8 @@
   "required": [
     "sharedIncidentId",
     "sentByDispatcherAt",
-    "patients"
+    "patients",
+    "missionLocation"
   ],
   "type": "object",
   "properties": {
@@ -43,7 +44,7 @@
       "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
     "missionLocation": {
-      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json"
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
     },
     "patients": {
       "type": "array",
@@ -73,6 +74,32 @@
       "IncidentFlashingLights": true,
       "additionalInfo": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
+      "missionLocation": {
+        "coordinate": {
+          "lat": 65.453323,
+          "lon": 14.542343
+        },
+        "address": {
+          "street": "Musterstrasse",
+          "houseNumber": "15b",
+          "postalCode": "12345",
+          "city": "Musterhausen",
+          "cityDistrict": "Musterberg",
+          "state": "Brandenburg",
+          "country": "DE"
+        },
+        "object": {
+          "name": "Abteilung IV, Haus 3",
+          "additionalInfo": "Campus West"
+        },
+        "superiorObject": {
+          "name": "Krankenhaus Musterstift",
+          "additionalInfo": "Weitere Informationen"
+        },
+        "floor": "3. OG",
+        "room": "412",
+        "additionalInfo": "Weitere Informationen"
+      },
       "patients": [
         {
           "name": "Mustermann",
@@ -119,6 +146,35 @@
     }
   ],
   "$defs": {
+    "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json": {
+      "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json",
+      "title": "Eine WGS84-Koordinate",
+      "description": "Eine WGS84-Koordinate.",
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      },
+      "unevaluatedProperties": false,
+      "examples": [
+        {
+          "lat": 65.453323,
+          "lon": 14.542343
+        }
+      ]
+    },
     "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json": {
       "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json",
       "title": "Eine Adresse",
@@ -160,6 +216,100 @@
           "cityDistrict": "Musterberg",
           "state": "Brandenburg",
           "country": "DE"
+        }
+      ]
+    },
+    "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json": {
+      "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json",
+      "title": "Ein Einsatz-Zielobjekt",
+      "description": "Ein Einsatz-Zielobjekt",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "additionalInfo": {
+          "type": "string"
+        }
+      },
+      "unevaluatedProperties": false,
+      "examples": [
+        {
+          "name": "Krankenhaus Musterstift",
+          "additionalInfo": "Weitere Informationen"
+        }
+      ]
+    },
+    "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json": {
+      "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json",
+      "title": "Ein Einsatz-Zielort",
+      "description": "Ein Einsatz-Zielort",
+      "anyOf": [
+        {
+          "required": [
+            "coordinate"
+          ]
+        },
+        {
+          "required": [
+            "address"
+          ]
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "coordinate": {
+          "$ref": "coordinate.schema.json"
+        },
+        "address": {
+          "$ref": "address.schema.json"
+        },
+        "object": {
+          "$ref": "missionObject.schema.json"
+        },
+        "superiorObject": {
+          "$ref": "missionObject.schema.json"
+        },
+        "floor": {
+          "type": "string"
+        },
+        "room": {
+          "type": "string"
+        },
+        "additionalInfo": {
+          "type": "string"
+        }
+      },
+      "unevaluatedProperties": false,
+      "examples": [
+        {
+          "coordinate": {
+            "lat": 65.453323,
+            "lon": 14.542343
+          },
+          "address": {
+            "street": "Musterstrasse",
+            "houseNumber": "15b",
+            "postalCode": "12345",
+            "city": "Musterhausen",
+            "cityDistrict": "Musterberg",
+            "state": "Brandenburg",
+            "country": "DE"
+          },
+          "object": {
+            "name": "Abteilung IV, Haus 3",
+            "additionalInfo": "Campus West"
+          },
+          "superiorObject": {
+            "name": "Krankenhaus Musterstift",
+            "additionalInfo": "Weitere Informationen"
+          },
+          "floor": "3. OG",
+          "room": "412",
+          "additionalInfo": "Weitere Informationen"
         }
       ]
     },
