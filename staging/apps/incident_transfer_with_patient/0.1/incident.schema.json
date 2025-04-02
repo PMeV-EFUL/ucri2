@@ -27,7 +27,7 @@
       "type": "string",
       "description": "Taktische Bewertung: Sachverhalt"
     },
-    "IncidentFlashingLights": {
+    "flashingLights": {
       "type": "boolean"
     },
     "additionalInfo": {
@@ -38,7 +38,7 @@
       "format": "date-time",
       "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
-    "missionLocation": {
+	"missionLocation": {
       "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
     },
     "patients": {
@@ -65,7 +65,7 @@
       "F2"
     ],
     "issue": "Notfall",
-    "IncidentFlashingLights": true,
+    "flashingLights": true,
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
     "missionLocation": {
