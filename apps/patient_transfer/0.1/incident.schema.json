@@ -1,13 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
-  "title": "Ein Einsatz mit Patientendaten",
-  "description": "Ein Einsatz mit Patientendaten",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
+  "title": "Eine Übergabe-Anfrage für einen Patienten",
+  "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
   "required": [
     "sharedIncidentId",
     "sentByDispatcherAt",
-    "patients",
-    "missionLocation"
+    "patient"
   ],
   "type": "object",
   "properties": {
@@ -20,20 +19,12 @@
       "type": "string",
       "description": "Sender-interne ID des Einsatzes"
     },
-    "classifications": {
-      "type": "array",
-      "description": "Stichwortkürzel des Einsatzes",
-      "minItems": 1,
-      "items": {
-        "type": "string"
-      }
-    },
     "issue": {
       "type": "string",
-      "description": "Taktische Bewertung: Sachverhalt"
-    },
-    "flashingLights": {
-      "type": "boolean"
+      "enum": [
+        "consultation_needed"
+      ],
+      "description": "Übergabegrund"
     },
     "additionalInfo": {
       "type": "string"
@@ -43,15 +34,13 @@
       "format": "date-time",
       "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
-    "missionLocation": {
-      "$ref": "#/$defs/location.schema.json"
-    },
-    "patients": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "$ref": "#/$defs/patient.schema.json"
-      }
+    "patient": {
+      "$ref": "#/$defs/patient.schema.json",
+      "type": "object",
+      "required": [
+        "name",
+        "phone"
+      ]
     },
     "informers": {
       "type": "array",
@@ -66,19 +55,14 @@
     {
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
       "internalId": "f123456",
-      "classifications": [
-        "A1",
-        "F2"
-      ],
-      "issue": "Notfall",
-      "flashingLights": true,
+      "issue": "consultation_needed",
       "additionalInfo": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
-      "missionLocation": {
-        "coordinate": {
-          "lat": 65.453323,
-          "lon": 14.542343
-        },
+      "patient": {
+        "name": "Mustermann",
+        "surname": "Hans",
+        "phone": "+49 30 123456",
+        "email": "hans.mustermann@example.com",
         "address": {
           "street": "Musterstrasse",
           "houseNumber": "15b",
@@ -88,53 +72,25 @@
           "state": "Brandenburg",
           "country": "DE"
         },
-        "object": {
-          "name": "Abteilung IV, Haus 3",
-          "additionalInfo": "Campus West"
+        "additionalInfo": "weitere Informationen",
+        "gender": "Male",
+        "dateOfBirth": "19801230",
+        "age": 55,
+        "healthInsuranceInformation": {
+          "healthInsuranceCompany": "Musterkasse",
+          "healthInsuranceCompanyNumber": 101234567,
+          "insuranceNumber": "S123456789"
         },
-        "superiorObject": {
-          "name": "Krankenhaus Musterstift",
-          "additionalInfo": "Weitere Informationen"
+        "initialAssessment": {
+          "rmi": 360,
+          "rmc": 360543215,
+          "pzc": 360401,
+          "additionalInformation": "unspezifischer Notfall"
         },
-        "floor": "3. OG",
-        "room": "412",
-        "additionalInfo": "Weitere Informationen"
+        "infectionInformation": "potentiell ansteckend",
+        "infectionStatus": true,
+        "transportNumber": "123456"
       },
-      "patients": [
-        {
-          "name": "Mustermann",
-          "surname": "Hans",
-          "phone": "+49 30 123456",
-          "email": "hans.mustermann@example.com",
-          "address": {
-            "street": "Musterstrasse",
-            "houseNumber": "15b",
-            "postalCode": "12345",
-            "city": "Musterhausen",
-            "cityDistrict": "Musterberg",
-            "state": "Brandenburg",
-            "country": "DE"
-          },
-          "additionalInfo": "weitere Informationen",
-          "gender": "Male",
-          "dateOfBirth": "19801230",
-          "age": 55,
-          "healthInsuranceInformation": {
-            "healthInsuranceCompany": "Musterkasse",
-            "healthInsuranceCompanyNumber": 101234567,
-            "insuranceNumber": "S123456789"
-          },
-          "initialAssessment": {
-            "rmi": 360,
-            "rmc": 360543215,
-            "pzc": 360401,
-            "additionalInformation": "unspezifischer Notfall"
-          },
-          "infectionInformation": "potentiell ansteckend",
-          "infectionStatus": true,
-          "transportNumber": "123456"
-        }
-      ],
       "informers": [
         {
           "name": "Musterfrau",
@@ -146,34 +102,6 @@
     }
   ],
   "$defs": {
-    "coordinate.schema.json": {
-      "title": "Eine WGS84-Koordinate",
-      "description": "Eine WGS84-Koordinate.",
-      "required": [
-        "lat",
-        "lon"
-      ],
-      "type": "object",
-      "properties": {
-        "lat": {
-          "type": "number",
-          "minimum": -90,
-          "maximum": 90
-        },
-        "lon": {
-          "type": "number",
-          "minimum": -180,
-          "maximum": 180
-        }
-      },
-      "unevaluatedProperties": false,
-      "examples": [
-        {
-          "lat": 65.453323,
-          "lon": 14.542343
-        }
-      ]
-    },
     "address.schema.json": {
       "title": "Eine Adresse",
       "description": "Eine Adresse",
@@ -214,98 +142,6 @@
           "cityDistrict": "Musterberg",
           "state": "Brandenburg",
           "country": "DE"
-        }
-      ]
-    },
-    "missionObject.schema.json": {
-      "title": "Ein Einsatz-Zielobjekt",
-      "description": "Ein Einsatz-Zielobjekt",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "additionalInfo": {
-          "type": "string"
-        }
-      },
-      "unevaluatedProperties": false,
-      "examples": [
-        {
-          "name": "Krankenhaus Musterstift",
-          "additionalInfo": "Weitere Informationen"
-        }
-      ]
-    },
-    "location.schema.json": {
-      "title": "Ein Einsatz-Zielort",
-      "description": "Ein Einsatz-Zielort",
-      "anyOf": [
-        {
-          "required": [
-            "coordinate"
-          ]
-        },
-        {
-          "required": [
-            "address"
-          ]
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "coordinate": {
-          "$ref": "#/$defs/coordinate.schema.json"
-        },
-        "address": {
-          "$ref": "#/$defs/address.schema.json"
-        },
-        "object": {
-          "$ref": "#/$defs/missionObject.schema.json"
-        },
-        "superiorObject": {
-          "$ref": "#/$defs/missionObject.schema.json"
-        },
-        "floor": {
-          "type": "string"
-        },
-        "room": {
-          "type": "string"
-        },
-        "additionalInfo": {
-          "type": "string"
-        }
-      },
-      "unevaluatedProperties": false,
-      "examples": [
-        {
-          "coordinate": {
-            "lat": 65.453323,
-            "lon": 14.542343
-          },
-          "address": {
-            "street": "Musterstrasse",
-            "houseNumber": "15b",
-            "postalCode": "12345",
-            "city": "Musterhausen",
-            "cityDistrict": "Musterberg",
-            "state": "Brandenburg",
-            "country": "DE"
-          },
-          "object": {
-            "name": "Abteilung IV, Haus 3",
-            "additionalInfo": "Campus West"
-          },
-          "superiorObject": {
-            "name": "Krankenhaus Musterstift",
-            "additionalInfo": "Weitere Informationen"
-          },
-          "floor": "3. OG",
-          "room": "412",
-          "additionalInfo": "Weitere Informationen"
         }
       ]
     },

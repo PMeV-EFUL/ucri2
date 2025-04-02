@@ -10,16 +10,16 @@
 	"type": "object",
 	"properties": {
 		"coordinate": {
-			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json"
+			"$ref":	"coordinate.schema.json"
 		},
 		"address": {
-			"$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json"
+			"$ref": "address.schema.json"
 		},
 		"object": {
-			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json"
+			"$ref":	"missionObject.schema.json"
 		},
 		"superiorObject": {
-			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json"
+			"$ref":	"missionObject.schema.json"
 		},
 		"floor": {
 			"type": "string"
