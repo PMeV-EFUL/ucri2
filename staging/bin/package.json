@@ -1,8 +1,15 @@
 {
   "type": "module",
+  "name": "processor",
+  "version": "1.0",
+  "scripts": {
+    "start": "node processApplicationSchemata.js"
+  },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.9.3",
     "@hyperjump/json-schema": "^1.11.0",
-    "json-schema-static-docs": "^0.28.1"
+    "json-schema-static-docs": "^0.28.1",
+    "markdown-toc": "^1.2.0",
+    "md-to-pdf": "^5.2.4"
   }
 }
