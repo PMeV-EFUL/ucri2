@@ -5,23 +5,23 @@
 - [Überblick](#uberblick)
 - [App-Nachrichten](#app-nachrichten)
   * [Bestätigung oder Ablehnung einer Patientenübergabeanfrage](#bestatigung-oder-ablehnung-einer-patientenubergabeanfrage)
-    + [Properties](#properties)
-    + [Example](#example)
+    + [Eigenschaften](#eigenschaften)
+    + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
     + [acknowledgedByDispatcherAt](#acknowledgedbydispatcherat)
     + [status](#status)
     + [cause](#cause)
     + [Schema](#schema)
   * [Eine Übergabe-Anfrage für einen Patienten](#eine-ubergabe-anfrage-fur-einen-patienten)
-    + [Properties](#properties-1)
-    + [Example](#example-1)
+    + [Eigenschaften](#eigenschaften-1)
+    + [Beispiel](#beispiel-1)
     + [sharedIncidentId](#sharedincidentid-1)
     + [internalId](#internalid)
     + [issue](#issue)
     + [additionalInfo](#additionalinfo)
     + [sentByDispatcherAt](#sentbydispatcherat)
     + [patient](#patient)
-      - [Properties](#properties-2)
+      - [Properties](#properties)
       - [patient.name](#patientname)
       - [patient.surname](#patientsurname)
       - [patient.phone](#patientphone)
@@ -92,12 +92,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 </tbody>
 </table>
 
-### Properties
+### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Type</th><th>Required</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#acknowledgedbydispatcherat">acknowledgedByDispatcherAt</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#status">status</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#cause">cause</a></td><td>String</td><td>No</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#acknowledgedbydispatcherat">acknowledgedByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#status">status</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#cause">cause</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
-### Example
+### Beispiel
 
 
 
@@ -121,12 +121,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -145,12 +145,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -169,12 +169,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Annahme- oder Ablehnungsstatus</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -196,12 +196,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -283,12 +283,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 </tbody>
 </table>
 
-### Properties
+### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Type</th><th>Required</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Yes</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array</td><td>No</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array</td><td>Nein</td></tr></tbody></table>
 
 
-### Example
+### Beispiel
 
 
 
@@ -354,12 +354,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -378,12 +378,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Sender-interne ID des Einsatzes</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -399,12 +399,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Übergabegrund</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -422,9 +422,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -440,12 +440,12 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -464,16 +464,16 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Ein Patient</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Ein Patient</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -481,7 +481,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 </table>
 
 #### Properties
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Type</th><th>Required</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientname">name</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#patientsurname">surname</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#patientphone">phone</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#patientemail">email</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#patientaddress">address</a></td><td>Object</td><td>No</td></tr><tr><td colspan="2"><a href="#patientadditionalinfo">additionalInfo</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#patientgender">gender</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#patientdateofbirth">dateOfBirth</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#patientage">age</a></td><td>Number</td><td>No</td></tr><tr><td colspan="2"><a href="#patienthealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>No</td></tr><tr><td colspan="2"><a href="#patientinitialassessment">initialAssessment</a></td><td>Object</td><td>No</td></tr><tr><td colspan="2"><a href="#patientinfectioninformation">infectionInformation</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#patientinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>No</td></tr><tr><td colspan="2"><a href="#patienttransportnumber">transportNumber</a></td><td>String</td><td>No</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientsurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientphone">phone</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienthealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienttransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### patient.name
@@ -489,9 +489,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -506,9 +506,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -523,9 +523,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -540,9 +540,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -558,16 +558,16 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -581,9 +581,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -598,9 +598,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -615,9 +615,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -632,9 +632,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -649,9 +649,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -666,9 +666,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -683,9 +683,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -701,9 +701,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -718,9 +718,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -738,9 +738,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -758,9 +758,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Number</td></tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -776,16 +776,16 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Informationen zum Versicherungsverhältnis</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Informationen zum Versicherungsverhältnis</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -799,9 +799,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -816,9 +816,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -836,9 +836,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -855,16 +855,16 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Ersteinschätzung</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Ersteinschätzung</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -878,9 +878,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -898,9 +898,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -915,9 +915,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -935,9 +935,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -953,9 +953,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -970,9 +970,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Boolean</td></tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -987,9 +987,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1005,9 +1005,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Array</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -1024,7 +1024,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1037,7 +1037,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1050,7 +1050,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1063,7 +1063,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1077,16 +1077,16 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1100,9 +1100,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -1117,9 +1117,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1134,9 +1134,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1151,9 +1151,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1168,9 +1168,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1185,9 +1185,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1202,9 +1202,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1220,7 +1220,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>

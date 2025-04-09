@@ -5,16 +5,16 @@
 - [Überblick](#uberblick)
 - [App-Nachrichten](#app-nachrichten)
   * [Bestätigung oder Ablehnung einer Einsatzübergabeanfrage](#bestatigung-oder-ablehnung-einer-einsatzubergabeanfrage)
-    + [Properties](#properties)
-    + [Example](#example)
+    + [Eigenschaften](#eigenschaften)
+    + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
     + [acknowledgedByDispatcherAt](#acknowledgedbydispatcherat)
     + [status](#status)
     + [cause](#cause)
     + [Schema](#schema)
   * [Ein Einsatz mit Patientendaten](#ein-einsatz-mit-patientendaten)
-    + [Properties](#properties-1)
-    + [Example](#example-1)
+    + [Eigenschaften](#eigenschaften-1)
+    + [Beispiel](#beispiel-1)
     + [sharedIncidentId](#sharedincidentid-1)
     + [internalId](#internalid)
     + [classifications](#classifications)
@@ -23,7 +23,7 @@
     + [additionalInfo](#additionalinfo)
     + [sentByDispatcherAt](#sentbydispatcherat)
     + [missionLocation](#missionlocation)
-      - [Properties](#properties-2)
+      - [Properties](#properties)
       - [missionLocation.coordinate](#missionlocationcoordinate)
       - [missionLocation.coordinate.lat](#missionlocationcoordinatelat)
       - [missionLocation.coordinate.lon](#missionlocationcoordinatelon)
@@ -113,12 +113,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 </tbody>
 </table>
 
-### Properties
+### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Type</th><th>Required</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#acknowledgedbydispatcherat">acknowledgedByDispatcherAt</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#status">status</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#cause">cause</a></td><td>String</td><td>No</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#acknowledgedbydispatcherat">acknowledgedByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#status">status</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#cause">cause</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
-### Example
+### Beispiel
 
 
 
@@ -142,12 +142,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -166,12 +166,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -190,12 +190,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Annahme- oder Ablehnungsstatus</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -217,12 +217,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -304,12 +304,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 </tbody>
 </table>
 
-### Properties
+### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Type</th><th>Required</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Yes</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array</td><td>No</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>No</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Yes</td></tr><tr><td rowspan="2">missionLocation</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array</td><td>Yes</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array</td><td>No</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td rowspan="2">missionLocation</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array</td><td>Nein</td></tr></tbody></table>
 
 
-### Example
+### Beispiel
 
 
 
@@ -408,12 +408,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -432,12 +432,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Sender-interne ID des Einsatzes</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -453,12 +453,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Stichwortkürzel des Einsatzes</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Array</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -477,12 +477,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Taktische Bewertung: Sachverhalt</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -497,9 +497,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Boolean</td></tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -514,9 +514,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -532,12 +532,12 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -556,16 +556,16 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Ein Einsatz-Zielort</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Ein Einsatz-Zielort</td>
     </tr>
     <tr><tr><td rowspan="2">Type</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -573,7 +573,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 </table>
 
 #### Properties
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Type</th><th>Required</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>No</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>No</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>No</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>No</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>No</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>No</td></tr><tr><td colspan="2" rowspan="2">Any of:</td><td></td></tr><tr><td></td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2" rowspan="2">Any of:</td><td></td></tr><tr><td></td></tr></tbody></table>
 
 
 #### missionLocation.coordinate
@@ -582,16 +582,16 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Eine WGS84-Koordinate</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Eine WGS84-Koordinate.</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -605,9 +605,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Number</td></tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -628,9 +628,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Number</td></tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -653,16 +653,16 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -676,9 +676,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -693,9 +693,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -710,9 +710,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -727,9 +727,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -744,9 +744,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -761,9 +761,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -778,9 +778,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -797,16 +797,16 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Ein Einsatz-Zielobjekt</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Ein Einsatz-Zielobjekt</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -820,9 +820,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -837,9 +837,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -856,16 +856,16 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Ein Einsatz-Zielobjekt</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Ein Einsatz-Zielobjekt</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -879,9 +879,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -896,9 +896,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -914,9 +914,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -931,9 +931,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -948,9 +948,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -992,9 +992,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Array</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     <tr>
@@ -1011,7 +1011,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1024,7 +1024,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1037,7 +1037,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1050,7 +1050,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1064,16 +1064,16 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1087,9 +1087,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -1104,9 +1104,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1121,9 +1121,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1138,9 +1138,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1155,9 +1155,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1172,9 +1172,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1189,9 +1189,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1207,7 +1207,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1220,7 +1220,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Enum</th>
       <td colspan="2"><ul><li>Male</li><li>Female</li><li>Diverse</li></ul></td>
@@ -1236,7 +1236,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Format</th>
       <td colspan="2">date</td>
@@ -1252,7 +1252,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Number</td></tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
     
   </tbody>
 </table>
@@ -1266,14 +1266,14 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Informationen zum Versicherungsverhältnis</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Informationen zum Versicherungsverhältnis</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     
   </tbody>
 </table>
@@ -1285,7 +1285,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1298,7 +1298,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
       <td colspan="2">999999999</td>
@@ -1314,7 +1314,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1329,14 +1329,14 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Ersteinschätzung</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Ersteinschätzung</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     
   </tbody>
 </table>
@@ -1348,7 +1348,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
       <td colspan="2">999</td>
@@ -1364,7 +1364,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     
   </tbody>
 </table>
@@ -1377,7 +1377,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
       <td colspan="2">999999</td>
@@ -1393,7 +1393,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1407,7 +1407,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1420,7 +1420,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Boolean</td></tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     
   </tbody>
 </table>
@@ -1433,7 +1433,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1447,9 +1447,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">Array</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     <tr>
@@ -1466,7 +1466,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1479,7 +1479,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1492,7 +1492,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1505,7 +1505,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1519,16 +1519,16 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">Eine Adresse</td>
     </tr>
-    <tr><th>Type</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1542,9 +1542,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">Yes</td>
     </tr>
     
@@ -1559,9 +1559,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1576,9 +1576,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1593,9 +1593,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1610,9 +1610,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1627,9 +1627,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1644,9 +1644,9 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">No</td>
     </tr>
     
@@ -1662,7 +1662,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Type</th><td colspan="2">String</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>

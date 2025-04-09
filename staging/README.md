@@ -5,7 +5,6 @@ Auch die von den Benutzern erstellten Teile der App-Dokumentation werden hier ab
 Außerdem enthält dieser Bereich ein node.js-Programm, welches die Quell-Schemata verarbeitet, die finalen App-Schemata generiert sowie die Dokumentation erstellt (im Markdown- und PDF-Format).
 
 # TODOs
-- Übersetzen der automatisch generierten Schema-Dokumentation (englische Begriffe eindeutschen, vgl. templates/schema.hbs und lib/renderer/*.js in /staging/bin/json-schema-static-docs-master). 
 - Durchgehende Nutzung von title und description Properties in allen Schemata (inkl. Building Blocks, ggf aus UCRI1 übernehmen).
 - Weitere Apps hinzufügen (aktuell existieren nur incident_transfer_with_patient und patient_transfer)
 - PDFs schicker machen (z.B. header und footer per markdown-frontmatter, vgl. https://www.npmjs.com/package/md-to-pdf), Code hierfür im Processor STEP 5 einfügen)

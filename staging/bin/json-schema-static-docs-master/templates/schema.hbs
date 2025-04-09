@@ -12,13 +12,13 @@
 </table>
 
 {{#if schema.properties}}
-## Properties
+## Eigenschaften
 
 {{propertiesTable schema }}
 {{/if}}
 
 {{#if example}}
-## Example
+## Beispiel
 ```
 {{{json example.data}}}
 ```
@@ -26,7 +26,7 @@
 
 {{#if schema.examples}}
 {{#each schema.examples}}
-## Example
+## Beispiel
 {{#if this.meta:title}}### {{this.meta:title}}{{/if}}
 {{#if this.meta:description}}<p>{{this.meta:description}}</p>{{/if}}
 
@@ -160,20 +160,20 @@
     {{/if}}
     {{#if this.title}}
     <tr>
-      <th>Title</th>
+      <th>Titel</th>
       <td colspan="2">{{ this.title }}</td>
     </tr>
     {{/if}}
     {{#if this.description}}
     <tr>
-      <th>Description</th>
+      <th>Beschreibung</th>
       <td colspan="2">{{ this.description }}</td>
     </tr>
     {{/if}}
     {{propertyTypeRow this }}
     {{#if (isDefined this.isRequired)}}
     <tr>
-      <th>Required</th>
+      <th>Obligat?</th>
       <td colspan="2">{{#if this.isRequired}}Yes{{else}}No{{/if}}</td>
     </tr>
     {{/if}}
@@ -253,7 +253,7 @@
       <th>Pattern</th>
       <td colspan="2">{{this.pattern}}</td>
     </tr>{{/if}}{{#if (match this.type '^(string|integer|number|boolean)$')}}{{#if this.examples}}<tr>
-      <th>Examples</th>
+      <th>Beispiele</th>
       <td colspan="2">{{#each this.examples}}<li>{{this}}</li>{{/each}}</td>
     </tr>{{/if}}{{/if}}
   </tbody>

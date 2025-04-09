@@ -77,7 +77,7 @@ const propertyRow = (name, property, parentKey, isRequired) => {
   } else {
     typeLabel = getLabelForProperty(property);
   }
-  const requiredText=isRequired ? "Yes" : "No";
+  const requiredText=isRequired ? "Ja" : "Nein";
   let html =
     `<tr><td colspan="2"><a href="#${href}">${name}</a></td>` +
     `<td>${typeLabel}</td><td>${requiredText}</td></tr>`;
@@ -149,7 +149,7 @@ const propertiesTable = (schema, parentKey) => {
 
   let html =
     '<table class="jssd-properties-table">' +
-    '<thead><tr><th colspan="2">Name</th><th>Type</th><th>Required</th></tr></thead>' +
+    '<thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead>' +
     "<tbody>";
 
   for (const key in properties) {
@@ -227,7 +227,7 @@ Handlebars.registerHelper("propertyTypeRow", function (property) {
   } else {
     const typeLabel = getLabelForProperty(property);
     if (typeLabel) {
-      html = `<tr><th>Type</th><td colspan="2">${typeLabel}</td></tr>`;
+      html = `<tr><th>Typ</th><td colspan="2">${typeLabel}</td></tr>`;
     }
   }
   return html ? new Handlebars.SafeString(html) : "";
