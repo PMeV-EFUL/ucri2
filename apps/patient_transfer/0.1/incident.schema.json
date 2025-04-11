@@ -103,32 +103,39 @@
   ],
   "$defs": {
     "address.schema.json": {
-      "title": "Eine Adresse",
-      "description": "Eine Adresse",
+      "title": "Adresse",
+      "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
       "required": [
         "street"
       ],
       "type": "object",
       "properties": {
         "street": {
+          "title": "Name der Strasse",
           "type": "string"
         },
         "houseNumber": {
+          "title": "Hausnummer",
           "type": "string"
         },
         "postalCode": {
+          "title": "Postleitzahl",
           "type": "string"
         },
         "city": {
+          "title": "Stadt",
           "type": "string"
         },
         "cityDistrict": {
+          "title": "Ortsteil",
           "type": "string"
         },
         "state": {
+          "title": "Bundesland",
           "type": "string"
         },
         "country": {
+          "title": "Land",
           "type": "string"
         }
       },
@@ -147,19 +154,23 @@
     },
     "healthInsuranceInformation.schema.json": {
       "title": "Informationen zum Versicherungsverhältnis",
-      "description": "Informationen zum Versicherungsverhältnis",
+      "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
       "required": [],
       "type": "object",
       "properties": {
         "healthInsuranceCompany": {
+          "title": "Name der Krankenversicherung",
           "type": "string"
         },
         "healthInsuranceCompanyNumber": {
+          "title": "IK der Krankenversicherung",
+          "description": "TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?",
           "type": "integer",
           "minimum": 0,
           "maximum": 999999999
         },
         "insuranceNumber": {
+          "title": "Versichertennummer (Alphanumerisch)",
           "type": "string"
         }
       },
@@ -174,19 +185,23 @@
     },
     "initialAssessment.schema.json": {
       "title": "Ersteinschätzung",
-      "description": "Ersteinschätzung",
+      "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?",
       "required": [],
       "type": "object",
+      "minProperties": 1,
       "properties": {
         "rmi": {
+          "title": "Rückmeldeindikator",
           "type": "integer",
           "minimum": 0,
           "maximum": 999
         },
         "rmc": {
+          "title": "Rückmeldecode",
           "type": "integer"
         },
         "pzc": {
+          "title": "Patientenzuweisungscode",
           "type": "integer",
           "minimum": 0,
           "maximum": 999999
@@ -206,32 +221,38 @@
       ]
     },
     "patient.schema.json": {
-      "title": "Ein Patient",
-      "description": "Ein Patient",
+      "title": "Patient",
+      "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "name": {
+          "title": "Nachname",
           "type": "string"
         },
         "surname": {
+          "title": "Vorname",
           "type": "string"
         },
         "phone": {
+          "title": "Telefonnummer",
           "type": "string"
         },
         "email": {
+          "title": "Email-Adresse",
           "type": "string"
         },
         "address": {
           "$ref": "#/$defs/address.schema.json"
         },
         "additionalInfo": {
+          "title": "Weitere Informationen zur Person",
           "type": "string"
         },
         "gender": {
+          "title": "Geschlecht",
           "type": "string",
           "enum": [
             "Male",
@@ -240,10 +261,13 @@
           ]
         },
         "dateOfBirth": {
+          "title": "Geburtsdatum",
+          "description": "Das Geburtsdatum im ISO8601 Date-Format (tagesgenaue Datumsangabe ohne Zeitangabe)",
           "type": "string",
           "format": "date"
         },
         "age": {
+          "title": "Alter in Jahren",
           "type": "number",
           "minimum": 0
         },
@@ -254,12 +278,15 @@
           "$ref": "#/$defs/initialAssessment.schema.json"
         },
         "infectionInformation": {
+          "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
           "type": "string"
         },
         "infectionStatus": {
+          "title": "Informationen ob der Patient ansteckend ist (true/false)",
           "type": "boolean"
         },
         "transportNumber": {
+          "title": "Transportnummer",
           "type": "string"
         }
       },
@@ -301,29 +328,34 @@
       "unevaluatedProperties": false
     },
     "person.schema.json": {
-      "title": "Eine Person",
-      "description": "Eine Person",
+      "title": "Person",
+      "description": "Eine Person. Obligat ist der Nachname.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "name": {
+          "title": "Nachname",
           "type": "string"
         },
         "surname": {
+          "title": "Vorname",
           "type": "string"
         },
         "phone": {
+          "title": "Telefonnummer",
           "type": "string"
         },
         "email": {
+          "title": "Email-Adresse",
           "type": "string"
         },
         "address": {
           "$ref": "#/$defs/address.schema.json"
         },
         "additionalInfo": {
+          "title": "Weitere Informationen zur Person",
           "type": "string"
         }
       },

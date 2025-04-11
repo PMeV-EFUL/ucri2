@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td rowspan="2">missionLocation</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td rowspan="2">missionLocation</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -121,7 +121,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Format</th>
@@ -145,7 +145,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -163,10 +163,10 @@
       <th>Beschreibung</th>
       <td colspan="2">Stichwortkürzel des Einsatzes</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Array</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ String)</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     <tr>
       <th>Min Items</th>
@@ -175,6 +175,8 @@
   </tbody>
 </table>
 
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody></tbody></table>
 
 
 
@@ -190,7 +192,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -207,7 +209,7 @@
     <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -224,7 +226,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -245,7 +247,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Format</th>
@@ -264,22 +266,22 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Ein Einsatz-Zielort</td>
+      <td colspan="2">Einsatz-Zielort</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielort</td>
+      <td colspan="2">Ein Einsatz-Zielort. Mindestens eine Koordinate oder Adresse müssen vorhanden sein.</td>
     </tr>
     <tr><tr><td rowspan="2">Type</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     
   </tbody>
 </table>
 
-### Properties
+### Eigenschaften
   <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2" rowspan="2">Any of:</td><td></td></tr><tr><td></td></tr></tbody></table>
 
 
@@ -290,16 +292,16 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Eine WGS84-Koordinate</td>
+      <td colspan="2">WGS84-Koordinate</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine WGS84-Koordinate.</td>
+      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -312,10 +314,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Breitengrad in Grad</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Minimum</th>
@@ -335,10 +341,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Längengrad in Grad</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Minimum</th>
@@ -361,16 +371,16 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Eine Adresse</td>
+      <td colspan="2">Adresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine Adresse</td>
+      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -383,10 +393,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Name der Strasse</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     
   </tbody>
@@ -400,10 +414,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Hausnummer</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -417,10 +435,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Postleitzahl</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -434,10 +456,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Stadt</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -451,10 +477,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Ortsteil</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -468,10 +498,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Bundesland</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -485,10 +519,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Land</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -505,16 +543,16 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt</td>
+      <td colspan="2">Einsatz-Zielobjekt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt</td>
+      <td colspan="2">Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -527,10 +565,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Objektname</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     
   </tbody>
@@ -544,10 +586,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Weitere Informationen zum Einsatzobjekt</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -564,16 +610,16 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt</td>
+      <td colspan="2">Einsatz-Zielobjekt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt</td>
+      <td colspan="2">Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -586,10 +632,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Objektname</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     
   </tbody>
@@ -603,10 +653,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Weitere Informationen zum Einsatzobjekt</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -621,10 +675,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Etage</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -638,10 +696,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zimmer</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -655,10 +717,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Weitere Informationen zum Einsatz-Zielort</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -699,10 +765,10 @@
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Typ</th><td colspan="2">Array</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Min Items</th>
@@ -711,6 +777,8 @@
   </tbody>
 </table>
 
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientsname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientshealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientstransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### patients.name
@@ -718,6 +786,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Nachname</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -731,6 +803,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Vorname</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -744,6 +820,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Telefonnummer</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -757,6 +837,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Email-Adresse</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -772,16 +856,16 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Eine Adresse</td>
+      <td colspan="2">Adresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine Adresse</td>
+      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -794,10 +878,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Name der Strasse</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     
   </tbody>
@@ -811,10 +899,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Hausnummer</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -828,10 +920,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Postleitzahl</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -845,10 +941,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Stadt</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -862,10 +962,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Ortsteil</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -879,10 +983,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Bundesland</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -896,10 +1004,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Land</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -914,6 +1026,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Weitere Informationen zur Person</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -927,6 +1043,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Geschlecht</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Enum</th>
@@ -943,6 +1063,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Geburtsdatum</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Geburtsdatum im ISO8601 Date-Format (tagesgenaue Datumsangabe ohne Zeitangabe)</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Format</th>
@@ -959,6 +1087,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Alter in Jahren</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     
   </tbody>
@@ -978,7 +1110,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Informationen zum Versicherungsverhältnis</td>
+      <td colspan="2">Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     
@@ -992,6 +1124,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Name der Krankenversicherung</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1005,6 +1141,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">IK der Krankenversicherung</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
@@ -1021,6 +1165,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Versichertennummer (Alphanumerisch)</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1041,10 +1189,13 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ersteinschätzung</td>
+      <td colspan="2">Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    
+    <tr>
+      <th>Min Properties</th>
+      <td colspan="2">1</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1055,6 +1206,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Rückmeldeindikator</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
@@ -1071,6 +1226,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Rückmeldecode</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     
   </tbody>
@@ -1084,6 +1243,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Patientenzuweisungscode</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
@@ -1114,6 +1277,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Informationen ob der Patient ansteckend ist (als Freitext)</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1127,6 +1294,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Informationen ob der Patient ansteckend ist (true/false)</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     
   </tbody>
@@ -1140,6 +1311,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Transportnummer</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1154,10 +1329,10 @@
 
 <table class="jssd-property-table">
   <tbody>
-    <tr><th>Typ</th><td colspan="2">Array</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     <tr>
       <th>Min Items</th>
@@ -1166,6 +1341,8 @@
   </tbody>
 </table>
 
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### informers.name
@@ -1173,6 +1350,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Nachname</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1186,6 +1367,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Vorname</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1199,6 +1384,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Telefonnummer</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1212,6 +1401,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Email-Adresse</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1227,16 +1420,16 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Eine Adresse</td>
+      <td colspan="2">Adresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine Adresse</td>
+      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -1249,10 +1442,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Name der Strasse</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     
   </tbody>
@@ -1266,10 +1463,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Hausnummer</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -1283,10 +1484,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Postleitzahl</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -1300,10 +1505,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Stadt</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -1317,10 +1526,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Ortsteil</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -1334,10 +1547,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Bundesland</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -1351,10 +1568,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Land</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>
@@ -1369,6 +1590,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Weitere Informationen zur Person</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1536,8 +1761,8 @@
     ],
     "$defs": {
         "coordinate.schema.json": {
-            "title": "Eine WGS84-Koordinate",
-            "description": "Eine WGS84-Koordinate.",
+            "title": "WGS84-Koordinate",
+            "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",
             "required": [
                 "lat",
                 "lon"
@@ -1545,11 +1770,13 @@
             "type": "object",
             "properties": {
                 "lat": {
+                    "title": "Breitengrad in Grad",
                     "type": "number",
                     "minimum": -90,
                     "maximum": 90
                 },
                 "lon": {
+                    "title": "Längengrad in Grad",
                     "type": "number",
                     "minimum": -180,
                     "maximum": 180
@@ -1564,32 +1791,39 @@
             ]
         },
         "address.schema.json": {
-            "title": "Eine Adresse",
-            "description": "Eine Adresse",
+            "title": "Adresse",
+            "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
             "required": [
                 "street"
             ],
             "type": "object",
             "properties": {
                 "street": {
+                    "title": "Name der Strasse",
                     "type": "string"
                 },
                 "houseNumber": {
+                    "title": "Hausnummer",
                     "type": "string"
                 },
                 "postalCode": {
+                    "title": "Postleitzahl",
                     "type": "string"
                 },
                 "city": {
+                    "title": "Stadt",
                     "type": "string"
                 },
                 "cityDistrict": {
+                    "title": "Ortsteil",
                     "type": "string"
                 },
                 "state": {
+                    "title": "Bundesland",
                     "type": "string"
                 },
                 "country": {
+                    "title": "Land",
                     "type": "string"
                 }
             },
@@ -1607,17 +1841,19 @@
             ]
         },
         "missionObject.schema.json": {
-            "title": "Ein Einsatz-Zielobjekt",
-            "description": "Ein Einsatz-Zielobjekt",
+            "title": "Einsatz-Zielobjekt",
+            "description": "Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts",
             "required": [
                 "name"
             ],
             "type": "object",
             "properties": {
                 "name": {
+                    "title": "Objektname",
                     "type": "string"
                 },
                 "additionalInfo": {
+                    "title": "Weitere Informationen zum Einsatzobjekt",
                     "type": "string"
                 }
             },
@@ -1630,8 +1866,8 @@
             ]
         },
         "location.schema.json": {
-            "title": "Ein Einsatz-Zielort",
-            "description": "Ein Einsatz-Zielort",
+            "title": "Einsatz-Zielort",
+            "description": "Ein Einsatz-Zielort. Mindestens eine Koordinate oder Adresse müssen vorhanden sein.",
             "anyOf": [
                 {
                     "required": [
@@ -1659,12 +1895,15 @@
                     "$ref": "#/$defs/missionObject.schema.json"
                 },
                 "floor": {
+                    "title": "Etage",
                     "type": "string"
                 },
                 "room": {
+                    "title": "Zimmer",
                     "type": "string"
                 },
                 "additionalInfo": {
+                    "title": "Weitere Informationen zum Einsatz-Zielort",
                     "type": "string"
                 }
             },
@@ -1700,19 +1939,23 @@
         },
         "healthInsuranceInformation.schema.json": {
             "title": "Informationen zum Versicherungsverhältnis",
-            "description": "Informationen zum Versicherungsverhältnis",
+            "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
             "required": [],
             "type": "object",
             "properties": {
                 "healthInsuranceCompany": {
+                    "title": "Name der Krankenversicherung",
                     "type": "string"
                 },
                 "healthInsuranceCompanyNumber": {
+                    "title": "IK der Krankenversicherung",
+                    "description": "TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?",
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999999999
                 },
                 "insuranceNumber": {
+                    "title": "Versichertennummer (Alphanumerisch)",
                     "type": "string"
                 }
             },
@@ -1727,19 +1970,23 @@
         },
         "initialAssessment.schema.json": {
             "title": "Ersteinschätzung",
-            "description": "Ersteinschätzung",
+            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?",
             "required": [],
             "type": "object",
+            "minProperties": 1,
             "properties": {
                 "rmi": {
+                    "title": "Rückmeldeindikator",
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999
                 },
                 "rmc": {
+                    "title": "Rückmeldecode",
                     "type": "integer"
                 },
                 "pzc": {
+                    "title": "Patientenzuweisungscode",
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999999
@@ -1759,32 +2006,38 @@
             ]
         },
         "patient.schema.json": {
-            "title": "Ein Patient",
-            "description": "Ein Patient",
+            "title": "Patient",
+            "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
             "required": [
                 "name"
             ],
             "type": "object",
             "properties": {
                 "name": {
+                    "title": "Nachname",
                     "type": "string"
                 },
                 "surname": {
+                    "title": "Vorname",
                     "type": "string"
                 },
                 "phone": {
+                    "title": "Telefonnummer",
                     "type": "string"
                 },
                 "email": {
+                    "title": "Email-Adresse",
                     "type": "string"
                 },
                 "address": {
                     "$ref": "#/$defs/address.schema.json"
                 },
                 "additionalInfo": {
+                    "title": "Weitere Informationen zur Person",
                     "type": "string"
                 },
                 "gender": {
+                    "title": "Geschlecht",
                     "type": "string",
                     "enum": [
                         "Male",
@@ -1793,10 +2046,13 @@
                     ]
                 },
                 "dateOfBirth": {
+                    "title": "Geburtsdatum",
+                    "description": "Das Geburtsdatum im ISO8601 Date-Format (tagesgenaue Datumsangabe ohne Zeitangabe)",
                     "type": "string",
                     "format": "date"
                 },
                 "age": {
+                    "title": "Alter in Jahren",
                     "type": "number",
                     "minimum": 0
                 },
@@ -1807,12 +2063,15 @@
                     "$ref": "#/$defs/initialAssessment.schema.json"
                 },
                 "infectionInformation": {
+                    "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
                     "type": "string"
                 },
                 "infectionStatus": {
+                    "title": "Informationen ob der Patient ansteckend ist (true/false)",
                     "type": "boolean"
                 },
                 "transportNumber": {
+                    "title": "Transportnummer",
                     "type": "string"
                 }
             },
@@ -1854,29 +2113,34 @@
             "unevaluatedProperties": false
         },
         "person.schema.json": {
-            "title": "Eine Person",
-            "description": "Eine Person",
+            "title": "Person",
+            "description": "Eine Person. Obligat ist der Nachname.",
             "required": [
                 "name"
             ],
             "type": "object",
             "properties": {
                 "name": {
+                    "title": "Nachname",
                     "type": "string"
                 },
                 "surname": {
+                    "title": "Vorname",
                     "type": "string"
                 },
                 "phone": {
+                    "title": "Telefonnummer",
                     "type": "string"
                 },
                 "email": {
+                    "title": "Email-Adresse",
                     "type": "string"
                 },
                 "address": {
                     "$ref": "#/$defs/address.schema.json"
                 },
                 "additionalInfo": {
+                    "title": "Weitere Informationen zur Person",
                     "type": "string"
                 }
             },

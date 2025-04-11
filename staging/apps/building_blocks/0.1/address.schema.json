@@ -1,30 +1,37 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Eine Adresse",
-  "description": "Eine Adresse",
+  "title": "Adresse",
+  "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
   "required": [ "street" ],
   "type": "object",
   "properties": {
     "street": {
-      "type": "string"
+      "title": "Name der Strasse",
+	  "type": "string"
     },
     "houseNumber": {
+	  "title": "Hausnummer",
       "type": "string"
     },
 	"postalCode": {
+      "title": "Postleitzahl",
       "type": "string"
     },
 	"city": {
+      "title": "Stadt",
       "type": "string"
     },
 	"cityDistrict": {
+      "title": "Ortsteil",
       "type": "string"
     },
 	"state": {
+      "title": "Bundesland",
       "type": "string"
     },
 	"country": {
+      "title": "Land",
       "type": "string"
     }
   },

@@ -1,17 +1,19 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Eine WGS84-Koordinate",
-  "description": "Eine WGS84-Koordinate.",
+  "title": "WGS84-Koordinate",
+  "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",
   "required": [ "lat", "lon" ],
   "type": "object",
   "properties": {
     "lat": {
+      "title": "Breitengrad in Grad",
       "type": "number",
       "minimum": -90,
       "maximum": 90
     },
     "lon": {
+      "title": "Längengrad in Grad",
       "type": "number",
       "minimum": -180,
       "maximum": 180

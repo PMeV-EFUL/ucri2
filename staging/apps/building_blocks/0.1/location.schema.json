@@ -1,8 +1,8 @@
 {
 	"$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json",
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Ein Einsatz-Zielort",
-	"description": "Ein Einsatz-Zielort",
+	"title": "Einsatz-Zielort",
+	"description": "Ein Einsatz-Zielort. Mindestens eine Koordinate oder Adresse müssen vorhanden sein.",
 	"anyOf": [
         {"required": ["coordinate"]},
         {"required": ["address"]}
@@ -22,12 +22,15 @@
 			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json"
 		},
 		"floor": {
+			"title": "Etage",
 			"type": "string"
 		},
 		"room": {
+			"title": "Zimmer",
 			"type": "string"
 		},
 		"additionalInfo": {
+			"title": "Weitere Informationen zum Einsatz-Zielort",
 			"type": "string"
 		}
 	},

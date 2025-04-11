@@ -35,13 +35,15 @@ async function process(){
   //     "incident","acknowledgement"
   //   ]
   // };
+  let errorsOccured=false;
+
   let schemas={};
   for (const schemaDir in schemaDirs){
     console.log(`processing schema dir ${schemaDir}...`);
     const schemaNames=schemaDirs[schemaDir].files;
     //STEP 1: Load schemas from filesystem, register with hyperjump library
     for (const schemaName of schemaNames){
-      console.log(`loading schema "${schemaName}"...`);
+      console.log(`STEP 1: loading schema "${schemaName}"...`);
       //load files
       let schema=JSON.parse(fs.readFileSync(`${stagedAppsPath}/${schemaDir}/${schemaName}`, 'utf8'));
       registerSchema(schema);
@@ -52,7 +54,7 @@ async function process(){
     //STEP 2: Test schema examples
     //now lets test the schema examples
     for (const schemaName of schemaNames){
-      console.log(`testing schema "${schemaName}"...`);
+      console.log(`STEP 2: testing schema "${schemaName}"...`);
       let schema=schemas[schemaName];
       if (!schema.examples){
         console.error("NO EXAMPLE GIVEN!")
@@ -64,15 +66,19 @@ async function process(){
         } else {
           console.log("Instance is invalid :-(");
           console.log(JSON.stringify(output,null,2));
+          errorsOccured=true;
         }
       }
       console.log(`schema "${schemaName}" tested!`);
+      if (errorsOccured){
+        console.error("errors occured when testing, aborting...");
+      }
     }
     //STEP 3: Bundle and postprocess schemata
     //now bundle the schemata
     if (schemaDir.indexOf("building_blocks")<0) {
       for (const schemaName of schemaNames){
-        console.log(`bundling schema "${schemaName}"...`);
+        console.log(`STEP 3: bundling schema "${schemaName}"...`);
         let schema=schemas[schemaName];
         let schemaId = schema["$id"];
         const output = await bundle(schemaId);
@@ -98,7 +104,7 @@ async function process(){
     //STEP 4: generate per-schema documentatio using local json-schema-static-docs library (adapted by PZernicke)
     if (schemaDir.indexOf("building_blocks")<0) {
       // generate documentation
-      console.log("generating per message docs....");
+      console.log("STEP 4: generating per message docs....");
       const inputPath= `${bundledAppsPath}/${schemaDir}`;
       const outputPath= `${docsPath}/${schemaDir}`
       //console.log(JSON.stringify(output,null,2));
@@ -121,7 +127,7 @@ async function process(){
 
     //STEP 5: collect markdown files into a single one and generate pdf version
     if (schemaDir.indexOf("building_blocks")<0) {
-      console.log("generating merged docs ...");
+      console.log("STEP 5: generating merged docs ...");
       let completeMarkdown=fs.readFileSync(`${stagedAppsPath}/${schemaDir}/manual_documentation.md`, 'utf8');
       completeMarkdown+="\n # App-Nachrichten\n"
       for (const schemaName of schemaNames) {

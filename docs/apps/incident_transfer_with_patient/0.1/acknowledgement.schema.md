@@ -46,7 +46,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Format</th>
@@ -70,7 +70,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Format</th>
@@ -94,7 +94,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Yes</td>
+      <td colspan="2">Ja</td>
     </tr>
     <tr>
       <th>Enum</th>
@@ -121,7 +121,7 @@
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">No</td>
+      <td colspan="2">Nein</td>
     </tr>
     
   </tbody>

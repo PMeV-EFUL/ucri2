@@ -75,7 +75,11 @@ const getLabelForProperty = (property) => {
     result = `Array [${getHtmlAnchorForRef(ref, property.items.title)}]`;
   } else if (_isRelativeRef && property.type === "object") {
     result = `Object (of type ${getHtmlAnchorForRef(ref, property.title)})`;
-  } else {
+  }
+  else if (property.type === "array"){
+    result = `Array (vom Typ ${formatLabel(property.items.type)})`
+  }
+  else {
     result = formatLabel(property.type);
   }
 

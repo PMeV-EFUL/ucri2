@@ -69,12 +69,16 @@
 
 {{#unless (isDefined parentKey)}}
   {{#if this.properties}}
-### Properties
+### Eigenschaften
   {{propertiesTable this propertyKey }}
+  {{/if}}
+  {{#if this.items}}
+### Eigenschaften der Objekte im Array
+  {{propertiesTable this.items propertyKey }}
   {{/if}}
 {{/unless}}
 
-{{#unless (isExternalRef this.$ref)}}
+{{!#unless (isExternalRef this.$ref)}}
 {{#if this.properties}}
 {{#each this.properties}}
 {{#if (isDefined ../parentKey)}}
@@ -85,7 +89,7 @@
 {{/each}}
 {{/if}}
 {{#if this.items }}
-{{#unless (isDefined this.items.$ref)}}
+{{!#unless (isDefined this.items.$ref)}}
 {{#each this.items.properties}}
 {{#if (isDefined ../parentKey)}}
 {{> property parentKey=(concat ../parentKey '.' ../propertyKey) propertyKey=@key }}
@@ -93,7 +97,7 @@
 {{> property parentKey=../propertyKey propertyKey=@key }}
 {{/if}}
 {{/each}}
-{{/unless}}
+{{!/unless}}
 {{/if}}
 {{#if this.oneOf }}
 {{#each this.oneOf}}
@@ -122,7 +126,7 @@
 {{/if}}
 {{/each}}
 {{/if}}
-{{/unless}}
+{{!/unless}}
 
 {{/inline}}
 
@@ -174,7 +178,7 @@
     {{#if (isDefined this.isRequired)}}
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">{{#if this.isRequired}}Yes{{else}}No{{/if}}</td>
+      <td colspan="2">{{#if this.isRequired}}Ja{{else}}Nein{{/if}}</td>
     </tr>
     {{/if}}
     {{#if this.default}}

@@ -1,21 +1,25 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Ein Patient",
-  "description": "Ein Patient",
+  "title": "Patient",
+  "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
   "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personBase.schema.json",
   "required": [ "name" ],
   "type": "object",
   "properties": {
     "gender": {
+      "title": "Geschlecht",
       "type": "string",
 	  "enum": ["Male","Female","Diverse"]	  
     },
 	"dateOfBirth": {
+      "title": "Geburtsdatum",
+      "description": "Das Geburtsdatum im ISO8601 Date-Format (tagesgenaue Datumsangabe ohne Zeitangabe)",
       "type": "string",
 	  "format": "date"
     },
 	"age": {
+      "title": "Alter in Jahren",
       "type": "number",
 	  "minimum":0
     },
@@ -26,12 +30,15 @@
 		"$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/initialAssessment.schema.json"
 	},
 	"infectionInformation": {
+      "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
       "type": "string"
     },
 	"infectionStatus": {
+      "title": "Informationen ob der Patient ansteckend ist (true/false)",
       "type": "boolean"
     },
 	"transportNumber": {
+      "title": "Transportnummer",
       "type": "string"
     }
   },
