@@ -5,7 +5,8 @@ Auch die von den Benutzern erstellten Teile der App-Dokumentation werden hier ab
 Außerdem enthält dieser Bereich ein node.js-Programm, welches die Quell-Schemata verarbeitet, die finalen App-Schemata generiert sowie die Dokumentation erstellt (im Markdown- und PDF-Format).
 
 # TODOs
-- Durchgehende Nutzung von title und description Properties in allen Schemata (inkl. Building Blocks, ggf aus UCRI1 übernehmen).
+- Durchgehende Nutzung von title und description Properties in allen Schemata (inkl. Building Blocks, ggf aus UCRI1 übernehmen). Bisher haben alle Building blocks zumindest schon mal einen Titel.
+- Prüfen von TODOs innerhalb der BB-Schemata (hauptsächlich Punkte, wo wir entscheiden müssen, ob Zahlenwerte mit führenden Nullen als number oder string modelliert werden)
 - Autogenerierte Docs haben unzureichende Unterstützung für anyOf i.V.m. required (Nutzung in Location)
 - Arrays, die keine Objekte enthalten haben eine überflüssige Detail-Tabelle zu enthaltenen Eigenschaften
 - Weitere Apps hinzufügen (aktuell existieren nur incident_transfer_with_patient und patient_transfer)
@@ -23,6 +24,31 @@ Innerhalb dieses Bereiches existieren die folgenden Ordner:
 Außerhalb dieses Bereiches (auf der Root-Ebene des Repository) befinden sich die Zielordner für den Processor:
 - apps: Enthält die finalen Nachrichten-Schemata der UCRI2-Apps
 - docs/apps: Enthält die generierte Dokumentation für die UCRI2-Apps (Einzelne .md-Dateien für jede Nachricht und ein Paar aus .md und .pdf-Dateien für die App selbst)
+
+**Hinweis: Die Dateien in diesen Verzeichnissen dürfen nicht selbst bearbeitet werden, stattdessen ist der Processor (s.u.) zu nutzen!**
+
+# Allgemeine Abläufe zum Hinzufügen oder Ändern von Schemata und/oder Apps
+Die Dateien in den Ziel-Verzeichnissen
+
+- /apps
+- /docs
+
+**DÜRFEN NIEMALS DIREKT BEARBEITET WERDEN**. Stattdessen werden die Quelldateien angepasst und der Processor (s.u.) genutzt!
+
+
+## Building Blocks erweitern
+Die Building-Block-Schemata in staging/apps/building_blocks können direkt geändert oder auch neue building blocks hinzugefügt werden. Beim Hinzufügen sollte ein existierender building block als Vorlage verwendet werden.
+
+**Nach einer Änderung muss der Processor (s.u.) ausgeführt werden, um die Änderung zu prüfen und die app-Schemata sowie die Dokumentation mit den Änderungen zu aktualisieren.**
+
+## Eine App anpassen
+Die App-Schemata unter staging/apps/APPNAME können direkt geändert oder auch neue Nachrichten-Schemata hinzugefügt werden.
+Falls der nicht aus den Schemata generierte erste Teil der Dokumentation angepasst werden soll, ist die staging/apps/APPNAME/VERSION/documentation_manual.md anzupassen.
+
+** Nach einer Änderung muss der Processor (s.u.) ausgeführt werden, um die Änderung zu prüfen und die app-Schemata sowie die Dokumentation mit den Änderungen zu aktualisieren.**
+
+## Eine App hinzufügen
+Beim Hinzufügen sollte eine neues Verzeichnis unter staging/apps erstellt werden. Es sollte eine existierende app als Vorlage verwendet werden.
 
 # Regelungen für die JSON-Schemata
 Die JSON-Schemata müssen folgenden Bedingungen genügen:
