@@ -7,9 +7,9 @@ Außerdem enthält dieser Bereich ein node.js-Programm, welches die Quell-Schema
 # TODOs
 - Durchgehende Nutzung von title und description Properties in allen Schemata (inkl. Building Blocks, ggf aus UCRI1 übernehmen). Bisher haben alle Building blocks zumindest schon mal einen Titel.
 - Prüfen von TODOs innerhalb der BB-Schemata (hauptsächlich Punkte, wo wir entscheiden müssen, ob Zahlenwerte mit führenden Nullen als number oder string modelliert werden)
-- Autogenerierte Docs haben unzureichende Unterstützung für anyOf i.V.m. required (Nutzung in Location)
-- Arrays, die keine Objekte enthalten haben eine überflüssige Detail-Tabelle zu enthaltenen Eigenschaften
-- Weitere Apps hinzufügen (aktuell existieren nur incident_transfer_with_patient und patient_transfer)
+- ~~Autogenerierte Docs haben unzureichende Unterstützung für anyOf i.V.m. required (Nutzung in Location)~~ (anyof wird für die docs komplett ignoriert)
+- ~~Arrays, die keine Objekte enthalten haben eine überflüssige Detail-Tabelle zu enthaltenen Eigenschaften~~ (repariert)
+- Weitere Apps hinzufügen (aktuell existieren nur incident_transfer_with_patient, patient_transfer und incident_transfer_police)
 - PDFs schicker machen (z.B. header und footer per markdown-frontmatter, vgl. https://www.npmjs.com/package/md-to-pdf), Code hierfür im Processor STEP 5 einfügen)
 - Überlegen, wie wir die Migration von UCRI1 erleichtern können (Mapping-Tabellen UCRI1->UCRI2-Properties?)
 
