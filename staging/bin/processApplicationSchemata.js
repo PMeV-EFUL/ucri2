@@ -85,8 +85,14 @@ async function process(){
         //process the output to change all refs to be local
         replaceRefs(output);
 
-        //resolve all refs which point to a *Base Building block
-        resolveBaseRefs(output);
+        //resolve all refs which point to a *Base Building block until no more replacements are done
+        const resolvedBaseRefKeys = {};
+        let replacementsPerformed=true;
+        while(replacementsPerformed){
+          replacementsPerformed=resolveBaseRefs(output,resolvedBaseRefKeys);
+        }
+        //remove all *Base refs which were replaced
+        removeResolvedBaseRefs(output,resolvedBaseRefKeys);
 
         //write the bundled and processed final schema
         const outputPath= `${bundledAppsPath}/${schemaDir}`
@@ -196,28 +202,34 @@ function replaceRefs(obj) {
   }
 }
 
-function resolveBaseRefs(schema) {
+function resolveBaseRefs(schema,resolvedBaseRefKeys) {
   //we check all $defs for direct $refs to *Base schemata
-  const resolvedBaseRefKeys={}
-  const $defs=schema.$defs;
-  for (var key in $defs){
-    const defSchema=$defs[key];
-    if (defSchema.$ref){
-      const baseRefMatch=/(#\/\$defs\/)(.*Base.schema.json)/.exec(defSchema.$ref);
-      if (baseRefMatch){
+  // const resolvedBaseRefKeys = {}
+  let replacementsPerformed=false;
+  const $defs = schema.$defs;
+  for (var key in $defs) {
+    const defSchema = $defs[key];
+    if (defSchema.$ref) {
+      const baseRefMatch = /(#\/\$defs\/)(.*Base.schema.json)/.exec(defSchema.$ref);
+      if (baseRefMatch) {
         //we replace the ref by merging the reffed schema
-        const reffedKey=baseRefMatch[2];
-        const reffedSchema=$defs[reffedKey];
+        const reffedKey = baseRefMatch[2];
+        const reffedSchema = $defs[reffedKey];
         delete defSchema.$ref;
-        let mergedSchema=JSON.parse(JSON.stringify(reffedSchema));
+        let mergedSchema = JSON.parse(JSON.stringify(reffedSchema));
         //merge the extending schema into the reffed schema
-        mergeDeep(mergedSchema,defSchema);
-        $defs[key]=mergedSchema;
+        mergeDeep(mergedSchema, defSchema);
+        $defs[key] = mergedSchema;
         //mark the reffed Base schema for deletion
-        resolvedBaseRefKeys[reffedKey]=true;
+        resolvedBaseRefKeys[reffedKey] = true;
+        replacementsPerformed=true;
       }
     }
   }
+  return replacementsPerformed;
+}
+function removeResolvedBaseRefs(schema,resolvedBaseRefKeys) {
+  const $defs = schema.$defs;
   for (const baseSchemaKey in resolvedBaseRefKeys){
     delete $defs[baseSchemaKey];
   }
