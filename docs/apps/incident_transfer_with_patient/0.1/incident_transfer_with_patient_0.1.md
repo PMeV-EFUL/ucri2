@@ -18,7 +18,6 @@
     + [sharedIncidentId](#sharedincidentid-1)
     + [internalId](#internalid)
     + [classifications](#classifications)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
     + [issue](#issue)
     + [flashingLights](#flashinglights)
     + [additionalInfo](#additionalinfo)
@@ -48,7 +47,7 @@
       - [missionLocation.0](#missionlocation0)
       - [missionLocation.1](#missionlocation1)
     + [patients](#patients)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
+      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
       - [patients.name](#patientsname)
       - [patients.surname](#patientssurname)
       - [patients.phone](#patientsphone)
@@ -78,7 +77,7 @@
       - [patients.infectionStatus](#patientsinfectionstatus)
       - [patients.transportNumber](#patientstransportnumber)
     + [informers](#informers)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-2)
+      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
       - [informers.name](#informersname)
       - [informers.surname](#informerssurname)
       - [informers.phone](#informersphone)
@@ -471,8 +470,6 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
   </tbody>
 </table>
 
-#### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody></tbody></table>
 
 
 

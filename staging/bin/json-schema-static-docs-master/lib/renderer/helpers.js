@@ -89,5 +89,5 @@ const getLabelForProperty = (property) => {
 module.exports = {
   getHtmlAnchorForRef,
   getLabelForProperty,
-  upperCaseFirstCharacter,
+  upperCaseFirstCharacter
 };

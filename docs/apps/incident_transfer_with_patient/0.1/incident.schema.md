@@ -175,8 +175,6 @@
   </tbody>
 </table>
 
-### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody></tbody></table>
 
 
 

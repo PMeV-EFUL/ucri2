@@ -73,8 +73,10 @@
   {{propertiesTable this propertyKey }}
   {{/if}}
   {{#if this.items}}
+    {{#if (eq this.items.type "object" ) }}
 ### Eigenschaften der Objekte im Array
   {{propertiesTable this.items propertyKey }}
+    {{/if}}
   {{/if}}
 {{/unless}}
 

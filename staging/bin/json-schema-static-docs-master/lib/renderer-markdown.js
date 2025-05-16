@@ -12,6 +12,7 @@ const {
 const readFile = util.promisify(fs.readFile);
 
 /* ------ */
+Handlebars.registerHelper('eq', (a, b) => a == b)
 
 Handlebars.registerHelper("isExternalRef", function (value) {
   //Change by PZ, returns false positives so we just always return false

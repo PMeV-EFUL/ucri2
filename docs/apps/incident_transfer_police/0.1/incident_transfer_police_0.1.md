@@ -19,7 +19,6 @@
     + [sharedIncidentId](#sharedincidentid-1)
     + [internalId](#internalid)
     + [classifications](#classifications)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
     + [issue](#issue)
     + [flashingLights](#flashinglights)
     + [additionalInfo](#additionalinfo)
@@ -49,7 +48,7 @@
       - [missionLocation.0](#missionlocation0)
       - [missionLocation.1](#missionlocation1)
     + [informers](#informers)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
+      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
       - [informers.name](#informersname)
       - [informers.surname](#informerssurname)
       - [informers.phone](#informersphone)
@@ -64,7 +63,7 @@
       - [informers.address.country](#informersaddresscountry)
       - [informers.additionalInfo](#informersadditionalinfo)
     + [accusedPersons](#accusedpersons)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-2)
+      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
       - [accusedPersons.name](#accusedpersonsname)
       - [accusedPersons.surname](#accusedpersonssurname)
       - [accusedPersons.phone](#accusedpersonsphone)
@@ -81,7 +80,7 @@
       - [accusedPersons.dateOfBirth](#accusedpersonsdateofbirth)
       - [accusedPersons.nationality](#accusedpersonsnationality)
     + [victimPersons](#victimpersons)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-3)
+      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-2)
       - [victimPersons.name](#victimpersonsname)
       - [victimPersons.surname](#victimpersonssurname)
       - [victimPersons.phone](#victimpersonsphone)
@@ -483,8 +482,6 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
   </tbody>
 </table>
 
-#### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody></tbody></table>
 
 
 
