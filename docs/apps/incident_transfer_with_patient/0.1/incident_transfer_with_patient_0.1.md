@@ -2457,7 +2457,8 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
                     },
                     "additionalInfo": "weitere Informationen"
                 }
-            ]
+            ],
+            "unevaluatedProperties": false
         }
     }
 }

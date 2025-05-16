@@ -1501,7 +1501,8 @@
                     },
                     "additionalInfo": "weitere Informationen"
                 }
-            ]
+            ],
+            "unevaluatedProperties": false
         }
     }
 }
