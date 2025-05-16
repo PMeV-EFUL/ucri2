@@ -1,0 +1,23 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Einsatz-Zielobjekt",
+  "description": "Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts",
+  "required": [ "name" ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "Objektname",
+      "type": "string"
+    },
+    "additionalInfo": {
+      "title": "Weitere Informationen zum Einsatzobjekt",
+      "type": "string"
+    }
+  },
+  "unevaluatedProperties": false,
+  "examples": [{
+    "name": "Krankenhaus Musterstift",
+    "additionalInfo": "Weitere Informationen"
+  }]
+}

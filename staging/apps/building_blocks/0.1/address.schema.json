@@ -1,0 +1,48 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Adresse",
+  "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
+  "required": [ "street" ],
+  "type": "object",
+  "properties": {
+    "street": {
+      "title": "Name der Strasse",
+	  "type": "string"
+    },
+    "houseNumber": {
+	  "title": "Hausnummer",
+      "type": "string"
+    },
+	"postalCode": {
+      "title": "Postleitzahl",
+      "type": "string"
+    },
+	"city": {
+      "title": "Stadt",
+      "type": "string"
+    },
+	"cityDistrict": {
+      "title": "Ortsteil",
+      "type": "string"
+    },
+	"state": {
+      "title": "Bundesland",
+      "type": "string"
+    },
+	"country": {
+      "title": "Land",
+      "type": "string"
+    }
+  },
+  "unevaluatedProperties": false,
+  "examples": [{
+    "street": "Musterstrasse",
+    "houseNumber": "15b",
+    "postalCode" : "12345",
+    "city": "Musterhausen",
+    "cityDistrict": "Musterberg",
+    "state": "Brandenburg",
+    "country": "DE"
+  }]
+}

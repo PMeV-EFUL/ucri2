@@ -1,0 +1,37 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/initialAssessment.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ersteinschätzung",
+  "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?",
+  "required": [],
+  "type": "object",
+  "minProperties": 1,
+  "properties": {
+    "rmi": {
+      "title": "Rückmeldeindikator",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999
+    },
+	"rmc": {
+      "title": "Rückmeldecode",
+      "type": "integer"
+    },
+	"pzc": {
+      "title": "Patientenzuweisungscode",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999999
+    },
+	"additionalInformation": {
+      "type": "string"
+    }
+  },
+  "unevaluatedProperties": false,
+  "examples": [{
+    "rmi": 360,
+    "rmc": 360543215,
+    "pzc": 360401,
+    "additionalInformation": "unspezifischer Notfall"
+  }]
+}

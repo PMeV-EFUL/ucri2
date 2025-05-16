@@ -1,0 +1,154 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/0.1/incident.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Polizeilicher Einsatz",
+  "description": "Ein polizeilicher Einsatz mit eigenen Datenobjekten für die speziellen Personenrollen Beschuldigter und Geschädigter",
+  "required": [ "sharedIncidentId","sentByDispatcherAt","missionLocation" ],
+  "type": "object",
+  "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "global eindeutige UUID des Einsatzes"
+    },
+    "internalId": {
+      "type": "string",
+      "description": "Sender-interne ID des Einsatzes"
+    },
+    "classifications": {
+      "type": "array",
+      "description": "Stichwortkürzel des Einsatzes",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "issue": {
+      "type": "string",
+      "description": "Taktische Bewertung: Sachverhalt"
+    },
+    "flashingLights": {
+      "type": "boolean"
+    },
+    "additionalInfo": {
+      "type": "string"
+    },
+    "sentByDispatcherAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+    },
+    "missionLocation": {
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
+    },
+
+    "informers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/person.schema.json"
+      }
+    },
+    "accusedPersons": {
+      "type": "array",
+      "description": "List of accused persons involved in the incident.",
+      "items": {
+        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personPoliceRelevant.schema.json"
+      }
+    },
+    "victimPersons": {
+      "type": "array",
+      "description": "List of victim persons involved in the incident.",
+      "items": {
+        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personPoliceRelevant.schema.json"
+      }
+    }
+  },
+  "unevaluatedProperties": false,
+  "examples": [{
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "internalId": "f123456",
+    "classifications": [
+      "A1",
+      "F2"
+    ],
+    "issue": "Notfall",
+    "flashingLights": true,
+    "additionalInfo": "Zusatzinformationen",
+    "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "missionLocation": {
+      "coordinate": {
+        "lat": 65.453323,
+        "lon": 14.542343
+      },
+      "address": {
+        "street": "Musterstrasse",
+        "houseNumber": "15b",
+        "postalCode" : "12345",
+        "city": "Musterhausen",
+        "cityDistrict": "Musterberg",
+        "state": "Brandenburg",
+        "country": "DE"
+      },
+      "object": {
+        "name": "Abteilung IV, Haus 3",
+        "additionalInfo": "Campus West"
+      },
+      "superiorObject": {
+        "name": "Krankenhaus Musterstift",
+        "additionalInfo": "Weitere Informationen"
+      },
+      "floor": "3. OG",
+      "room": "412",
+      "additionalInfo": "Weitere Informationen"
+    },
+    "accusedPersons": [
+      {
+        "name": "Mustermann",
+        "surname": "Hans",
+        "phone": "+49 30 123456",
+        "email": "hans.mustermann@example.com",
+        "address": {
+          "street": "Musterstrasse",
+          "houseNumber": "15b",
+          "postalCode": "12345",
+          "city": "Musterhausen",
+          "cityDistrict": "Musterberg",
+          "state": "Brandenburg",
+          "country": "DE"
+        },
+        "additionalInfo": "weitere Informationen",
+        "dateOfBirth": "1980-05-15",
+        "nationality": "DE"
+      }
+    ],
+    "victimPersons": [
+      {
+        "name": "Musterfrau",
+        "surname": "Anna",
+        "phone": "+49 30 654321",
+        "email": "anna.musterfrau@example.com",
+        "address": {
+          "street": "Beispielstrasse",
+          "houseNumber": "10a",
+          "postalCode": "54321",
+          "city": "Beispielstadt",
+          "cityDistrict": "Beispielberg",
+          "state": "Berlin",
+          "country": "DE"
+        },
+        "additionalInfo": "weitere Informationen",
+        "dateOfBirth": "1990-07-20",
+        "nationality": "DE"
+      }
+    ],
+    "informers": [
+      {
+        "name": "Musterfrau",
+        "surname": "Heike",
+        "phone": "+49 30 234567",
+        "email": "heike.musterfrau@example.com"
+      }
+    ]
+  }]
+}

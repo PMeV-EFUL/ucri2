@@ -1,0 +1,8 @@
+todos:
+- Idee: Konzept von App und den enthaltenen Schemata für einzelne Nachrichten trennen, Versionierung nur auf der App-Ebene
+- payload.yaml und schemaRef.yaml :schemaVersion -> appVersion
+- payload.yaml und schemaRef.yaml :appId hinzufügen
+- schemaRef.yaml in appRef.yaml umbenennen (referenz in commParticipant.yaml ändern)
+- commParticipant.yaml: supportedMessages in supportedApps ändern
+- envelope.yaml: example.payload appId hinzufügen, schemaVersion->appVersion umbenennen), in data $schema zu SchemaId umbenennen
+- Frage: Wer führt die Schema-Validierung von Payload-Daten durch? Eventuell sind diese bereits verschlüsselt?

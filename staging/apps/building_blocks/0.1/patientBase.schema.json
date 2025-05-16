@@ -1,0 +1,78 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patientBase.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Patient",
+  "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personBase.schema.json",
+  "required": [ "name" ],
+  "type": "object",
+  "properties": {
+    "gender": {
+      "title": "Geschlecht",
+      "type": "string",
+	  "enum": ["Male","Female","Diverse"]	  
+    },
+	"dateOfBirth": {
+      "title": "Geburtsdatum",
+      "description": "Das Geburtsdatum im ISO8601 Date-Format (tagesgenaue Datumsangabe ohne Zeitangabe)",
+      "type": "string",
+	  "format": "date"
+    },
+	"age": {
+      "title": "Alter in Jahren",
+      "type": "number",
+	  "minimum":0
+    },
+	"healthInsuranceInformation": {
+		"$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/healthInsuranceInformation.schema.json"
+	},
+	"initialAssessment": {
+		"$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/initialAssessment.schema.json"
+	},
+	"infectionInformation": {
+      "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
+      "type": "string"
+    },
+	"infectionStatus": {
+      "title": "Informationen ob der Patient ansteckend ist (true/false)",
+      "type": "boolean"
+    },
+	"transportNumber": {
+      "title": "Transportnummer",
+      "type": "string"
+    }
+  },
+  "examples": [{
+    "name": "Mustermann",
+    "surname": "Hans",
+    "phone": "+49 30 123456",
+    "email": "hans.mustermann@example.com",
+    "address": {
+      "street": "Musterstrasse",
+      "houseNumber": "15b",
+      "postalCode" : "12345",
+      "city": "Musterhausen",
+      "cityDistrict": "Musterberg",
+      "state": "Brandenburg",
+      "country": "DE"
+    },
+    "additionalInfo": "weitere Informationen",
+    "gender": "Male",
+    "dateOfBirth": "19801230",
+    "age": 55,
+    "healthInsuranceInformation": {
+      "healthInsuranceCompany":"Musterkasse",
+      "healthInsuranceCompanyNumber": 101234567,
+      "insuranceNumber": "S123456789"
+    },
+    "initialAssessment": {
+      "rmi": 360,
+      "rmc": 360543215,
+      "pzc": 360401,
+      "additionalInformation": "unspezifischer Notfall"
+    },
+    "infectionInformation": "potentiell ansteckend",
+    "infectionStatus": true,
+    "transportNumber": "123456"
+    }]
+}

@@ -1,0 +1,31 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/healthInsuranceInformation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Informationen zum Versicherungsverhältnis",
+  "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "healthInsuranceCompany": {
+      "title": "Name der Krankenversicherung",
+      "type": "string"
+    },
+	"healthInsuranceCompanyNumber": {
+      "title": "IK der Krankenversicherung",
+      "description": "TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999999999
+    },
+	"insuranceNumber": {
+      "title": "Versichertennummer (Alphanumerisch)",
+      "type": "string"
+    }
+  },
+  "unevaluatedProperties": false,
+  "examples": [{
+    "healthInsuranceCompany":"Musterkasse",
+    "healthInsuranceCompanyNumber": 101234567,
+    "insuranceNumber": "S123456789"
+  }]
+}
