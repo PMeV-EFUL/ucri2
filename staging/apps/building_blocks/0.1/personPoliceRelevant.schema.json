@@ -1,0 +1,35 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personPoliceRelevant.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personBase.schema.json",
+  "unevaluatedProperties": false,
+  "properties": {
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of birth of the accused person."
+    },
+    "nationality": {
+      "type": "string",
+      "description": "The nationality of the accused person."
+    }
+  },
+  "examples": [{
+    "name": "Mustermann",
+    "surname": "Hans",
+    "phone": "+49 30 123456",
+    "email": "hans.mustermann@example.com",
+    "address": {
+      "street": "Musterstrasse",
+      "houseNumber": "15b",
+      "postalCode": "12345",
+      "city": "Musterhausen",
+      "cityDistrict": "Musterberg",
+      "state": "Brandenburg",
+      "country": "DE"
+    },
+    "additionalInfo": "weitere Informationen",
+    "dateOfBirth": "1980-05-15",
+    "nationality": "DE"
+  }]
+}
