@@ -169,6 +169,8 @@ const propertiesTable = (schema, parentKey) => {
     ) {
       html += allOfRow(key, property);
     } else if (
+      //disable anyOf rendering for now...
+      false &&
       property &&
       property.anyOf != undefined &&
       (!property.$ref || property.$ref.match(/^#/))
@@ -190,10 +192,10 @@ const propertiesTable = (schema, parentKey) => {
     html += allOfArrayRow(allOf);
   }
 
-  let anyOf = schema.anyOf;
-  if (Array.isArray(anyOf) && anyOf.length > 0) {
-    html += anyOfArrayRow(anyOf);
-  }
+  // let anyOf = schema.anyOf;
+  // if (Array.isArray(anyOf) && anyOf.length > 0) {
+  //   html += anyOfArrayRow(anyOf);
+  // }
 
   html += "</tbody></table>";
 
@@ -223,7 +225,7 @@ Handlebars.registerHelper("propertyTypeRow", function (property) {
     html = `<tr>${oneOfRow("Type", property)}</tr>`;
   } else if (property.allOf != undefined) {
     html = `<tr>${allOfRow("Type", property)}</tr>`;
-  } else if (property.anyOf != undefined) {
+  } else if (property.anyOfNOTUSEDATM != undefined) {
     html = `<tr>${anyOfRow("Type", property)}</tr>`;
   } else {
     const typeLabel = getLabelForProperty(property);

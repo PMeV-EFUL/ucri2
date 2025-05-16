@@ -45,8 +45,6 @@
       - [missionLocation.floor](#missionlocationfloor)
       - [missionLocation.room](#missionlocationroom)
       - [missionLocation.additionalInfo](#missionlocationadditionalinfo)
-      - [missionLocation.0](#missionlocation0)
-      - [missionLocation.1](#missionlocation1)
     + [informers](#informers)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
       - [informers.name](#informersname)
@@ -315,7 +313,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
 
 ### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td rowspan="2">missionLocation</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ### Beispiel
@@ -577,7 +575,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
       <th>Beschreibung</th>
       <td colspan="2">Ein Einsatz-Zielort. Mindestens eine Koordinate oder Adresse müssen vorhanden sein.</td>
     </tr>
-    <tr><tr><td rowspan="2">Type</td><td rowspan="2">Any of:</td><td>Object</td></tr><tr><td>Object</td></tr></tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Ja</td>
@@ -587,7 +585,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
 </table>
 
 #### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2" rowspan="2">Any of:</td><td></td></tr><tr><td></td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### missionLocation.coordinate
@@ -1031,32 +1029,6 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### missionLocation.0
-
-
-<table class="jssd-property-table">
-  <tbody>
-    
-    
-  </tbody>
-</table>
-
-
-
-
-#### missionLocation.1
-
-
-<table class="jssd-property-table">
-  <tbody>
-    
     
   </tbody>
 </table>

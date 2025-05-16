@@ -119,7 +119,7 @@
 {{/if}}
 {{/each}}
 {{/if}}
-{{#if this.anyOf }}
+{{#if this.anyOfNOTUSEDATM }}
 {{#each this.anyOf}}
 {{#if (isDefined ../parentKey)}}
 {{> property parentKey=(concat ../parentKey '.' ../propertyKey) propertyKey=@key }}
