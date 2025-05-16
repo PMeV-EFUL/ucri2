@@ -38,6 +38,13 @@ Die Dateien in den Ziel-Verzeichnissen
 
 ## Building Blocks erweitern
 Die Building-Block-Schemata in staging/apps/building_blocks können direkt geändert oder auch neue building blocks hinzugefügt werden. Beim Hinzufügen sollte ein existierender building block als Vorlage verwendet werden.
+Bei den Building Blocks existieren zwei Arten von Schemata:
+- *Base-Schemata: Diese dienen als Grundlage für die Ableitung von anderen Schemata (z.B. ist jeder Patient eine Person) und dürfen NICHT außerhalb der Building Blocks referenziert werden. Diese Schemata dürfen KEINE "unevaluatedProperties": false Eigenschaft haben, damit von diesen Schemata abgeleitet werden kann!
+- alle anderen Schemata: Diese sind die eigentlichen Building Blocks und MÜSSEN immer "unevaluatedProperties": false enthalten, damit sichergestellt ist, dass keine weiteren Eigenschaften, die nicht im Schema definiert sind, hinzugefügt werden können.
+
+Falls in Zukunft von einem Building-Block-Schema ein anderes Building-Block-Schema abgeleitet werden soll, ist zu prüfen, ob für dieses bereits ein *Base-Schema existiert. Falls dem noch nicht so ist, muss zuerst das *Base-Schema erstellt und das bestehende Schema von diesem per $ref abgeleitet werden (vgl. Person und PersonBase).
+Hierbei ist auch zu beachten, dass das abgeleitete Schema unbedingt eine examples-Eigenschaft besitzen sollte (diese kann aus dem *Base-Schema kopiert werden).
+Danach kann dann von dem neuen *Base-Schema ein neuer abgeleiteter Building Block erstellt werden (bei dem dann wiederum "unevaluatedProperties": false gesetzt werden muss!)
 
 **Nach einer Änderung muss der Processor (s.u.) ausgeführt werden, um die Änderung zu prüfen und die app-Schemata sowie die Dokumentation mit den Änderungen zu aktualisieren.**
 
