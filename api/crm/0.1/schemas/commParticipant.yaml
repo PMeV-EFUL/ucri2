@@ -3,7 +3,7 @@ required:
   - systemName
   - operatorName
   - operatorShortName
-  - supportedMessages
+  - supportedApps
   - techSupport
 type: object
 properties:
@@ -21,10 +21,12 @@ properties:
   operatorShortName:
     type: string
     description: Betreibername-Kürzel
-  supportedMessages:
+  supportedApps:
     type: array
+    description: Liste der unterstützten UCRI2-Applikation in spezifischen Versionen. Sobald ein KT eine Applikation unterstützt,
+      müssen auch alle in der Applikation spezifizierten Nachrichten unterstützt werden.
     items:
-      $ref: 'schemaRef.yaml'
+      $ref: 'appRef.yaml'
   techSupport:
     $ref: 'techSupport.yaml'
   key:
@@ -42,11 +44,11 @@ example:
   systemName: ELS Essen
   operatorName: Einsatzleitstelle Essen
   operatorShortName: ELS E
-  supportedMessages:
-    - schemaId: incident
-      schemaVersion: '0.1'
-    - schemaId: incidentAck
-      schemaVersion: '0.2'
+  supportedApps:
+    - appId: incident
+      appVersion: '0.1'
+    - appId: incident
+      appVersion: '0.2'
   key:
     kty: RSA
     n: ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx
