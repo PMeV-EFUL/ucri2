@@ -1,33 +1,10 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/acknowledgement.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/acknowledgementBase.schema.json",
+  "unevaluatedProperties": false,
   "title": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
   "description": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
-  "required": ["sharedIncidentId","acknowledgedByDispatcherAt","status"],
-  "type": "object",
-  "properties": {
-    "sharedIncidentId": {
-      "type": "string",
-      "format": "uuid",
-      "description": "global eindeutige UUID des Einsatzes"
-    },
-    "acknowledgedByDispatcherAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
-    },
-    "status": {
-      "type": "string",
-      "format": "uuid",
-      "enum": ["accepted","rejected"],
-      "description": "Annahme- oder Ablehnungsstatus"
-    },
-	"cause": {
-      "type": "string",
-      "description": "Begründung für die Annahme oder Ablehnung"
-    }
-  },
-  "unevaluatedProperties": false,
   "examples": [{
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",

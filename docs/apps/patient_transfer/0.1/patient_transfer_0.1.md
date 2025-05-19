@@ -88,7 +88,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 <table>
 <tbody>
-<tr><th>$id</th><td>https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/acknowledgement.schema.json</td></tr>
+<tr><th>$id</th><td>https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json</td></tr>
 <tr><th>$schema</th><td>https://json-schema.org/draft/2020-12/schema</td></tr>
 </tbody>
 </table>
@@ -223,7 +223,8 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 ```
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/acknowledgement.schema.json",
+    "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json",
+    "unevaluatedProperties": false,
     "title": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "required": [
@@ -257,7 +258,6 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
             "description": "Begründung für die Annahme oder Ablehnung"
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -265,7 +265,8 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
             "status": "rejected",
             "cause": "Einsatzort ist unbekannt!"
         }
-    ]
+    ],
+    "$defs": {}
 }
 ```
 

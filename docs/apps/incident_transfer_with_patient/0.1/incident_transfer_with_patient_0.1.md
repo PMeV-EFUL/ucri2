@@ -244,6 +244,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/acknowledgement.schema.json",
+    "unevaluatedProperties": false,
     "title": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "required": [
@@ -277,7 +278,6 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
             "description": "Begründung für die Annahme oder Ablehnung"
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -285,7 +285,8 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
             "status": "rejected",
             "cause": "Einsatzort ist unbekannt!"
         }
-    ]
+    ],
+    "$defs": {}
 }
 ```
 

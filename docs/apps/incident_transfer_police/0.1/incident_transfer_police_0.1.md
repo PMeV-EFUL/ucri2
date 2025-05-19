@@ -251,6 +251,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/0.1/acknowledgement.schema.json",
+    "unevaluatedProperties": false,
     "title": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "required": [
@@ -284,7 +285,6 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
             "description": "Begründung für die Annahme oder Ablehnung"
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -292,7 +292,8 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
             "status": "rejected",
             "cause": "Einsatzort ist unbekannt!"
         }
-    ]
+    ],
+    "$defs": {}
 }
 ```
 
