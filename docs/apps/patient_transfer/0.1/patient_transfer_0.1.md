@@ -308,6 +308,15 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
     "issue": "consultation_needed",
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "protocolRemarks": [
+        {
+            "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+            "timestamp": "2024-01-01T10:06:09",
+            "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
+            "type": "information",
+            "silent": false
+        }
+    ],
     "patient": {
         "name": "Mustermann",
         "surname": "Hans",
@@ -1610,6 +1619,15 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
             "issue": "consultation_needed",
             "additionalInfo": "Zusatzinformationen",
             "sentByDispatcherAt": "2024-01-01T10:05:08",
+            "protocolRemarks": [
+                {
+                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
+                    "type": "information",
+                    "silent": false
+                }
+            ],
             "patient": {
                 "name": "Mustermann",
                 "surname": "Hans",

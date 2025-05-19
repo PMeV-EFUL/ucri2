@@ -32,6 +32,15 @@
     "flashingLights": true,
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "protocolRemarks": [
+        {
+            "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+            "timestamp": "2024-01-01T10:06:09",
+            "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+            "type": "information",
+            "silent": true
+        }
+    ],
     "missionLocation": {
         "coordinate": {
             "lat": 65.453323,
@@ -1887,6 +1896,15 @@
             "flashingLights": true,
             "additionalInfo": "Zusatzinformationen",
             "sentByDispatcherAt": "2024-01-01T10:05:08",
+            "protocolRemarks": [
+                {
+                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+                    "type": "information",
+                    "silent": true
+                }
+            ],
             "missionLocation": {
                 "coordinate": {
                     "lat": 65.453323,
