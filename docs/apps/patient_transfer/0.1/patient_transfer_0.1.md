@@ -17,9 +17,9 @@
     + [Beispiel](#beispiel-1)
     + [sharedIncidentId](#sharedincidentid-1)
     + [internalId](#internalid)
-    + [issue](#issue)
     + [additionalInfo](#additionalinfo)
     + [sentByDispatcherAt](#sentbydispatcherat)
+    + [issue](#issue)
     + [patient](#patient)
       - [Eigenschaften](#eigenschaften-2)
       - [patient.name](#patientname)
@@ -286,7 +286,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 ### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ### Beispiel
@@ -394,30 +394,6 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 
 
-### issue
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Übergabegrund</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Enum</th>
-      <td colspan="2"><ul><li>consultation_needed</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
 ### additionalInfo
 
 
@@ -452,6 +428,30 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
     <tr>
       <th>Format</th>
       <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### issue
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Übergabegrund</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Enum</th>
+      <td colspan="2"><ul><li>consultation_needed</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -1399,6 +1399,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
+    "unevaluatedProperties": false,
     "title": "Eine Übergabe-Anfrage für einen Patienten",
     "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
     "required": [
@@ -1417,13 +1418,6 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
             "type": "string",
             "description": "Sender-interne ID des Einsatzes"
         },
-        "issue": {
-            "type": "string",
-            "enum": [
-                "consultation_needed"
-            ],
-            "description": "Übergabegrund"
-        },
         "additionalInfo": {
             "type": "string"
         },
@@ -1431,6 +1425,13 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
             "type": "string",
             "format": "date-time",
             "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+        },
+        "issue": {
+            "type": "string",
+            "enum": [
+                "consultation_needed"
+            ],
+            "description": "Übergabegrund"
         },
         "patient": {
             "$ref": "#/$defs/patient.schema.json",
@@ -1448,7 +1449,6 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
             }
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",

@@ -1,32 +1,17 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentBase.schema.json",
+  "unevaluatedProperties": false,
   "title": "Eine Übergabe-Anfrage für einen Patienten",
   "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
   "required": [ "sharedIncidentId","sentByDispatcherAt","patient"],
   "type": "object",
   "properties": {
-    "sharedIncidentId": {
-      "type": "string",
-      "format": "uuid",
-      "description": "global eindeutige UUID des Einsatzes"
-    },
-    "internalId": {
-      "type": "string",
-      "description": "Sender-interne ID des Einsatzes"
-    },
     "issue": {
       "type": "string",
       "enum": ["consultation_needed"],
       "description": "Übergabegrund"
-    },
-    "additionalInfo": {
-      "type": "string"
-    },
-    "sentByDispatcherAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
     "patient": {
       "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json",
@@ -41,7 +26,6 @@
       }
     }
   },
-  "unevaluatedProperties": false,
   "examples": [{
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "internalId": "f123456",

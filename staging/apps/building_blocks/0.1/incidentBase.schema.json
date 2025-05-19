@@ -25,9 +25,9 @@
     }
   },
   "examples": [{
-    "rmi": 360,
-    "rmc": 360543215,
-    "pzc": 360401,
-    "additionalInformation": "unspezifischer Notfall"
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "internalId": "f123456",
+    "additionalInfo": "Zusatzinformationen",
+    "sentByDispatcherAt": "2024-01-01T10:05:08"
   }]
 }

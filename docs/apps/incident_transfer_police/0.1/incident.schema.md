@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -159,6 +159,47 @@
 
 
 
+## additionalInfo
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+## sentByDispatcherAt
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
 ## classifications
 
 
@@ -215,47 +256,6 @@
       <td colspan="2">Nein</td>
     </tr>
     
-  </tbody>
-</table>
-
-
-
-
-## additionalInfo
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-## sentByDispatcherAt
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Ja</td>
-    </tr>
-    <tr>
-      <th>Format</th>
-      <td colspan="2">date-time</td>
-    </tr>
   </tbody>
 </table>
 
@@ -1662,6 +1662,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/0.1/incident.schema.json",
+    "unevaluatedProperties": false,
     "title": "Polizeilicher Einsatz",
     "description": "Ein polizeilicher Einsatz mit eigenen Datenobjekten für die speziellen Personenrollen Beschuldigter und Geschädigter",
     "required": [
@@ -1680,6 +1681,14 @@
             "type": "string",
             "description": "Sender-interne ID des Einsatzes"
         },
+        "additionalInfo": {
+            "type": "string"
+        },
+        "sentByDispatcherAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+        },
         "classifications": {
             "type": "array",
             "description": "Stichwortkürzel des Einsatzes",
@@ -1694,14 +1703,6 @@
         },
         "flashingLights": {
             "type": "boolean"
-        },
-        "additionalInfo": {
-            "type": "string"
-        },
-        "sentByDispatcherAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
         },
         "missionLocation": {
             "$ref": "#/$defs/location.schema.json"
@@ -1728,7 +1729,6 @@
             }
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
