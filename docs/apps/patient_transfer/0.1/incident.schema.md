@@ -1,6 +1,6 @@
 
 
-# Eine Übergabe-Anfrage für einen Patienten
+# App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten
 
 <p>Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist</p>
 
@@ -1273,7 +1273,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
     "unevaluatedProperties": false,
-    "title": "Eine Übergabe-Anfrage für einen Patienten",
+    "title": "App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten",
     "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
     "required": [
         "sharedIncidentId",

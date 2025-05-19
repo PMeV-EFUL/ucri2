@@ -1,6 +1,6 @@
 
 
-# Bestätigung oder Ablehnung einer Einsatzübergabeanfrage
+# App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage
 
 <p>Bestätigung oder Ablehnung einer Einsatzübergabeanfrage</p>
 
@@ -143,7 +143,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/acknowledgement.schema.json",
     "unevaluatedProperties": false,
-    "title": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
+    "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "required": [
         "sharedIncidentId",

@@ -4,7 +4,7 @@
 
 - [Überblick](#uberblick)
 - [App-Nachrichten](#app-nachrichten)
-  * [Bestätigung oder Ablehnung einer Einsatzübergabeanfrage](#bestatigung-oder-ablehnung-einer-einsatzubergabeanfrage)
+  * [App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage](#app-nachricht-acknowledgement---bestatigung-oder-ablehnung-einer-einsatzubergabeanfrage)
     + [Eigenschaften](#eigenschaften)
     + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
@@ -12,7 +12,7 @@
     + [status](#status)
     + [cause](#cause)
     + [Schema](#schema)
-  * [Ein Einsatz mit Patientendaten](#ein-einsatz-mit-patientendaten)
+  * [App-Nachricht incident - Ein Einsatz mit Patientendaten](#app-nachricht-incident---ein-einsatz-mit-patientendaten)
     + [Eigenschaften](#eigenschaften-1)
     + [Beispiel](#beispiel-1)
     + [sharedIncidentId](#sharedincidentid-1)
@@ -109,7 +109,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 
 
-## Bestätigung oder Ablehnung einer Einsatzübergabeanfrage
+## App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage
 
 <p>Bestätigung oder Ablehnung einer Einsatzübergabeanfrage</p>
 
@@ -252,7 +252,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/acknowledgement.schema.json",
     "unevaluatedProperties": false,
-    "title": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
+    "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "required": [
         "sharedIncidentId",
@@ -301,7 +301,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
 
 
 
-## Ein Einsatz mit Patientendaten
+## App-Nachricht incident - Ein Einsatz mit Patientendaten
 
 <p>Ein Einsatz mit Patientendaten</p>
 
@@ -2026,7 +2026,7 @@ Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mi
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
     "unevaluatedProperties": false,
-    "title": "Ein Einsatz mit Patientendaten",
+    "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
     "description": "Ein Einsatz mit Patientendaten",
     "required": [
         "sharedIncidentId",

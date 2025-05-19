@@ -1,6 +1,6 @@
 
 
-# Ein Einsatz mit Patientendaten
+# App-Nachricht incident - Ein Einsatz mit Patientendaten
 
 <p>Ein Einsatz mit Patientendaten</p>
 
@@ -1725,7 +1725,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
     "unevaluatedProperties": false,
-    "title": "Ein Einsatz mit Patientendaten",
+    "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
     "description": "Ein Einsatz mit Patientendaten",
     "required": [
         "sharedIncidentId",

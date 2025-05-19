@@ -5,7 +5,7 @@
 - [Überblick](#uberblick)
 - [Ablaufbeschreibung](#ablaufbeschreibung)
 - [App-Nachrichten](#app-nachrichten)
-  * [Bestätigung oder Ablehnung einer Einsatzübergabeanfrage](#bestatigung-oder-ablehnung-einer-einsatzubergabeanfrage)
+  * [App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage](#app-nachricht-acknowledgement---bestatigung-oder-ablehnung-einer-einsatzubergabeanfrage)
     + [Eigenschaften](#eigenschaften)
     + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
@@ -13,7 +13,7 @@
     + [status](#status)
     + [cause](#cause)
     + [Schema](#schema)
-  * [Polizeilicher Einsatz](#polizeilicher-einsatz)
+  * [App-Nachricht incident - Polizeilicher Einsatz](#app-nachricht-incident---polizeilicher-einsatz)
     + [Eigenschaften](#eigenschaften-1)
     + [Beispiel](#beispiel-1)
     + [sharedIncidentId](#sharedincidentid-1)
@@ -116,7 +116,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
 
 
 
-## Bestätigung oder Ablehnung einer Einsatzübergabeanfrage
+## App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage
 
 <p>Bestätigung oder Ablehnung einer Einsatzübergabeanfrage</p>
 
@@ -259,7 +259,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/0.1/acknowledgement.schema.json",
     "unevaluatedProperties": false,
-    "title": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
+    "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Einsatzübergabeanfrage",
     "required": [
         "sharedIncidentId",
@@ -308,7 +308,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
 
 
 
-## Polizeilicher Einsatz
+## App-Nachricht incident - Polizeilicher Einsatz
 
 <p>Ein polizeilicher Einsatz mit eigenen Datenobjekten für die speziellen Personenrollen Beschuldigter und Geschädigter</p>
 
@@ -2117,7 +2117,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/0.1/incident.schema.json",
     "unevaluatedProperties": false,
-    "title": "Polizeilicher Einsatz",
+    "title": "App-Nachricht incident - Polizeilicher Einsatz",
     "description": "Ein polizeilicher Einsatz mit eigenen Datenobjekten für die speziellen Personenrollen Beschuldigter und Geschädigter",
     "required": [
         "sharedIncidentId",

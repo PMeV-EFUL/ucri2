@@ -1,6 +1,6 @@
 
 
-# Bestätigung oder Ablehnung einer Patientenübergabeanfrage
+# App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage
 
 <p>Bestätigung oder Ablehnung einer Patientenübergabeanfrage</p>
 
@@ -143,7 +143,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json",
     "unevaluatedProperties": false,
-    "title": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
+    "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "required": [
         "sharedIncidentId",

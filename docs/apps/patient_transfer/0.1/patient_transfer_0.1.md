@@ -4,7 +4,7 @@
 
 - [Überblick](#uberblick)
 - [App-Nachrichten](#app-nachrichten)
-  * [Bestätigung oder Ablehnung einer Patientenübergabeanfrage](#bestatigung-oder-ablehnung-einer-patientenubergabeanfrage)
+  * [App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage](#app-nachricht-acknowledgement---bestatigung-oder-ablehnung-einer-patientenubergabeanfrage)
     + [Eigenschaften](#eigenschaften)
     + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
@@ -12,7 +12,7 @@
     + [status](#status)
     + [cause](#cause)
     + [Schema](#schema)
-  * [Eine Übergabe-Anfrage für einen Patienten](#eine-ubergabe-anfrage-fur-einen-patienten)
+  * [App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten](#app-nachricht-incident---eine-ubergabe-anfrage-fur-einen-patienten)
     + [Eigenschaften](#eigenschaften-1)
     + [Beispiel](#beispiel-1)
     + [sharedIncidentId](#sharedincidentid-1)
@@ -89,7 +89,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 
 
-## Bestätigung oder Ablehnung einer Patientenübergabeanfrage
+## App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage
 
 <p>Bestätigung oder Ablehnung einer Patientenübergabeanfrage</p>
 
@@ -232,7 +232,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json",
     "unevaluatedProperties": false,
-    "title": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
+    "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "required": [
         "sharedIncidentId",
@@ -281,7 +281,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 
 
 
-## Eine Übergabe-Anfrage für einen Patienten
+## App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten
 
 <p>Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist</p>
 
@@ -1554,7 +1554,7 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
     "unevaluatedProperties": false,
-    "title": "Eine Übergabe-Anfrage für einen Patienten",
+    "title": "App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten",
     "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
     "required": [
         "sharedIncidentId",
