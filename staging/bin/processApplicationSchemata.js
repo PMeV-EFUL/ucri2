@@ -81,16 +81,20 @@ async function process(){
         console.log(`STEP 3: bundling schema "${schemaName}"...`);
         let schema=schemas[schemaName];
         let schemaId = schema["$id"];
-        const output = await bundle(schemaId);
+        let output = await bundle(schemaId);
         //process the output to change all refs to be local
         replaceRefs(output);
 
+        let resolvedBaseRefKeys = {};
+        //remove  top level base $ref if any
+        output=resolveTopLevelRefs(output,resolvedBaseRefKeys);
+
         //resolve all refs which point to a *Base Building block until no more replacements are done
-        const resolvedBaseRefKeys = {};
         let replacementsPerformed=true;
         while(replacementsPerformed){
           replacementsPerformed=resolveBaseRefs(output,resolvedBaseRefKeys);
         }
+
         //remove all *Base refs which were replaced
         removeResolvedBaseRefs(output,resolvedBaseRefKeys);
 
@@ -200,6 +204,32 @@ function replaceRefs(obj) {
       obj[key]=`#/$defs/${newRef}`;
     }
   }
+}
+
+function resolveTopLevelRefs(schema,resolvedBaseRefKeys) {
+  let outSchema=schema;
+  //we check the top level for any $refs and resolve them
+  const $defs = schema.$defs;
+  const defSchema = schema;
+  if (defSchema.$ref) {
+    const baseRefMatch = /(#\/\$defs\/)(.*Base.schema.json)/.exec(defSchema.$ref);
+    if (baseRefMatch) {
+      //we replace the ref by merging the reffed schema
+      const reffedKey = baseRefMatch[2];
+      const reffedSchema = $defs[reffedKey];
+      delete defSchema.$ref;
+      //to make sure that the resulting schema has a sensible order of keys we first define the firstmost keys and then add the rest of the reffed schema
+      let mergedSchema = {$schema:"",$id:"",unevaluatedProperties:false};
+      mergeDeep(mergedSchema,JSON.parse(JSON.stringify(reffedSchema)));
+      //let mergedSchema = JSON.parse(JSON.stringify(reffedSchema));
+      //then merge the extending schema into the reffed schema
+      mergeDeep(mergedSchema, defSchema);
+      outSchema=mergedSchema;
+      //mark the reffed Base schema for deletion
+      resolvedBaseRefKeys[reffedKey] = true;
+    }
+  }
+  return outSchema;
 }
 
 function resolveBaseRefs(schema,resolvedBaseRefKeys) {

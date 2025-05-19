@@ -2413,5 +2413,3 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
     }
 }
 ```
-
-

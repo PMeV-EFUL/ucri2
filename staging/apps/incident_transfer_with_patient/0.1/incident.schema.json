@@ -1,20 +1,12 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentBase.schema.json",
   "title": "Ein Einsatz mit Patientendaten",
   "description": "Ein Einsatz mit Patientendaten",
   "required": [ "sharedIncidentId","sentByDispatcherAt","patients","missionLocation" ],
   "type": "object",
   "properties": {
-    "sharedIncidentId": {
-      "type": "string",
-      "format": "uuid",
-      "description": "global eindeutige UUID des Einsatzes"
-    },
-    "internalId": {
-      "type": "string",
-      "description": "Sender-interne ID des Einsatzes"
-    },
     "classifications": {
       "type": "array",
       "description": "Stichwortkürzel des Einsatzes",
@@ -30,15 +22,7 @@
     "flashingLights": {
       "type": "boolean"
     },
-    "additionalInfo": {
-      "type": "string"
-    },
-    "sentByDispatcherAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
-    },
-	"missionLocation": {
+    "missionLocation": {
       "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
     },
     "patients": {

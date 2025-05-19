@@ -1780,5 +1780,3 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
     }
 }
 ```
-
-

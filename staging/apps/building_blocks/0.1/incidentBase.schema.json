@@ -1,0 +1,33 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentBase.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Basis eines Einsatzobjektes",
+  "description": "Die Basis eines Einsatzobjekts mit Eigenschaften, die in jedem Einsatz vorkommen müssen.",
+  "required": ["sharedIncidentId","sentByDispatcherAt"],
+  "type": "object",
+  "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "global eindeutige UUID des Einsatzes"
+    },
+    "internalId": {
+      "type": "string",
+      "description": "Sender-interne ID des Einsatzes"
+    },
+    "additionalInfo": {
+      "type": "string"
+    },
+    "sentByDispatcherAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+    }
+  },
+  "examples": [{
+    "rmi": 360,
+    "rmc": 360543215,
+    "pzc": 360401,
+    "additionalInformation": "unspezifischer Notfall"
+  }]
+}
