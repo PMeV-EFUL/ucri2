@@ -212,7 +212,7 @@ function resolveTopLevelRefs(schema,resolvedBaseRefKeys) {
   const $defs = schema.$defs;
   const defSchema = schema;
   if (defSchema.$ref) {
-    const baseRefMatch = /(#\/\$defs\/)(.*Base.schema.json)/.exec(defSchema.$ref);
+    const baseRefMatch = /(#\/\$defs\/)(.*.schema.json)/.exec(defSchema.$ref);
     if (baseRefMatch) {
       //we replace the ref by merging the reffed schema
       const reffedKey = baseRefMatch[2];
