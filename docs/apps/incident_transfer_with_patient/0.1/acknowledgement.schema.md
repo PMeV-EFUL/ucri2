@@ -41,7 +41,7 @@
   <tbody>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">global eindeutige UUID des Einsatzes</td>
+      <td colspan="2">global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -155,7 +155,7 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
-            "description": "global eindeutige UUID des Einsatzes"
+            "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
         },
         "acknowledgedByDispatcherAt": {
             "type": "string",

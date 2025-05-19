@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -196,6 +196,143 @@
     </tr>
   </tbody>
 </table>
+
+
+
+
+## protocolRemarks
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Protokollvermerke</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Min Items</th>
+      <td colspan="2">1</td>
+    </tr>
+  </tbody>
+</table>
+
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstype">type</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+
+
+### protocolRemarks.sharedIncidentId
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">uuid</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.timestamp
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zeitstempel</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.message
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungstext</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Inhalt der Benachrichtigung</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.type
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungstyp</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.silent
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungs-Sichtbarkeit</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
+    
+  </tbody>
+</table>
+
 
 
 
@@ -1689,6 +1826,15 @@
             "format": "date-time",
             "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
         },
+        "protocolRemarks": {
+            "title": "Protokollvermerke",
+            "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/$defs/notification.schema.json"
+            }
+        },
         "classifications": {
             "type": "array",
             "description": "Stichwortkürzel des Einsatzes",
@@ -1818,6 +1964,54 @@
         }
     ],
     "$defs": {
+        "notification.schema.json": {
+            "unevaluatedProperties": false,
+            "title": "Einsatzbezogene Text-Benachrichtigung",
+            "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+            "required": [
+                "sharedIncidentId",
+                "timestamp",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "sharedIncidentId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "Zeitstempel",
+                    "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+                },
+                "message": {
+                    "title": "Benachrichtigungstext",
+                    "description": "Inhalt der Benachrichtigung",
+                    "type": "string"
+                },
+                "type": {
+                    "title": "Benachrichtigungstyp",
+                    "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+                    "type": "string"
+                },
+                "silent": {
+                    "title": "Benachrichtigungs-Sichtbarkeit",
+                    "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+                    "type": "information",
+                    "silent": true
+                }
+            ]
+        },
         "coordinate.schema.json": {
             "title": "WGS84-Koordinate",
             "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",

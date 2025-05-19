@@ -28,6 +28,15 @@
       "format": "date-time",
       "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
+    "protocolRemarks": {
+      "title": "Protokollvermerke",
+      "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/notification.schema.json"
+      }
+    },
     "issue": {
       "type": "string",
       "enum": [
@@ -102,6 +111,54 @@
     }
   ],
   "$defs": {
+    "notification.schema.json": {
+      "unevaluatedProperties": false,
+      "title": "Einsatzbezogene Text-Benachrichtigung",
+      "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+      "required": [
+        "sharedIncidentId",
+        "timestamp",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "sharedIncidentId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Zeitstempel",
+          "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+        },
+        "message": {
+          "title": "Benachrichtigungstext",
+          "description": "Inhalt der Benachrichtigung",
+          "type": "string"
+        },
+        "type": {
+          "title": "Benachrichtigungstyp",
+          "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+          "type": "string"
+        },
+        "silent": {
+          "title": "Benachrichtigungs-Sichtbarkeit",
+          "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+          "type": "boolean"
+        }
+      },
+      "examples": [
+        {
+          "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+          "timestamp": "2024-01-01T10:06:09",
+          "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+          "type": "information",
+          "silent": true
+        }
+      ]
+    },
     "address.schema.json": {
       "title": "Adresse",
       "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/notification_text/0.1/notification.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht notification - Einsatzbezogene Textnachricht",
+  "description": "Eine einsatzbezogene Textnachricht",
+  "required": [
+    "sharedIncidentId",
+    "timestamp",
+    "message"
+  ],
+  "type": "object",
+  "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Zeitstempel",
+      "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+    },
+    "message": {
+      "title": "Benachrichtigungstext",
+      "description": "Inhalt der Benachrichtigung",
+      "type": "string"
+    },
+    "type": {
+      "title": "Benachrichtigungstyp",
+      "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+      "type": "string"
+    },
+    "silent": {
+      "title": "Benachrichtigungs-Sichtbarkeit",
+      "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+      "type": "boolean"
+    }
+  },
+  "examples": [
+    {
+      "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+      "timestamp": "2024-01-01T10:06:09",
+      "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+      "type": "information",
+      "silent": true
+    }
+  ],
+  "$defs": {}
+}

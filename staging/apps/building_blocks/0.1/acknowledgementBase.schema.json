@@ -9,7 +9,7 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
-      "description": "global eindeutige UUID des Einsatzes"
+      "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
     },
     "acknowledgedByDispatcherAt": {
       "type": "string",
