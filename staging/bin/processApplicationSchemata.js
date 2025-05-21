@@ -64,7 +64,7 @@ async function process(){
         if (output.valid) {
           console.log("Example instance is valid :-)");
         } else {
-          console.log("Instance is invalid :-(");
+          console.log("ERROR: Instance is invalid :-(");
           console.log(JSON.stringify(output,null,2));
           errorsOccured=true;
         }
@@ -172,7 +172,11 @@ async function process(){
       console.log("not generating merged docs for building blocks...");
     }
   }
-  console.log("processing finished sucessfully.");
+  if (errorsOccured){
+    console.error("ERROR: processing FAILED, see ERROR messages above!")
+  }else{
+    console.log("processing finished sucessfully.");
+  }
 }
 
 function collectInputSchemata(){
