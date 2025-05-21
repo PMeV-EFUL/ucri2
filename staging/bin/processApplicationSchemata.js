@@ -139,13 +139,26 @@ async function process(){
     if (schemaDir.indexOf("building_blocks")<0) {
       console.log("STEP 5: generating merged docs ...");
       let completeMarkdown=fs.readFileSync(`${stagedAppsPath}/${schemaDir}/manual_documentation.md`, 'utf8');
-      completeMarkdown+="\n # App-Nachrichten\n"
-      for (const schemaName of schemaNames) {
-        const schemaDocFilename=schemaName.replace("schema.json","schema.md");
-        //read schema markdown, push all headings one level down
-        const schemaDocMarkdown=fs.readFileSync(`${docsPath}/${schemaDir}/${schemaDocFilename}`, 'utf8').replaceAll("# ","## ");
-        completeMarkdown+=`\n${schemaDocMarkdown}`;
+      // completeMarkdown+="\n # App-Nachrichten\n"
+      //include per-message docs as indicated by comments
+      let includeRegexMatch;
+      const includeRegex= /(<!-- include )(.*)( -->)/g;
+      const includedFilenames=[];
+      while ((includeRegexMatch = includeRegex.exec(completeMarkdown)) !== null) {
+        includedFilenames.push(includeRegexMatch[2]);
       }
+      for (const includedFilename of includedFilenames){
+        //read schema markdown, push all headings one level down
+        const includedMarkdown=fs.readFileSync(`${docsPath}/${schemaDir}/${includedFilename}`, 'utf8').replaceAll("# ","## ");
+        completeMarkdown=completeMarkdown.replaceAll(`<!-- include ${includedFilename} -->`,includedMarkdown);
+      }
+
+      // for (const schemaName of schemaNames) {
+      //   const schemaDocFilename=schemaName.replace("schema.json","schema.md");
+      //   //read schema markdown, push all headings one level down
+      //   const schemaDocMarkdown=fs.readFileSync(`${docsPath}/${schemaDir}/${schemaDocFilename}`, 'utf8').replaceAll("# ","## ");
+      //   completeMarkdown+=`\n${schemaDocMarkdown}`;
+      // }
       //insert table of contents (needs <!-- toc --><!-- tocstop --> in manual_documentation.md)
       completeMarkdown=toc.insert(completeMarkdown);
       //write completed markdown

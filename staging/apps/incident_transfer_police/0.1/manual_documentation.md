@@ -10,3 +10,7 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
 
 1. A->B: Einsatz übergeben
 2. B->A: Einsatz annehmen oder ablehnen
+
+# App-Nachrichten
+<!-- include incident.schema.md -->
+<!-- include acknowledgement.schema.md -->

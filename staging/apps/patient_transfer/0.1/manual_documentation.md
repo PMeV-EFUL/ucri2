@@ -9,4 +9,8 @@ Der Anwendungsfall Patientendatentransfer ist der Sonderfall der Einsatzübergab
 
 Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänger-Leitstelle bestätigt oder abgelehnt.
 
+# App-Nachrichten
+<!-- include incident.schema.md -->
+<!-- include acknowledgement.schema.md -->
+
 
