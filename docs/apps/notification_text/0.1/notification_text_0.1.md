@@ -25,7 +25,6 @@ Nachrichten, die bereits existierende App-Nachrichten nachbilden (z.b. Einsatzan
 
 1. A->B: Einsatzbezogene Textnachricht übermitteln
 
-
 # App-Nachrichten
 
 

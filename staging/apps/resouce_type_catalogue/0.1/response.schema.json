@@ -1,0 +1,51 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_type_catalogue/0.1/response.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/catalogueMessageBase.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht response - Eine Antwort auf eine Einsatzmitteltyp-Katalog-Anfrage",
+  "description": "Eine Antwort auf eine Einsatzmitteltyp-Katalog-Anfrage",
+  "required": ["requestId","catalogueVersion","catalogue"],
+  "type": "object",
+  "properties": {
+    "catalogueVersion": {
+      "type": "string",
+      "title": "Katalogversion",
+      "description": "die Versionskennung des Katalogs."
+    },
+    "catalogue": {
+      "type": "array",
+      "description": "Einsatzmitteltyp-Katalogeinträge",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["abbreviation","description"],
+        "properties": {
+          "abbreviation": {
+            "type": "string",
+            "title": "Einsatzmitteltyp-Kürzel",
+            "description": "Das Einsatzmitteltypkürzel"
+          },
+          "description": {
+            "type": "string",
+            "title": "Beschreibung",
+            "description": "Beschreibung des Einsatzmitteltyps"
+          }
+        }
+      }
+    }
+  },
+  "examples": [{
+    "requestId": "440e8400-e29b-41d4-a716-446655440000",
+    "catalogueVersion": "1.0-20250101",
+    "catalogue": [{
+        "abbreviation": "TLF",
+        "description": "Tanklöschfahrzeug"
+      },
+      {
+        "abbreviation": "KTW",
+        "description": "Krankentransportwagen"
+      }
+    ]
+  }]
+}
