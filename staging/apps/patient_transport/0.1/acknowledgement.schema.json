@@ -1,0 +1,14 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transport/0.1/acknowledgement.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/acknowledgementBase.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Transportanfrage",
+  "description": "Bestätigung oder Ablehnung einer Transportanfrage",
+  "examples": [{
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+    "status": "rejected",
+    "cause": "Keine freien Kapazitäten"
+  }]
+}
