@@ -36,6 +36,7 @@ Klärung den richtigen Einsatzmitteltyp zuordnen kann. Einsätze dürfen auf
 keinen Fall wegen unbekanntem Einsatzmitteltyp unberücksichtigt bleiben.
  
 # App-Nachrichten
+<!-- include ../../general_schema_documentation.md -->
 <!-- include request.schema.md -->
 <!-- include response.schema.md -->
 

@@ -12,5 +12,6 @@ Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use
 2. B->A: Einsatz annehmen oder ablehnen
 
 # App-Nachrichten
+<!-- include ../../general_schema_documentation.md -->
 <!-- include incident.schema.md -->
 <!-- include acknowledgement.schema.md -->

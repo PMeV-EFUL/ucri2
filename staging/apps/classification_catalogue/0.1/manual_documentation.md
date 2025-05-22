@@ -38,6 +38,7 @@ oder die Klärung einleitet. Einsätze dürfen auf keinen Fall wegen
 unbekannter Stichworte unberücksichtigt bleiben.
 
 # App-Nachrichten
+<!-- include ../../general_schema_documentation.md -->
 <!-- include request.schema.md -->
 <!-- include response.schema.md -->
 

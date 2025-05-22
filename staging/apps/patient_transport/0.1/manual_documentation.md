@@ -20,6 +20,7 @@ Das Datum für den Zieltermin wird ISO8601 kompatibel erwartet "2012-04-23T18:25
 4. B->A: Übergabe ablehnen
 
 # App-Nachrichten
+<!-- include ../../general_schema_documentation.md -->
 <!-- include incident.schema.md -->
 <!-- include acknowledgement.schema.md -->
 
