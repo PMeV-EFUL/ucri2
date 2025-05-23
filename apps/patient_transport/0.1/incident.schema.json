@@ -18,18 +18,23 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
+      "title": "globale Einsatz-UUID",
       "description": "global eindeutige UUID des Einsatzes"
     },
     "internalId": {
       "type": "string",
+      "title": "Sender-interne Einsatz-ID",
       "description": "Sender-interne ID des Einsatzes"
     },
     "additionalInfo": {
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
     },
     "sentByDispatcherAt": {
       "type": "string",
       "format": "date-time",
+      "title": "Dispatcher-Übergabe-Zeitstempel",
       "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
     "protocolRemarks": {
@@ -207,6 +212,7 @@
         "sharedIncidentId": {
           "type": "string",
           "format": "uuid",
+          "title": "globale Einsatz-UUID",
           "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
         },
         "timestamp": {
@@ -251,13 +257,15 @@
       "type": "object",
       "properties": {
         "lat": {
-          "title": "Breitengrad in Grad",
+          "title": "Breitengrad",
+          "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
           "type": "number",
           "minimum": -90,
           "maximum": 90
         },
         "lon": {
-          "title": "Längengrad in Grad",
+          "title": "Längengrad",
+          "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
           "type": "number",
           "minimum": -180,
           "maximum": 180
@@ -273,7 +281,7 @@
     },
     "address.schema.json": {
       "title": "Adresse",
-      "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
+      "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
       "required": [
         "street"
       ],
@@ -281,31 +289,40 @@
       "properties": {
         "street": {
           "title": "Name der Strasse",
+          "description": "Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und 'Straße' mit einem 'ß' geschrieben werden (also 'Musterstraße' anstatt 'Musterstrasse' oder 'Musterstr.'). ",
           "type": "string"
         },
         "houseNumber": {
           "title": "Hausnummer",
+          "description": "Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also '12a' anstatt '12 a').",
           "type": "string"
         },
         "postalCode": {
           "title": "Postleitzahl",
-          "type": "string"
+          "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
+          "type": "string",
+          "pattern": "[0-9]+"
         },
         "city": {
           "title": "Stadt",
+          "description": "Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist 'cityDistrict' zu nutzen!",
           "type": "string"
         },
         "cityDistrict": {
           "title": "Ortsteil",
+          "description": "Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als 'city' eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.",
           "type": "string"
         },
         "state": {
           "title": "Bundesland",
+          "description": "Das Bundesland.",
           "type": "string"
         },
         "country": {
-          "title": "Land",
-          "type": "string"
+          "title": "ISO-Code des Landes",
+          "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
+          "type": "string",
+          "pattern": "[A-Z]{2}"
         }
       },
       "unevaluatedProperties": false,
@@ -331,10 +348,12 @@
       "properties": {
         "name": {
           "title": "Objektname",
+          "description": "Der Name des Objekts.",
           "type": "string"
         },
         "additionalInfo": {
-          "title": "Weitere Informationen zum Einsatzobjekt",
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
         }
       },
@@ -364,27 +383,38 @@
       "type": "object",
       "properties": {
         "coordinate": {
-          "$ref": "#/$defs/coordinate.schema.json"
+          "$ref": "#/$defs/coordinate.schema.json",
+          "title": "Koordinate",
+          "description": "Die Ortskoordinate."
         },
         "address": {
-          "$ref": "#/$defs/address.schema.json"
+          "$ref": "#/$defs/address.schema.json",
+          "title": "Adresse",
+          "description": "Die Adresse des Orts."
         },
         "object": {
-          "$ref": "#/$defs/missionObject.schema.json"
+          "$ref": "#/$defs/missionObject.schema.json",
+          "title": "Objekt",
+          "description": "Das Objekt."
         },
         "superiorObject": {
-          "$ref": "#/$defs/missionObject.schema.json"
+          "$ref": "#/$defs/missionObject.schema.json",
+          "title": "Übergeordnetes Objekt",
+          "description": "Das übergeordnete Objekt."
         },
         "floor": {
           "title": "Etage",
+          "description": "Die Etage.",
           "type": "string"
         },
         "room": {
-          "title": "Zimmer",
+          "title": "Zimmernummer",
+          "description": "Die Zimmernummer.",
           "type": "string"
         },
         "additionalInfo": {
-          "title": "Weitere Informationen zum Einsatz-Zielort",
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
         }
       },
@@ -426,11 +456,12 @@
       "properties": {
         "healthInsuranceCompany": {
           "title": "Name der Krankenversicherung",
+          "description": "Der Name der Krankenversicherung.",
           "type": "string"
         },
         "healthInsuranceCompanyNumber": {
           "title": "IK der Krankenversicherung",
-          "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht",
+          "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
           "type": "string",
           "pattern": "(0-9)*",
           "minLength": 9,
@@ -438,6 +469,7 @@
         },
         "insuranceNumber": {
           "title": "Versichertennummer (Alphanumerisch)",
+          "description": "Die Versichertennummer",
           "type": "string"
         }
       },
@@ -459,22 +491,27 @@
       "properties": {
         "rmi": {
           "title": "Rückmeldeindikator",
+          "description": "Der Rückmeldeindikator.",
           "type": "integer",
           "minimum": 0,
           "maximum": 999
         },
         "rmc": {
           "title": "Rückmeldecode",
+          "description": "Der Rückmeldecode.",
           "type": "integer"
         },
         "pzc": {
           "title": "Patientenzuweisungscode",
+          "description": "Der Patientenzuweisungscode.",
           "type": "integer",
           "minimum": 0,
           "maximum": 999999
         },
         "additionalInformation": {
-          "type": "string"
+          "type": "string",
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können. TODO der Name ist hier nicht sinnvoll, oder?"
         }
       },
       "unevaluatedProperties": false,
@@ -489,7 +526,7 @@
     },
     "patient.schema.json": {
       "title": "Patient",
-      "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
+      "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person und besitzt zusätzliche Eigenschaften. Obligat ist nur der Nachname.",
       "required": [
         "name"
       ],
@@ -497,29 +534,37 @@
       "properties": {
         "name": {
           "title": "Nachname",
+          "description": "Der Nachname.",
           "type": "string"
         },
         "surname": {
           "title": "Vorname",
+          "description": "Der Vorname.",
           "type": "string"
         },
         "phone": {
           "title": "Telefonnummer",
+          "description": "Die Telefonnummer.",
           "type": "string"
         },
         "email": {
           "title": "Email-Adresse",
+          "description": "Die Email-Adresse.",
           "type": "string"
         },
         "address": {
-          "$ref": "#/$defs/address.schema.json"
+          "$ref": "#/$defs/address.schema.json",
+          "title": "MeldeAdresse",
+          "description": "Die Meldeadresse."
         },
         "additionalInfo": {
-          "title": "Weitere Informationen zur Person",
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
         },
         "gender": {
           "title": "Geschlecht",
+          "description": "Das Geschlecht.",
           "type": "string",
           "enum": [
             "Male",
@@ -534,26 +579,34 @@
           "format": "date"
         },
         "age": {
-          "title": "Alter in Jahren",
+          "title": "Alter",
+          "description": "Das Alter in Jahren.",
           "type": "number",
           "minimum": 0
         },
         "healthInsuranceInformation": {
-          "$ref": "#/$defs/healthInsuranceInformation.schema.json"
+          "$ref": "#/$defs/healthInsuranceInformation.schema.json",
+          "title": "Informationen zum Versicherungsverhältnis",
+          "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer."
         },
         "initialAssessment": {
-          "$ref": "#/$defs/initialAssessment.schema.json"
+          "$ref": "#/$defs/initialAssessment.schema.json",
+          "title": "Ersteinschätzung",
+          "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?"
         },
         "infectionInformation": {
-          "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
+          "title": "Infektiös (Freitext)",
+          "description": "Informationen, ob der Patient ansteckend ist (als Freitext).",
           "type": "string"
         },
         "infectionStatus": {
-          "title": "Informationen ob der Patient ansteckend ist (true/false)",
+          "title": "Infektiös (Wahrheitswert)",
+          "description": "Informationen, ob der Patient ansteckend ist (true/false).",
           "type": "boolean"
         },
         "transportNumber": {
           "title": "Transportnummer",
+          "description": "Die Transportnummer.",
           "type": "string"
         }
       },
@@ -604,25 +657,32 @@
       "properties": {
         "name": {
           "title": "Nachname",
+          "description": "Der Nachname.",
           "type": "string"
         },
         "surname": {
           "title": "Vorname",
+          "description": "Der Vorname.",
           "type": "string"
         },
         "phone": {
           "title": "Telefonnummer",
+          "description": "Die Telefonnummer.",
           "type": "string"
         },
         "email": {
           "title": "Email-Adresse",
+          "description": "Die Email-Adresse.",
           "type": "string"
         },
         "address": {
-          "$ref": "#/$defs/address.schema.json"
+          "$ref": "#/$defs/address.schema.json",
+          "title": "MeldeAdresse",
+          "description": "Die Meldeadresse."
         },
         "additionalInfo": {
-          "title": "Weitere Informationen zur Person",
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
         }
       },

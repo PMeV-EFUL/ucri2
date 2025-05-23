@@ -14,7 +14,8 @@
     "requestId": {
       "type": "string",
       "format": "uuid",
-      "description": "global eindeutige requestId der Anfrage"
+      "title": "Anfrage-UUID",
+      "description": "global eindeutige UUID der Anfrage"
     },
     "catalogueVersion": {
       "type": "string",

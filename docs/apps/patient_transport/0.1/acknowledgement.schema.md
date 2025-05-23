@@ -40,6 +40,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird.</td>
     </tr>
@@ -63,6 +67,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Dispatcher-Zeitstempel</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde</td>
@@ -88,6 +96,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Annahme- oder Ablehnungsstatus</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Annahme- oder Ablehnungsstatus</td>
     </tr>
@@ -111,6 +123,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
@@ -152,11 +168,13 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
         },
         "acknowledgedByDispatcherAt": {
             "type": "string",
             "format": "date-time",
+            "title": "Dispatcher-Zeitstempel",
             "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
         },
         "status": {
@@ -165,10 +183,12 @@
                 "accepted",
                 "rejected"
             ],
+            "title": "Annahme- oder Ablehnungsstatus",
             "description": "Annahme- oder Ablehnungsstatus"
         },
         "cause": {
             "type": "string",
+            "title": "Begründung für die Annahme oder Ablehnung",
             "description": "Begründung für die Annahme oder Ablehnung"
         }
     },

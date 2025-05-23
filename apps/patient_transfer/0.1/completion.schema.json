@@ -14,6 +14,7 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
+      "title": "globale Einsatz-UUID",
       "description": "global eindeutige UUID des Einsatzes, der beendet wurde."
     },
     "completedAt": {
@@ -32,8 +33,9 @@
       "description": "Zustand, in dem der Einsatz beendet wurde"
     },
     "additionalInformation": {
-      "type": "string",
-      "description": "Weitere Informationen zur Einsatzbeendigung"
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+      "type": "string"
     }
   },
   "examples": [

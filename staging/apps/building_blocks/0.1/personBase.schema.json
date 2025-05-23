@@ -8,25 +8,32 @@
   "properties": {
     "name": {
       "title": "Nachname",
+      "description": "Der Nachname.",
       "type": "string"
     },
 	"surname": {
       "title": "Vorname",
+      "description": "Der Vorname.",
       "type": "string"
     },
 	"phone": {
       "title": "Telefonnummer",
+      "description": "Die Telefonnummer.",
       "type": "string"
     },
 	"email": {
       "title": "Email-Adresse",
+      "description": "Die Email-Adresse.",
       "type": "string"
     },
 	"address": {
-			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json"
-	},
+      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json",
+      "title": "MeldeAdresse",
+      "description": "Die Meldeadresse."
+    },
     "additionalInfo": {
-      "title": "Weitere Informationen zur Person",
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
     }
   },

@@ -127,8 +127,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Anfrage-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">global eindeutige requestId der Anfrage</td>
+      <td colspan="2">global eindeutige UUID der Anfrage</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -168,7 +172,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "requestId": {
             "type": "string",
             "format": "uuid",
-            "description": "global eindeutige requestId der Anfrage"
+            "title": "Anfrage-UUID",
+            "description": "global eindeutige UUID der Anfrage"
         }
     },
     "examples": [
@@ -232,8 +237,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Anfrage-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">global eindeutige requestId der Anfrage</td>
+      <td colspan="2">global eindeutige UUID der Anfrage</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -368,7 +377,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "requestId": {
             "type": "string",
             "format": "uuid",
-            "description": "global eindeutige requestId der Anfrage"
+            "title": "Anfrage-UUID",
+            "description": "global eindeutige UUID der Anfrage"
         },
         "catalogueVersion": {
             "type": "string",

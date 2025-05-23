@@ -14,11 +14,13 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
+      "title": "globale Einsatz-UUID",
       "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
     },
     "acknowledgedByDispatcherAt": {
       "type": "string",
       "format": "date-time",
+      "title": "Dispatcher-Zeitstempel",
       "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
     },
     "status": {
@@ -27,10 +29,12 @@
         "accepted",
         "rejected"
       ],
+      "title": "Annahme- oder Ablehnungsstatus",
       "description": "Annahme- oder Ablehnungsstatus"
     },
     "cause": {
       "type": "string",
+      "title": "Begründung für die Annahme oder Ablehnung",
       "description": "Begründung für die Annahme oder Ablehnung"
     }
   },

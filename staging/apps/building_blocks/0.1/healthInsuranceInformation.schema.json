@@ -8,11 +8,12 @@
   "properties": {
     "healthInsuranceCompany": {
       "title": "Name der Krankenversicherung",
+      "description": "Der Name der Krankenversicherung.",
       "type": "string"
     },
 	"healthInsuranceCompanyNumber": {
       "title": "IK der Krankenversicherung",
-      "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht",
+      "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
       "type": "string",
       "pattern": "(0-9)*",
       "minLength": 9,
@@ -20,6 +21,7 @@
     },
 	"insuranceNumber": {
       "title": "Versichertennummer (Alphanumerisch)",
+      "description": "Die Versichertennummer",
       "type": "string"
     }
   },

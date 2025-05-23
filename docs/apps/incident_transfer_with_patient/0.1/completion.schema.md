@@ -40,6 +40,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes, der beendet wurde.</td>
     </tr>
@@ -120,8 +124,12 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Weitere Informationen zur Einsatzbeendigung</td>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -160,6 +168,7 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes, der beendet wurde."
         },
         "completedAt": {
@@ -178,8 +187,9 @@
             "description": "Zustand, in dem der Einsatz beendet wurde"
         },
         "additionalInformation": {
-            "type": "string",
-            "description": "Weitere Informationen zur Einsatzbeendigung"
+            "title": "Zusatzinformationen",
+            "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+            "type": "string"
         }
     },
     "examples": [

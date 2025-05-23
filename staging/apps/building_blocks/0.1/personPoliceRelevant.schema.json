@@ -2,16 +2,20 @@
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personPoliceRelevant.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personBase.schema.json",
+  "title": "Polizeilich relevante Person",
+  "description": "Eine polizeilich relevante Person.",
   "unevaluatedProperties": false,
   "properties": {
     "dateOfBirth": {
       "type": "string",
       "format": "date",
-      "description": "The date of birth of the accused person."
+      "title": "Geburtsdatum",
+      "description": "Das Geburtsdatum der Person."
     },
     "nationality": {
       "type": "string",
-      "description": "The nationality of the accused person."
+      "title": "Nationalität",
+      "description": "die Nationalität der Person."
     }
   },
   "examples": [{

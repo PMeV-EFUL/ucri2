@@ -9,22 +9,27 @@
   "properties": {
     "rmi": {
       "title": "Rückmeldeindikator",
+      "description": "Der Rückmeldeindikator.",
       "type": "integer",
       "minimum": 0,
       "maximum": 999
     },
 	"rmc": {
       "title": "Rückmeldecode",
+      "description": "Der Rückmeldecode.",
       "type": "integer"
     },
 	"pzc": {
       "title": "Patientenzuweisungscode",
+      "description": "Der Patientenzuweisungscode.",
       "type": "integer",
       "minimum": 0,
       "maximum": 999999
     },
 	"additionalInformation": {
-      "type": "string"
+      "type": "string",
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können. TODO der Name ist hier nicht sinnvoll, oder?"
     }
   },
   "unevaluatedProperties": false,

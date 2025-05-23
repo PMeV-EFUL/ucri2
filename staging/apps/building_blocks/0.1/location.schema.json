@@ -10,27 +10,38 @@
 	"type": "object",
 	"properties": {
 		"coordinate": {
-			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json"
+			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json",
+			"title": "Koordinate",
+			"description": "Die Ortskoordinate."
 		},
 		"address": {
-			"$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json"
+			"$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json",
+			"title": "Adresse",
+			"description": "Die Adresse des Orts."
 		},
 		"object": {
-			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json"
+			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json",
+			"title": "Objekt",
+			"description": "Das Objekt."
 		},
 		"superiorObject": {
-			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json"
+			"$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/missionObject.schema.json",
+			"title": "Übergeordnetes Objekt",
+			"description": "Das übergeordnete Objekt."
 		},
 		"floor": {
 			"title": "Etage",
+			"description": "Die Etage.",
 			"type": "string"
 		},
 		"room": {
-			"title": "Zimmer",
+			"title": "Zimmernummer",
+			"description": "Die Zimmernummer.",
 			"type": "string"
 		},
 		"additionalInfo": {
-			"title": "Weitere Informationen zum Einsatz-Zielort",
+			"title": "Zusatzinformationen",
+			"description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
 			"type": "string"
 		}
 	},

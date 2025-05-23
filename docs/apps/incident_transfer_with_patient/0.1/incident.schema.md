@@ -290,11 +290,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">WGS84-Koordinate</td>
+      <td colspan="2">Koordinate</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+      <td colspan="2">Die Ortskoordinate.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -314,7 +314,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Breitengrad in Grad</td>
+      <td colspan="2">Breitengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Breitengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -341,7 +345,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Längengrad in Grad</td>
+      <td colspan="2">Längengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Längengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -373,7 +381,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Adresse des Orts.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -394,6 +402,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -416,6 +428,10 @@
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -437,12 +453,19 @@
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
   </tbody>
 </table>
 
@@ -457,6 +480,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -479,6 +506,10 @@
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -500,6 +531,10 @@
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -519,14 +554,21 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -541,11 +583,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Einsatz-Zielobjekt</td>
+      <td colspan="2">Objekt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts</td>
+      <td colspan="2">Das Objekt.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -567,6 +609,10 @@
       <th>Titel</th>
       <td colspan="2">Objektname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Name des Objekts.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -586,7 +632,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zum Einsatzobjekt</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -608,11 +658,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Einsatz-Zielobjekt</td>
+      <td colspan="2">Übergeordnetes Objekt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts</td>
+      <td colspan="2">Das übergeordnete Objekt.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -634,6 +684,10 @@
       <th>Titel</th>
       <td colspan="2">Objektname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Name des Objekts.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -653,7 +707,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zum Einsatzobjekt</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -677,6 +735,10 @@
       <th>Titel</th>
       <td colspan="2">Etage</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Etage.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -696,7 +758,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Zimmer</td>
+      <td colspan="2">Zimmernummer</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Zimmernummer.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -717,7 +783,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zum Einsatz-Zielort</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -762,6 +832,10 @@
       <th>Titel</th>
       <td colspan="2">Nachname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -778,6 +852,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -796,6 +874,10 @@
       <th>Titel</th>
       <td colspan="2">Telefonnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -813,6 +895,10 @@
       <th>Titel</th>
       <td colspan="2">Email-Adresse</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -828,17 +914,13 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Adresse</td>
+      <td colspan="2">MeldeAdresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Meldeadresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -853,6 +935,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -875,6 +961,10 @@
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -896,12 +986,19 @@
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
   </tbody>
 </table>
 
@@ -916,6 +1013,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -938,6 +1039,10 @@
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -959,6 +1064,10 @@
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -978,14 +1087,21 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1000,7 +1116,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zur Person</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1018,6 +1138,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Geschlecht</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Geschlecht.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1061,7 +1185,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Alter in Jahren</td>
+      <td colspan="2">Alter</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Alter in Jahren.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     
@@ -1100,6 +1228,10 @@
       <th>Titel</th>
       <td colspan="2">Name der Krankenversicherung</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Name der Krankenversicherung.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1119,7 +1251,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht</td>
+      <td colspan="2">Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1146,6 +1278,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Versichertennummer (Alphanumerisch)</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Versichertennummer</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1188,6 +1324,10 @@
       <th>Titel</th>
       <td colspan="2">Rückmeldeindikator</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Rückmeldeindikator.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
@@ -1208,6 +1348,10 @@
       <th>Titel</th>
       <td colspan="2">Rückmeldecode</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Rückmeldecode.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     
   </tbody>
@@ -1225,6 +1369,10 @@
       <th>Titel</th>
       <td colspan="2">Patientenzuweisungscode</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Patientenzuweisungscode.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
       <th>Maximum</th>
@@ -1241,6 +1389,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können. TODO der Name ist hier nicht sinnvoll, oder?</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1257,7 +1413,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Informationen ob der Patient ansteckend ist (als Freitext)</td>
+      <td colspan="2">Infektiös (Freitext)</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Informationen, ob der Patient ansteckend ist (als Freitext).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1274,7 +1434,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Informationen ob der Patient ansteckend ist (true/false)</td>
+      <td colspan="2">Infektiös (Wahrheitswert)</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Informationen, ob der Patient ansteckend ist (true/false).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     
@@ -1292,6 +1456,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Transportnummer</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Transportnummer.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1332,6 +1500,10 @@
       <th>Titel</th>
       <td colspan="2">Nachname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1348,6 +1520,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1366,6 +1542,10 @@
       <th>Titel</th>
       <td colspan="2">Telefonnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1383,6 +1563,10 @@
       <th>Titel</th>
       <td colspan="2">Email-Adresse</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1398,17 +1582,13 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Adresse</td>
+      <td colspan="2">MeldeAdresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Meldeadresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -1423,6 +1603,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1445,6 +1629,10 @@
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1466,12 +1654,19 @@
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1486,6 +1681,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1508,6 +1707,10 @@
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1529,6 +1732,10 @@
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1548,14 +1755,21 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1570,7 +1784,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zur Person</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1748,13 +1966,15 @@
             "type": "object",
             "properties": {
                 "lat": {
-                    "title": "Breitengrad in Grad",
+                    "title": "Breitengrad",
+                    "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
                     "type": "number",
                     "minimum": -90,
                     "maximum": 90
                 },
                 "lon": {
-                    "title": "Längengrad in Grad",
+                    "title": "Längengrad",
+                    "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
                     "type": "number",
                     "minimum": -180,
                     "maximum": 180
@@ -1770,7 +1990,7 @@
         },
         "address.schema.json": {
             "title": "Adresse",
-            "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
+            "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
             "required": [
                 "street"
             ],
@@ -1778,31 +1998,40 @@
             "properties": {
                 "street": {
                     "title": "Name der Strasse",
+                    "description": "Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und 'Straße' mit einem 'ß' geschrieben werden (also 'Musterstraße' anstatt 'Musterstrasse' oder 'Musterstr.'). ",
                     "type": "string"
                 },
                 "houseNumber": {
                     "title": "Hausnummer",
+                    "description": "Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also '12a' anstatt '12 a').",
                     "type": "string"
                 },
                 "postalCode": {
                     "title": "Postleitzahl",
-                    "type": "string"
+                    "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
+                    "type": "string",
+                    "pattern": "[0-9]+"
                 },
                 "city": {
                     "title": "Stadt",
+                    "description": "Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist 'cityDistrict' zu nutzen!",
                     "type": "string"
                 },
                 "cityDistrict": {
                     "title": "Ortsteil",
+                    "description": "Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als 'city' eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.",
                     "type": "string"
                 },
                 "state": {
                     "title": "Bundesland",
+                    "description": "Das Bundesland.",
                     "type": "string"
                 },
                 "country": {
-                    "title": "Land",
-                    "type": "string"
+                    "title": "ISO-Code des Landes",
+                    "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
+                    "type": "string",
+                    "pattern": "[A-Z]{2}"
                 }
             },
             "unevaluatedProperties": false,
@@ -1828,10 +2057,12 @@
             "properties": {
                 "name": {
                     "title": "Objektname",
+                    "description": "Der Name des Objekts.",
                     "type": "string"
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zum Einsatzobjekt",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 }
             },
@@ -1861,27 +2092,38 @@
             "type": "object",
             "properties": {
                 "coordinate": {
-                    "$ref": "#/$defs/coordinate.schema.json"
+                    "$ref": "#/$defs/coordinate.schema.json",
+                    "title": "Koordinate",
+                    "description": "Die Ortskoordinate."
                 },
                 "address": {
-                    "$ref": "#/$defs/address.schema.json"
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "Adresse",
+                    "description": "Die Adresse des Orts."
                 },
                 "object": {
-                    "$ref": "#/$defs/missionObject.schema.json"
+                    "$ref": "#/$defs/missionObject.schema.json",
+                    "title": "Objekt",
+                    "description": "Das Objekt."
                 },
                 "superiorObject": {
-                    "$ref": "#/$defs/missionObject.schema.json"
+                    "$ref": "#/$defs/missionObject.schema.json",
+                    "title": "Übergeordnetes Objekt",
+                    "description": "Das übergeordnete Objekt."
                 },
                 "floor": {
                     "title": "Etage",
+                    "description": "Die Etage.",
                     "type": "string"
                 },
                 "room": {
-                    "title": "Zimmer",
+                    "title": "Zimmernummer",
+                    "description": "Die Zimmernummer.",
                     "type": "string"
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zum Einsatz-Zielort",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 }
             },
@@ -1923,11 +2165,12 @@
             "properties": {
                 "healthInsuranceCompany": {
                     "title": "Name der Krankenversicherung",
+                    "description": "Der Name der Krankenversicherung.",
                     "type": "string"
                 },
                 "healthInsuranceCompanyNumber": {
                     "title": "IK der Krankenversicherung",
-                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht",
+                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
                     "type": "string",
                     "pattern": "(0-9)*",
                     "minLength": 9,
@@ -1935,6 +2178,7 @@
                 },
                 "insuranceNumber": {
                     "title": "Versichertennummer (Alphanumerisch)",
+                    "description": "Die Versichertennummer",
                     "type": "string"
                 }
             },
@@ -1956,22 +2200,27 @@
             "properties": {
                 "rmi": {
                     "title": "Rückmeldeindikator",
+                    "description": "Der Rückmeldeindikator.",
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999
                 },
                 "rmc": {
                     "title": "Rückmeldecode",
+                    "description": "Der Rückmeldecode.",
                     "type": "integer"
                 },
                 "pzc": {
                     "title": "Patientenzuweisungscode",
+                    "description": "Der Patientenzuweisungscode.",
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999999
                 },
                 "additionalInformation": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können. TODO der Name ist hier nicht sinnvoll, oder?"
                 }
             },
             "unevaluatedProperties": false,
@@ -1986,7 +2235,7 @@
         },
         "patient.schema.json": {
             "title": "Patient",
-            "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
+            "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person und besitzt zusätzliche Eigenschaften. Obligat ist nur der Nachname.",
             "required": [
                 "name"
             ],
@@ -1994,29 +2243,37 @@
             "properties": {
                 "name": {
                     "title": "Nachname",
+                    "description": "Der Nachname.",
                     "type": "string"
                 },
                 "surname": {
                     "title": "Vorname",
+                    "description": "Der Vorname.",
                     "type": "string"
                 },
                 "phone": {
                     "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
                     "type": "string"
                 },
                 "email": {
                     "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
                     "type": "string"
                 },
                 "address": {
-                    "$ref": "#/$defs/address.schema.json"
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zur Person",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 },
                 "gender": {
                     "title": "Geschlecht",
+                    "description": "Das Geschlecht.",
                     "type": "string",
                     "enum": [
                         "Male",
@@ -2031,26 +2288,34 @@
                     "format": "date"
                 },
                 "age": {
-                    "title": "Alter in Jahren",
+                    "title": "Alter",
+                    "description": "Das Alter in Jahren.",
                     "type": "number",
                     "minimum": 0
                 },
                 "healthInsuranceInformation": {
-                    "$ref": "#/$defs/healthInsuranceInformation.schema.json"
+                    "$ref": "#/$defs/healthInsuranceInformation.schema.json",
+                    "title": "Informationen zum Versicherungsverhältnis",
+                    "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer."
                 },
                 "initialAssessment": {
-                    "$ref": "#/$defs/initialAssessment.schema.json"
+                    "$ref": "#/$defs/initialAssessment.schema.json",
+                    "title": "Ersteinschätzung",
+                    "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?"
                 },
                 "infectionInformation": {
-                    "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
+                    "title": "Infektiös (Freitext)",
+                    "description": "Informationen, ob der Patient ansteckend ist (als Freitext).",
                     "type": "string"
                 },
                 "infectionStatus": {
-                    "title": "Informationen ob der Patient ansteckend ist (true/false)",
+                    "title": "Infektiös (Wahrheitswert)",
+                    "description": "Informationen, ob der Patient ansteckend ist (true/false).",
                     "type": "boolean"
                 },
                 "transportNumber": {
                     "title": "Transportnummer",
+                    "description": "Die Transportnummer.",
                     "type": "string"
                 }
             },
@@ -2101,25 +2366,32 @@
             "properties": {
                 "name": {
                     "title": "Nachname",
+                    "description": "Der Nachname.",
                     "type": "string"
                 },
                 "surname": {
                     "title": "Vorname",
+                    "description": "Der Vorname.",
                     "type": "string"
                 },
                 "phone": {
                     "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
                     "type": "string"
                 },
                 "email": {
                     "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
                     "type": "string"
                 },
                 "address": {
-                    "$ref": "#/$defs/address.schema.json"
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zur Person",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 }
             },

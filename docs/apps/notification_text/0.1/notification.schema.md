@@ -41,6 +41,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht.</td>
     </tr>
@@ -187,6 +191,7 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
         },
         "timestamp": {

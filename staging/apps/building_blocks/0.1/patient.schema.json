@@ -2,6 +2,8 @@
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patientBase.schema.json",
+  "title": "Patient",
+  "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person und besitzt zusätzliche Eigenschaften. Obligat ist nur der Nachname.",
   "unevaluatedProperties": false,
   "examples": [{
     "name": "Mustermann",

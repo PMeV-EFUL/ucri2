@@ -328,6 +328,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes</td>
     </tr>
@@ -352,6 +356,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Sender-interne Einsatz-ID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Sender-interne ID des Einsatzes</td>
     </tr>
@@ -372,6 +380,14 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -389,6 +405,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Dispatcher-Übergabe-Zeitstempel</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
@@ -442,6 +462,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht.</td>
@@ -640,11 +664,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">WGS84-Koordinate</td>
+      <td colspan="2">Koordinate</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+      <td colspan="2">Die Ortskoordinate.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -664,7 +688,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Breitengrad in Grad</td>
+      <td colspan="2">Breitengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Breitengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -691,7 +719,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Längengrad in Grad</td>
+      <td colspan="2">Längengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Längengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -723,7 +755,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Adresse des Orts.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -744,6 +776,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -766,6 +802,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -787,12 +827,19 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
   </tbody>
 </table>
 
@@ -807,6 +854,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -829,6 +880,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -850,6 +905,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -869,14 +928,21 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -891,11 +957,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Einsatz-Zielobjekt</td>
+      <td colspan="2">Objekt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts</td>
+      <td colspan="2">Das Objekt.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -917,6 +983,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Objektname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Name des Objekts.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -936,7 +1006,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zum Einsatzobjekt</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -958,11 +1032,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Einsatz-Zielobjekt</td>
+      <td colspan="2">Übergeordnetes Objekt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts</td>
+      <td colspan="2">Das übergeordnete Objekt.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -984,6 +1058,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Objektname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Name des Objekts.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1003,7 +1081,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zum Einsatzobjekt</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1027,6 +1109,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Etage</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Etage.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1046,7 +1132,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Zimmer</td>
+      <td colspan="2">Zimmernummer</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Zimmernummer.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1067,7 +1157,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zum Einsatz-Zielort</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1112,6 +1206,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Nachname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1128,6 +1226,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1146,6 +1248,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Telefonnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1163,6 +1269,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Email-Adresse</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1178,17 +1288,13 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Adresse</td>
+      <td colspan="2">MeldeAdresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Meldeadresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -1203,6 +1309,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1225,6 +1335,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1246,12 +1360,19 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1266,6 +1387,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1288,6 +1413,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1309,6 +1438,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1328,14 +1461,21 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1350,7 +1490,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zur Person</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1392,6 +1536,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Nachname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1408,6 +1556,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1426,6 +1578,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Telefonnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1443,6 +1599,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Email-Adresse</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1458,17 +1618,13 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Adresse</td>
+      <td colspan="2">MeldeAdresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Meldeadresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -1483,6 +1639,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1505,6 +1665,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1526,12 +1690,19 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1546,6 +1717,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1568,6 +1743,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1589,6 +1768,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1608,14 +1791,21 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1630,7 +1820,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zur Person</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1646,8 +1840,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Geburtsdatum</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The date of birth of the accused person.</td>
+      <td colspan="2">Das Geburtsdatum der Person.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1666,8 +1864,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Nationalität</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The nationality of the accused person.</td>
+      <td colspan="2">die Nationalität der Person.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1709,6 +1911,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Nachname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1725,6 +1931,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1743,6 +1953,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Telefonnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1760,6 +1974,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Email-Adresse</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
@@ -1775,17 +1993,13 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Adresse</td>
+      <td colspan="2">MeldeAdresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Meldeadresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -1800,6 +2014,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1822,6 +2040,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1843,12 +2065,19 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1863,6 +2092,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1885,6 +2118,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1906,6 +2143,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1925,14 +2166,21 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1947,7 +2195,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zur Person</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -1963,8 +2215,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Geburtsdatum</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The date of birth of the accused person.</td>
+      <td colspan="2">Das Geburtsdatum der Person.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1983,8 +2239,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Nationalität</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The nationality of the accused person.</td>
+      <td colspan="2">die Nationalität der Person.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -2181,11 +2441,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">WGS84-Koordinate</td>
+      <td colspan="2">Fahrzeugposition</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+      <td colspan="2">Fahrzeugposition</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -2205,7 +2465,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Breitengrad in Grad</td>
+      <td colspan="2">Breitengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Breitengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -2232,7 +2496,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Längengrad in Grad</td>
+      <td colspan="2">Längengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Längengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -2285,11 +2553,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">WGS84-Koordinate</td>
+      <td colspan="2">Position N1</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+      <td colspan="2">Position N1</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -2309,7 +2577,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Breitengrad in Grad</td>
+      <td colspan="2">Breitengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Breitengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -2336,7 +2608,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Längengrad in Grad</td>
+      <td colspan="2">Längengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Längengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -2364,11 +2640,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">WGS84-Koordinate</td>
+      <td colspan="2">Position N2</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+      <td colspan="2">Position N2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -2388,7 +2664,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Breitengrad in Grad</td>
+      <td colspan="2">Breitengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Breitengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -2415,7 +2695,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Längengrad in Grad</td>
+      <td colspan="2">Längengrad</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Längengrad in Grad gemäß WGS84-Spezifikation</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -2487,18 +2771,23 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes"
         },
         "internalId": {
             "type": "string",
+            "title": "Sender-interne Einsatz-ID",
             "description": "Sender-interne ID des Einsatzes"
         },
         "additionalInfo": {
+            "title": "Zusatzinformationen",
+            "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
             "type": "string"
         },
         "sentByDispatcherAt": {
             "type": "string",
             "format": "date-time",
+            "title": "Dispatcher-Übergabe-Zeitstempel",
             "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
         },
         "protocolRemarks": {
@@ -2687,6 +2976,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "sharedIncidentId": {
                     "type": "string",
                     "format": "uuid",
+                    "title": "globale Einsatz-UUID",
                     "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
                 },
                 "timestamp": {
@@ -2731,13 +3021,15 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "type": "object",
             "properties": {
                 "lat": {
-                    "title": "Breitengrad in Grad",
+                    "title": "Breitengrad",
+                    "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
                     "type": "number",
                     "minimum": -90,
                     "maximum": 90
                 },
                 "lon": {
-                    "title": "Längengrad in Grad",
+                    "title": "Längengrad",
+                    "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
                     "type": "number",
                     "minimum": -180,
                     "maximum": 180
@@ -2753,7 +3045,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "address.schema.json": {
             "title": "Adresse",
-            "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
+            "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
             "required": [
                 "street"
             ],
@@ -2761,31 +3053,40 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "properties": {
                 "street": {
                     "title": "Name der Strasse",
+                    "description": "Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und 'Straße' mit einem 'ß' geschrieben werden (also 'Musterstraße' anstatt 'Musterstrasse' oder 'Musterstr.'). ",
                     "type": "string"
                 },
                 "houseNumber": {
                     "title": "Hausnummer",
+                    "description": "Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also '12a' anstatt '12 a').",
                     "type": "string"
                 },
                 "postalCode": {
                     "title": "Postleitzahl",
-                    "type": "string"
+                    "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
+                    "type": "string",
+                    "pattern": "[0-9]+"
                 },
                 "city": {
                     "title": "Stadt",
+                    "description": "Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist 'cityDistrict' zu nutzen!",
                     "type": "string"
                 },
                 "cityDistrict": {
                     "title": "Ortsteil",
+                    "description": "Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als 'city' eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.",
                     "type": "string"
                 },
                 "state": {
                     "title": "Bundesland",
+                    "description": "Das Bundesland.",
                     "type": "string"
                 },
                 "country": {
-                    "title": "Land",
-                    "type": "string"
+                    "title": "ISO-Code des Landes",
+                    "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
+                    "type": "string",
+                    "pattern": "[A-Z]{2}"
                 }
             },
             "unevaluatedProperties": false,
@@ -2811,10 +3112,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "properties": {
                 "name": {
                     "title": "Objektname",
+                    "description": "Der Name des Objekts.",
                     "type": "string"
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zum Einsatzobjekt",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 }
             },
@@ -2844,27 +3147,38 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "type": "object",
             "properties": {
                 "coordinate": {
-                    "$ref": "#/$defs/coordinate.schema.json"
+                    "$ref": "#/$defs/coordinate.schema.json",
+                    "title": "Koordinate",
+                    "description": "Die Ortskoordinate."
                 },
                 "address": {
-                    "$ref": "#/$defs/address.schema.json"
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "Adresse",
+                    "description": "Die Adresse des Orts."
                 },
                 "object": {
-                    "$ref": "#/$defs/missionObject.schema.json"
+                    "$ref": "#/$defs/missionObject.schema.json",
+                    "title": "Objekt",
+                    "description": "Das Objekt."
                 },
                 "superiorObject": {
-                    "$ref": "#/$defs/missionObject.schema.json"
+                    "$ref": "#/$defs/missionObject.schema.json",
+                    "title": "Übergeordnetes Objekt",
+                    "description": "Das übergeordnete Objekt."
                 },
                 "floor": {
                     "title": "Etage",
+                    "description": "Die Etage.",
                     "type": "string"
                 },
                 "room": {
-                    "title": "Zimmer",
+                    "title": "Zimmernummer",
+                    "description": "Die Zimmernummer.",
                     "type": "string"
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zum Einsatz-Zielort",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 }
             },
@@ -2908,25 +3222,32 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "properties": {
                 "name": {
                     "title": "Nachname",
+                    "description": "Der Nachname.",
                     "type": "string"
                 },
                 "surname": {
                     "title": "Vorname",
+                    "description": "Der Vorname.",
                     "type": "string"
                 },
                 "phone": {
                     "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
                     "type": "string"
                 },
                 "email": {
                     "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
                     "type": "string"
                 },
                 "address": {
-                    "$ref": "#/$defs/address.schema.json"
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zur Person",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 }
             },
@@ -2951,8 +3272,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "unevaluatedProperties": false
         },
         "personPoliceRelevant.schema.json": {
-            "title": "Person",
-            "description": "Eine Person. Obligat ist der Nachname.",
+            "title": "Polizeilich relevante Person",
+            "description": "Eine polizeilich relevante Person.",
             "required": [
                 "name"
             ],
@@ -2960,35 +3281,44 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "properties": {
                 "name": {
                     "title": "Nachname",
+                    "description": "Der Nachname.",
                     "type": "string"
                 },
                 "surname": {
                     "title": "Vorname",
+                    "description": "Der Vorname.",
                     "type": "string"
                 },
                 "phone": {
                     "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
                     "type": "string"
                 },
                 "email": {
                     "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
                     "type": "string"
                 },
                 "address": {
-                    "$ref": "#/$defs/address.schema.json"
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zur Person",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 },
                 "dateOfBirth": {
                     "type": "string",
                     "format": "date",
-                    "description": "The date of birth of the accused person."
+                    "title": "Geburtsdatum",
+                    "description": "Das Geburtsdatum der Person."
                 },
                 "nationality": {
                     "type": "string",
-                    "description": "The nationality of the accused person."
+                    "title": "Nationalität",
+                    "description": "die Nationalität der Person."
                 }
             },
             "examples": [
@@ -3159,6 +3489,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird.</td>
     </tr>
@@ -3182,6 +3516,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Dispatcher-Zeitstempel</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde</td>
@@ -3207,6 +3545,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Annahme- oder Ablehnungsstatus</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Annahme- oder Ablehnungsstatus</td>
     </tr>
@@ -3230,6 +3572,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
@@ -3271,11 +3617,13 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
         },
         "acknowledgedByDispatcherAt": {
             "type": "string",
             "format": "date-time",
+            "title": "Dispatcher-Zeitstempel",
             "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
         },
         "status": {
@@ -3284,10 +3632,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "accepted",
                 "rejected"
             ],
+            "title": "Annahme- oder Ablehnungsstatus",
             "description": "Annahme- oder Ablehnungsstatus"
         },
         "cause": {
             "type": "string",
+            "title": "Begründung für die Annahme oder Ablehnung",
             "description": "Begründung für die Annahme oder Ablehnung"
         }
     },
@@ -3346,6 +3696,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes, der beendet wurde.</td>
@@ -3427,8 +3781,12 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Weitere Informationen zur Einsatzbeendigung</td>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3467,6 +3825,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes, der beendet wurde."
         },
         "completedAt": {
@@ -3485,8 +3844,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "description": "Zustand, in dem der Einsatz beendet wurde"
         },
         "additionalInformation": {
-            "type": "string",
-            "description": "Weitere Informationen zur Einsatzbeendigung"
+            "title": "Zusatzinformationen",
+            "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+            "type": "string"
         }
     },
     "examples": [

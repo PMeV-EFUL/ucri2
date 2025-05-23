@@ -10,6 +10,7 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
+      "title": "globale Einsatz-UUID",
       "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
     },
     "timestamp": {
