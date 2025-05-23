@@ -39,6 +39,9 @@
       "items": {
         "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/person.schema.json"
       }
+    },
+    "eCallData": {
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/eCallData.schema.json"
     }
   },
   "examples": [{
@@ -120,6 +123,28 @@
         "phone": "+49 30 234567",
         "email": "heike.musterfrau@example.com"
       }
-    ]
+    ],
+    "eCallData": {
+      "automaticActivation": true,
+      "positionCanBeTrusted": true,
+      "vehicleType": "M1",
+      "vin": "X1234567890",
+      "vehiclePropulsionStorageType": "gasolineTank",
+      "timestamp": "2024-01-01T10:05:08",
+      "vehiclePosition": {
+        "lat": 65.453323,
+        "lon": 14.542343
+      },
+      "directionOfTravel": 90,
+      "positionN1": {
+        "lat": 65.453388,
+        "lon": 14.542343
+      },
+      "positionN2": {
+        "lat": 65.453400,
+        "lon": 14.542343
+      },
+      "numberOfPassengers": 4
+    }
   }]
 }

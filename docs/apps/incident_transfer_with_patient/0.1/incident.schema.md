@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldata">eCallData</a></td><td>Object</td><td>Nein</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -100,7 +100,29 @@
             "phone": "+49 30 234567",
             "email": "heike.musterfrau@example.com"
         }
-    ]
+    ],
+    "eCallData": {
+        "automaticActivation": true,
+        "positionCanBeTrusted": true,
+        "vehicleType": "M1",
+        "vin": "X1234567890",
+        "vehiclePropulsionStorageType": "gasolineTank",
+        "timestamp": "2024-01-01T10:05:08",
+        "vehiclePosition": {
+            "lat": 65.453323,
+            "lon": 14.542343
+        },
+        "directionOfTravel": 90,
+        "positionN1": {
+            "lat": 65.453388,
+            "lon": 14.542343
+        },
+        "positionN2": {
+            "lat": 65.4534,
+            "lon": 14.542343
+        },
+        "numberOfPassengers": 4
+    }
 }
 ```
 
@@ -1712,6 +1734,473 @@
 
 
 
+## eCallData
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">eCall-Daten</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">eCall-Daten gemäß der eCall-Spezifikation. Obligat ist der Zeitstempel (timestamp).</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+### Eigenschaften
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#ecalldataautomaticactivation">automaticActivation</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatapositioncanbetrusted">positionCanBeTrusted</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatavehicletype">vehicleType</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatavin">vin</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatavehiclepropulsionstoragetype">vehiclePropulsionStorageType</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatatimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#ecalldatavehicleposition">vehiclePosition</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatadirectionoftravel">directionOfTravel</a></td><td>Integer</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatapositionn1">positionN1</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatapositionn2">positionN2</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldatanumberofpassengers">numberOfPassengers</a></td><td>Integer</td><td>Nein</td></tr></tbody></table>
+
+
+### eCallData.automaticActivation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Automatische Aktivierung</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Wurde der eCall automatisch oder manuell ausgelöst</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### eCallData.positionCanBeTrusted
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Positionsvertrauenswürdigkeit</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Ist die angegebene Fahrzeugposition vertrauenswürdig</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### eCallData.vehicleType
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Fahrzeugtyp</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Fahrzeugtyp aus MSD z.B. M1 für PKW</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### eCallData.vin
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Fahrzeugkennung</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Fahrzeugidentifikationsnummer</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### eCallData.vehiclePropulsionStorageType
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Fahrzeugenergiespeicherart</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Kommaseparierte Liste der Energiespeicherarten. Mögliche Werte [gasolineTank | dieselTank | compressedNaturalGas | liquidePropaneGas | electricEnergyStorage | hydrogenStorage ]</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Enum</th>
+      <td colspan="2"><ul><li>gasolineTank</li><li>dieselTank</li><li>compressedNaturalGas</li><li>liquidePropaneGas</li><li>electricEnergyStorage</li><li>hydrogenStorage</li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### eCallData.timestamp
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zeitstempel</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt des eCall aus MSD</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### eCallData.vehiclePosition
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">WGS84-Koordinate</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+### eCallData.vehiclePosition.lat
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Breitengrad in Grad</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Minimum</th>
+      <td colspan="2">-90</td>
+    </tr><tr>
+      <th>Maximum</th>
+      <td colspan="2">90</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### eCallData.vehiclePosition.lon
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Längengrad in Grad</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Minimum</th>
+      <td colspan="2">-180</td>
+    </tr><tr>
+      <th>Maximum</th>
+      <td colspan="2">180</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+### eCallData.directionOfTravel
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Fahrtrichtung</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Letzte bekannte Fahrtrichtung in Grad. Auflösung in 2° Schritten</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### eCallData.positionN1
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">WGS84-Koordinate</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+### eCallData.positionN1.lat
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Breitengrad in Grad</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Minimum</th>
+      <td colspan="2">-90</td>
+    </tr><tr>
+      <th>Maximum</th>
+      <td colspan="2">90</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### eCallData.positionN1.lon
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Längengrad in Grad</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Minimum</th>
+      <td colspan="2">-180</td>
+    </tr><tr>
+      <th>Maximum</th>
+      <td colspan="2">180</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+### eCallData.positionN2
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">WGS84-Koordinate</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+### eCallData.positionN2.lat
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Breitengrad in Grad</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Minimum</th>
+      <td colspan="2">-90</td>
+    </tr><tr>
+      <th>Maximum</th>
+      <td colspan="2">90</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### eCallData.positionN2.lon
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Längengrad in Grad</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Number</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Minimum</th>
+      <td colspan="2">-180</td>
+    </tr><tr>
+      <th>Maximum</th>
+      <td colspan="2">180</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+### eCallData.numberOfPassengers
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Anzahl der Fahrzeuginsassen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Anzahl der Fahrzeuginsassen</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
 
 
 
@@ -1792,6 +2281,9 @@
             "items": {
                 "$ref": "#/$defs/person.schema.json"
             }
+        },
+        "eCallData": {
+            "$ref": "#/$defs/eCallData.schema.json"
         }
     },
     "examples": [
@@ -1874,7 +2366,29 @@
                     "phone": "+49 30 234567",
                     "email": "heike.musterfrau@example.com"
                 }
-            ]
+            ],
+            "eCallData": {
+                "automaticActivation": true,
+                "positionCanBeTrusted": true,
+                "vehicleType": "M1",
+                "vin": "X1234567890",
+                "vehiclePropulsionStorageType": "gasolineTank",
+                "timestamp": "2024-01-01T10:05:08",
+                "vehiclePosition": {
+                    "lat": 65.453323,
+                    "lon": 14.542343
+                },
+                "directionOfTravel": 90,
+                "positionN1": {
+                    "lat": 65.453388,
+                    "lon": 14.542343
+                },
+                "positionN2": {
+                    "lat": 65.4534,
+                    "lon": 14.542343
+                },
+                "numberOfPassengers": 4
+            }
         }
     ],
     "$defs": {
@@ -2329,6 +2843,104 @@
                 }
             ],
             "unevaluatedProperties": false
+        },
+        "eCallData.schema.json": {
+            "title": "eCall-Daten",
+            "description": "eCall-Daten gemäß der eCall-Spezifikation. Obligat ist der Zeitstempel (timestamp).",
+            "required": [
+                "timestamp"
+            ],
+            "type": "object",
+            "properties": {
+                "automaticActivation": {
+                    "title": "Automatische Aktivierung",
+                    "description": "Wurde der eCall automatisch oder manuell ausgelöst",
+                    "type": "boolean"
+                },
+                "positionCanBeTrusted": {
+                    "title": "Positionsvertrauenswürdigkeit",
+                    "description": "Ist die angegebene Fahrzeugposition vertrauenswürdig",
+                    "type": "boolean"
+                },
+                "vehicleType": {
+                    "title": "Fahrzeugtyp",
+                    "description": "Fahrzeugtyp aus MSD z.B. M1 für PKW",
+                    "type": "string"
+                },
+                "vin": {
+                    "title": "Fahrzeugkennung",
+                    "description": "Fahrzeugidentifikationsnummer",
+                    "type": "string"
+                },
+                "vehiclePropulsionStorageType": {
+                    "title": "Fahrzeugenergiespeicherart",
+                    "description": "Kommaseparierte Liste der Energiespeicherarten. Mögliche Werte [gasolineTank | dieselTank | compressedNaturalGas | liquidePropaneGas | electricEnergyStorage | hydrogenStorage ]",
+                    "type": "string",
+                    "enum": [
+                        "gasolineTank",
+                        "dieselTank",
+                        "compressedNaturalGas",
+                        "liquidePropaneGas",
+                        "electricEnergyStorage",
+                        "hydrogenStorage"
+                    ]
+                },
+                "timestamp": {
+                    "title": "Zeitstempel",
+                    "description": "Zeitpunkt des eCall aus MSD",
+                    "type": "string"
+                },
+                "vehiclePosition": {
+                    "$ref": "#/$defs/coordinate.schema.json",
+                    "title": "Fahrzeugposition",
+                    "description": "Fahrzeugposition"
+                },
+                "directionOfTravel": {
+                    "title": "Fahrtrichtung",
+                    "description": "Letzte bekannte Fahrtrichtung in Grad. Auflösung in 2° Schritten",
+                    "type": "integer"
+                },
+                "positionN1": {
+                    "$ref": "#/$defs/coordinate.schema.json",
+                    "title": "Position N1",
+                    "description": "Position N1"
+                },
+                "positionN2": {
+                    "$ref": "#/$defs/coordinate.schema.json",
+                    "title": "Position N2",
+                    "description": "Position N2"
+                },
+                "numberOfPassengers": {
+                    "title": "Anzahl der Fahrzeuginsassen",
+                    "description": "Anzahl der Fahrzeuginsassen",
+                    "type": "integer"
+                }
+            },
+            "unevaluatedProperties": false,
+            "examples": [
+                {
+                    "automaticActivation": true,
+                    "positionCanBeTrusted": true,
+                    "vehicleType": "M1",
+                    "vin": "X1234567890",
+                    "vehiclePropulsionStorageType": "gasolineTank",
+                    "timestamp": "2024-01-01T10:05:08",
+                    "vehiclePosition": {
+                        "lat": 65.453323,
+                        "lon": 14.542343
+                    },
+                    "directionOfTravel": 90,
+                    "positionN1": {
+                        "lat": 65.453388,
+                        "lon": 14.542343
+                    },
+                    "positionN2": {
+                        "lat": 65.4534,
+                        "lon": 14.542343
+                    },
+                    "numberOfPassengers": 4
+                }
+            ]
         }
     }
 }

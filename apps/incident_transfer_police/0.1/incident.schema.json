@@ -75,6 +75,9 @@
       "items": {
         "$ref": "#/$defs/personPoliceRelevant.schema.json"
       }
+    },
+    "eCallData": {
+      "$ref": "#/$defs/eCallData.schema.json"
     }
   },
   "examples": [
@@ -171,7 +174,29 @@
           "phone": "+49 30 234567",
           "email": "heike.musterfrau@example.com"
         }
-      ]
+      ],
+      "eCallData": {
+        "automaticActivation": true,
+        "positionCanBeTrusted": true,
+        "vehicleType": "M1",
+        "vin": "X1234567890",
+        "vehiclePropulsionStorageType": "gasolineTank",
+        "timestamp": "2024-01-01T10:05:08",
+        "vehiclePosition": {
+          "lat": 65.453323,
+          "lon": 14.542343
+        },
+        "directionOfTravel": 90,
+        "positionN1": {
+          "lat": 65.453388,
+          "lon": 14.542343
+        },
+        "positionN2": {
+          "lat": 65.4534,
+          "lon": 14.542343
+        },
+        "numberOfPassengers": 4
+      }
     }
   ],
   "$defs": {
@@ -514,6 +539,104 @@
         }
       ],
       "unevaluatedProperties": false
+    },
+    "eCallData.schema.json": {
+      "title": "eCall-Daten",
+      "description": "eCall-Daten gemäß der eCall-Spezifikation. Obligat ist der Zeitstempel (timestamp).",
+      "required": [
+        "timestamp"
+      ],
+      "type": "object",
+      "properties": {
+        "automaticActivation": {
+          "title": "Automatische Aktivierung",
+          "description": "Wurde der eCall automatisch oder manuell ausgelöst",
+          "type": "boolean"
+        },
+        "positionCanBeTrusted": {
+          "title": "Positionsvertrauenswürdigkeit",
+          "description": "Ist die angegebene Fahrzeugposition vertrauenswürdig",
+          "type": "boolean"
+        },
+        "vehicleType": {
+          "title": "Fahrzeugtyp",
+          "description": "Fahrzeugtyp aus MSD z.B. M1 für PKW",
+          "type": "string"
+        },
+        "vin": {
+          "title": "Fahrzeugkennung",
+          "description": "Fahrzeugidentifikationsnummer",
+          "type": "string"
+        },
+        "vehiclePropulsionStorageType": {
+          "title": "Fahrzeugenergiespeicherart",
+          "description": "Kommaseparierte Liste der Energiespeicherarten. Mögliche Werte [gasolineTank | dieselTank | compressedNaturalGas | liquidePropaneGas | electricEnergyStorage | hydrogenStorage ]",
+          "type": "string",
+          "enum": [
+            "gasolineTank",
+            "dieselTank",
+            "compressedNaturalGas",
+            "liquidePropaneGas",
+            "electricEnergyStorage",
+            "hydrogenStorage"
+          ]
+        },
+        "timestamp": {
+          "title": "Zeitstempel",
+          "description": "Zeitpunkt des eCall aus MSD",
+          "type": "string"
+        },
+        "vehiclePosition": {
+          "$ref": "#/$defs/coordinate.schema.json",
+          "title": "Fahrzeugposition",
+          "description": "Fahrzeugposition"
+        },
+        "directionOfTravel": {
+          "title": "Fahrtrichtung",
+          "description": "Letzte bekannte Fahrtrichtung in Grad. Auflösung in 2° Schritten",
+          "type": "integer"
+        },
+        "positionN1": {
+          "$ref": "#/$defs/coordinate.schema.json",
+          "title": "Position N1",
+          "description": "Position N1"
+        },
+        "positionN2": {
+          "$ref": "#/$defs/coordinate.schema.json",
+          "title": "Position N2",
+          "description": "Position N2"
+        },
+        "numberOfPassengers": {
+          "title": "Anzahl der Fahrzeuginsassen",
+          "description": "Anzahl der Fahrzeuginsassen",
+          "type": "integer"
+        }
+      },
+      "unevaluatedProperties": false,
+      "examples": [
+        {
+          "automaticActivation": true,
+          "positionCanBeTrusted": true,
+          "vehicleType": "M1",
+          "vin": "X1234567890",
+          "vehiclePropulsionStorageType": "gasolineTank",
+          "timestamp": "2024-01-01T10:05:08",
+          "vehiclePosition": {
+            "lat": 65.453323,
+            "lon": 14.542343
+          },
+          "directionOfTravel": 90,
+          "positionN1": {
+            "lat": 65.453388,
+            "lon": 14.542343
+          },
+          "positionN2": {
+            "lat": 65.4534,
+            "lon": 14.542343
+          },
+          "numberOfPassengers": 4
+        }
+      ]
     }
   }
 }
