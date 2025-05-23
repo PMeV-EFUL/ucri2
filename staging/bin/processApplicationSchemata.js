@@ -13,14 +13,41 @@ general notes:
 -the standard bundling is modified by making all internalized refs into #/$def/filename refs (to allow documentation generation and support schema implementations which do not fully support the 2020 schema draft.
 -$refs at the root of $def schemas are replaced by merging the reffed schemas directly. Altough the 2020 draft allows root level $refs (as a means to model "inheritance"), not all implementations support this (hyperjump and ajv JS validators do, the used
  json-schema-static-docs lib for schema documentation generation doesn't.
- LIMITATION: Only one level of root $ref is supported at this point (as used by the person->patient inheritance)
 -the resulting bundled schemata for the application messages should be usable for most JSON schema implementations as they are simplified in regards to the possibilities granted by the JSON schema spec
--Markdown documentation is generated for each schema individually ([schemaname].schema.md and also for each usecase
+-Markdown documentation is generated for each schema individually ([schemaname].schema.md and also for each usecase as a joint md and pdf file
  */
 
 const stagedAppsPath="../apps";
 const bundledAppsPath="../../apps";
 const docsPath="../../docs/apps";
+
+const missingPropertyMessages=[]
+function checkForMissingProperties(path,obj) {
+  for (var key in obj) {
+
+    //recurse
+    if (!obj.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      const child=obj[key];
+      const newPath=`${path}.${key}`;
+      if (child.$ref || child.properties || child.items) {
+        //there should be a title and a description here!
+        if (!child.title) {
+          missingPropertyMessages.push(`${newPath} : title is missing`);
+        }
+        if (!child.description) {
+          missingPropertyMessages.push(`${newPath} : description is missing`);
+        }
+      }
+
+      checkForMissingProperties(newPath,obj[key])
+    }
+  }
+}
+
 async function process(){
   const schemaDirs=collectInputSchemata();
   console.log(`Processing the following app/version directories with schema files:\n ${JSON.stringify(schemaDirs,null,2)}`);
@@ -98,6 +125,9 @@ async function process(){
         //remove all *Base refs which were replaced
         removeResolvedBaseRefs(output,resolvedBaseRefKeys);
 
+        //check the whole output schema for missing titles or descriptions
+        checkForMissingProperties(`${schemaDir}/${schemaName}`,{":":output});
+
         //write the bundled and processed final schema
         const outputPath= `${bundledAppsPath}/${schemaDir}`
         const outputFile= `${outputPath}/${schemaName}`
@@ -139,7 +169,6 @@ async function process(){
     if (schemaDir.indexOf("building_blocks")<0) {
       console.log("STEP 5: generating merged docs ...");
       let completeMarkdown=fs.readFileSync(`${stagedAppsPath}/${schemaDir}/manual_documentation.md`, 'utf8');
-      // completeMarkdown+="\n # App-Nachrichten\n"
       //include per-message docs as indicated by comments
       let includeRegexMatch;
       const includeRegex= /(<!-- include )(.*)( -->)/g;
@@ -153,12 +182,6 @@ async function process(){
         completeMarkdown=completeMarkdown.replaceAll(`<!-- include ${includedFilename} -->`,includedMarkdown);
       }
 
-      // for (const schemaName of schemaNames) {
-      //   const schemaDocFilename=schemaName.replace("schema.json","schema.md");
-      //   //read schema markdown, push all headings one level down
-      //   const schemaDocMarkdown=fs.readFileSync(`${docsPath}/${schemaDir}/${schemaDocFilename}`, 'utf8').replaceAll("# ","## ");
-      //   completeMarkdown+=`\n${schemaDocMarkdown}`;
-      // }
       //insert table of contents (needs <!-- toc --><!-- tocstop --> in manual_documentation.md)
       completeMarkdown=toc.insert(completeMarkdown);
       //write completed markdown
@@ -171,6 +194,12 @@ async function process(){
     }else{
       console.log("not generating merged docs for building blocks...");
     }
+  }
+  if (missingPropertyMessages){
+    console.warn("There were missing documentation properties detected (fix issues in building blocks first, then issues remaining in message schema files:)");
+    console.warn(missingPropertyMessages.join("\n"));
+  }else{
+    console.log("no missing documentation properties were detected, yay ;-)")
   }
   if (errorsOccured){
     console.error("ERROR: processing FAILED, see ERROR messages above!")
