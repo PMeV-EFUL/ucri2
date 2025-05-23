@@ -23,7 +23,6 @@
     },
     "status": {
       "type": "string",
-      "format": "uuid",
       "enum": [
         "accepted",
         "rejected"

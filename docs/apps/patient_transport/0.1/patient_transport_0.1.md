@@ -3292,9 +3292,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Enum</th>
       <td colspan="2"><ul><li>accepted</li><li>rejected</li></ul></td>
-    </tr><tr>
-      <th>Format</th>
-      <td colspan="2">uuid</td>
     </tr>
   </tbody>
 </table>
@@ -3357,7 +3354,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "status": {
             "type": "string",
-            "format": "uuid",
             "enum": [
                 "accepted",
                 "rejected"

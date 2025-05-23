@@ -18,7 +18,6 @@
     },
     "status": {
       "type": "string",
-      "format": "uuid",
       "enum": ["accepted","rejected"],
       "description": "Annahme- oder Ablehnungsstatus"
     },

@@ -3,6 +3,7 @@
 <!-- toc -->
 
 - [Überblick](#uberblick)
+- [Ablaufbeschreibung](#ablaufbeschreibung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -79,6 +80,14 @@
     + [status](#status)
     + [cause](#cause)
     + [Schema](#schema-1)
+  * [App-Nachricht completion - Einsatzendemeldung](#app-nachricht-completion---einsatzendemeldung)
+    + [Eigenschaften](#eigenschaften-3)
+    + [Beispiel](#beispiel-2)
+    + [sharedIncidentId](#sharedincidentid-2)
+    + [completedAt](#completedat)
+    + [status](#status-1)
+    + [additionalInformation](#additionalinformation)
+    + [Schema](#schema-2)
 
 <!-- tocstop -->
 
@@ -88,6 +97,12 @@ Der Anwendungsfall Patientendatentransfer ist der Sonderfall der Einsatzübergab
 -- Die Adressinformationen beschreiben keinen Einsatzort, sondern die Adresse des Patienten als Stammdateninformation
 
 Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänger-Leitstelle bestätigt oder abgelehnt.
+
+# Ablaufbeschreibung
+
+1. A->B: Einsatz übergeben
+2. B->A: Einsatz annehmen oder ablehnen
+3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
 # App-Nachrichten
 ### Verwendete Datentypen
@@ -1942,9 +1957,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     <tr>
       <th>Enum</th>
       <td colspan="2"><ul><li>accepted</li><li>rejected</li></ul></td>
-    </tr><tr>
-      <th>Format</th>
-      <td colspan="2">uuid</td>
     </tr>
   </tbody>
 </table>
@@ -2007,7 +2019,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "status": {
             "type": "string",
-            "format": "uuid",
             "enum": [
                 "accepted",
                 "rejected"
@@ -2025,6 +2036,204 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
             "status": "rejected",
             "cause": "Einsatzort ist unbekannt!"
+        }
+    ],
+    "$defs": {}
+}
+```
+
+
+
+
+
+## App-Nachricht completion - Einsatzendemeldung
+
+<p>Einsatzendemeldung</p>
+
+<table>
+<tbody>
+<tr><th>$id</th><td>https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/completion.schema.json</td></tr>
+<tr><th>$schema</th><td>https://json-schema.org/draft/2020-12/schema</td></tr>
+</tbody>
+</table>
+
+### Eigenschaften
+
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#completedat">completedAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#status">status</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#additionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+
+
+### Beispiel
+
+
+
+```
+{
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "completedAt": "2024-01-01T10:15:09",
+    "status": "aborted",
+    "additionalInformation": "Keine Person angetroffen"
+}
+```
+
+
+
+<hr />
+
+
+### sharedIncidentId
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">global eindeutige UUID des Einsatzes, der beendet wurde.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">uuid</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### completedAt
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Beendigungs-Zeitstempel</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt an dem der Einsatz beendet wurde</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### status
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Beendigungsstatus</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zustand, in dem der Einsatz beendet wurde</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Enum</th>
+      <td colspan="2"><ul><li>completed_sucessfully</li><li>aborted</li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Weitere Informationen zur Einsatzbeendigung</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+<hr />
+
+### Schema
+```
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/completion.schema.json",
+    "unevaluatedProperties": false,
+    "title": "App-Nachricht completion - Einsatzendemeldung",
+    "description": "Einsatzendemeldung",
+    "required": [
+        "sharedIncidentId",
+        "completedAt",
+        "status"
+    ],
+    "type": "object",
+    "properties": {
+        "sharedIncidentId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "global eindeutige UUID des Einsatzes, der beendet wurde."
+        },
+        "completedAt": {
+            "title": "Beendigungs-Zeitstempel",
+            "type": "string",
+            "format": "date-time",
+            "description": "Zeitpunkt an dem der Einsatz beendet wurde"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "completed_sucessfully",
+                "aborted"
+            ],
+            "title": "Beendigungsstatus",
+            "description": "Zustand, in dem der Einsatz beendet wurde"
+        },
+        "additionalInformation": {
+            "type": "string",
+            "description": "Weitere Informationen zur Einsatzbeendigung"
+        }
+    },
+    "examples": [
+        {
+            "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+            "completedAt": "2024-01-01T10:15:09",
+            "status": "aborted",
+            "additionalInformation": "Keine Person angetroffen"
         }
     ],
     "$defs": {}

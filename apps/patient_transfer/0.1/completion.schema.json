@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/completion.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht completion - Einsatzendemeldung",
+  "description": "Einsatzendemeldung",
+  "required": [
+    "sharedIncidentId",
+    "completedAt",
+    "status"
+  ],
+  "type": "object",
+  "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "global eindeutige UUID des Einsatzes, der beendet wurde."
+    },
+    "completedAt": {
+      "title": "Beendigungs-Zeitstempel",
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt an dem der Einsatz beendet wurde"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed_sucessfully",
+        "aborted"
+      ],
+      "title": "Beendigungsstatus",
+      "description": "Zustand, in dem der Einsatz beendet wurde"
+    },
+    "additionalInformation": {
+      "type": "string",
+      "description": "Weitere Informationen zur Einsatzbeendigung"
+    }
+  },
+  "examples": [
+    {
+      "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+      "completedAt": "2024-01-01T10:15:09",
+      "status": "aborted",
+      "additionalInformation": "Keine Person angetroffen"
+    }
+  ],
+  "$defs": {}
+}

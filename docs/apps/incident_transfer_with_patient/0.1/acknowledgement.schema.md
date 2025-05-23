@@ -99,9 +99,6 @@
     <tr>
       <th>Enum</th>
       <td colspan="2"><ul><li>accepted</li><li>rejected</li></ul></td>
-    </tr><tr>
-      <th>Format</th>
-      <td colspan="2">uuid</td>
     </tr>
   </tbody>
 </table>
@@ -164,7 +161,6 @@
         },
         "status": {
             "type": "string",
-            "format": "uuid",
             "enum": [
                 "accepted",
                 "rejected"
