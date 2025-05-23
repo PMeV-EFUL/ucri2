@@ -190,7 +190,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "age": 55,
         "healthInsuranceInformation": {
             "healthInsuranceCompany": "Musterkasse",
-            "healthInsuranceCompanyNumber": 101234567,
+            "healthInsuranceCompanyNumber": "101234567",
             "insuranceNumber": "S123456789"
         },
         "initialAssessment": {
@@ -898,16 +898,22 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?</td>
+      <td colspan="2">Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
     <tr>
-      <th>Maximum</th>
-      <td colspan="2">999999999</td>
+      <th>Min Length</th>
+      <td colspan="2">9</td>
+    </tr><tr>
+      <th>Max Length</th>
+      <td colspan="2">9</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">(0-9)*</td>
     </tr>
   </tbody>
 </table>
@@ -1501,7 +1507,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "age": 55,
                 "healthInsuranceInformation": {
                     "healthInsuranceCompany": "Musterkasse",
-                    "healthInsuranceCompanyNumber": 101234567,
+                    "healthInsuranceCompanyNumber": "101234567",
                     "insuranceNumber": "S123456789"
                 },
                 "initialAssessment": {
@@ -1635,10 +1641,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 },
                 "healthInsuranceCompanyNumber": {
                     "title": "IK der Krankenversicherung",
-                    "description": "TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 999999999
+                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht",
+                    "type": "string",
+                    "pattern": "(0-9)*",
+                    "minLength": 9,
+                    "maxLength": 9
                 },
                 "insuranceNumber": {
                     "title": "Versichertennummer (Alphanumerisch)",
@@ -1649,7 +1656,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "examples": [
                 {
                     "healthInsuranceCompany": "Musterkasse",
-                    "healthInsuranceCompanyNumber": 101234567,
+                    "healthInsuranceCompanyNumber": "101234567",
                     "insuranceNumber": "S123456789"
                 }
             ]
@@ -1782,7 +1789,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "age": 55,
                     "healthInsuranceInformation": {
                         "healthInsuranceCompany": "Musterkasse",
-                        "healthInsuranceCompanyNumber": 101234567,
+                        "healthInsuranceCompanyNumber": "101234567",
                         "insuranceNumber": "S123456789"
                     },
                     "initialAssessment": {

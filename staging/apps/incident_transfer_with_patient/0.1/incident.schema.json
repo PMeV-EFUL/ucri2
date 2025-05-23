@@ -1,13 +1,20 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentBase.schema.json",
-  "unevaluatedProperties": false,
-  "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
+  "title": "Ein Einsatz mit Patientendaten",
   "description": "Ein Einsatz mit Patientendaten",
   "required": [ "sharedIncidentId","sentByDispatcherAt","patients","missionLocation" ],
   "type": "object",
   "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "global eindeutige UUID des Einsatzes"
+    },
+    "internalId": {
+      "type": "string",
+      "description": "Sender-interne ID des Einsatzes"
+    },
     "classifications": {
       "type": "array",
       "description": "Stichwortkürzel des Einsatzes",
@@ -23,7 +30,15 @@
     "flashingLights": {
       "type": "boolean"
     },
-    "missionLocation": {
+    "additionalInfo": {
+      "type": "string"
+    },
+    "sentByDispatcherAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+    },
+	"missionLocation": {
       "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
     },
     "patients": {
@@ -39,11 +54,9 @@
       "items": {
         "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/person.schema.json"
       }
-    },
-    "eCallData": {
-      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/eCallData.schema.json"
     }
   },
+  "unevaluatedProperties": false,
   "examples": [{
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "internalId": "f123456",
@@ -102,7 +115,7 @@
         "age": 55,
         "healthInsuranceInformation": {
           "healthInsuranceCompany":"Musterkasse",
-          "healthInsuranceCompanyNumber": 101234567,
+          "healthInsuranceCompanyNumber": "101234567",
           "insuranceNumber": "S123456789"
         },
         "initialAssessment": {
@@ -123,28 +136,6 @@
         "phone": "+49 30 234567",
         "email": "heike.musterfrau@example.com"
       }
-    ],
-    "eCallData": {
-      "automaticActivation": true,
-      "positionCanBeTrusted": true,
-      "vehicleType": "M1",
-      "vin": "X1234567890",
-      "vehiclePropulsionStorageType": "gasolineTank",
-      "timestamp": "2024-01-01T10:05:08",
-      "vehiclePosition": {
-        "lat": 65.453323,
-        "lon": 14.542343
-      },
-      "directionOfTravel": 90,
-      "positionN1": {
-        "lat": 65.453388,
-        "lon": 14.542343
-      },
-      "positionN2": {
-        "lat": 65.453400,
-        "lon": 14.542343
-      },
-      "numberOfPassengers": 4
-    }
+    ]
   }]
 }

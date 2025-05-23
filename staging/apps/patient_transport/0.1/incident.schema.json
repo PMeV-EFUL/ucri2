@@ -136,7 +136,7 @@
       "age": 55,
       "healthInsuranceInformation": {
         "healthInsuranceCompany":"Musterkasse",
-        "healthInsuranceCompanyNumber": 101234567,
+        "healthInsuranceCompanyNumber": "101234567",
         "insuranceNumber": "S123456789"
       },
       "initialAssessment": {
