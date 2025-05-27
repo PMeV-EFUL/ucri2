@@ -1626,7 +1626,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "#/$defs/notification.schema.json"
+                "$ref": "#/$defs/notification.schema.json",
+                "title": "Protokollvermerk",
+                "description": "Ein Protokollvermerk."
             }
         },
         "issue": {

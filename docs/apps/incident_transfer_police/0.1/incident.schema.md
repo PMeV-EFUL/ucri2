@@ -2619,7 +2619,9 @@
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "#/$defs/notification.schema.json"
+                "$ref": "#/$defs/notification.schema.json",
+                "title": "Protokollvermerk",
+                "description": "Ein Protokollvermerk."
             }
         },
         "classifications": {

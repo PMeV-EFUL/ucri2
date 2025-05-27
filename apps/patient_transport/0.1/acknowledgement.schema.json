@@ -1,9 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transport/0.1/acknowledgement.schema.json",
-  "unevaluatedProperties": false,
-  "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Transportanfrage",
-  "description": "Bestätigung oder Ablehnung einer Transportanfrage",
+  "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patiententransportanfrage",
+  "description": "Bestätigung oder Ablehnung einer Patiententransportanfrage",
   "required": [
     "sharedIncidentId",
     "acknowledgedByDispatcherAt",
@@ -14,13 +13,11 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
-      "title": "globale Einsatz-UUID",
-      "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
+      "description": "global eindeutige UUID des Transports"
     },
     "acknowledgedByDispatcherAt": {
       "type": "string",
       "format": "date-time",
-      "title": "Dispatcher-Zeitstempel",
       "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
     },
     "status": {
@@ -29,22 +26,31 @@
         "accepted",
         "rejected"
       ],
-      "title": "Annahme- oder Ablehnungsstatus",
       "description": "Annahme- oder Ablehnungsstatus"
     },
-    "cause": {
+    "plannedPickupTime": {
       "type": "string",
-      "title": "Begründung für die Annahme oder Ablehnung",
-      "description": "Begründung für die Annahme oder Ablehnung"
+      "format": "date-time",
+      "description": "Geplante Abholzeit des Patienten"
+    },
+    "alternativeProposal": {
+      "type": "string",
+      "description": "Alternativer Vorschlag bei Ablehnung (z.B. anderer Zeitpunkt)"
     }
   },
+  "unevaluatedProperties": false,
   "examples": [
     {
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
       "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+      "status": "accepted",
+      "plannedPickupTime": "2024-01-01T14:15:00"
+    },
+    {
+      "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+      "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
       "status": "rejected",
-      "cause": "Keine freien Kapazitäten"
+      "alternativeProposal": "Transport am nächsten Tag um 9:00 Uhr möglich"
     }
-  ],
-  "$defs": {}
+  ]
 }

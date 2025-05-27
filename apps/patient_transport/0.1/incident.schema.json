@@ -2,16 +2,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transport/0.1/incident.schema.json",
   "unevaluatedProperties": false,
-  "title": "App-Nachricht transfer - Patiententransportanfrage",
-  "description": "Eine Patiententransportanfrage",
+  "title": "App-Nachricht incident - Patiententransport",
+  "description": "Ein Patiententransport mit Patienten- und Transportinformationen",
   "required": [
     "sharedIncidentId",
     "sentByDispatcherAt",
     "patient",
-    "pickupLocation",
-    "destinationLocation",
-    "pickupTime",
-    "arrivalTime"
+    "destinationLocation"
   ],
   "type": "object",
   "properties": {
@@ -43,7 +40,9 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "$ref": "#/$defs/notification.schema.json"
+        "$ref": "#/$defs/notification.schema.json",
+        "title": "Protokollvermerk",
+        "description": "Ein Protokollvermerk."
       }
     },
     "classifications": {
@@ -58,102 +57,103 @@
       "type": "string",
       "description": "Taktische Bewertung: Sachverhalt"
     },
-    "pickupLocation": {
-      "title": "Startort",
-      "description": "Der Ort, an dem der Transport beginnen soll",
-      "$ref": "#/$defs/location.schema.json"
+    "flashingLights": {
+      "type": "boolean",
+      "description": "Blaulichtfahrt notwendig"
     },
-    "destinationLocation": {
-      "title": "Zielort",
-      "description": "Der Ort, zu dem der Transport durchgeführt werden soll",
-      "$ref": "#/$defs/location.schema.json"
-    },
-    "pickupTime": {
-      "title": "Abholzeit",
-      "description": "Der Zeitpunkt, an dem der Transport beginnen soll",
+    "plannedPickupTime": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "Geplante Abholzeit des Patienten"
     },
     "arrivalTime": {
-      "title": "Ankunftszeit",
-      "description": "Der Zeitpunkt, an dem der Transport ankommen soll",
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "Geplante Ankunftszeit am Zielort"
     },
-    "arrivalTimeFixed": {
-      "title": "Fixtermin",
-      "description": "Angabe, ob die Ankunftszeit genau eingehalten werden muss",
-      "type": "boolean"
+    "pickupLocation": {
+      "$ref": "#/$defs/location.schema.json",
+      "description": "Abholort des Patienten"
+    },
+    "destinationLocation": {
+      "$ref": "#/$defs/location.schema.json",
+      "description": "Zielort des Patienten"
     },
     "patient": {
-      "title": "Patientendaten",
-      "description": "Angaben zum zu transportierenden Patienten",
-      "$ref": "#/$defs/patient.schema.json"
+      "$ref": "#/$defs/patient.schema.json",
+      "description": "Der zu transportierende Patient"
     },
-    "informers": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "$ref": "#/$defs/person.schema.json"
-      }
+    "informer": {
+      "$ref": "#/$defs/person.schema.json",
+      "description": "Person, die den Transport angefordert hat"
+    },
+    "transportType": {
+      "type": "string",
+      "description": "Art der Patientenbeförderung (z.B. sitzend, liegend, Spezial- oder Intensivtransport)"
     }
   },
   "examples": [
     {
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-      "internalId": "f123456",
+      "internalId": "T123456",
       "classifications": [
-        "A1"
+        "KTP",
+        "P2"
       ],
-      "issue": "Verlegung",
-      "additionalInfo": "Zusatzinformationen",
+      "issue": "Krankentransport",
+      "flashingLights": false,
+      "additionalInfo": "Transport sollte zwischen 14:30 und 15:30 sein",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
+      "plannedPickupTime": "2024-01-01T14:30:00",
+      "arrivalTime": "2024-01-01T15:15:00",
       "pickupLocation": {
+        "coordinate": {
+          "lat": 65.453323,
+          "lon": 14.542343
+        },
         "address": {
-          "street": "Musterstrasse",
-          "houseNumber": "15b",
-          "postalCode": "12345",
+          "street": "Klinikstraße",
+          "houseNumber": "5",
+          "postalCode": "54321",
           "city": "Musterhausen",
-          "cityDistrict": "Musterberg",
+          "cityDistrict": "Zentrum",
           "state": "Brandenburg",
           "country": "DE"
         },
         "object": {
-          "name": "Abteilung IV, Haus 3",
-          "additionalInfo": "Campus West"
+          "name": "Station 3B",
+          "additionalInfo": "Innere Medizin"
         },
         "superiorObject": {
-          "name": "Krankenhaus Musterstift",
-          "additionalInfo": "Weitere Informationen"
+          "name": "Krankenhaus Musterhausen",
+          "additionalInfo": "Hauptgebäude"
         },
         "floor": "3. OG",
-        "room": "412",
-        "additionalInfo": "Weitere Informationen"
+        "room": "315",
+        "additionalInfo": "Bitte an der Pforte melden"
       },
       "destinationLocation": {
+        "coordinate": {
+          "lat": 65.443323,
+          "lon": 14.552343
+        },
         "address": {
-          "street": "Mustergasse",
-          "houseNumber": "13",
-          "postalCode": "12346",
+          "street": "Pflegeweg",
+          "houseNumber": "22",
+          "postalCode": "54322",
           "city": "Musterhausen",
-          "cityDistrict": "Musterberg",
+          "cityDistrict": "Nord",
           "state": "Brandenburg",
           "country": "DE"
         },
         "object": {
-          "name": "Abteilung I, Haus 1"
+          "name": "Pflegeheim Sonnenblick",
+          "additionalInfo": "Pflegestation 2"
         },
-        "superiorObject": {
-          "name": "Krankenhaus Musteringen",
-          "additionalInfo": "Weitere Informationen"
-        },
-        "floor": "2. OG",
-        "room": "201",
-        "additionalInfo": "Weitere Informationen"
+        "floor": "1. OG",
+        "room": "107",
+        "additionalInfo": "Code für Eingangstür: 1234"
       },
-      "pickupTime": "2024-01-01T11:00:00",
-      "arrivalTime": "2024-01-01T11:30:00",
-      "arrivalTimeFixed": false,
       "patient": {
         "name": "Mustermann",
         "surname": "Hans",
@@ -168,12 +168,12 @@
           "state": "Brandenburg",
           "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInfo": "gehbehindert",
         "gender": "Male",
-        "dateOfBirth": "19801230",
-        "age": 55,
+        "dateOfBirth": "1940-12-30",
+        "age": 83,
         "healthInsuranceInformation": {
-          "healthInsuranceCompany": "Musterkasse",
+          "healthInsuranceCompany": "AOK Brandenburg",
           "healthInsuranceCompanyNumber": "101234567",
           "insuranceNumber": "S123456789"
         },
@@ -181,20 +181,19 @@
           "rmi": 360,
           "rmc": 360543215,
           "pzc": 360401,
-          "additionalInformation": "unspezifischer Notfall"
+          "additionalInformation": "Patient ist stabil, benötigt Rollstuhl"
         },
-        "infectionInformation": "potentiell ansteckend",
-        "infectionStatus": true,
-        "transportNumber": "123456"
+        "infectionInformation": "Keine bekannten Infektionen",
+        "infectionStatus": false,
+        "transportNumber": "T-2024-0042"
       },
-      "informers": [
-        {
-          "name": "Musterfrau",
-          "surname": "Heike",
-          "phone": "+49 30 234567",
-          "email": "heike.musterfrau@example.com"
-        }
-      ]
+      "informer": {
+        "name": "Doktor",
+        "surname": "Julia",
+        "phone": "+49 30 987654",
+        "email": "j.doktor@krankenhaus-musterhausen.de"
+      },
+      "transportType": "liegend mit Beatmung"
     }
   ],
   "$defs": {
