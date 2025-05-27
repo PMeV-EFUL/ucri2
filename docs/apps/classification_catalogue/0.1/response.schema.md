@@ -103,6 +103,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Stichwortkürzel-Katalogeinträge</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Stichwortkürzel-Katalogeinträge</td>
     </tr>
@@ -221,10 +225,13 @@
         },
         "catalogue": {
             "type": "array",
+            "title": "Stichwortkürzel-Katalogeinträge",
             "description": "Stichwortkürzel-Katalogeinträge",
             "minItems": 1,
             "items": {
                 "type": "object",
+                "title": "Stichwortkürzel-Katalogeintrag",
+                "description": "Stichwortkürzel-Katalogeintrag",
                 "required": [
                     "abbreviation",
                     "description",

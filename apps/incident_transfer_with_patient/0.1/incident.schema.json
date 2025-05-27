@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
-  "title": "Ein Einsatz mit Patientendaten",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
   "description": "Ein Einsatz mit Patientendaten",
   "required": [
     "sharedIncidentId",
@@ -14,54 +15,85 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
+      "title": "globale Einsatz-UUID",
       "description": "global eindeutige UUID des Einsatzes"
     },
     "internalId": {
       "type": "string",
+      "title": "Sender-interne Einsatz-ID",
       "description": "Sender-interne ID des Einsatzes"
     },
-    "classifications": {
-      "type": "array",
-      "description": "Stichwortkürzel des Einsatzes",
-      "minItems": 1,
-      "items": {
-        "type": "string"
-      }
-    },
-    "issue": {
-      "type": "string",
-      "description": "Taktische Bewertung: Sachverhalt"
-    },
-    "flashingLights": {
-      "type": "boolean"
-    },
     "additionalInfo": {
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
     },
     "sentByDispatcherAt": {
       "type": "string",
       "format": "date-time",
+      "title": "Dispatcher-Übergabe-Zeitstempel",
       "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
     },
-    "missionLocation": {
-      "$ref": "#/$defs/location.schema.json"
-    },
-    "patients": {
+    "protocolRemarks": {
+      "title": "Protokollvermerke",
+      "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
       "type": "array",
       "minItems": 1,
       "items": {
+        "$ref": "#/$defs/notification.schema.json",
+        "title": "Protokollvermerk",
+        "description": "Ein Protokollvermerk."
+      }
+    },
+    "classifications": {
+      "type": "array",
+      "title": "Stichwortkürzel des Einsatzes",
+      "description": "Stichwortkürzel des Einsatzes",
+      "minItems": 1,
+      "items": {
+        "title": "Stichwortkürzel",
+        "description": "Stichwortkürzel",
+        "type": "string"
+      }
+    },
+    "issue": {
+      "type": "string",
+      "title": "Taktische Bewertung",
+      "description": "Taktische Bewertung: Sachverhalt"
+    },
+    "flashingLights": {
+      "title": "Sonderrechte",
+      "description": "Sonderrechte",
+      "type": "boolean"
+    },
+    "missionLocation": {
+      "title": "Einsatzort",
+      "description": "Einsatzort",
+      "$ref": "#/$defs/location.schema.json"
+    },
+    "patients": {
+      "title": "Patienten",
+      "description": "List der Patienten.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Patient",
+        "description": "Ein(e) Patient(in).",
         "$ref": "#/$defs/patient.schema.json"
       }
     },
     "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
         "$ref": "#/$defs/person.schema.json"
       }
     }
   },
-  "unevaluatedProperties": false,
   "examples": [
     {
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -146,6 +178,55 @@
     }
   ],
   "$defs": {
+    "notification.schema.json": {
+      "unevaluatedProperties": false,
+      "title": "Einsatzbezogene Text-Benachrichtigung",
+      "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+      "required": [
+        "sharedIncidentId",
+        "timestamp",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "sharedIncidentId": {
+          "type": "string",
+          "format": "uuid",
+          "title": "globale Einsatz-UUID",
+          "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Zeitstempel",
+          "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+        },
+        "message": {
+          "title": "Benachrichtigungstext",
+          "description": "Inhalt der Benachrichtigung",
+          "type": "string"
+        },
+        "category": {
+          "title": "Benachrichtigungskategorie",
+          "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
+          "type": "string"
+        },
+        "silent": {
+          "title": "Benachrichtigungs-Sichtbarkeit",
+          "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+          "type": "boolean"
+        }
+      },
+      "examples": [
+        {
+          "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+          "timestamp": "2024-01-01T10:06:09",
+          "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+          "category": "information",
+          "silent": true
+        }
+      ]
+    },
     "coordinate.schema.json": {
       "title": "WGS84-Koordinate",
       "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",

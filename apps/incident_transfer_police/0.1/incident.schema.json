@@ -46,44 +46,64 @@
     },
     "classifications": {
       "type": "array",
+      "title": "Stichwortkürzel des Einsatzes",
       "description": "Stichwortkürzel des Einsatzes",
       "minItems": 1,
       "items": {
+        "title": "Stichwortkürzel",
+        "description": "Stichwortkürzel",
         "type": "string"
       }
     },
     "issue": {
       "type": "string",
+      "title": "Taktische Bewertung",
       "description": "Taktische Bewertung: Sachverhalt"
     },
     "flashingLights": {
+      "title": "Sonderrechte",
+      "description": "Sonderrechte",
       "type": "boolean"
     },
     "missionLocation": {
+      "title": "Einsatzort",
+      "description": "Einsatzort",
       "$ref": "#/$defs/location.schema.json"
     },
     "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
         "$ref": "#/$defs/person.schema.json"
       }
     },
     "accusedPersons": {
       "type": "array",
-      "description": "List of accused persons involved in the incident.",
+      "title": "Beschuldigte",
+      "description": "Liste der am Einsatz beteiligten beschuldigten Personen.",
       "items": {
+        "title": "Beschuldigte(r)",
+        "description": "Am Einsatz beteiligten beschuldigte Person.",
         "$ref": "#/$defs/personPoliceRelevant.schema.json"
       }
     },
     "victimPersons": {
       "type": "array",
-      "description": "List of victim persons involved in the incident.",
+      "title": "Betroffene",
+      "description": "Liste der am Einsatz beteiligten betroffenen Personen.",
       "items": {
+        "title": "Betroffene(r)",
+        "description": "Am Einsatz beteiligten betroffene Person.",
         "$ref": "#/$defs/personPoliceRelevant.schema.json"
       }
     },
     "eCallData": {
+      "title": "eCall-Daten",
+      "description": "eCall-Datensatz des Einsatzes.",
       "$ref": "#/$defs/eCallData.schema.json"
     }
   },
@@ -104,7 +124,7 @@
           "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
           "timestamp": "2024-01-01T10:06:09",
           "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-          "type": "information",
+          "category": "information",
           "silent": true
         }
       ],
@@ -235,9 +255,9 @@
           "description": "Inhalt der Benachrichtigung",
           "type": "string"
         },
-        "type": {
-          "title": "Benachrichtigungstyp",
-          "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+        "category": {
+          "title": "Benachrichtigungskategorie",
+          "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
           "type": "string"
         },
         "silent": {
@@ -251,7 +271,7 @@
           "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
           "timestamp": "2024-01-01T10:06:09",
           "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-          "type": "information",
+          "category": "information",
           "silent": true
         }
       ]

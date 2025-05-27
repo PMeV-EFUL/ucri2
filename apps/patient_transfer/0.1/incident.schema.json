@@ -45,6 +45,7 @@
       }
     },
     "issue": {
+      "title": "Übergabegrund",
       "type": "string",
       "enum": [
         "consultation_needed"
@@ -52,6 +53,8 @@
       "description": "Übergabegrund"
     },
     "patient": {
+      "title": "Patient",
+      "description": "Der/die Patient(in).",
       "$ref": "#/$defs/patient.schema.json",
       "type": "object",
       "required": [
@@ -60,9 +63,13 @@
       ]
     },
     "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
         "$ref": "#/$defs/person.schema.json"
       }
     }
@@ -79,7 +86,7 @@
           "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
           "timestamp": "2024-01-01T10:06:09",
           "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
-          "type": "information",
+          "category": "information",
           "silent": false
         }
       ],
@@ -155,9 +162,9 @@
           "description": "Inhalt der Benachrichtigung",
           "type": "string"
         },
-        "type": {
-          "title": "Benachrichtigungstyp",
-          "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+        "category": {
+          "title": "Benachrichtigungskategorie",
+          "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
           "type": "string"
         },
         "silent": {
@@ -171,7 +178,7 @@
           "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
           "timestamp": "2024-01-01T10:06:09",
           "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-          "type": "information",
+          "category": "information",
           "silent": true
         }
       ]

@@ -2,13 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transport/0.1/incident.schema.json",
   "unevaluatedProperties": false,
-  "title": "App-Nachricht incident - Patiententransport",
-  "description": "Ein Patiententransport mit Patienten- und Transportinformationen",
+  "title": "App-Nachricht transfer - Patiententransportanfrage",
+  "description": "Eine Patiententransportanfrage",
   "required": [
     "sharedIncidentId",
     "sentByDispatcherAt",
     "patient",
-    "destinationLocation"
+    "pickupLocation",
+    "destinationLocation",
+    "pickupTime",
+    "arrivalTime"
   ],
   "type": "object",
   "properties": {
@@ -47,113 +50,120 @@
     },
     "classifications": {
       "type": "array",
+      "title": "Stichwortkürzel des Einsatzes",
       "description": "Stichwortkürzel des Einsatzes",
       "minItems": 1,
       "items": {
+        "title": "Stichwortkürzel",
+        "description": "Stichwortkürzel",
         "type": "string"
       }
     },
     "issue": {
       "type": "string",
+      "title": "Taktische Bewertung",
       "description": "Taktische Bewertung: Sachverhalt"
     },
-    "flashingLights": {
-      "type": "boolean",
-      "description": "Blaulichtfahrt notwendig"
-    },
-    "plannedPickupTime": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Geplante Abholzeit des Patienten"
-    },
-    "arrivalTime": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Geplante Ankunftszeit am Zielort"
-    },
     "pickupLocation": {
-      "$ref": "#/$defs/location.schema.json",
-      "description": "Abholort des Patienten"
+      "title": "Startort",
+      "description": "Der Ort, an dem der Transport beginnen soll",
+      "$ref": "#/$defs/location.schema.json"
     },
     "destinationLocation": {
-      "$ref": "#/$defs/location.schema.json",
-      "description": "Zielort des Patienten"
+      "title": "Zielort",
+      "description": "Der Ort, zu dem der Transport durchgeführt werden soll",
+      "$ref": "#/$defs/location.schema.json"
+    },
+    "pickupTime": {
+      "title": "Abholzeit",
+      "description": "Der Zeitpunkt, an dem der Transport beginnen soll",
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrivalTime": {
+      "title": "Ankunftszeit",
+      "description": "Der Zeitpunkt, an dem der Transport ankommen soll",
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrivalTimeFixed": {
+      "title": "Fixtermin",
+      "description": "Angabe, ob die Ankunftszeit genau eingehalten werden muss",
+      "type": "boolean"
     },
     "patient": {
-      "$ref": "#/$defs/patient.schema.json",
-      "description": "Der zu transportierende Patient"
+      "title": "Patientendaten",
+      "description": "Angaben zum zu transportierenden Patienten",
+      "$ref": "#/$defs/patient.schema.json"
     },
-    "informer": {
-      "$ref": "#/$defs/person.schema.json",
-      "description": "Person, die den Transport angefordert hat"
-    },
-    "transportType": {
-      "type": "string",
-      "description": "Art der Patientenbeförderung (z.B. sitzend, liegend, Spezial- oder Intensivtransport)"
+    "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
+        "$ref": "#/$defs/person.schema.json"
+      }
     }
   },
   "examples": [
     {
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-      "internalId": "T123456",
+      "internalId": "f123456",
       "classifications": [
-        "KTP",
-        "P2"
+        "A1"
       ],
-      "issue": "Krankentransport",
-      "flashingLights": false,
-      "additionalInfo": "Transport sollte zwischen 14:30 und 15:30 sein",
+      "issue": "Verlegung",
+      "additionalInfo": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
-      "plannedPickupTime": "2024-01-01T14:30:00",
-      "arrivalTime": "2024-01-01T15:15:00",
       "pickupLocation": {
-        "coordinate": {
-          "lat": 65.453323,
-          "lon": 14.542343
-        },
         "address": {
-          "street": "Klinikstraße",
-          "houseNumber": "5",
-          "postalCode": "54321",
+          "street": "Musterstrasse",
+          "houseNumber": "15b",
+          "postalCode": "12345",
           "city": "Musterhausen",
-          "cityDistrict": "Zentrum",
+          "cityDistrict": "Musterberg",
           "state": "Brandenburg",
           "country": "DE"
         },
         "object": {
-          "name": "Station 3B",
-          "additionalInfo": "Innere Medizin"
+          "name": "Abteilung IV, Haus 3",
+          "additionalInfo": "Campus West"
         },
         "superiorObject": {
-          "name": "Krankenhaus Musterhausen",
-          "additionalInfo": "Hauptgebäude"
+          "name": "Krankenhaus Musterstift",
+          "additionalInfo": "Weitere Informationen"
         },
         "floor": "3. OG",
-        "room": "315",
-        "additionalInfo": "Bitte an der Pforte melden"
+        "room": "412",
+        "additionalInfo": "Weitere Informationen"
       },
       "destinationLocation": {
-        "coordinate": {
-          "lat": 65.443323,
-          "lon": 14.552343
-        },
         "address": {
-          "street": "Pflegeweg",
-          "houseNumber": "22",
-          "postalCode": "54322",
+          "street": "Mustergasse",
+          "houseNumber": "13",
+          "postalCode": "12346",
           "city": "Musterhausen",
-          "cityDistrict": "Nord",
+          "cityDistrict": "Musterberg",
           "state": "Brandenburg",
           "country": "DE"
         },
         "object": {
-          "name": "Pflegeheim Sonnenblick",
-          "additionalInfo": "Pflegestation 2"
+          "name": "Abteilung I, Haus 1"
         },
-        "floor": "1. OG",
-        "room": "107",
-        "additionalInfo": "Code für Eingangstür: 1234"
+        "superiorObject": {
+          "name": "Krankenhaus Musteringen",
+          "additionalInfo": "Weitere Informationen"
+        },
+        "floor": "2. OG",
+        "room": "201",
+        "additionalInfo": "Weitere Informationen"
       },
+      "pickupTime": "2024-01-01T11:00:00",
+      "arrivalTime": "2024-01-01T11:30:00",
+      "arrivalTimeFixed": false,
       "patient": {
         "name": "Mustermann",
         "surname": "Hans",
@@ -168,12 +178,12 @@
           "state": "Brandenburg",
           "country": "DE"
         },
-        "additionalInfo": "gehbehindert",
+        "additionalInfo": "weitere Informationen",
         "gender": "Male",
-        "dateOfBirth": "1940-12-30",
-        "age": 83,
+        "dateOfBirth": "19801230",
+        "age": 55,
         "healthInsuranceInformation": {
-          "healthInsuranceCompany": "AOK Brandenburg",
+          "healthInsuranceCompany": "Musterkasse",
           "healthInsuranceCompanyNumber": "101234567",
           "insuranceNumber": "S123456789"
         },
@@ -181,19 +191,20 @@
           "rmi": 360,
           "rmc": 360543215,
           "pzc": 360401,
-          "additionalInformation": "Patient ist stabil, benötigt Rollstuhl"
+          "additionalInformation": "unspezifischer Notfall"
         },
-        "infectionInformation": "Keine bekannten Infektionen",
-        "infectionStatus": false,
-        "transportNumber": "T-2024-0042"
+        "infectionInformation": "potentiell ansteckend",
+        "infectionStatus": true,
+        "transportNumber": "123456"
       },
-      "informer": {
-        "name": "Doktor",
-        "surname": "Julia",
-        "phone": "+49 30 987654",
-        "email": "j.doktor@krankenhaus-musterhausen.de"
-      },
-      "transportType": "liegend mit Beatmung"
+      "informers": [
+        {
+          "name": "Musterfrau",
+          "surname": "Heike",
+          "phone": "+49 30 234567",
+          "email": "heike.musterfrau@example.com"
+        }
+      ]
     }
   ],
   "$defs": {
@@ -225,9 +236,9 @@
           "description": "Inhalt der Benachrichtigung",
           "type": "string"
         },
-        "type": {
-          "title": "Benachrichtigungstyp",
-          "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+        "category": {
+          "title": "Benachrichtigungskategorie",
+          "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
           "type": "string"
         },
         "silent": {
@@ -241,7 +252,7 @@
           "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
           "timestamp": "2024-01-01T10:06:09",
           "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-          "type": "information",
+          "category": "information",
           "silent": true
         }
       ]

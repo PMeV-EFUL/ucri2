@@ -295,6 +295,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Stichwortkürzel-Katalogeinträge</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Stichwortkürzel-Katalogeinträge</td>
     </tr>
@@ -413,10 +417,13 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "catalogue": {
             "type": "array",
+            "title": "Stichwortkürzel-Katalogeinträge",
             "description": "Stichwortkürzel-Katalogeinträge",
             "minItems": 1,
             "items": {
                 "type": "object",
+                "title": "Stichwortkürzel-Katalogeintrag",
+                "description": "Stichwortkürzel-Katalogeintrag",
                 "required": [
                     "abbreviation",
                     "description",

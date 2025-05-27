@@ -1,6 +1,6 @@
 
 
-# Ein Einsatz mit Patientendaten
+# App-Nachricht incident - Ein Einsatz mit Patientendaten
 
 <p>Ein Einsatz mit Patientendaten</p>
 
@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -115,6 +115,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes</td>
     </tr>
@@ -139,6 +143,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Sender-interne Einsatz-ID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Sender-interne ID des Einsatzes</td>
     </tr>
@@ -154,11 +162,209 @@
 
 
 
+## additionalInfo
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+## sentByDispatcherAt
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Dispatcher-Übergabe-Zeitstempel</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+## protocolRemarks
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Protokollvermerke</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Min Items</th>
+      <td colspan="2">1</td>
+    </tr>
+  </tbody>
+</table>
+
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkscategory">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+
+
+### protocolRemarks.sharedIncidentId
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">uuid</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.timestamp
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zeitstempel</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.message
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungstext</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Inhalt der Benachrichtigung</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.category
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungskategorie</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.silent
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungs-Sichtbarkeit</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
 ## classifications
 
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Stichwortkürzel des Einsatzes</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Stichwortkürzel des Einsatzes</td>
@@ -184,6 +390,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Taktische Bewertung</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Taktische Bewertung: Sachverhalt</td>
     </tr>
@@ -204,53 +414,20 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Sonderrechte</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Sonderrechte</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
     
-  </tbody>
-</table>
-
-
-
-
-## additionalInfo
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-## sentByDispatcherAt
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Ja</td>
-    </tr>
-    <tr>
-      <th>Format</th>
-      <td colspan="2">date-time</td>
-    </tr>
   </tbody>
 </table>
 
@@ -264,11 +441,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Einsatz-Zielort</td>
+      <td colspan="2">Einsatzort</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Einsatz-Zielort. Mindestens eine Koordinate oder Adresse müssen vorhanden sein.</td>
+      <td colspan="2">Einsatzort</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -807,6 +984,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Patienten</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">List der Patienten.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1475,6 +1660,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Meldende</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Liste der Meldenden Personen</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1811,7 +2004,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
-    "title": "Ein Einsatz mit Patientendaten",
+    "unevaluatedProperties": false,
+    "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
     "description": "Ein Einsatz mit Patientendaten",
     "required": [
         "sharedIncidentId",
@@ -1824,54 +2018,85 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes"
         },
         "internalId": {
             "type": "string",
+            "title": "Sender-interne Einsatz-ID",
             "description": "Sender-interne ID des Einsatzes"
         },
-        "classifications": {
-            "type": "array",
-            "description": "Stichwortkürzel des Einsatzes",
-            "minItems": 1,
-            "items": {
-                "type": "string"
-            }
-        },
-        "issue": {
-            "type": "string",
-            "description": "Taktische Bewertung: Sachverhalt"
-        },
-        "flashingLights": {
-            "type": "boolean"
-        },
         "additionalInfo": {
+            "title": "Zusatzinformationen",
+            "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
             "type": "string"
         },
         "sentByDispatcherAt": {
             "type": "string",
             "format": "date-time",
+            "title": "Dispatcher-Übergabe-Zeitstempel",
             "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
         },
-        "missionLocation": {
-            "$ref": "#/$defs/location.schema.json"
-        },
-        "patients": {
+        "protocolRemarks": {
+            "title": "Protokollvermerke",
+            "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
             "type": "array",
             "minItems": 1,
             "items": {
+                "$ref": "#/$defs/notification.schema.json",
+                "title": "Protokollvermerk",
+                "description": "Ein Protokollvermerk."
+            }
+        },
+        "classifications": {
+            "type": "array",
+            "title": "Stichwortkürzel des Einsatzes",
+            "description": "Stichwortkürzel des Einsatzes",
+            "minItems": 1,
+            "items": {
+                "title": "Stichwortkürzel",
+                "description": "Stichwortkürzel",
+                "type": "string"
+            }
+        },
+        "issue": {
+            "type": "string",
+            "title": "Taktische Bewertung",
+            "description": "Taktische Bewertung: Sachverhalt"
+        },
+        "flashingLights": {
+            "title": "Sonderrechte",
+            "description": "Sonderrechte",
+            "type": "boolean"
+        },
+        "missionLocation": {
+            "title": "Einsatzort",
+            "description": "Einsatzort",
+            "$ref": "#/$defs/location.schema.json"
+        },
+        "patients": {
+            "title": "Patienten",
+            "description": "List der Patienten.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "title": "Patient",
+                "description": "Ein(e) Patient(in).",
                 "$ref": "#/$defs/patient.schema.json"
             }
         },
         "informers": {
+            "title": "Meldende",
+            "description": "Liste der Meldenden Personen",
             "type": "array",
             "minItems": 1,
             "items": {
+                "title": "Meldende Person",
+                "description": "Meldende Person",
                 "$ref": "#/$defs/person.schema.json"
             }
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -1956,6 +2181,55 @@
         }
     ],
     "$defs": {
+        "notification.schema.json": {
+            "unevaluatedProperties": false,
+            "title": "Einsatzbezogene Text-Benachrichtigung",
+            "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+            "required": [
+                "sharedIncidentId",
+                "timestamp",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "sharedIncidentId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "title": "globale Einsatz-UUID",
+                    "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "Zeitstempel",
+                    "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+                },
+                "message": {
+                    "title": "Benachrichtigungstext",
+                    "description": "Inhalt der Benachrichtigung",
+                    "type": "string"
+                },
+                "category": {
+                    "title": "Benachrichtigungskategorie",
+                    "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
+                    "type": "string"
+                },
+                "silent": {
+                    "title": "Benachrichtigungs-Sichtbarkeit",
+                    "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+                    "category": "information",
+                    "silent": true
+                }
+            ]
+        },
         "coordinate.schema.json": {
             "title": "WGS84-Koordinate",
             "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",

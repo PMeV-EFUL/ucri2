@@ -24,9 +24,12 @@
     },
     "catalogue": {
       "type": "array",
-      "description": "Einsatzmitteltyp-Katalogeinträge",
+      "title": "Einsatzmitteltyp-Katalogeinträge",
+      "description": "Liste der Einsatzmitteltyp-Katalogeinträge",
       "minItems": 1,
       "items": {
+        "title": "Einsatzmitteltyp-Katalogeintrag",
+        "description": "Einsatzmitteltyp-Katalogeintrag",
         "type": "object",
         "required": [
           "abbreviation",

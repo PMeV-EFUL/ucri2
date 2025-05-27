@@ -101,8 +101,12 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
-      <th>Beschreibung</th>
+      <th>Titel</th>
       <td colspan="2">Einsatzmitteltyp-Katalogeinträge</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Liste der Einsatzmitteltyp-Katalogeinträge</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
@@ -198,9 +202,12 @@
         },
         "catalogue": {
             "type": "array",
-            "description": "Einsatzmitteltyp-Katalogeinträge",
+            "title": "Einsatzmitteltyp-Katalogeinträge",
+            "description": "Liste der Einsatzmitteltyp-Katalogeinträge",
             "minItems": 1,
             "items": {
+                "title": "Einsatzmitteltyp-Katalogeintrag",
+                "description": "Einsatzmitteltyp-Katalogeintrag",
                 "type": "object",
                 "required": [
                     "abbreviation",

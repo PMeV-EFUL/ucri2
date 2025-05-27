@@ -1,62 +1,62 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Ein Einsatz mit Patientendaten",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentBase.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
   "description": "Ein Einsatz mit Patientendaten",
   "required": [ "sharedIncidentId","sentByDispatcherAt","patients","missionLocation" ],
   "type": "object",
   "properties": {
-    "sharedIncidentId": {
-      "type": "string",
-      "format": "uuid",
-      "description": "global eindeutige UUID des Einsatzes"
-    },
-    "internalId": {
-      "type": "string",
-      "description": "Sender-interne ID des Einsatzes"
-    },
     "classifications": {
       "type": "array",
+      "title": "Stichwortkürzel des Einsatzes",
       "description": "Stichwortkürzel des Einsatzes",
       "minItems": 1,
       "items": {
+        "title": "Stichwortkürzel",
+        "description": "Stichwortkürzel",
         "type": "string"
       }
     },
     "issue": {
       "type": "string",
+      "title": "Taktische Bewertung",
       "description": "Taktische Bewertung: Sachverhalt"
     },
     "flashingLights": {
+      "title": "Sonderrechte",
+      "description": "Sonderrechte",
       "type": "boolean"
     },
-    "additionalInfo": {
-      "type": "string"
-    },
-    "sentByDispatcherAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
-    },
-	"missionLocation": {
+    "missionLocation": {
+      "title": "Einsatzort",
+      "description": "Einsatzort",
       "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
     },
     "patients": {
+      "title": "Patienten",
+      "description": "List der Patienten.",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Patient",
+        "description": "Ein(e) Patient(in).",
         "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json"
       }
     },
     "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
         "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/person.schema.json"
       }
     }
   },
-  "unevaluatedProperties": false,
   "examples": [{
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "internalId": "f123456",

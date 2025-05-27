@@ -23,7 +23,7 @@
       - [protocolRemarks.sharedIncidentId](#protocolremarkssharedincidentid)
       - [protocolRemarks.timestamp](#protocolremarkstimestamp)
       - [protocolRemarks.message](#protocolremarksmessage)
-      - [protocolRemarks.type](#protocolremarkstype)
+      - [protocolRemarks.category](#protocolremarkscategory)
       - [protocolRemarks.silent](#protocolremarkssilent)
     + [issue](#issue)
     + [patient](#patient)
@@ -166,7 +166,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
             "timestamp": "2024-01-01T10:06:09",
             "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
-            "type": "information",
+            "category": "information",
             "silent": false
         }
     ],
@@ -351,7 +351,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstype">type</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkscategory">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
 
 
 #### protocolRemarks.sharedIncidentId
@@ -423,18 +423,18 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-#### protocolRemarks.type
+#### protocolRemarks.category
 
 
 <table class="jssd-property-table">
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Benachrichtigungstyp</td>
+      <td colspan="2">Benachrichtigungskategorie</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar</td>
+      <td colspan="2">Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -472,6 +472,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Übergabegrund</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Übergabegrund</td>
     </tr>
@@ -501,7 +505,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person und besitzt zusätzliche Eigenschaften. Obligat ist nur der Nachname.</td>
+      <td colspan="2">Der/die Patient(in).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -1252,6 +1256,14 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Meldende</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Liste der Meldenden Personen</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -1632,6 +1644,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             }
         },
         "issue": {
+            "title": "Übergabegrund",
             "type": "string",
             "enum": [
                 "consultation_needed"
@@ -1639,6 +1652,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "description": "Übergabegrund"
         },
         "patient": {
+            "title": "Patient",
+            "description": "Der/die Patient(in).",
             "$ref": "#/$defs/patient.schema.json",
             "type": "object",
             "required": [
@@ -1647,9 +1662,13 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             ]
         },
         "informers": {
+            "title": "Meldende",
+            "description": "Liste der Meldenden Personen",
             "type": "array",
             "minItems": 1,
             "items": {
+                "title": "Meldende Person",
+                "description": "Meldende Person",
                 "$ref": "#/$defs/person.schema.json"
             }
         }
@@ -1666,7 +1685,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
                     "timestamp": "2024-01-01T10:06:09",
                     "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
-                    "type": "information",
+                    "category": "information",
                     "silent": false
                 }
             ],
@@ -1742,9 +1761,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Inhalt der Benachrichtigung",
                     "type": "string"
                 },
-                "type": {
-                    "title": "Benachrichtigungstyp",
-                    "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+                "category": {
+                    "title": "Benachrichtigungskategorie",
+                    "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
                     "type": "string"
                 },
                 "silent": {
@@ -1758,7 +1777,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
                     "timestamp": "2024-01-01T10:06:09",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-                    "type": "information",
+                    "category": "information",
                     "silent": true
                 }
             ]

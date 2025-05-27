@@ -9,25 +9,30 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
-      "description": "global eindeutige UUID des Transports"
+      "title": "globale Einsatz-UUID",
+      "description": "global eindeutige UUID der Patiententransportanfrage, die bestätigt oder abgelehnt wird."
     },
     "acknowledgedByDispatcherAt": {
       "type": "string",
       "format": "date-time",
+      "title": "Dispatcher-Zeitstempel",
       "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
     },
     "status": {
       "type": "string",
       "enum": ["accepted", "rejected"],
+      "title": "Annahme- oder Ablehnungsstatus",
       "description": "Annahme- oder Ablehnungsstatus"
     },
     "plannedPickupTime": {
       "type": "string",
       "format": "date-time",
+      "title": "Abholzeitpunkt",
       "description": "Geplante Abholzeit des Patienten"
     },
     "alternativeProposal": {
       "type": "string",
+      "title": "Alternativvorschlag",
       "description": "Alternativer Vorschlag bei Ablehnung (z.B. anderer Zeitpunkt)"
     }
   },

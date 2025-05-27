@@ -9,19 +9,26 @@
   "type": "object",
   "properties": {
     "issue": {
+      "title": "Übergabegrund",
       "type": "string",
       "enum": ["consultation_needed"],
       "description": "Übergabegrund"
     },
     "patient": {
+      "title": "Patient",
+      "description": "Der/die Patient(in).",
       "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json",
       "type": "object",
       "required": [ "name","phone" ]
     },
     "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
         "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/person.schema.json"
       }
     }
@@ -36,7 +43,7 @@
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
       "timestamp": "2024-01-01T10:06:09",
       "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
-      "type": "information",
+      "category": "information",
       "silent": false
     }],
     "patient": {

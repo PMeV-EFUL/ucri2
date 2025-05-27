@@ -17,7 +17,7 @@
     + [sharedIncidentId](#sharedincidentid)
     + [timestamp](#timestamp)
     + [message](#message)
-    + [type](#type)
+    + [category](#category)
     + [silent](#silent)
     + [Schema](#schema)
 
@@ -74,7 +74,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 ### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#timestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#message">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#type">type</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#silent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#timestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#message">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#category">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#silent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
 
 
 ### Beispiel
@@ -86,7 +86,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "timestamp": "2024-01-01T10:06:09",
     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-    "type": "information",
+    "category": "information",
     "silent": true
 }
 ```
@@ -177,18 +177,18 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### type
+### category
 
 
 <table class="jssd-property-table">
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Benachrichtigungstyp</td>
+      <td colspan="2">Benachrichtigungskategorie</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar</td>
+      <td colspan="2">Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -266,9 +266,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "description": "Inhalt der Benachrichtigung",
             "type": "string"
         },
-        "type": {
-            "title": "Benachrichtigungstyp",
-            "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+        "category": {
+            "title": "Benachrichtigungskategorie",
+            "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
             "type": "string"
         },
         "silent": {
@@ -282,7 +282,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
             "timestamp": "2024-01-01T10:06:09",
             "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-            "type": "information",
+            "category": "information",
             "silent": true
         }
     ],

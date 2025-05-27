@@ -15,10 +15,13 @@
     },
     "catalogue": {
       "type": "array",
+      "title": "Stichwortkürzel-Katalogeinträge",
       "description": "Stichwortkürzel-Katalogeinträge",
       "minItems": 1,
       "items": {
         "type": "object",
+        "title": "Stichwortkürzel-Katalogeintrag",
+        "description": "Stichwortkürzel-Katalogeintrag",
         "required": ["abbreviation","description","classificationGroup"],
         "properties": {
           "abbreviation": {

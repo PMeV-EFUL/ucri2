@@ -54,8 +54,12 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">global eindeutige UUID des Transports</td>
+      <td colspan="2">global eindeutige UUID der Patiententransportanfrage, die bestätigt oder abgelehnt wird.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -77,6 +81,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Dispatcher-Zeitstempel</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde</td>
@@ -102,6 +110,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Annahme- oder Ablehnungsstatus</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Annahme- oder Ablehnungsstatus</td>
     </tr>
@@ -126,6 +138,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Abholzeitpunkt</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Geplante Abholzeit des Patienten</td>
     </tr>
@@ -149,6 +165,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Alternativvorschlag</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Alternativer Vorschlag bei Ablehnung (z.B. anderer Zeitpunkt)</td>
@@ -189,11 +209,13 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
-            "description": "global eindeutige UUID des Transports"
+            "title": "globale Einsatz-UUID",
+            "description": "global eindeutige UUID der Patiententransportanfrage, die bestätigt oder abgelehnt wird."
         },
         "acknowledgedByDispatcherAt": {
             "type": "string",
             "format": "date-time",
+            "title": "Dispatcher-Zeitstempel",
             "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
         },
         "status": {
@@ -202,15 +224,18 @@
                 "accepted",
                 "rejected"
             ],
+            "title": "Annahme- oder Ablehnungsstatus",
             "description": "Annahme- oder Ablehnungsstatus"
         },
         "plannedPickupTime": {
             "type": "string",
             "format": "date-time",
+            "title": "Abholzeitpunkt",
             "description": "Geplante Abholzeit des Patienten"
         },
         "alternativeProposal": {
             "type": "string",
+            "title": "Alternativvorschlag",
             "description": "Alternativer Vorschlag bei Ablehnung (z.B. anderer Zeitpunkt)"
         }
     },

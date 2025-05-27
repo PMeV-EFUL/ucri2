@@ -24,9 +24,9 @@
       "description": "Inhalt der Benachrichtigung",
       "type": "string"
     },
-	"type": {
-      "title": "Benachrichtigungstyp",
-      "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+	"category": {
+      "title": "Benachrichtigungskategorie",
+      "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
       "type": "string"
     },
     "silent": {
@@ -39,7 +39,7 @@
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "timestamp": "2024-01-01T10:06:09",
     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-    "type": "information",
+    "category": "information",
     "silent": true
   }]
 }

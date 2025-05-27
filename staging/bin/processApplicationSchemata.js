@@ -30,10 +30,10 @@ function checkForMissingProperties(path,obj) {
       continue;
     }
 
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
+    if (key!== "examples" && typeof obj[key] === 'object' && obj[key] !== null) {
       const child=obj[key];
       const newPath=`${path}.${key}`;
-      if (child.$ref || child.properties || child.items) {
+      if (child.$ref || child.type) {
         //there should be a title and a description here!
         if (!child.title) {
           missingPropertyMessages.push(`${newPath} : title is missing`);
@@ -195,7 +195,7 @@ async function process(){
       console.log("not generating merged docs for building blocks...");
     }
   }
-  if (missingPropertyMessages){
+  if (missingPropertyMessages.length>0){
     console.warn("There were missing documentation properties detected (fix issues in building blocks first, then issues remaining in message schema files:)");
     console.warn(missingPropertyMessages.join("\n"));
   }else{

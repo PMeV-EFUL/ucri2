@@ -1,8 +1,8 @@
 
 
-# App-Nachricht incident - Patiententransport
+# App-Nachricht transfer - Patiententransportanfrage
 
-<p>Ein Patiententransport mit Patienten- und Transportinformationen</p>
+<p>Eine Patiententransportanfrage</p>
 
 <table>
 <tbody>
@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#plannedpickuptime">plannedPickupTime</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#arrivaltime">arrivalTime</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocation">pickupLocation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocation">destinationLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informer">informer</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#transporttype">transportType</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocation">pickupLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#destinationlocation">destinationLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#pickuptime">pickupTime</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#arrivaltime">arrivalTime</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#arrivaltimefixed">arrivalTimeFixed</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -23,65 +23,59 @@
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "internalId": "T123456",
+    "internalId": "f123456",
     "classifications": [
-        "KTP",
-        "P2"
+        "A1"
     ],
-    "issue": "Krankentransport",
-    "flashingLights": false,
-    "additionalInfo": "Transport sollte zwischen 14:30 und 15:30 sein",
+    "issue": "Verlegung",
+    "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
-    "plannedPickupTime": "2024-01-01T14:30:00",
-    "arrivalTime": "2024-01-01T15:15:00",
     "pickupLocation": {
-        "coordinate": {
-            "lat": 65.453323,
-            "lon": 14.542343
-        },
         "address": {
-            "street": "Klinikstraße",
-            "houseNumber": "5",
-            "postalCode": "54321",
+            "street": "Musterstrasse",
+            "houseNumber": "15b",
+            "postalCode": "12345",
             "city": "Musterhausen",
-            "cityDistrict": "Zentrum",
+            "cityDistrict": "Musterberg",
             "state": "Brandenburg",
             "country": "DE"
         },
         "object": {
-            "name": "Station 3B",
-            "additionalInfo": "Innere Medizin"
+            "name": "Abteilung IV, Haus 3",
+            "additionalInfo": "Campus West"
         },
         "superiorObject": {
-            "name": "Krankenhaus Musterhausen",
-            "additionalInfo": "Hauptgebäude"
+            "name": "Krankenhaus Musterstift",
+            "additionalInfo": "Weitere Informationen"
         },
         "floor": "3. OG",
-        "room": "315",
-        "additionalInfo": "Bitte an der Pforte melden"
+        "room": "412",
+        "additionalInfo": "Weitere Informationen"
     },
     "destinationLocation": {
-        "coordinate": {
-            "lat": 65.443323,
-            "lon": 14.552343
-        },
         "address": {
-            "street": "Pflegeweg",
-            "houseNumber": "22",
-            "postalCode": "54322",
+            "street": "Mustergasse",
+            "houseNumber": "13",
+            "postalCode": "12346",
             "city": "Musterhausen",
-            "cityDistrict": "Nord",
+            "cityDistrict": "Musterberg",
             "state": "Brandenburg",
             "country": "DE"
         },
         "object": {
-            "name": "Pflegeheim Sonnenblick",
-            "additionalInfo": "Pflegestation 2"
+            "name": "Abteilung I, Haus 1"
         },
-        "floor": "1. OG",
-        "room": "107",
-        "additionalInfo": "Code für Eingangstür: 1234"
+        "superiorObject": {
+            "name": "Krankenhaus Musteringen",
+            "additionalInfo": "Weitere Informationen"
+        },
+        "floor": "2. OG",
+        "room": "201",
+        "additionalInfo": "Weitere Informationen"
     },
+    "pickupTime": "2024-01-01T11:00:00",
+    "arrivalTime": "2024-01-01T11:30:00",
+    "arrivalTimeFixed": false,
     "patient": {
         "name": "Mustermann",
         "surname": "Hans",
@@ -96,12 +90,12 @@
             "state": "Brandenburg",
             "country": "DE"
         },
-        "additionalInfo": "gehbehindert",
+        "additionalInfo": "weitere Informationen",
         "gender": "Male",
-        "dateOfBirth": "1940-12-30",
-        "age": 83,
+        "dateOfBirth": "19801230",
+        "age": 55,
         "healthInsuranceInformation": {
-            "healthInsuranceCompany": "AOK Brandenburg",
+            "healthInsuranceCompany": "Musterkasse",
             "healthInsuranceCompanyNumber": "101234567",
             "insuranceNumber": "S123456789"
         },
@@ -109,19 +103,20 @@
             "rmi": 360,
             "rmc": 360543215,
             "pzc": 360401,
-            "additionalInformation": "Patient ist stabil, benötigt Rollstuhl"
+            "additionalInformation": "unspezifischer Notfall"
         },
-        "infectionInformation": "Keine bekannten Infektionen",
-        "infectionStatus": false,
-        "transportNumber": "T-2024-0042"
+        "infectionInformation": "potentiell ansteckend",
+        "infectionStatus": true,
+        "transportNumber": "123456"
     },
-    "informer": {
-        "name": "Doktor",
-        "surname": "Julia",
-        "phone": "+49 30 987654",
-        "email": "j.doktor@krankenhaus-musterhausen.de"
-    },
-    "transportType": "liegend mit Beatmung"
+    "informers": [
+        {
+            "name": "Musterfrau",
+            "surname": "Heike",
+            "phone": "+49 30 234567",
+            "email": "heike.musterfrau@example.com"
+        }
+    ]
 }
 ```
 
@@ -262,7 +257,7 @@
 </table>
 
 ### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstype">type</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkscategory">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
 
 
 ### protocolRemarks.sharedIncidentId
@@ -334,18 +329,18 @@
 
 
 
-### protocolRemarks.type
+### protocolRemarks.category
 
 
 <table class="jssd-property-table">
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Benachrichtigungstyp</td>
+      <td colspan="2">Benachrichtigungskategorie</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar</td>
+      <td colspan="2">Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -383,6 +378,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Stichwortkürzel des Einsatzes</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Stichwortkürzel des Einsatzes</td>
     </tr>
@@ -407,6 +406,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Taktische Bewertung</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Taktische Bewertung: Sachverhalt</td>
     </tr>
@@ -422,75 +425,6 @@
 
 
 
-## flashingLights
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Blaulichtfahrt notwendig</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-## plannedPickupTime
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Geplante Abholzeit des Patienten</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Format</th>
-      <td colspan="2">date-time</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-## arrivalTime
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Geplante Ankunftszeit am Zielort</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Format</th>
-      <td colspan="2">date-time</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
 ## pickupLocation
 
 
@@ -498,16 +432,16 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Einsatz-Zielort</td>
+      <td colspan="2">Startort</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Abholort des Patienten</td>
+      <td colspan="2">Der Ort, an dem der Transport beginnen soll</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
       <th>Obligat?</th>
-      <td colspan="2">Nein</td>
+      <td colspan="2">Ja</td>
     </tr>
     
   </tbody>
@@ -1043,11 +977,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Einsatz-Zielort</td>
+      <td colspan="2">Zielort</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Zielort des Patienten</td>
+      <td colspan="2">Der Ort, zu dem der Transport durchgeführt werden soll</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -1581,6 +1515,87 @@
 
 
 
+## pickupTime
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Abholzeit</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Zeitpunkt, an dem der Transport beginnen soll</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+## arrivalTime
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Ankunftszeit</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Zeitpunkt, an dem der Transport ankommen soll</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+## arrivalTimeFixed
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Fixtermin</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Angabe, ob die Ankunftszeit genau eingehalten werden muss</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 ## patient
 
 
@@ -1588,11 +1603,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Patient</td>
+      <td colspan="2">Patientendaten</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Der zu transportierende Patient</td>
+      <td colspan="2">Angaben zum zu transportierenden Patienten</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -2338,33 +2353,36 @@
 
 
 
-## informer
+## informers
 
 
 <table class="jssd-property-table">
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Person</td>
+      <td colspan="2">Meldende</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Person, die den Transport angefordert hat</td>
+      <td colspan="2">Liste der Meldenden Personen</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Object</td></tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Min Items</th>
+      <td colspan="2">1</td>
+    </tr>
   </tbody>
 </table>
 
-### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informername">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informersurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informerphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informeremail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informeraddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informeradditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
-### informer.name
+### informers.name
 
 
 <table class="jssd-property-table">
@@ -2378,10 +2396,6 @@
       <td colspan="2">Der Nachname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Ja</td>
-    </tr>
     
   </tbody>
 </table>
@@ -2389,7 +2403,7 @@
 
 
 
-### informer.surname
+### informers.surname
 
 
 <table class="jssd-property-table">
@@ -2403,10 +2417,6 @@
       <td colspan="2">Der Vorname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -2414,7 +2424,7 @@
 
 
 
-### informer.phone
+### informers.phone
 
 
 <table class="jssd-property-table">
@@ -2428,10 +2438,6 @@
       <td colspan="2">Die Telefonnummer.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -2439,7 +2445,7 @@
 
 
 
-### informer.email
+### informers.email
 
 
 <table class="jssd-property-table">
@@ -2453,10 +2459,6 @@
       <td colspan="2">Die Email-Adresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -2464,7 +2466,7 @@
 
 
 
-### informer.address
+### informers.address
 
 
 <table class="jssd-property-table">
@@ -2478,17 +2480,13 @@
       <td colspan="2">Die Meldeadresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
 
 
 
-### informer.address.street
+### informers.address.street
 
 
 <table class="jssd-property-table">
@@ -2513,7 +2511,7 @@
 
 
 
-### informer.address.houseNumber
+### informers.address.houseNumber
 
 
 <table class="jssd-property-table">
@@ -2538,7 +2536,7 @@
 
 
 
-### informer.address.postalCode
+### informers.address.postalCode
 
 
 <table class="jssd-property-table">
@@ -2566,7 +2564,7 @@
 
 
 
-### informer.address.city
+### informers.address.city
 
 
 <table class="jssd-property-table">
@@ -2591,7 +2589,7 @@
 
 
 
-### informer.address.cityDistrict
+### informers.address.cityDistrict
 
 
 <table class="jssd-property-table">
@@ -2616,7 +2614,7 @@
 
 
 
-### informer.address.state
+### informers.address.state
 
 
 <table class="jssd-property-table">
@@ -2641,7 +2639,7 @@
 
 
 
-### informer.address.country
+### informers.address.country
 
 
 <table class="jssd-property-table">
@@ -2670,7 +2668,7 @@
 
 
 
-### informer.additionalInfo
+### informers.additionalInfo
 
 
 <table class="jssd-property-table">
@@ -2684,35 +2682,10 @@
       <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
 
-
-
-
-
-## transportType
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Art der Patientenbeförderung (z.B. sitzend, liegend, Spezial- oder Intensivtransport)</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
 
 
 
@@ -2730,13 +2703,16 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transport/0.1/incident.schema.json",
     "unevaluatedProperties": false,
-    "title": "App-Nachricht incident - Patiententransport",
-    "description": "Ein Patiententransport mit Patienten- und Transportinformationen",
+    "title": "App-Nachricht transfer - Patiententransportanfrage",
+    "description": "Eine Patiententransportanfrage",
     "required": [
         "sharedIncidentId",
         "sentByDispatcherAt",
         "patient",
-        "destinationLocation"
+        "pickupLocation",
+        "destinationLocation",
+        "pickupTime",
+        "arrivalTime"
     ],
     "type": "object",
     "properties": {
@@ -2775,113 +2751,120 @@
         },
         "classifications": {
             "type": "array",
+            "title": "Stichwortkürzel des Einsatzes",
             "description": "Stichwortkürzel des Einsatzes",
             "minItems": 1,
             "items": {
+                "title": "Stichwortkürzel",
+                "description": "Stichwortkürzel",
                 "type": "string"
             }
         },
         "issue": {
             "type": "string",
+            "title": "Taktische Bewertung",
             "description": "Taktische Bewertung: Sachverhalt"
         },
-        "flashingLights": {
-            "type": "boolean",
-            "description": "Blaulichtfahrt notwendig"
-        },
-        "plannedPickupTime": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Geplante Abholzeit des Patienten"
-        },
-        "arrivalTime": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Geplante Ankunftszeit am Zielort"
-        },
         "pickupLocation": {
-            "$ref": "#/$defs/location.schema.json",
-            "description": "Abholort des Patienten"
+            "title": "Startort",
+            "description": "Der Ort, an dem der Transport beginnen soll",
+            "$ref": "#/$defs/location.schema.json"
         },
         "destinationLocation": {
-            "$ref": "#/$defs/location.schema.json",
-            "description": "Zielort des Patienten"
+            "title": "Zielort",
+            "description": "Der Ort, zu dem der Transport durchgeführt werden soll",
+            "$ref": "#/$defs/location.schema.json"
+        },
+        "pickupTime": {
+            "title": "Abholzeit",
+            "description": "Der Zeitpunkt, an dem der Transport beginnen soll",
+            "type": "string",
+            "format": "date-time"
+        },
+        "arrivalTime": {
+            "title": "Ankunftszeit",
+            "description": "Der Zeitpunkt, an dem der Transport ankommen soll",
+            "type": "string",
+            "format": "date-time"
+        },
+        "arrivalTimeFixed": {
+            "title": "Fixtermin",
+            "description": "Angabe, ob die Ankunftszeit genau eingehalten werden muss",
+            "type": "boolean"
         },
         "patient": {
-            "$ref": "#/$defs/patient.schema.json",
-            "description": "Der zu transportierende Patient"
+            "title": "Patientendaten",
+            "description": "Angaben zum zu transportierenden Patienten",
+            "$ref": "#/$defs/patient.schema.json"
         },
-        "informer": {
-            "$ref": "#/$defs/person.schema.json",
-            "description": "Person, die den Transport angefordert hat"
-        },
-        "transportType": {
-            "type": "string",
-            "description": "Art der Patientenbeförderung (z.B. sitzend, liegend, Spezial- oder Intensivtransport)"
+        "informers": {
+            "title": "Meldende",
+            "description": "Liste der Meldenden Personen",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "title": "Meldende Person",
+                "description": "Meldende Person",
+                "$ref": "#/$defs/person.schema.json"
+            }
         }
     },
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "internalId": "T123456",
+            "internalId": "f123456",
             "classifications": [
-                "KTP",
-                "P2"
+                "A1"
             ],
-            "issue": "Krankentransport",
-            "flashingLights": false,
-            "additionalInfo": "Transport sollte zwischen 14:30 und 15:30 sein",
+            "issue": "Verlegung",
+            "additionalInfo": "Zusatzinformationen",
             "sentByDispatcherAt": "2024-01-01T10:05:08",
-            "plannedPickupTime": "2024-01-01T14:30:00",
-            "arrivalTime": "2024-01-01T15:15:00",
             "pickupLocation": {
-                "coordinate": {
-                    "lat": 65.453323,
-                    "lon": 14.542343
-                },
                 "address": {
-                    "street": "Klinikstraße",
-                    "houseNumber": "5",
-                    "postalCode": "54321",
+                    "street": "Musterstrasse",
+                    "houseNumber": "15b",
+                    "postalCode": "12345",
                     "city": "Musterhausen",
-                    "cityDistrict": "Zentrum",
+                    "cityDistrict": "Musterberg",
                     "state": "Brandenburg",
                     "country": "DE"
                 },
                 "object": {
-                    "name": "Station 3B",
-                    "additionalInfo": "Innere Medizin"
+                    "name": "Abteilung IV, Haus 3",
+                    "additionalInfo": "Campus West"
                 },
                 "superiorObject": {
-                    "name": "Krankenhaus Musterhausen",
-                    "additionalInfo": "Hauptgebäude"
+                    "name": "Krankenhaus Musterstift",
+                    "additionalInfo": "Weitere Informationen"
                 },
                 "floor": "3. OG",
-                "room": "315",
-                "additionalInfo": "Bitte an der Pforte melden"
+                "room": "412",
+                "additionalInfo": "Weitere Informationen"
             },
             "destinationLocation": {
-                "coordinate": {
-                    "lat": 65.443323,
-                    "lon": 14.552343
-                },
                 "address": {
-                    "street": "Pflegeweg",
-                    "houseNumber": "22",
-                    "postalCode": "54322",
+                    "street": "Mustergasse",
+                    "houseNumber": "13",
+                    "postalCode": "12346",
                     "city": "Musterhausen",
-                    "cityDistrict": "Nord",
+                    "cityDistrict": "Musterberg",
                     "state": "Brandenburg",
                     "country": "DE"
                 },
                 "object": {
-                    "name": "Pflegeheim Sonnenblick",
-                    "additionalInfo": "Pflegestation 2"
+                    "name": "Abteilung I, Haus 1"
                 },
-                "floor": "1. OG",
-                "room": "107",
-                "additionalInfo": "Code für Eingangstür: 1234"
+                "superiorObject": {
+                    "name": "Krankenhaus Musteringen",
+                    "additionalInfo": "Weitere Informationen"
+                },
+                "floor": "2. OG",
+                "room": "201",
+                "additionalInfo": "Weitere Informationen"
             },
+            "pickupTime": "2024-01-01T11:00:00",
+            "arrivalTime": "2024-01-01T11:30:00",
+            "arrivalTimeFixed": false,
             "patient": {
                 "name": "Mustermann",
                 "surname": "Hans",
@@ -2896,12 +2879,12 @@
                     "state": "Brandenburg",
                     "country": "DE"
                 },
-                "additionalInfo": "gehbehindert",
+                "additionalInfo": "weitere Informationen",
                 "gender": "Male",
-                "dateOfBirth": "1940-12-30",
-                "age": 83,
+                "dateOfBirth": "19801230",
+                "age": 55,
                 "healthInsuranceInformation": {
-                    "healthInsuranceCompany": "AOK Brandenburg",
+                    "healthInsuranceCompany": "Musterkasse",
                     "healthInsuranceCompanyNumber": "101234567",
                     "insuranceNumber": "S123456789"
                 },
@@ -2909,19 +2892,20 @@
                     "rmi": 360,
                     "rmc": 360543215,
                     "pzc": 360401,
-                    "additionalInformation": "Patient ist stabil, benötigt Rollstuhl"
+                    "additionalInformation": "unspezifischer Notfall"
                 },
-                "infectionInformation": "Keine bekannten Infektionen",
-                "infectionStatus": false,
-                "transportNumber": "T-2024-0042"
+                "infectionInformation": "potentiell ansteckend",
+                "infectionStatus": true,
+                "transportNumber": "123456"
             },
-            "informer": {
-                "name": "Doktor",
-                "surname": "Julia",
-                "phone": "+49 30 987654",
-                "email": "j.doktor@krankenhaus-musterhausen.de"
-            },
-            "transportType": "liegend mit Beatmung"
+            "informers": [
+                {
+                    "name": "Musterfrau",
+                    "surname": "Heike",
+                    "phone": "+49 30 234567",
+                    "email": "heike.musterfrau@example.com"
+                }
+            ]
         }
     ],
     "$defs": {
@@ -2953,9 +2937,9 @@
                     "description": "Inhalt der Benachrichtigung",
                     "type": "string"
                 },
-                "type": {
-                    "title": "Benachrichtigungstyp",
-                    "description": "Typ der Benachrichtigung. Aktuell ist dieser Typ frei wählbar",
+                "category": {
+                    "title": "Benachrichtigungskategorie",
+                    "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
                     "type": "string"
                 },
                 "silent": {
@@ -2969,7 +2953,7 @@
                     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
                     "timestamp": "2024-01-01T10:06:09",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-                    "type": "information",
+                    "category": "information",
                     "silent": true
                 }
             ]
