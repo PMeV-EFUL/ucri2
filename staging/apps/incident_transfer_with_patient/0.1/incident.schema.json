@@ -1,29 +1,13 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentBase.schema.json",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentExtendedBase.schema.json",
   "unevaluatedProperties": false,
   "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
   "description": "Ein Einsatz mit Patientendaten",
   "required": [ "sharedIncidentId","sentByDispatcherAt","patients","missionLocation" ],
   "type": "object",
   "properties": {
-    "classifications": {
-      "type": "array",
-      "title": "Stichwortkürzel des Einsatzes",
-      "description": "Stichwortkürzel des Einsatzes",
-      "minItems": 1,
-      "items": {
-        "title": "Stichwortkürzel",
-        "description": "Stichwortkürzel",
-        "type": "string"
-      }
-    },
-    "issue": {
-      "type": "string",
-      "title": "Taktische Bewertung",
-      "description": "Taktische Bewertung: Sachverhalt"
-    },
     "flashingLights": {
       "title": "Sonderrechte",
       "description": "Sonderrechte",

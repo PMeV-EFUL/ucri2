@@ -114,7 +114,9 @@ async function process(){
 
         let resolvedBaseRefKeys = {};
         //remove  top level base $ref if any
-        output=resolveTopLevelRefs(output,resolvedBaseRefKeys);
+        while (output.$ref){
+          output=resolveTopLevelRefs(output,resolvedBaseRefKeys);
+        }
 
         //resolve all refs which point to a *Base Building block until no more replacements are done
         let replacementsPerformed=true;
