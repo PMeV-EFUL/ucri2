@@ -18,8 +18,23 @@
     + [internalId](#internalid)
     + [additionalInfo](#additionalinfo)
     + [sentByDispatcherAt](#sentbydispatcherat)
-    + [protocolRemarks](#protocolremarks)
+    + [informers](#informers)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
+      - [informers.name](#informersname)
+      - [informers.surname](#informerssurname)
+      - [informers.phone](#informersphone)
+      - [informers.email](#informersemail)
+      - [informers.address](#informersaddress)
+      - [informers.address.street](#informersaddressstreet)
+      - [informers.address.houseNumber](#informersaddresshousenumber)
+      - [informers.address.postalCode](#informersaddresspostalcode)
+      - [informers.address.city](#informersaddresscity)
+      - [informers.address.cityDistrict](#informersaddresscitydistrict)
+      - [informers.address.state](#informersaddressstate)
+      - [informers.address.country](#informersaddresscountry)
+      - [informers.additionalInfo](#informersadditionalinfo)
+    + [protocolRemarks](#protocolremarks)
+      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
       - [protocolRemarks.sharedIncidentId](#protocolremarkssharedincidentid)
       - [protocolRemarks.timestamp](#protocolremarkstimestamp)
       - [protocolRemarks.message](#protocolremarksmessage)
@@ -56,21 +71,6 @@
       - [patient.infectionInformation](#patientinfectioninformation)
       - [patient.infectionStatus](#patientinfectionstatus)
       - [patient.transportNumber](#patienttransportnumber)
-    + [informers](#informers)
-      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
-      - [informers.name](#informersname)
-      - [informers.surname](#informerssurname)
-      - [informers.phone](#informersphone)
-      - [informers.email](#informersemail)
-      - [informers.address](#informersaddress)
-      - [informers.address.street](#informersaddressstreet)
-      - [informers.address.houseNumber](#informersaddresshousenumber)
-      - [informers.address.postalCode](#informersaddresspostalcode)
-      - [informers.address.city](#informersaddresscity)
-      - [informers.address.cityDistrict](#informersaddresscitydistrict)
-      - [informers.address.state](#informersaddressstate)
-      - [informers.address.country](#informersaddresscountry)
-      - [informers.additionalInfo](#informersadditionalinfo)
     + [Schema](#schema)
   * [App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage](#app-nachricht-acknowledgement---bestatigung-oder-ablehnung-einer-patientenubergabeanfrage)
     + [Eigenschaften](#eigenschaften-2)
@@ -147,7 +147,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 ### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr></tbody></table>
 
 
 ### Beispiel
@@ -321,6 +321,343 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
   </tbody>
 </table>
+
+
+
+
+### informers
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Meldende</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Liste der Meldenden Personen</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Min Items</th>
+      <td colspan="2">1</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+
+
+#### informers.name
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Nachname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.surname
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.phone
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Telefonnummer</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.email
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Email-Adresse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.address
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">MeldeAdresse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Meldeadresse.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+#### informers.address.street
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.houseNumber
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Hausnummer</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.postalCode
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Postleitzahl</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]+</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.city
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.cityDistrict
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Ortsteil</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.state
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Bundesland</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.country
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">[A-Z]{2}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+#### informers.additionalInfo
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
 
 
 
@@ -1251,343 +1588,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### informers
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Meldende</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Liste der Meldenden Personen</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Min Items</th>
-      <td colspan="2">1</td>
-    </tr>
-  </tbody>
-</table>
-
-#### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
-
-
-#### informers.name
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Nachname</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Der Nachname.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.surname
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Vorname</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Der Vorname.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.phone
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Telefonnummer</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Die Telefonnummer.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.email
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Email-Adresse</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Die Email-Adresse.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.address
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">MeldeAdresse</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Die Meldeadresse.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-#### informers.address.street
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Name der Strasse</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Ja</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.address.houseNumber
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Hausnummer</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.address.postalCode
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Postleitzahl</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Pattern</th>
-      <td colspan="2">[0-9]+</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-#### informers.address.city
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Stadt</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.address.cityDistrict
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Ortsteil</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.address.state
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Bundesland</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Das Bundesland.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-#### informers.address.country
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">ISO-Code des Landes</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Pattern</th>
-      <td colspan="2">[A-Z]{2}</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-
-#### informers.additionalInfo
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Zusatzinformationen</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-
 
 
 
@@ -1632,6 +1632,17 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "title": "Dispatcher-Übergabe-Zeitstempel",
             "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
         },
+        "informers": {
+            "title": "Meldende",
+            "description": "Liste der Meldenden Personen",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "title": "Meldende Person",
+                "description": "Meldende Person",
+                "$ref": "#/$defs/person.schema.json"
+            }
+        },
         "protocolRemarks": {
             "title": "Protokollvermerke",
             "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
@@ -1660,17 +1671,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "name",
                 "phone"
             ]
-        },
-        "informers": {
-            "title": "Meldende",
-            "description": "Liste der Meldenden Personen",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-                "title": "Meldende Person",
-                "description": "Meldende Person",
-                "$ref": "#/$defs/person.schema.json"
-            }
         }
     },
     "examples": [
@@ -1733,55 +1733,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         }
     ],
     "$defs": {
-        "notification.schema.json": {
-            "unevaluatedProperties": false,
-            "title": "Einsatzbezogene Text-Benachrichtigung",
-            "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
-            "required": [
-                "sharedIncidentId",
-                "timestamp",
-                "message"
-            ],
-            "type": "object",
-            "properties": {
-                "sharedIncidentId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "title": "globale Einsatz-UUID",
-                    "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
-                },
-                "timestamp": {
-                    "type": "string",
-                    "format": "date-time",
-                    "title": "Zeitstempel",
-                    "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
-                },
-                "message": {
-                    "title": "Benachrichtigungstext",
-                    "description": "Inhalt der Benachrichtigung",
-                    "type": "string"
-                },
-                "category": {
-                    "title": "Benachrichtigungskategorie",
-                    "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
-                    "type": "string"
-                },
-                "silent": {
-                    "title": "Benachrichtigungs-Sichtbarkeit",
-                    "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
-                    "type": "boolean"
-                }
-            },
-            "examples": [
-                {
-                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-                    "timestamp": "2024-01-01T10:06:09",
-                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-                    "category": "information",
-                    "silent": true
-                }
-            ]
-        },
         "address.schema.json": {
             "title": "Adresse",
             "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
@@ -1838,6 +1789,114 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "cityDistrict": "Musterberg",
                     "state": "Brandenburg",
                     "country": "DE"
+                }
+            ]
+        },
+        "person.schema.json": {
+            "title": "Person",
+            "description": "Eine Person. Obligat ist der Nachname.",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Nachname",
+                    "description": "Der Nachname.",
+                    "type": "string"
+                },
+                "surname": {
+                    "title": "Vorname",
+                    "description": "Der Vorname.",
+                    "type": "string"
+                },
+                "phone": {
+                    "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
+                    "type": "string"
+                },
+                "email": {
+                    "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
+                    "type": "string"
+                },
+                "address": {
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
+                },
+                "additionalInfo": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Mustermann",
+                    "surname": "Hans",
+                    "phone": "+49 30 123456",
+                    "email": "hans.mustermann@example.com",
+                    "address": {
+                        "street": "Musterstrasse",
+                        "houseNumber": "15b",
+                        "postalCode": "12345",
+                        "city": "Musterhausen",
+                        "cityDistrict": "Musterberg",
+                        "state": "Brandenburg",
+                        "country": "DE"
+                    },
+                    "additionalInfo": "weitere Informationen"
+                }
+            ],
+            "unevaluatedProperties": false
+        },
+        "notification.schema.json": {
+            "unevaluatedProperties": false,
+            "title": "Einsatzbezogene Text-Benachrichtigung",
+            "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+            "required": [
+                "sharedIncidentId",
+                "timestamp",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "sharedIncidentId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "title": "globale Einsatz-UUID",
+                    "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "Zeitstempel",
+                    "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+                },
+                "message": {
+                    "title": "Benachrichtigungstext",
+                    "description": "Inhalt der Benachrichtigung",
+                    "type": "string"
+                },
+                "category": {
+                    "title": "Benachrichtigungskategorie",
+                    "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
+                    "type": "string"
+                },
+                "silent": {
+                    "title": "Benachrichtigungs-Sichtbarkeit",
+                    "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+                    "category": "information",
+                    "silent": true
                 }
             ]
         },
@@ -2036,65 +2095,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "infectionInformation": "potentiell ansteckend",
                     "infectionStatus": true,
                     "transportNumber": "123456"
-                }
-            ],
-            "unevaluatedProperties": false
-        },
-        "person.schema.json": {
-            "title": "Person",
-            "description": "Eine Person. Obligat ist der Nachname.",
-            "required": [
-                "name"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "title": "Nachname",
-                    "description": "Der Nachname.",
-                    "type": "string"
-                },
-                "surname": {
-                    "title": "Vorname",
-                    "description": "Der Vorname.",
-                    "type": "string"
-                },
-                "phone": {
-                    "title": "Telefonnummer",
-                    "description": "Die Telefonnummer.",
-                    "type": "string"
-                },
-                "email": {
-                    "title": "Email-Adresse",
-                    "description": "Die Email-Adresse.",
-                    "type": "string"
-                },
-                "address": {
-                    "$ref": "#/$defs/address.schema.json",
-                    "title": "MeldeAdresse",
-                    "description": "Die Meldeadresse."
-                },
-                "additionalInfo": {
-                    "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
-                    "type": "string"
-                }
-            },
-            "examples": [
-                {
-                    "name": "Mustermann",
-                    "surname": "Hans",
-                    "phone": "+49 30 123456",
-                    "email": "hans.mustermann@example.com",
-                    "address": {
-                        "street": "Musterstrasse",
-                        "houseNumber": "15b",
-                        "postalCode": "12345",
-                        "city": "Musterhausen",
-                        "cityDistrict": "Musterberg",
-                        "state": "Brandenburg",
-                        "country": "DE"
-                    },
-                    "additionalInfo": "weitere Informationen"
                 }
             ],
             "unevaluatedProperties": false
