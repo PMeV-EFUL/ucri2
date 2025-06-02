@@ -33,7 +33,7 @@
 	"initialAssessment": {
 		"$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/initialAssessment.schema.json",
       "title": "Ersteinschätzung",
-      "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?"
+      "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein."
     },
 	"infectionInformation": {
       "title": "Infektiös (Freitext)",
@@ -75,9 +75,9 @@
       "insuranceNumber": "S123456789"
     },
     "initialAssessment": {
-      "rmi": 360,
-      "rmc": 360543215,
-      "pzc": 360401,
+      "rmi": "360",
+      "rmc": "360543215",
+      "pzc": "360401",
       "additionalInformation": "unspezifischer Notfall"
     },
     "infectionInformation": "potentiell ansteckend",

@@ -194,9 +194,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "insuranceNumber": "S123456789"
         },
         "initialAssessment": {
-            "rmi": 360,
-            "rmc": 360543215,
-            "pzc": 360401,
+            "rmi": "360",
+            "rmc": "360543215",
+            "pzc": "360401",
             "additionalInformation": "unspezifischer Notfall"
         },
         "infectionInformation": "potentiell ansteckend",
@@ -1389,7 +1389,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?</td>
+      <td colspan="2">Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -1416,16 +1416,22 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Der Rückmeldeindikator.</td>
+      <td colspan="2">Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
     <tr>
-      <th>Maximum</th>
-      <td colspan="2">999</td>
+      <th>Min Length</th>
+      <td colspan="2">3</td>
+    </tr><tr>
+      <th>Max Length</th>
+      <td colspan="2">3</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]*</td>
     </tr>
   </tbody>
 </table>
@@ -1444,14 +1450,20 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Der Rückmeldecode.</td>
+      <td colspan="2">Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Min Length</th>
+      <td colspan="2">1</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]*</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1469,16 +1481,22 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Der Patientenzuweisungscode.</td>
+      <td colspan="2">Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
     <tr>
-      <th>Maximum</th>
-      <td colspan="2">999999</td>
+      <th>Min Length</th>
+      <td colspan="2">6</td>
+    </tr><tr>
+      <th>Max Length</th>
+      <td colspan="2">6</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">[0-9]*</td>
     </tr>
   </tbody>
 </table>
@@ -1497,7 +1515,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können. TODO der Name ist hier nicht sinnvoll, oder?</td>
+      <td colspan="2">Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -1713,9 +1731,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "insuranceNumber": "S123456789"
                 },
                 "initialAssessment": {
-                    "rmi": 360,
-                    "rmc": 360543215,
-                    "pzc": 360401,
+                    "rmi": "360",
+                    "rmc": "360543215",
+                    "pzc": "360401",
                     "additionalInformation": "unspezifischer Notfall"
                 },
                 "infectionInformation": "potentiell ansteckend",
@@ -1943,35 +1961,39 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "properties": {
                 "rmi": {
                     "title": "Rückmeldeindikator",
-                    "description": "Der Rückmeldeindikator.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 999
+                    "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "[0-9]*",
+                    "minLength": 3,
+                    "maxLength": 3
                 },
                 "rmc": {
                     "title": "Rückmeldecode",
-                    "description": "Der Rückmeldecode.",
-                    "type": "integer"
+                    "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "[0-9]*",
+                    "minLength": 1
                 },
                 "pzc": {
                     "title": "Patientenzuweisungscode",
-                    "description": "Der Patientenzuweisungscode.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 999999
+                    "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "[0-9]*",
+                    "minLength": 6,
+                    "maxLength": 6
                 },
                 "additionalInformation": {
                     "type": "string",
                     "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können. TODO der Name ist hier nicht sinnvoll, oder?"
+                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
                 }
             },
             "unevaluatedProperties": false,
             "examples": [
                 {
-                    "rmi": 360,
-                    "rmc": 360543215,
-                    "pzc": 360401,
+                    "rmi": "360",
+                    "rmc": "360543215",
+                    "pzc": "360401",
                     "additionalInformation": "unspezifischer Notfall"
                 }
             ]
@@ -2044,7 +2066,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "initialAssessment": {
                     "$ref": "#/$defs/initialAssessment.schema.json",
                     "title": "Ersteinschätzung",
-                    "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?"
+                    "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein."
                 },
                 "infectionInformation": {
                     "title": "Infektiös (Freitext)",
@@ -2087,9 +2109,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                         "insuranceNumber": "S123456789"
                     },
                     "initialAssessment": {
-                        "rmi": 360,
-                        "rmc": 360543215,
-                        "pzc": 360401,
+                        "rmi": "360",
+                        "rmc": "360543215",
+                        "pzc": "360401",
                         "additionalInformation": "unspezifischer Notfall"
                     },
                     "infectionInformation": "potentiell ansteckend",

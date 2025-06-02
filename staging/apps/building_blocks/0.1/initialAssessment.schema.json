@@ -9,34 +9,38 @@
   "properties": {
     "rmi": {
       "title": "Rückmeldeindikator",
-      "description": "Der Rückmeldeindikator.",
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 999
+      "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
+      "type": "string",
+      "pattern": "[0-9]*",
+      "minLength": 3,
+      "maxLength": 3
     },
 	"rmc": {
       "title": "Rückmeldecode",
-      "description": "Der Rückmeldecode.",
-      "type": "integer"
+      "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
+      "type": "string",
+      "pattern": "[0-9]*",
+      "minLength": 1
     },
 	"pzc": {
       "title": "Patientenzuweisungscode",
-      "description": "Der Patientenzuweisungscode.",
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 999999
+      "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
+      "type": "string",
+      "pattern": "[0-9]*",
+      "minLength": 6,
+      "maxLength": 6
     },
 	"additionalInformation": {
       "type": "string",
       "title": "Zusatzinformationen",
-      "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können. TODO der Name ist hier nicht sinnvoll, oder?"
+      "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
     }
   },
   "unevaluatedProperties": false,
   "examples": [{
-    "rmi": 360,
-    "rmc": 360543215,
-    "pzc": 360401,
+    "rmi": "360",
+    "rmc": "360543215",
+    "pzc": "360401",
     "additionalInformation": "unspezifischer Notfall"
   }]
 }
