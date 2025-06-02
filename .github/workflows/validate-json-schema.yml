@@ -12,5 +12,5 @@ jobs:
       with:
         node-version: 18
     - run: npm install -g ajv-cli ajv-formats
-    - run: find apps -name '*.schema.json' -print0 | xargs -n 1 -0 ajv compile -c ajv-formats -s
+    - run: find apps -name '*.schema.json' -print0 | xargs -n 1 -0 ajv compile --spec=draft2020 -c ajv-formats -s
 
