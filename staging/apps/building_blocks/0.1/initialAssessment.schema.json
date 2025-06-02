@@ -2,7 +2,7 @@
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/initialAssessment.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Ersteinschätzung",
-  "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?",
+  "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
   "required": [],
   "type": "object",
   "minProperties": 1,
@@ -11,7 +11,7 @@
       "title": "Rückmeldeindikator",
       "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
       "type": "string",
-      "pattern": "[0-9]*",
+      "pattern": "^[0-9]*$",
       "minLength": 3,
       "maxLength": 3
     },
@@ -19,14 +19,14 @@
       "title": "Rückmeldecode",
       "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
       "type": "string",
-      "pattern": "[0-9]*",
+      "pattern": "^[0-9]*$",
       "minLength": 1
     },
 	"pzc": {
       "title": "Patientenzuweisungscode",
       "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
       "type": "string",
-      "pattern": "[0-9]*",
+      "pattern": "^[0-9]*$",
       "minLength": 6,
       "maxLength": 6
     },

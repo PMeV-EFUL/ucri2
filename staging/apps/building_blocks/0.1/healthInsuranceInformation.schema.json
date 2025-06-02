@@ -15,7 +15,7 @@
       "title": "IK der Krankenversicherung",
       "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
       "type": "string",
-      "pattern": "(0-9)*",
+      "pattern": "^[0-9]*$",
       "minLength": 9,
       "maxLength": 9
     },
