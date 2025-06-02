@@ -7,6 +7,12 @@
   "required": ["sharedIncidentId","sentByDispatcherAt"],
   "type": "object",
   "properties": {
+    "startTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Einsatzbeginn-Zeitstempel",
+      "description": "Zeitpunkt des Einsatzbeginns"
+    },
     "classifications": {
       "type": "array",
       "title": "Stichwortkürzel des Einsatzes",
@@ -31,6 +37,7 @@
       "A1",
       "F2"
     ],
+    "startTimestamp": "2024-01-01T09:55:15",
     "issue": "Notfall",
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",

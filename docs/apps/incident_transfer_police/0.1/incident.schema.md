@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldata">eCallData</a></td><td>Object</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#starttimestamp">startTimestamp</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#accusedpersons">accusedPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#victimpersons">victimPersons</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#ecalldata">eCallData</a></td><td>Object</td><td>Nein</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -32,6 +32,7 @@
     "flashingLights": true,
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "startTimestamp": "2024-01-01T09:55:15",
     "protocolRemarks": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -725,6 +726,34 @@
   </tbody>
 </table>
 
+
+
+
+
+## startTimestamp
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Einsatzbeginn-Zeitstempel</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt des Einsatzbeginns</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
@@ -2667,6 +2696,12 @@
                 "description": "Ein Protokollvermerk."
             }
         },
+        "startTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Einsatzbeginn-Zeitstempel",
+            "description": "Zeitpunkt des Einsatzbeginns"
+        },
         "classifications": {
             "type": "array",
             "title": "Stichwortkürzel des Einsatzes",
@@ -2731,6 +2766,7 @@
             "flashingLights": true,
             "additionalInfo": "Zusatzinformationen",
             "sentByDispatcherAt": "2024-01-01T10:05:08",
+            "startTimestamp": "2024-01-01T09:55:15",
             "protocolRemarks": [
                 {
                     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",

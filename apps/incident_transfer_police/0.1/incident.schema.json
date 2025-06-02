@@ -55,6 +55,12 @@
         "description": "Ein Protokollvermerk."
       }
     },
+    "startTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Einsatzbeginn-Zeitstempel",
+      "description": "Zeitpunkt des Einsatzbeginns"
+    },
     "classifications": {
       "type": "array",
       "title": "Stichwortkürzel des Einsatzes",
@@ -119,6 +125,7 @@
       "flashingLights": true,
       "additionalInfo": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
+      "startTimestamp": "2024-01-01T09:55:15",
       "protocolRemarks": [
         {
           "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",

@@ -49,6 +49,7 @@
     ],
     "issue": "Verlegung",
     "additionalInfo": "Zusatzinformationen",
+    "startTimestamp": "2024-01-01T09:55:15",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
     "pickupLocation": {
       "address": {

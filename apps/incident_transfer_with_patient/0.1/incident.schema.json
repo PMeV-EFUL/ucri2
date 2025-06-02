@@ -56,6 +56,12 @@
         "description": "Ein Protokollvermerk."
       }
     },
+    "startTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Einsatzbeginn-Zeitstempel",
+      "description": "Zeitpunkt des Einsatzbeginns"
+    },
     "classifications": {
       "type": "array",
       "title": "Stichwortkürzel des Einsatzes",
@@ -106,6 +112,7 @@
       "flashingLights": true,
       "additionalInfo": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
+      "startTimestamp": "2024-01-01T09:55:15",
       "missionLocation": {
         "coordinate": {
           "lat": 65.453323,
