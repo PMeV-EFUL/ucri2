@@ -122,7 +122,7 @@ Zeichenketten werden über den type: string abgebildet und immer im Unicode-Form
 - **Enumerationen**: Mit dem Attribut "enum" kann eine Liste von gültigen Ausprägungen festgelegt werden.
 - **Datumsangaben**: Mit dem Attribut "format:date" werden ISO8601-konforme tagesgenaue Datumsangaben dargestellt (z.B. "2025-12-01" für den 1.Dezember 2025). Mit dem Attribut "format:date-time" werden ISO8601-konforme Zeitstempel (z.B. "2018-11-13T20:20:39") dargestellt. Als Zeitzone ist hierbei UTC festgelegt.
 - **UUIDs**: Mit dem Attribut "format:uuid" werden UUIDs dargestellt, z.B. ("550e8400-e29b-41d4-a716-446655440000").
-- **Weitere formateingeschränkte Zeichenketten**: Über das Attribut "pattern" kann ein regulärer Ausdruck (regEx) festgelegt werden, welcher gültige Ausprägungen beschreibt. Um die Verständlichkeit der Spezifikation zu erhöhen, werden solche regulären Ausdrück immer im "description"-Attribut einer Eigenschaft beschrieben, z.B. würde für "pattern:'(0-9)+'" die "description" als Erklärung "Der Wert muss ausschliesslich aus Ziffern bestehen" vorhanden sein.
+- **Weitere formateingeschränkte Zeichenketten**: Über das Attribut "pattern" kann ein regulärer Ausdruck (regEx) festgelegt werden, welcher gültige Ausprägungen beschreibt. Um die Verständlichkeit der Spezifikation zu erhöhen, werden solche regulären Ausdrück immer im "description"-Attribut einer Eigenschaft beschrieben, z.B. würde für **pattern:"^[0-9]*$"** die "description" als Erklärung "Der Wert muss ausschliesslich aus Ziffern bestehen" vorhanden sein.
 
 #### Objekte - type: object
 JSON-Objekte werden über "type: object" beschrieben. Hierbei sind in jedem Falle nur die im "properties"-Attribut beschriebenen Objekteigenschaften gültig, weitere Eigenschaften sind nicht zulässig, dies wird über das Attribut "unevaluatedProperties": false festgelegt.
@@ -528,7 +528,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]+</td>
+      <td colspan="2">^[0-9]+$</td>
     </tr>
   </tbody>
 </table>
@@ -631,7 +631,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[A-Z]{2}</td>
+      <td colspan="2">^[A-Z]{2}$</td>
     </tr>
   </tbody>
 </table>
@@ -1051,7 +1051,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]+</td>
+      <td colspan="2">^[0-9]+$</td>
     </tr>
   </tbody>
 </table>
@@ -1154,7 +1154,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[A-Z]{2}</td>
+      <td colspan="2">^[A-Z]{2}$</td>
     </tr>
   </tbody>
 </table>
@@ -1344,7 +1344,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <td colspan="2">9</td>
     </tr><tr>
       <th>Pattern</th>
-      <td colspan="2">(0-9)*</td>
+      <td colspan="2">^[0-9]*$</td>
     </tr>
   </tbody>
 </table>
@@ -1431,7 +1431,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <td colspan="2">3</td>
     </tr><tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]*</td>
+      <td colspan="2">^[0-9]*$</td>
     </tr>
   </tbody>
 </table>
@@ -1462,7 +1462,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <td colspan="2">1</td>
     </tr><tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]*</td>
+      <td colspan="2">^[0-9]*$</td>
     </tr>
   </tbody>
 </table>
@@ -1496,7 +1496,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <td colspan="2">6</td>
     </tr><tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]*</td>
+      <td colspan="2">^[0-9]*$</td>
     </tr>
   </tbody>
 </table>
@@ -1773,7 +1773,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "Postleitzahl",
                     "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
                     "type": "string",
-                    "pattern": "[0-9]+"
+                    "pattern": "^[0-9]+$"
                 },
                 "city": {
                     "title": "Stadt",
@@ -1794,7 +1794,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "ISO-Code des Landes",
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
-                    "pattern": "[A-Z]{2}"
+                    "pattern": "^[A-Z]{2}$"
                 }
             },
             "unevaluatedProperties": false,
@@ -1933,7 +1933,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "IK der Krankenversicherung",
                     "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
                     "type": "string",
-                    "pattern": "(0-9)*",
+                    "pattern": "^[0-9]*$",
                     "minLength": 9,
                     "maxLength": 9
                 },
@@ -1954,7 +1954,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "initialAssessment.schema.json": {
             "title": "Ersteinschätzung",
-            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?",
+            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
             "required": [],
             "type": "object",
             "minProperties": 1,
@@ -1963,7 +1963,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "Rückmeldeindikator",
                     "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
                     "type": "string",
-                    "pattern": "[0-9]*",
+                    "pattern": "^[0-9]*$",
                     "minLength": 3,
                     "maxLength": 3
                 },
@@ -1971,14 +1971,14 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "Rückmeldecode",
                     "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
                     "type": "string",
-                    "pattern": "[0-9]*",
+                    "pattern": "^[0-9]*$",
                     "minLength": 1
                 },
                 "pzc": {
                     "title": "Patientenzuweisungscode",
                     "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
                     "type": "string",
-                    "pattern": "[0-9]*",
+                    "pattern": "^[0-9]*$",
                     "minLength": 6,
                     "maxLength": 6
                 },

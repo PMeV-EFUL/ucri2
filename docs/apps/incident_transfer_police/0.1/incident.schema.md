@@ -455,7 +455,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]+</td>
+      <td colspan="2">^[0-9]+$</td>
     </tr>
   </tbody>
 </table>
@@ -558,7 +558,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[A-Z]{2}</td>
+      <td colspan="2">^[A-Z]{2}$</td>
     </tr>
   </tbody>
 </table>
@@ -1043,7 +1043,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]+</td>
+      <td colspan="2">^[0-9]+$</td>
     </tr>
   </tbody>
 </table>
@@ -1146,7 +1146,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[A-Z]{2}</td>
+      <td colspan="2">^[A-Z]{2}$</td>
     </tr>
   </tbody>
 </table>
@@ -1581,7 +1581,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]+</td>
+      <td colspan="2">^[0-9]+$</td>
     </tr>
   </tbody>
 </table>
@@ -1684,7 +1684,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[A-Z]{2}</td>
+      <td colspan="2">^[A-Z]{2}$</td>
     </tr>
   </tbody>
 </table>
@@ -1960,7 +1960,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[0-9]+</td>
+      <td colspan="2">^[0-9]+$</td>
     </tr>
   </tbody>
 </table>
@@ -2063,7 +2063,7 @@
     </tr>
     <tr>
       <th>Pattern</th>
-      <td colspan="2">[A-Z]{2}</td>
+      <td colspan="2">^[A-Z]{2}$</td>
     </tr>
   </tbody>
 </table>
@@ -2897,7 +2897,7 @@
                     "title": "Postleitzahl",
                     "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
                     "type": "string",
-                    "pattern": "[0-9]+"
+                    "pattern": "^[0-9]+$"
                 },
                 "city": {
                     "title": "Stadt",
@@ -2918,7 +2918,7 @@
                     "title": "ISO-Code des Landes",
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
-                    "pattern": "[A-Z]{2}"
+                    "pattern": "^[A-Z]{2}$"
                 }
             },
             "unevaluatedProperties": false,
