@@ -1,0 +1,72 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_acknowledgement.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resource Acknowledgement",
+  "description": "Acknowledgement specifying which specific resources are provided in response to a resource request.",
+  "type": "object",
+  "properties": {
+    "resourceRequestId": {
+      "title": "Resource Request ID",
+      "description": "The unique identifier of the resource request being acknowledged.",
+      "type": "string"
+    },
+    "acknowledgedResources": {
+      "title": "Acknowledged Resources",
+      "description": "List of specific resources that are acknowledged/provided in response to the request.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Acknowledged Resource",
+        "type": "object",
+        "required": ["resourceId", "resourceName", "resourceType"],
+        "properties": {
+          "resourceId": {
+            "title": "Resource ID",
+            "description": "Unique identifier of the specific resource.",
+            "type": "string"
+          },
+          "resourceName": {
+            "title": "Resource Name",
+            "description": "Name of the specific resource.",
+            "type": "string"
+          },
+          "resourceType": {
+            "title": "Resource Type",
+            "description": "Type of the resource (from resource type catalog).",
+            "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resouce_type_catalogue/0.1/response.schema.json#/properties/resourceType/items"
+          }
+        }
+      }
+    },
+    "acknowledgedAt": {
+      "title": "Acknowledged At",
+      "description": "Timestamp when the resource acknowledgement was issued.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "comment": {
+      "title": "Kommentar",
+      "description": "Optional comment or additional information.",
+      "type": "string"
+    }
+  },
+  "required": ["resourceRequestId", "acknowledgedResources", "acknowledgedAt"],
+  "examples": [
+    {
+      "resourceRequestId": "10002003",
+      "acknowledgedResources": [
+        {
+          "resourceId": "1234",
+          "resourceName": "KTW-1",
+          "resourceType": "KTW"
+        },
+        {
+          "resourceId": "5674",
+          "resourceName": "RTW-3",
+          "resourceType": "RTW"
+        }
+      ],
+      "acknowledgedAt": "2025-06-11T10:20:00Z"
+    }
+  ]
+}
