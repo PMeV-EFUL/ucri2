@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
-  "title": "Eine Übergabe-Anfrage für einen Patienten",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten",
   "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
   "required": [
     "sharedIncidentId",
@@ -13,44 +14,66 @@
     "sharedIncidentId": {
       "type": "string",
       "format": "uuid",
+      "title": "globale Einsatz-UUID",
       "description": "global eindeutige UUID des Einsatzes"
     },
     "internalId": {
       "type": "string",
+      "title": "Sender-interne Einsatz-ID",
       "description": "Sender-interne ID des Einsatzes"
     },
+    "additionalInfo": {
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+      "type": "string"
+    },
+    "sentByDispatcherAt": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dispatcher-Übergabe-Zeitstempel",
+      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+    },
+    "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
+        "$ref": "#/$defs/person.schema.json"
+      }
+    },
+    "protocolRemarks": {
+      "title": "Protokollvermerke",
+      "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/notification.schema.json",
+        "title": "Protokollvermerk",
+        "description": "Ein Protokollvermerk."
+      }
+    },
     "issue": {
+      "title": "Übergabegrund",
       "type": "string",
       "enum": [
         "consultation_needed"
       ],
       "description": "Übergabegrund"
     },
-    "additionalInfo": {
-      "type": "string"
-    },
-    "sentByDispatcherAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
-    },
     "patient": {
+      "title": "Patient",
+      "description": "Der/die Patient(in).",
       "$ref": "#/$defs/patient.schema.json",
       "type": "object",
       "required": [
         "name",
         "phone"
       ]
-    },
-    "informers": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "$ref": "#/$defs/person.schema.json"
-      }
     }
   },
-  "unevaluatedProperties": false,
   "examples": [
     {
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -58,6 +81,15 @@
       "issue": "consultation_needed",
       "additionalInfo": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
+      "protocolRemarks": [
+        {
+          "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+          "timestamp": "2024-01-01T10:06:09",
+          "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
+          "category": "information",
+          "silent": false
+        }
+      ],
       "patient": {
         "name": "Mustermann",
         "surname": "Hans",
@@ -78,13 +110,13 @@
         "age": 55,
         "healthInsuranceInformation": {
           "healthInsuranceCompany": "Musterkasse",
-          "healthInsuranceCompanyNumber": 101234567,
+          "healthInsuranceCompanyNumber": "101234567",
           "insuranceNumber": "S123456789"
         },
         "initialAssessment": {
-          "rmi": 360,
-          "rmc": 360543215,
-          "pzc": 360401,
+          "rmi": "360",
+          "rmc": "360543215",
+          "pzc": "360401",
           "additionalInformation": "unspezifischer Notfall"
         },
         "infectionInformation": "potentiell ansteckend",
@@ -104,7 +136,7 @@
   "$defs": {
     "address.schema.json": {
       "title": "Adresse",
-      "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
+      "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
       "required": [
         "street"
       ],
@@ -112,31 +144,40 @@
       "properties": {
         "street": {
           "title": "Name der Strasse",
+          "description": "Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und 'Straße' mit einem 'ß' geschrieben werden (also 'Musterstraße' anstatt 'Musterstrasse' oder 'Musterstr.'). ",
           "type": "string"
         },
         "houseNumber": {
           "title": "Hausnummer",
+          "description": "Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also '12a' anstatt '12 a').",
           "type": "string"
         },
         "postalCode": {
           "title": "Postleitzahl",
-          "type": "string"
+          "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
+          "type": "string",
+          "pattern": "^[0-9]+$"
         },
         "city": {
           "title": "Stadt",
+          "description": "Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist 'cityDistrict' zu nutzen!",
           "type": "string"
         },
         "cityDistrict": {
           "title": "Ortsteil",
+          "description": "Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als 'city' eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.",
           "type": "string"
         },
         "state": {
           "title": "Bundesland",
+          "description": "Das Bundesland.",
           "type": "string"
         },
         "country": {
-          "title": "Land",
-          "type": "string"
+          "title": "ISO-Code des Landes",
+          "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
         }
       },
       "unevaluatedProperties": false,
@@ -152,6 +193,114 @@
         }
       ]
     },
+    "person.schema.json": {
+      "title": "Person",
+      "description": "Eine Person. Obligat ist der Nachname.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Nachname",
+          "description": "Der Nachname.",
+          "type": "string"
+        },
+        "surname": {
+          "title": "Vorname",
+          "description": "Der Vorname.",
+          "type": "string"
+        },
+        "phone": {
+          "title": "Telefonnummer",
+          "description": "Die Telefonnummer.",
+          "type": "string"
+        },
+        "email": {
+          "title": "Email-Adresse",
+          "description": "Die Email-Adresse.",
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/$defs/address.schema.json",
+          "title": "MeldeAdresse",
+          "description": "Die Meldeadresse."
+        },
+        "additionalInfo": {
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+          "type": "string"
+        }
+      },
+      "examples": [
+        {
+          "name": "Mustermann",
+          "surname": "Hans",
+          "phone": "+49 30 123456",
+          "email": "hans.mustermann@example.com",
+          "address": {
+            "street": "Musterstrasse",
+            "houseNumber": "15b",
+            "postalCode": "12345",
+            "city": "Musterhausen",
+            "cityDistrict": "Musterberg",
+            "state": "Brandenburg",
+            "country": "DE"
+          },
+          "additionalInfo": "weitere Informationen"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "notification.schema.json": {
+      "unevaluatedProperties": false,
+      "title": "Einsatzbezogene Text-Benachrichtigung",
+      "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+      "required": [
+        "sharedIncidentId",
+        "timestamp",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "sharedIncidentId": {
+          "type": "string",
+          "format": "uuid",
+          "title": "globale Einsatz-UUID",
+          "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Zeitstempel",
+          "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+        },
+        "message": {
+          "title": "Benachrichtigungstext",
+          "description": "Inhalt der Benachrichtigung",
+          "type": "string"
+        },
+        "category": {
+          "title": "Benachrichtigungskategorie",
+          "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
+          "type": "string"
+        },
+        "silent": {
+          "title": "Benachrichtigungs-Sichtbarkeit",
+          "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+          "type": "boolean"
+        }
+      },
+      "examples": [
+        {
+          "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+          "timestamp": "2024-01-01T10:06:09",
+          "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+          "category": "information",
+          "silent": true
+        }
+      ]
+    },
     "healthInsuranceInformation.schema.json": {
       "title": "Informationen zum Versicherungsverhältnis",
       "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
@@ -160,17 +309,20 @@
       "properties": {
         "healthInsuranceCompany": {
           "title": "Name der Krankenversicherung",
+          "description": "Der Name der Krankenversicherung.",
           "type": "string"
         },
         "healthInsuranceCompanyNumber": {
           "title": "IK der Krankenversicherung",
-          "description": "TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?",
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 999999999
+          "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
+          "type": "string",
+          "pattern": "^[0-9]*$",
+          "minLength": 9,
+          "maxLength": 9
         },
         "insuranceNumber": {
           "title": "Versichertennummer (Alphanumerisch)",
+          "description": "Die Versichertennummer",
           "type": "string"
         }
       },
@@ -178,51 +330,60 @@
       "examples": [
         {
           "healthInsuranceCompany": "Musterkasse",
-          "healthInsuranceCompanyNumber": 101234567,
+          "healthInsuranceCompanyNumber": "101234567",
           "insuranceNumber": "S123456789"
         }
       ]
     },
     "initialAssessment.schema.json": {
       "title": "Ersteinschätzung",
-      "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?",
+      "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
       "required": [],
       "type": "object",
       "minProperties": 1,
       "properties": {
         "rmi": {
           "title": "Rückmeldeindikator",
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 999
+          "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
+          "type": "string",
+          "pattern": "^[0-9]*$",
+          "minLength": 3,
+          "maxLength": 3
         },
         "rmc": {
           "title": "Rückmeldecode",
-          "type": "integer"
+          "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
+          "type": "string",
+          "pattern": "^[0-9]*$",
+          "minLength": 1
         },
         "pzc": {
           "title": "Patientenzuweisungscode",
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 999999
+          "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
+          "type": "string",
+          "pattern": "^[0-9]*$",
+          "minLength": 6,
+          "maxLength": 6
         },
         "additionalInformation": {
-          "type": "string"
+          "type": "string",
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
         }
       },
       "unevaluatedProperties": false,
       "examples": [
         {
-          "rmi": 360,
-          "rmc": 360543215,
-          "pzc": 360401,
+          "rmi": "360",
+          "rmc": "360543215",
+          "pzc": "360401",
           "additionalInformation": "unspezifischer Notfall"
         }
       ]
     },
     "patient.schema.json": {
       "title": "Patient",
-      "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
+      "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person und besitzt zusätzliche Eigenschaften. Obligat ist nur der Nachname.",
       "required": [
         "name"
       ],
@@ -230,29 +391,37 @@
       "properties": {
         "name": {
           "title": "Nachname",
+          "description": "Der Nachname.",
           "type": "string"
         },
         "surname": {
           "title": "Vorname",
+          "description": "Der Vorname.",
           "type": "string"
         },
         "phone": {
           "title": "Telefonnummer",
+          "description": "Die Telefonnummer.",
           "type": "string"
         },
         "email": {
           "title": "Email-Adresse",
+          "description": "Die Email-Adresse.",
           "type": "string"
         },
         "address": {
-          "$ref": "#/$defs/address.schema.json"
+          "$ref": "#/$defs/address.schema.json",
+          "title": "MeldeAdresse",
+          "description": "Die Meldeadresse."
         },
         "additionalInfo": {
-          "title": "Weitere Informationen zur Person",
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
         },
         "gender": {
           "title": "Geschlecht",
+          "description": "Das Geschlecht.",
           "type": "string",
           "enum": [
             "Male",
@@ -267,26 +436,34 @@
           "format": "date"
         },
         "age": {
-          "title": "Alter in Jahren",
+          "title": "Alter",
+          "description": "Das Alter in Jahren.",
           "type": "number",
           "minimum": 0
         },
         "healthInsuranceInformation": {
-          "$ref": "#/$defs/healthInsuranceInformation.schema.json"
+          "$ref": "#/$defs/healthInsuranceInformation.schema.json",
+          "title": "Informationen zum Versicherungsverhältnis",
+          "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer."
         },
         "initialAssessment": {
-          "$ref": "#/$defs/initialAssessment.schema.json"
+          "$ref": "#/$defs/initialAssessment.schema.json",
+          "title": "Ersteinschätzung",
+          "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein."
         },
         "infectionInformation": {
-          "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
+          "title": "Infektiös (Freitext)",
+          "description": "Informationen, ob der Patient ansteckend ist (als Freitext).",
           "type": "string"
         },
         "infectionStatus": {
-          "title": "Informationen ob der Patient ansteckend ist (true/false)",
+          "title": "Infektiös (Wahrheitswert)",
+          "description": "Informationen, ob der Patient ansteckend ist (true/false).",
           "type": "boolean"
         },
         "transportNumber": {
           "title": "Transportnummer",
+          "description": "Die Transportnummer.",
           "type": "string"
         }
       },
@@ -311,70 +488,18 @@
           "age": 55,
           "healthInsuranceInformation": {
             "healthInsuranceCompany": "Musterkasse",
-            "healthInsuranceCompanyNumber": 101234567,
+            "healthInsuranceCompanyNumber": "101234567",
             "insuranceNumber": "S123456789"
           },
           "initialAssessment": {
-            "rmi": 360,
-            "rmc": 360543215,
-            "pzc": 360401,
+            "rmi": "360",
+            "rmc": "360543215",
+            "pzc": "360401",
             "additionalInformation": "unspezifischer Notfall"
           },
           "infectionInformation": "potentiell ansteckend",
           "infectionStatus": true,
           "transportNumber": "123456"
-        }
-      ],
-      "unevaluatedProperties": false
-    },
-    "person.schema.json": {
-      "title": "Person",
-      "description": "Eine Person. Obligat ist der Nachname.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Nachname",
-          "type": "string"
-        },
-        "surname": {
-          "title": "Vorname",
-          "type": "string"
-        },
-        "phone": {
-          "title": "Telefonnummer",
-          "type": "string"
-        },
-        "email": {
-          "title": "Email-Adresse",
-          "type": "string"
-        },
-        "address": {
-          "$ref": "#/$defs/address.schema.json"
-        },
-        "additionalInfo": {
-          "title": "Weitere Informationen zur Person",
-          "type": "string"
-        }
-      },
-      "examples": [
-        {
-          "name": "Mustermann",
-          "surname": "Hans",
-          "phone": "+49 30 123456",
-          "email": "hans.mustermann@example.com",
-          "address": {
-            "street": "Musterstrasse",
-            "houseNumber": "15b",
-            "postalCode": "12345",
-            "city": "Musterhausen",
-            "cityDistrict": "Musterberg",
-            "state": "Brandenburg",
-            "country": "DE"
-          },
-          "additionalInfo": "weitere Informationen"
         }
       ],
       "unevaluatedProperties": false

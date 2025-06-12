@@ -9,4 +9,16 @@ Der Anwendungsfall Patientendatentransfer ist der Sonderfall der Einsatzübergab
 
 Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänger-Leitstelle bestätigt oder abgelehnt.
 
+# Ablaufbeschreibung
+
+1. A->B: Einsatz übergeben
+2. B->A: Einsatz annehmen oder ablehnen
+3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
+
+# App-Nachrichten
+<!-- include ../../general_schema_documentation.md -->
+<!-- include incident.schema.md -->
+<!-- include acknowledgement.schema.md -->
+<!-- include completion.schema.md -->
+
 

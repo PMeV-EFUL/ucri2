@@ -13,14 +13,41 @@ general notes:
 -the standard bundling is modified by making all internalized refs into #/$def/filename refs (to allow documentation generation and support schema implementations which do not fully support the 2020 schema draft.
 -$refs at the root of $def schemas are replaced by merging the reffed schemas directly. Altough the 2020 draft allows root level $refs (as a means to model "inheritance"), not all implementations support this (hyperjump and ajv JS validators do, the used
  json-schema-static-docs lib for schema documentation generation doesn't.
- LIMITATION: Only one level of root $ref is supported at this point (as used by the person->patient inheritance)
 -the resulting bundled schemata for the application messages should be usable for most JSON schema implementations as they are simplified in regards to the possibilities granted by the JSON schema spec
--Markdown documentation is generated for each schema individually ([schemaname].schema.md and also for each usecase
+-Markdown documentation is generated for each schema individually ([schemaname].schema.md and also for each usecase as a joint md and pdf file
  */
 
 const stagedAppsPath="../apps";
 const bundledAppsPath="../../apps";
 const docsPath="../../docs/apps";
+
+const missingPropertyMessages=[]
+function checkForMissingProperties(path,obj) {
+  for (var key in obj) {
+
+    //recurse
+    if (!obj.hasOwnProperty(key)) {
+      continue;
+    }
+
+    if (key!== "examples" && typeof obj[key] === 'object' && obj[key] !== null) {
+      const child=obj[key];
+      const newPath=`${path}.${key}`;
+      if (child.$ref || child.type) {
+        //there should be a title and a description here!
+        if (!child.title) {
+          missingPropertyMessages.push(`${newPath} : title is missing`);
+        }
+        if (!child.description) {
+          missingPropertyMessages.push(`${newPath} : description is missing`);
+        }
+      }
+
+      checkForMissingProperties(newPath,obj[key])
+    }
+  }
+}
+
 async function process(){
   const schemaDirs=collectInputSchemata();
   console.log(`Processing the following app/version directories with schema files:\n ${JSON.stringify(schemaDirs,null,2)}`);
@@ -64,7 +91,7 @@ async function process(){
         if (output.valid) {
           console.log("Example instance is valid :-)");
         } else {
-          console.log("Instance is invalid :-(");
+          console.log("ERROR: Instance is invalid :-(");
           console.log(JSON.stringify(output,null,2));
           errorsOccured=true;
         }
@@ -81,18 +108,27 @@ async function process(){
         console.log(`STEP 3: bundling schema "${schemaName}"...`);
         let schema=schemas[schemaName];
         let schemaId = schema["$id"];
-        const output = await bundle(schemaId);
+        let output = await bundle(schemaId);
         //process the output to change all refs to be local
         replaceRefs(output);
 
+        let resolvedBaseRefKeys = {};
+        //remove  top level base $ref if any
+        while (output.$ref){
+          output=resolveTopLevelRefs(output,resolvedBaseRefKeys);
+        }
+
         //resolve all refs which point to a *Base Building block until no more replacements are done
-        const resolvedBaseRefKeys = {};
         let replacementsPerformed=true;
         while(replacementsPerformed){
           replacementsPerformed=resolveBaseRefs(output,resolvedBaseRefKeys);
         }
+
         //remove all *Base refs which were replaced
         removeResolvedBaseRefs(output,resolvedBaseRefKeys);
+
+        //check the whole output schema for missing titles or descriptions
+        checkForMissingProperties(`${schemaDir}/${schemaName}`,{":":output});
 
         //write the bundled and processed final schema
         const outputPath= `${bundledAppsPath}/${schemaDir}`
@@ -135,13 +171,19 @@ async function process(){
     if (schemaDir.indexOf("building_blocks")<0) {
       console.log("STEP 5: generating merged docs ...");
       let completeMarkdown=fs.readFileSync(`${stagedAppsPath}/${schemaDir}/manual_documentation.md`, 'utf8');
-      completeMarkdown+="\n # App-Nachrichten\n"
-      for (const schemaName of schemaNames) {
-        const schemaDocFilename=schemaName.replace("schema.json","schema.md");
-        //read schema markdown, push all headings one level down
-        const schemaDocMarkdown=fs.readFileSync(`${docsPath}/${schemaDir}/${schemaDocFilename}`, 'utf8').replaceAll("# ","## ");
-        completeMarkdown+=`\n${schemaDocMarkdown}`;
+      //include per-message docs as indicated by comments
+      let includeRegexMatch;
+      const includeRegex= /(<!-- include )(.*)( -->)/g;
+      const includedFilenames=[];
+      while ((includeRegexMatch = includeRegex.exec(completeMarkdown)) !== null) {
+        includedFilenames.push(includeRegexMatch[2]);
       }
+      for (const includedFilename of includedFilenames){
+        //read schema markdown, push all headings one level down
+        const includedMarkdown=fs.readFileSync(`${docsPath}/${schemaDir}/${includedFilename}`, 'utf8').replaceAll("# ","## ");
+        completeMarkdown=completeMarkdown.replaceAll(`<!-- include ${includedFilename} -->`,includedMarkdown);
+      }
+
       //insert table of contents (needs <!-- toc --><!-- tocstop --> in manual_documentation.md)
       completeMarkdown=toc.insert(completeMarkdown);
       //write completed markdown
@@ -155,7 +197,17 @@ async function process(){
       console.log("not generating merged docs for building blocks...");
     }
   }
-  console.log("processing finished sucessfully.");
+  if (missingPropertyMessages.length>0){
+    console.warn("There were missing documentation properties detected (fix issues in building blocks first, then issues remaining in message schema files:)");
+    console.warn(missingPropertyMessages.join("\n"));
+  }else{
+    console.log("no missing documentation properties were detected, yay ;-)")
+  }
+  if (errorsOccured){
+    console.error("ERROR: processing FAILED, see ERROR messages above!")
+  }else{
+    console.log("processing finished sucessfully.");
+  }
 }
 
 function collectInputSchemata(){
@@ -200,6 +252,32 @@ function replaceRefs(obj) {
       obj[key]=`#/$defs/${newRef}`;
     }
   }
+}
+
+function resolveTopLevelRefs(schema,resolvedBaseRefKeys) {
+  let outSchema=schema;
+  //we check the top level for any $refs and resolve them
+  const $defs = schema.$defs;
+  const defSchema = schema;
+  if (defSchema.$ref) {
+    const baseRefMatch = /(#\/\$defs\/)(.*.schema.json)/.exec(defSchema.$ref);
+    if (baseRefMatch) {
+      //we replace the ref by merging the reffed schema
+      const reffedKey = baseRefMatch[2];
+      const reffedSchema = $defs[reffedKey];
+      delete defSchema.$ref;
+      //to make sure that the resulting schema has a sensible order of keys we first define the firstmost keys and then add the rest of the reffed schema
+      let mergedSchema = {$schema:"",$id:"",unevaluatedProperties:false};
+      mergeDeep(mergedSchema,JSON.parse(JSON.stringify(reffedSchema)));
+      //let mergedSchema = JSON.parse(JSON.stringify(reffedSchema));
+      //then merge the extending schema into the reffed schema
+      mergeDeep(mergedSchema, defSchema);
+      outSchema=mergedSchema;
+      //mark the reffed Base schema for deletion
+      resolvedBaseRefKeys[reffedKey] = true;
+    }
+  }
+  return outSchema;
 }
 
 function resolveBaseRefs(schema,resolvedBaseRefKeys) {

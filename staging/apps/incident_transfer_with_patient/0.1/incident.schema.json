@@ -1,62 +1,35 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_with_patient/0.1/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Ein Einsatz mit Patientendaten",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentExtendedBase.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
   "description": "Ein Einsatz mit Patientendaten",
   "required": [ "sharedIncidentId","sentByDispatcherAt","patients","missionLocation" ],
   "type": "object",
   "properties": {
-    "sharedIncidentId": {
-      "type": "string",
-      "format": "uuid",
-      "description": "global eindeutige UUID des Einsatzes"
-    },
-    "internalId": {
-      "type": "string",
-      "description": "Sender-interne ID des Einsatzes"
-    },
-    "classifications": {
-      "type": "array",
-      "description": "Stichwortkürzel des Einsatzes",
-      "minItems": 1,
-      "items": {
-        "type": "string"
-      }
-    },
-    "issue": {
-      "type": "string",
-      "description": "Taktische Bewertung: Sachverhalt"
-    },
     "flashingLights": {
+      "title": "Sonderrechte",
+      "description": "Sonderrechte",
       "type": "boolean"
     },
-    "additionalInfo": {
-      "type": "string"
-    },
-    "sentByDispatcherAt": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
-    },
-	"missionLocation": {
+    "missionLocation": {
+      "title": "Einsatzort",
+      "description": "Einsatzort",
       "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
     },
     "patients": {
+      "title": "Patienten",
+      "description": "List der Patienten.",
       "type": "array",
       "minItems": 1,
       "items": {
+        "title": "Patient",
+        "description": "Ein(e) Patient(in).",
         "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json"
-      }
-    },
-    "informers": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/person.schema.json"
       }
     }
   },
-  "unevaluatedProperties": false,
   "examples": [{
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "internalId": "f123456",
@@ -68,6 +41,7 @@
     "flashingLights": true,
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "startTimestamp": "2024-01-01T09:55:15",
     "missionLocation": {
       "coordinate": {
         "lat": 65.453323,
@@ -115,13 +89,13 @@
         "age": 55,
         "healthInsuranceInformation": {
           "healthInsuranceCompany":"Musterkasse",
-          "healthInsuranceCompanyNumber": 101234567,
+          "healthInsuranceCompanyNumber": "101234567",
           "insuranceNumber": "S123456789"
         },
         "initialAssessment": {
-          "rmi": 360,
-          "rmc": 360543215,
-          "pzc": 360401,
+          "rmi": "360",
+          "rmc": "360543215",
+          "pzc": "360401",
           "additionalInformation": "unspezifischer Notfall"
         },
         "infectionInformation": "potentiell ansteckend",

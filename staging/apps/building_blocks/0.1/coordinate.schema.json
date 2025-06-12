@@ -7,13 +7,15 @@
   "type": "object",
   "properties": {
     "lat": {
-      "title": "Breitengrad in Grad",
+      "title": "Breitengrad",
+      "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
       "type": "number",
       "minimum": -90,
       "maximum": 90
     },
     "lon": {
-      "title": "Längengrad in Grad",
+      "title": "Längengrad",
+      "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
       "type": "number",
       "minimum": -180,
       "maximum": 180

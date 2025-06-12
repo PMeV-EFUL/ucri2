@@ -8,24 +8,27 @@
   "properties": {
     "healthInsuranceCompany": {
       "title": "Name der Krankenversicherung",
+      "description": "Der Name der Krankenversicherung.",
       "type": "string"
     },
 	"healthInsuranceCompanyNumber": {
       "title": "IK der Krankenversicherung",
-      "description": "TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?",
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 999999999
+      "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
+      "type": "string",
+      "pattern": "^[0-9]*$",
+      "minLength": 9,
+      "maxLength": 9
     },
 	"insuranceNumber": {
       "title": "Versichertennummer (Alphanumerisch)",
+      "description": "Die Versichertennummer",
       "type": "string"
     }
   },
   "unevaluatedProperties": false,
   "examples": [{
     "healthInsuranceCompany":"Musterkasse",
-    "healthInsuranceCompanyNumber": 101234567,
+    "healthInsuranceCompanyNumber": "101234567",
     "insuranceNumber": "S123456789"
   }]
 }

@@ -2,37 +2,46 @@
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/address.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Adresse",
-  "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
+  "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
   "required": [ "street" ],
   "type": "object",
   "properties": {
     "street": {
       "title": "Name der Strasse",
+      "description": "Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und 'Straße' mit einem 'ß' geschrieben werden (also 'Musterstraße' anstatt 'Musterstrasse' oder 'Musterstr.'). ",
 	  "type": "string"
     },
     "houseNumber": {
 	  "title": "Hausnummer",
+      "description": "Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also '12a' anstatt '12 a').",
       "type": "string"
     },
 	"postalCode": {
       "title": "Postleitzahl",
-      "type": "string"
+      "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
+      "type": "string",
+      "pattern": "^[0-9]+$"
     },
 	"city": {
       "title": "Stadt",
+      "description": "Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist 'cityDistrict' zu nutzen!",
       "type": "string"
     },
 	"cityDistrict": {
       "title": "Ortsteil",
+      "description": "Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als 'city' eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.",
       "type": "string"
     },
 	"state": {
       "title": "Bundesland",
+      "description": "Das Bundesland.",
       "type": "string"
     },
 	"country": {
-      "title": "Land",
-      "type": "string"
+      "title": "ISO-Code des Landes",
+      "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
     }
   },
   "unevaluatedProperties": false,

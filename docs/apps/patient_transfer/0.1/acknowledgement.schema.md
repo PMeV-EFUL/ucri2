@@ -1,12 +1,12 @@
 
 
-# Bestätigung oder Ablehnung einer Patientenübergabeanfrage
+# App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage
 
 <p>Bestätigung oder Ablehnung einer Patientenübergabeanfrage</p>
 
 <table>
 <tbody>
-<tr><th>$id</th><td>https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/acknowledgement.schema.json</td></tr>
+<tr><th>$id</th><td>https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json</td></tr>
 <tr><th>$schema</th><td>https://json-schema.org/draft/2020-12/schema</td></tr>
 </tbody>
 </table>
@@ -40,8 +40,12 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
-      <td colspan="2">global eindeutige UUID des Einsatzes</td>
+      <td colspan="2">global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -63,6 +67,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Dispatcher-Zeitstempel</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde</td>
@@ -88,6 +96,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Annahme- oder Ablehnungsstatus</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Annahme- oder Ablehnungsstatus</td>
     </tr>
@@ -99,9 +111,6 @@
     <tr>
       <th>Enum</th>
       <td colspan="2"><ul><li>accepted</li><li>rejected</li></ul></td>
-    </tr><tr>
-      <th>Format</th>
-      <td colspan="2">uuid</td>
     </tr>
   </tbody>
 </table>
@@ -114,6 +123,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Begründung für die Annahme oder Ablehnung</td>
@@ -141,8 +154,9 @@
 ```
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/acknowledgement.schema.json",
-    "title": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
+    "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json",
+    "unevaluatedProperties": false,
+    "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "description": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
     "required": [
         "sharedIncidentId",
@@ -154,28 +168,30 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
-            "description": "global eindeutige UUID des Einsatzes"
+            "title": "globale Einsatz-UUID",
+            "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
         },
         "acknowledgedByDispatcherAt": {
             "type": "string",
             "format": "date-time",
+            "title": "Dispatcher-Zeitstempel",
             "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
         },
         "status": {
             "type": "string",
-            "format": "uuid",
             "enum": [
                 "accepted",
                 "rejected"
             ],
+            "title": "Annahme- oder Ablehnungsstatus",
             "description": "Annahme- oder Ablehnungsstatus"
         },
         "cause": {
             "type": "string",
+            "title": "Begründung für die Annahme oder Ablehnung",
             "description": "Begründung für die Annahme oder Ablehnung"
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -183,7 +199,8 @@
             "status": "rejected",
             "cause": "Einsatzort ist unbekannt!"
         }
-    ]
+    ],
+    "$defs": {}
 }
 ```
 

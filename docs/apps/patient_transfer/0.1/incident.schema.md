@@ -1,6 +1,6 @@
 
 
-# Eine Übergabe-Anfrage für einen Patienten
+# App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten
 
 <p>Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist</p>
 
@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -27,6 +27,15 @@
     "issue": "consultation_needed",
     "additionalInfo": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "protocolRemarks": [
+        {
+            "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+            "timestamp": "2024-01-01T10:06:09",
+            "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
+            "category": "information",
+            "silent": false
+        }
+    ],
     "patient": {
         "name": "Mustermann",
         "surname": "Hans",
@@ -47,13 +56,13 @@
         "age": 55,
         "healthInsuranceInformation": {
             "healthInsuranceCompany": "Musterkasse",
-            "healthInsuranceCompanyNumber": 101234567,
+            "healthInsuranceCompanyNumber": "101234567",
             "insuranceNumber": "S123456789"
         },
         "initialAssessment": {
-            "rmi": 360,
-            "rmc": 360543215,
-            "pzc": 360401,
+            "rmi": "360",
+            "rmc": "360543215",
+            "pzc": "360401",
             "additionalInformation": "unspezifischer Notfall"
         },
         "infectionInformation": "potentiell ansteckend",
@@ -82,6 +91,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">global eindeutige UUID des Einsatzes</td>
     </tr>
@@ -106,6 +119,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Sender-interne Einsatz-ID</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Sender-interne ID des Einsatzes</td>
     </tr>
@@ -121,35 +138,19 @@
 
 
 
-## issue
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">Übergabegrund</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Enum</th>
-      <td colspan="2"><ul><li>consultation_needed</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
 ## additionalInfo
 
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -167,6 +168,10 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Dispatcher-Übergabe-Zeitstempel</td>
+    </tr>
     <tr>
       <th>Beschreibung</th>
       <td colspan="2">Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde</td>
@@ -186,6 +191,512 @@
 
 
 
+## informers
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Meldende</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Liste der Meldenden Personen</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Min Items</th>
+      <td colspan="2">1</td>
+    </tr>
+  </tbody>
+</table>
+
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+
+
+### informers.name
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Nachname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.surname
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.phone
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Telefonnummer</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.email
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Email-Adresse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.address
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">MeldeAdresse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Meldeadresse.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Object</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+### informers.address.street
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.address.houseNumber
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Hausnummer</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.address.postalCode
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Postleitzahl</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">^[0-9]+$</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### informers.address.city
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.address.cityDistrict
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Ortsteil</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.address.state
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Bundesland</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### informers.address.country
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">^[A-Z]{2}$</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+### informers.additionalInfo
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+## protocolRemarks
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Protokollvermerke</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Min Items</th>
+      <td colspan="2">1</td>
+    </tr>
+  </tbody>
+</table>
+
+### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkscategory">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+
+
+### protocolRemarks.sharedIncidentId
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">globale Einsatz-UUID</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">uuid</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.timestamp
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zeitstempel</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.message
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungstext</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Inhalt der Benachrichtigung</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.category
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungskategorie</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+### protocolRemarks.silent
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Benachrichtigungs-Sichtbarkeit</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+## issue
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Übergabegrund</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Übergabegrund</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    <tr>
+      <th>Enum</th>
+      <td colspan="2"><ul><li>consultation_needed</li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
 ## patient
 
 
@@ -197,7 +708,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.</td>
+      <td colspan="2">Der/die Patient(in).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -221,6 +732,10 @@
       <th>Titel</th>
       <td colspan="2">Nachname</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Nachname.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -241,6 +756,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Vorname</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Vorname.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -263,6 +782,10 @@
       <th>Titel</th>
       <td colspan="2">Telefonnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Telefonnummer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -284,6 +807,10 @@
       <th>Titel</th>
       <td colspan="2">Email-Adresse</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Email-Adresse.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -303,11 +830,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Adresse</td>
+      <td colspan="2">MeldeAdresse</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
+      <td colspan="2">Die Meldeadresse.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -328,6 +855,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Name der Strasse</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und &#x27;Straße&#x27; mit einem &#x27;ß&#x27; geschrieben werden (also &#x27;Musterstraße&#x27; anstatt &#x27;Musterstrasse&#x27; oder &#x27;Musterstr.&#x27;). </td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -350,6 +881,10 @@
       <th>Titel</th>
       <td colspan="2">Hausnummer</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also &#x27;12a&#x27; anstatt &#x27;12 a&#x27;).</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -371,12 +906,19 @@
       <th>Titel</th>
       <td colspan="2">Postleitzahl</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">^[0-9]+$</td>
+    </tr>
   </tbody>
 </table>
 
@@ -391,6 +933,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Stadt</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist &#x27;cityDistrict&#x27; zu nutzen!</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -413,6 +959,10 @@
       <th>Titel</th>
       <td colspan="2">Ortsteil</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als &#x27;city&#x27; eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -434,6 +984,10 @@
       <th>Titel</th>
       <td colspan="2">Bundesland</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Bundesland.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -453,14 +1007,21 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Land</td>
+      <td colspan="2">ISO-Code des Landes</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">^[A-Z]{2}$</td>
+    </tr>
   </tbody>
 </table>
 
@@ -475,7 +1036,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Weitere Informationen zur Person</td>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -497,6 +1062,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Geschlecht</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Geschlecht.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -548,7 +1117,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Alter in Jahren</td>
+      <td colspan="2">Alter</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Das Alter in Jahren.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Number</td></tr>
     <tr>
@@ -595,6 +1168,10 @@
       <th>Titel</th>
       <td colspan="2">Name der Krankenversicherung</td>
     </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Name der Krankenversicherung.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -618,16 +1195,22 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?</td>
+      <td colspan="2">Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
     <tr>
-      <th>Maximum</th>
-      <td colspan="2">999999999</td>
+      <th>Min Length</th>
+      <td colspan="2">9</td>
+    </tr><tr>
+      <th>Max Length</th>
+      <td colspan="2">9</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">^[0-9]*$</td>
     </tr>
   </tbody>
 </table>
@@ -643,6 +1226,10 @@
     <tr>
       <th>Titel</th>
       <td colspan="2">Versichertennummer (Alphanumerisch)</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Die Versichertennummer</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -668,7 +1255,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?</td>
+      <td colspan="2">Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Object</td></tr>
     <tr>
@@ -693,14 +1280,24 @@
       <th>Titel</th>
       <td colspan="2">Rückmeldeindikator</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
     <tr>
-      <th>Maximum</th>
-      <td colspan="2">999</td>
+      <th>Min Length</th>
+      <td colspan="2">3</td>
+    </tr><tr>
+      <th>Max Length</th>
+      <td colspan="2">3</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">^[0-9]*$</td>
     </tr>
   </tbody>
 </table>
@@ -717,12 +1314,22 @@
       <th>Titel</th>
       <td colspan="2">Rückmeldecode</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
+    <tr>
+      <th>Min Length</th>
+      <td colspan="2">1</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">^[0-9]*$</td>
+    </tr>
   </tbody>
 </table>
 
@@ -738,14 +1345,24 @@
       <th>Titel</th>
       <td colspan="2">Patientenzuweisungscode</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">Integer</td></tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
     <tr>
-      <th>Maximum</th>
-      <td colspan="2">999999</td>
+      <th>Min Length</th>
+      <td colspan="2">6</td>
+    </tr><tr>
+      <th>Max Length</th>
+      <td colspan="2">6</td>
+    </tr><tr>
+      <th>Pattern</th>
+      <td colspan="2">^[0-9]*$</td>
     </tr>
   </tbody>
 </table>
@@ -758,6 +1375,14 @@
 
 <table class="jssd-property-table">
   <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
@@ -778,7 +1403,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Informationen ob der Patient ansteckend ist (als Freitext)</td>
+      <td colspan="2">Infektiös (Freitext)</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Informationen, ob der Patient ansteckend ist (als Freitext).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -799,7 +1428,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Informationen ob der Patient ansteckend ist (true/false)</td>
+      <td colspan="2">Infektiös (Wahrheitswert)</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Informationen, ob der Patient ansteckend ist (true/false).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
     <tr>
@@ -822,290 +1455,15 @@
       <th>Titel</th>
       <td colspan="2">Transportnummer</td>
     </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-
-## informers
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    <tr>
-      <th>Min Items</th>
-      <td colspan="2">1</td>
-    </tr>
-  </tbody>
-</table>
-
-### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
-
-
-### informers.name
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Nachname</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.surname
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Vorname</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.phone
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Telefonnummer</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.email
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Email-Adresse</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.address
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Adresse</td>
-    </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Eine postalische Adresse. Obligat ist nur der Strassenname.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">Object</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-### informers.address.street
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Name der Strasse</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Ja</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.address.houseNumber
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Hausnummer</td>
+      <td colspan="2">Die Transportnummer.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
       <th>Obligat?</th>
       <td colspan="2">Nein</td>
     </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.address.postalCode
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Postleitzahl</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.address.city
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Stadt</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.address.cityDistrict
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Ortsteil</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.address.state
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Bundesland</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-### informers.address.country
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Land</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
-    
-  </tbody>
-</table>
-
-
-
-
-
-### informers.additionalInfo
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">Weitere Informationen zur Person</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
     
   </tbody>
 </table>
@@ -1126,7 +1484,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
-    "title": "Eine Übergabe-Anfrage für einen Patienten",
+    "unevaluatedProperties": false,
+    "title": "App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten",
     "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
     "required": [
         "sharedIncidentId",
@@ -1138,44 +1497,66 @@
         "sharedIncidentId": {
             "type": "string",
             "format": "uuid",
+            "title": "globale Einsatz-UUID",
             "description": "global eindeutige UUID des Einsatzes"
         },
         "internalId": {
             "type": "string",
+            "title": "Sender-interne Einsatz-ID",
             "description": "Sender-interne ID des Einsatzes"
         },
+        "additionalInfo": {
+            "title": "Zusatzinformationen",
+            "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+            "type": "string"
+        },
+        "sentByDispatcherAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Dispatcher-Übergabe-Zeitstempel",
+            "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+        },
+        "informers": {
+            "title": "Meldende",
+            "description": "Liste der Meldenden Personen",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "title": "Meldende Person",
+                "description": "Meldende Person",
+                "$ref": "#/$defs/person.schema.json"
+            }
+        },
+        "protocolRemarks": {
+            "title": "Protokollvermerke",
+            "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/$defs/notification.schema.json",
+                "title": "Protokollvermerk",
+                "description": "Ein Protokollvermerk."
+            }
+        },
         "issue": {
+            "title": "Übergabegrund",
             "type": "string",
             "enum": [
                 "consultation_needed"
             ],
             "description": "Übergabegrund"
         },
-        "additionalInfo": {
-            "type": "string"
-        },
-        "sentByDispatcherAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
-        },
         "patient": {
+            "title": "Patient",
+            "description": "Der/die Patient(in).",
             "$ref": "#/$defs/patient.schema.json",
             "type": "object",
             "required": [
                 "name",
                 "phone"
             ]
-        },
-        "informers": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-                "$ref": "#/$defs/person.schema.json"
-            }
         }
     },
-    "unevaluatedProperties": false,
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
@@ -1183,6 +1564,15 @@
             "issue": "consultation_needed",
             "additionalInfo": "Zusatzinformationen",
             "sentByDispatcherAt": "2024-01-01T10:05:08",
+            "protocolRemarks": [
+                {
+                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
+                    "category": "information",
+                    "silent": false
+                }
+            ],
             "patient": {
                 "name": "Mustermann",
                 "surname": "Hans",
@@ -1203,13 +1593,13 @@
                 "age": 55,
                 "healthInsuranceInformation": {
                     "healthInsuranceCompany": "Musterkasse",
-                    "healthInsuranceCompanyNumber": 101234567,
+                    "healthInsuranceCompanyNumber": "101234567",
                     "insuranceNumber": "S123456789"
                 },
                 "initialAssessment": {
-                    "rmi": 360,
-                    "rmc": 360543215,
-                    "pzc": 360401,
+                    "rmi": "360",
+                    "rmc": "360543215",
+                    "pzc": "360401",
                     "additionalInformation": "unspezifischer Notfall"
                 },
                 "infectionInformation": "potentiell ansteckend",
@@ -1229,7 +1619,7 @@
     "$defs": {
         "address.schema.json": {
             "title": "Adresse",
-            "description": "Eine postalische Adresse. Obligat ist nur der Strassenname.",
+            "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
             "required": [
                 "street"
             ],
@@ -1237,31 +1627,40 @@
             "properties": {
                 "street": {
                     "title": "Name der Strasse",
+                    "description": "Der Strassenname. Falls möglich, sollten Abkürzungen vermieden werden und 'Straße' mit einem 'ß' geschrieben werden (also 'Musterstraße' anstatt 'Musterstrasse' oder 'Musterstr.'). ",
                     "type": "string"
                 },
                 "houseNumber": {
                     "title": "Hausnummer",
+                    "description": "Die Hausnummer. Falls möglich, sollte diese Angabe keine Leerzeichen enthalten (also '12a' anstatt '12 a').",
                     "type": "string"
                 },
                 "postalCode": {
                     "title": "Postleitzahl",
-                    "type": "string"
+                    "description": "Die Postleitzahl als Zeichenkette aus mindestens einer Ziffer.",
+                    "type": "string",
+                    "pattern": "^[0-9]+$"
                 },
                 "city": {
                     "title": "Stadt",
+                    "description": "Die Stadt oder Gemeinde. Ortsteilangaben dürfen nicht in diesem Feld mitkodiert werden, stattdessen ist 'cityDistrict' zu nutzen!",
                     "type": "string"
                 },
                 "cityDistrict": {
                     "title": "Ortsteil",
+                    "description": "Der Ortsteil einer Stadt oder Gemeinde. Insbesondere für Adressen, in denen als 'city' eine Gemeinde angegeben wird, ist dieses Feld von hoher Bedeutung, da es die Eindeutigkeit der Adresse sicherstellt.",
                     "type": "string"
                 },
                 "state": {
                     "title": "Bundesland",
+                    "description": "Das Bundesland.",
                     "type": "string"
                 },
                 "country": {
-                    "title": "Land",
-                    "type": "string"
+                    "title": "ISO-Code des Landes",
+                    "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
+                    "type": "string",
+                    "pattern": "^[A-Z]{2}$"
                 }
             },
             "unevaluatedProperties": false,
@@ -1277,6 +1676,114 @@
                 }
             ]
         },
+        "person.schema.json": {
+            "title": "Person",
+            "description": "Eine Person. Obligat ist der Nachname.",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Nachname",
+                    "description": "Der Nachname.",
+                    "type": "string"
+                },
+                "surname": {
+                    "title": "Vorname",
+                    "description": "Der Vorname.",
+                    "type": "string"
+                },
+                "phone": {
+                    "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
+                    "type": "string"
+                },
+                "email": {
+                    "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
+                    "type": "string"
+                },
+                "address": {
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
+                },
+                "additionalInfo": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Mustermann",
+                    "surname": "Hans",
+                    "phone": "+49 30 123456",
+                    "email": "hans.mustermann@example.com",
+                    "address": {
+                        "street": "Musterstrasse",
+                        "houseNumber": "15b",
+                        "postalCode": "12345",
+                        "city": "Musterhausen",
+                        "cityDistrict": "Musterberg",
+                        "state": "Brandenburg",
+                        "country": "DE"
+                    },
+                    "additionalInfo": "weitere Informationen"
+                }
+            ],
+            "unevaluatedProperties": false
+        },
+        "notification.schema.json": {
+            "unevaluatedProperties": false,
+            "title": "Einsatzbezogene Text-Benachrichtigung",
+            "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+            "required": [
+                "sharedIncidentId",
+                "timestamp",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "sharedIncidentId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "title": "globale Einsatz-UUID",
+                    "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "Zeitstempel",
+                    "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+                },
+                "message": {
+                    "title": "Benachrichtigungstext",
+                    "description": "Inhalt der Benachrichtigung",
+                    "type": "string"
+                },
+                "category": {
+                    "title": "Benachrichtigungskategorie",
+                    "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
+                    "type": "string"
+                },
+                "silent": {
+                    "title": "Benachrichtigungs-Sichtbarkeit",
+                    "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+                    "category": "information",
+                    "silent": true
+                }
+            ]
+        },
         "healthInsuranceInformation.schema.json": {
             "title": "Informationen zum Versicherungsverhältnis",
             "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
@@ -1285,17 +1792,20 @@
             "properties": {
                 "healthInsuranceCompany": {
                     "title": "Name der Krankenversicherung",
+                    "description": "Der Name der Krankenversicherung.",
                     "type": "string"
                 },
                 "healthInsuranceCompanyNumber": {
                     "title": "IK der Krankenversicherung",
-                    "description": "TODO besser als String (aufgrund führender Nullen)? Internationale Differenzen berücksichtigen?",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 999999999
+                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 9,
+                    "maxLength": 9
                 },
                 "insuranceNumber": {
                     "title": "Versichertennummer (Alphanumerisch)",
+                    "description": "Die Versichertennummer",
                     "type": "string"
                 }
             },
@@ -1303,51 +1813,60 @@
             "examples": [
                 {
                     "healthInsuranceCompany": "Musterkasse",
-                    "healthInsuranceCompanyNumber": 101234567,
+                    "healthInsuranceCompanyNumber": "101234567",
                     "insuranceNumber": "S123456789"
                 }
             ]
         },
         "initialAssessment.schema.json": {
             "title": "Ersteinschätzung",
-            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein. TODO numerische Codes besser als string (wegen führender Nullen)?",
+            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
             "required": [],
             "type": "object",
             "minProperties": 1,
             "properties": {
                 "rmi": {
                     "title": "Rückmeldeindikator",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 999
+                    "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 3,
+                    "maxLength": 3
                 },
                 "rmc": {
                     "title": "Rückmeldecode",
-                    "type": "integer"
+                    "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 1
                 },
                 "pzc": {
                     "title": "Patientenzuweisungscode",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 999999
+                    "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 6,
+                    "maxLength": 6
                 },
                 "additionalInformation": {
-                    "type": "string"
+                    "type": "string",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
                 }
             },
             "unevaluatedProperties": false,
             "examples": [
                 {
-                    "rmi": 360,
-                    "rmc": 360543215,
-                    "pzc": 360401,
+                    "rmi": "360",
+                    "rmc": "360543215",
+                    "pzc": "360401",
                     "additionalInformation": "unspezifischer Notfall"
                 }
             ]
         },
         "patient.schema.json": {
             "title": "Patient",
-            "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person. Obligat ist nur der Nachname.",
+            "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person und besitzt zusätzliche Eigenschaften. Obligat ist nur der Nachname.",
             "required": [
                 "name"
             ],
@@ -1355,29 +1874,37 @@
             "properties": {
                 "name": {
                     "title": "Nachname",
+                    "description": "Der Nachname.",
                     "type": "string"
                 },
                 "surname": {
                     "title": "Vorname",
+                    "description": "Der Vorname.",
                     "type": "string"
                 },
                 "phone": {
                     "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
                     "type": "string"
                 },
                 "email": {
                     "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
                     "type": "string"
                 },
                 "address": {
-                    "$ref": "#/$defs/address.schema.json"
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
                 },
                 "additionalInfo": {
-                    "title": "Weitere Informationen zur Person",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
                 },
                 "gender": {
                     "title": "Geschlecht",
+                    "description": "Das Geschlecht.",
                     "type": "string",
                     "enum": [
                         "Male",
@@ -1392,26 +1919,34 @@
                     "format": "date"
                 },
                 "age": {
-                    "title": "Alter in Jahren",
+                    "title": "Alter",
+                    "description": "Das Alter in Jahren.",
                     "type": "number",
                     "minimum": 0
                 },
                 "healthInsuranceInformation": {
-                    "$ref": "#/$defs/healthInsuranceInformation.schema.json"
+                    "$ref": "#/$defs/healthInsuranceInformation.schema.json",
+                    "title": "Informationen zum Versicherungsverhältnis",
+                    "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer."
                 },
                 "initialAssessment": {
-                    "$ref": "#/$defs/initialAssessment.schema.json"
+                    "$ref": "#/$defs/initialAssessment.schema.json",
+                    "title": "Ersteinschätzung",
+                    "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein."
                 },
                 "infectionInformation": {
-                    "title": "Informationen ob der Patient ansteckend ist (als Freitext)",
+                    "title": "Infektiös (Freitext)",
+                    "description": "Informationen, ob der Patient ansteckend ist (als Freitext).",
                     "type": "string"
                 },
                 "infectionStatus": {
-                    "title": "Informationen ob der Patient ansteckend ist (true/false)",
+                    "title": "Infektiös (Wahrheitswert)",
+                    "description": "Informationen, ob der Patient ansteckend ist (true/false).",
                     "type": "boolean"
                 },
                 "transportNumber": {
                     "title": "Transportnummer",
+                    "description": "Die Transportnummer.",
                     "type": "string"
                 }
             },
@@ -1436,70 +1971,18 @@
                     "age": 55,
                     "healthInsuranceInformation": {
                         "healthInsuranceCompany": "Musterkasse",
-                        "healthInsuranceCompanyNumber": 101234567,
+                        "healthInsuranceCompanyNumber": "101234567",
                         "insuranceNumber": "S123456789"
                     },
                     "initialAssessment": {
-                        "rmi": 360,
-                        "rmc": 360543215,
-                        "pzc": 360401,
+                        "rmi": "360",
+                        "rmc": "360543215",
+                        "pzc": "360401",
                         "additionalInformation": "unspezifischer Notfall"
                     },
                     "infectionInformation": "potentiell ansteckend",
                     "infectionStatus": true,
                     "transportNumber": "123456"
-                }
-            ],
-            "unevaluatedProperties": false
-        },
-        "person.schema.json": {
-            "title": "Person",
-            "description": "Eine Person. Obligat ist der Nachname.",
-            "required": [
-                "name"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "title": "Nachname",
-                    "type": "string"
-                },
-                "surname": {
-                    "title": "Vorname",
-                    "type": "string"
-                },
-                "phone": {
-                    "title": "Telefonnummer",
-                    "type": "string"
-                },
-                "email": {
-                    "title": "Email-Adresse",
-                    "type": "string"
-                },
-                "address": {
-                    "$ref": "#/$defs/address.schema.json"
-                },
-                "additionalInfo": {
-                    "title": "Weitere Informationen zur Person",
-                    "type": "string"
-                }
-            },
-            "examples": [
-                {
-                    "name": "Mustermann",
-                    "surname": "Hans",
-                    "phone": "+49 30 123456",
-                    "email": "hans.mustermann@example.com",
-                    "address": {
-                        "street": "Musterstrasse",
-                        "houseNumber": "15b",
-                        "postalCode": "12345",
-                        "city": "Musterhausen",
-                        "cityDistrict": "Musterberg",
-                        "state": "Brandenburg",
-                        "country": "DE"
-                    },
-                    "additionalInfo": "weitere Informationen"
                 }
             ],
             "unevaluatedProperties": false

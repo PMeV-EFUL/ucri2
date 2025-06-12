@@ -8,10 +8,12 @@
   "properties": {
     "name": {
       "title": "Objektname",
+      "description": "Der Name des Objekts.",
       "type": "string"
     },
     "additionalInfo": {
-      "title": "Weitere Informationen zum Einsatzobjekt",
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
     }
   },
