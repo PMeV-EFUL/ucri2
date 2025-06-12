@@ -7,33 +7,33 @@
   "properties": {
     "resourceRequestId": {
       "title": "Resource Request ID",
-      "description": "The unique identifier of the original resource request.",
+      "description": "Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.",
       "type": "string"
     },
     "resourceId": {
       "title": "Resource ID",
-      "description": "Unique identifier of the deployed resource.",
+      "description": "Eindeutige Kennung der disponierten Ressource.",
       "type": "string"
     },
     "resourceName": {
-      "title": "Resource Name",
-      "description": "Name of the deployed resource.",
+      "title": "Ressourcenname",
+      "description": "Name der disponierten Ressource.",
       "type": "string"
     },
     "resourceType": {
-      "title": "Resource Type",
-      "description": "Type of the deployed resource (from resource type catalog).",
+      "title": "Ressourcentyp",
+      "description": "Typ der disponierten Ressource (laut Ressourcentypkatalog).",
       "type": "string"
     },
     "deployedAt": {
-      "title": "Deployed At",
-      "description": "Timestamp when the resource was deployed (moved out).",
+      "title": "Ausrückzeitpunkt",
+      "description": "Zeitpunkt, zu dem die Ressource ausgerückt ist.",
       "type": "string",
       "format": "date-time"
     },
     "comment": {
       "title": "Kommentar",
-      "description": "Optional comment or additional information.",
+      "description": "Optionaler Kommentar oder zusätzliche Informationen.",
       "type": "string"
     }
   },
