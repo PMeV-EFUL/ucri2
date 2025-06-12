@@ -16,6 +16,7 @@ Weitere Statusmeldungen werden nicht durch UCRI abgedeckt und können auf andere
 
 # App-Nachrichten
 <!-- include ../../general_schema_documentation.md -->
-<!-- include incident.schema.md -->
+<!-- include resource_request.schema.md -->
 <!-- include acknowledgement.schema.md -->
-<!-- include completion.schema.md -->
+<!-- include resource_acknowledgement.schema.md -->
+<!-- include resource_deployed.schema.md -->

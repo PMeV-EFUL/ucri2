@@ -1,6 +1,6 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_acknowledgement.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_acknowledgement.schema.json",
   "title": "Resource Acknowledgement",
   "description": "Acknowledgement specifying which specific resources are provided in response to a resource request.",
   "type": "object",
@@ -19,7 +19,11 @@
         "title": "Acknowledged Resource",
         "description": "Die bestätigten Ressourcen",
         "type": "object",
-        "required": ["resourceId", "resourceName", "resourceType"],
+        "required": [
+          "resourceId",
+          "resourceName",
+          "resourceType"
+        ],
         "properties": {
           "resourceId": {
             "title": "Resource ID",
@@ -51,7 +55,11 @@
       "type": "string"
     }
   },
-  "required": ["resourceRequestId", "acknowledgedResources", "acknowledgedAt"],
+  "required": [
+    "resourceRequestId",
+    "acknowledgedResources",
+    "acknowledgedAt"
+  ],
   "examples": [
     {
       "resourceRequestId": "10002003",
