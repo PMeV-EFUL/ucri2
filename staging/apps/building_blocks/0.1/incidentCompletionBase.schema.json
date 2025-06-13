@@ -1,0 +1,39 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentCompletionBase.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Basis einer Einsatzendenachricht",
+  "description": "Basis einer Einsatzendenachricht",
+  "required": ["sharedIncidentId","completedAt","status"],
+  "type": "object",
+  "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "title": "globale Einsatz-UUID",
+      "description": "global eindeutige UUID des Einsatzes, der beendet wurde."
+    },
+    "completedAt": {
+      "title": "Beendigungs-Zeitstempel",
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt an dem der Einsatz beendet wurde"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["completed_sucessfully","aborted"],
+      "title": "Beendigungsstatus",
+      "description": "Zustand, in dem der Einsatz beendet wurde"
+    },
+	"additionalInformation": {
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+      "type": "string"
+    }
+  },
+  "examples": [{
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "completedAt": "2024-01-01T10:15:09",
+    "status": "aborted",
+    "additionalInformation": "Keine Person angetroffen"
+  }]
+}

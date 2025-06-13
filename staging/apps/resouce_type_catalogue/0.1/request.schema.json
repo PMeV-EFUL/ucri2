@@ -1,0 +1,11 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_type_catalogue/0.1/request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/catalogueMessageBase.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht request - Eine Anfrage für den Einsatzmitteltype-Katalog",
+  "description": "Eine Anfrage für den Einsatzmitteltyp-Katalog einer Partnerleitstelle",
+  "examples": [{
+    "requestId": "440e8400-e29b-41d4-a716-446655440000"
+  }]
+}

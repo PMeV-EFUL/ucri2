@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer/0.1/acknowledgement.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht acknowledgement - Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
+  "description": "Bestätigung oder Ablehnung einer Patientenübergabeanfrage",
+  "required": [
+    "sharedIncidentId",
+    "acknowledgedByDispatcherAt",
+    "status"
+  ],
+  "type": "object",
+  "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "title": "globale Einsatz-UUID",
+      "description": "global eindeutige UUID des Einsatzes, der bestätigt oder abgelehnt wird."
+    },
+    "acknowledgedByDispatcherAt": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dispatcher-Zeitstempel",
+      "description": "Zeitpunkt an dem die Annahme oder Ablehnung vom Disponenten ausgelöst wurde"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "rejected"
+      ],
+      "title": "Annahme- oder Ablehnungsstatus",
+      "description": "Annahme- oder Ablehnungsstatus"
+    },
+    "cause": {
+      "type": "string",
+      "title": "Begründung für die Annahme oder Ablehnung",
+      "description": "Begründung für die Annahme oder Ablehnung"
+    }
+  },
+  "examples": [
+    {
+      "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+      "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+      "status": "rejected",
+      "cause": "Einsatzort ist unbekannt!"
+    }
+  ],
+  "$defs": {}
+}

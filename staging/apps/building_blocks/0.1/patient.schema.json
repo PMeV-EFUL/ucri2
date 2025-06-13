@@ -1,0 +1,41 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patientBase.schema.json",
+  "title": "Patient",
+  "description": "Ein Patient. Dieser übernimmt alle Eigenschaften von einer Person und besitzt zusätzliche Eigenschaften. Obligat ist nur der Nachname.",
+  "unevaluatedProperties": false,
+  "examples": [{
+    "name": "Mustermann",
+    "surname": "Hans",
+    "phone": "+49 30 123456",
+    "email": "hans.mustermann@example.com",
+    "address": {
+      "street": "Musterstrasse",
+      "houseNumber": "15b",
+      "postalCode" : "12345",
+      "city": "Musterhausen",
+      "cityDistrict": "Musterberg",
+      "state": "Brandenburg",
+      "country": "DE"
+    },
+    "additionalInfo": "weitere Informationen",
+    "gender": "Male",
+    "dateOfBirth": "19801230",
+    "age": 55,
+    "healthInsuranceInformation": {
+      "healthInsuranceCompany":"Musterkasse",
+      "healthInsuranceCompanyNumber": "101234567",
+      "insuranceNumber": "S123456789"
+    },
+    "initialAssessment": {
+      "rmi": "360",
+      "rmc": "360543215",
+      "pzc": "360401",
+      "additionalInformation": "unspezifischer Notfall"
+    },
+    "infectionInformation": "potentiell ansteckend",
+    "infectionStatus": true,
+    "transportNumber": "123456"
+    }]
+}
