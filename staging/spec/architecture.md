@@ -1,3 +1,5 @@
+[Zu der Hauptseite](index.md)
+
 # UCRI2 Systemarchitektur
 
 ## Messaging
@@ -47,3 +49,6 @@ Eine UCRI2-Anwendung wird durch folgende Artefakte definiert:
 - Prozessdefinitionen (Festlegungen bezüglich Anwendungslogik, die bei der Implementierung in technischen KT-Systemen berücksichtigt werden müssen)
 
 Wichtig ist das Prinzip der Trennung der UCRI2-Anwendungen untereinander und deren Unabhängigkeit von der Vermittlungsebene. Das erlaubt eine freie Weiterentwicklung jeder einzelnen Anwendung.
+
+---
+[Zu der Hauptseite](index.md)
