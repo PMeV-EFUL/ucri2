@@ -17,7 +17,7 @@ Das Ziel des UCRI-Systems ist eine Digitalisierung der menschlichen Kommunikatio
 
 Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch (die maximale Zeit zwischen den Meldungssende- und Meldungsempfangszeitpunkten) zu minimieren, kann bei Meldungsaustausch ein [Long Polling](https://de.wikipedia.org/wiki/Long_Polling) vorgesehen werden.
 
-### Anwendungsprotokoll
+### Protokoll
 
 Wegen der Anforderung zur sicheren Nachrichtenzustellung muss eine technische Nachrichtenempfangsbestätigung in der UCRM API vereinbart werden.
 
@@ -77,7 +77,7 @@ UCRM API ist in folgende fachliche Bereiche aufgeteilt:
 
 Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.
 
-Auf der Applikationsebene wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsieht:
+Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsieht:
 
 - KT - für die Kommunikation von KT-Systemen zu UCRM
 - UCRM - für Inter-CRM-Kommunikation
