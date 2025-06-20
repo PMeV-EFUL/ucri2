@@ -17,23 +17,6 @@ jobs:
       with:
         fetch-depth: 0 # Wichtig: Benötigt den gesamten Verlauf für die Git-Log-Befehle
 
-    - name: Release-Dateien erzeugen
-      run: |
-        echo "Erzeuge Dateien für Upload"
-
-        echo "Erzeuge API"
-        zip -r ucri2-api-${{ github.ref_name }}.zip api/ -x "*.zip"
-        echo "Erzeuge APPS"
-        zip -r ucri2-apps-${{ github.ref_name }}.zip apps/ -x "*.zip"
-        echo "Erzeuge ALL"
-        zip -r ucri2-all-${{ github.ref_name }}.zip . -x "*.zip"
-        echo "Erzeuge DOC"
-        find . -name "*.pdf" -exec  zip -j ucri2-doc-${{ github.ref_name }}.zip "{}" \;
-        echo "Erzeuge SHA256SUMS"
-        sha256sum *.zip > SHA256SUMS
-
-        echo "Alle Dateien erzeugt."
-
     - name: Changelog erstellen
       id: create_changelog
       run: |
@@ -50,6 +33,23 @@ jobs:
 
         echo "Changelog erstellt."
 
+    - name: Release-Dateien erzeugen
+      run: |
+        echo "Erzeuge Dateien für Upload"
+
+        echo "Erzeuge API"
+        zip -r ucri2-api-${{ github.ref_name }}.zip api/ -x "*.zip"
+        echo "Erzeuge APPS"
+        zip -r ucri2-apps-${{ github.ref_name }}.zip apps/ -x "*.zip"
+        echo "Erzeuge ALL"
+        zip -r ucri2-all-${{ github.ref_name }}.zip . -x "*.zip"
+        echo "Erzeuge DOC"
+        find . -name "*.pdf" -exec  zip -j ucri2-doc-${{ github.ref_name }}.zip "{}" \;
+        echo "Erzeuge SHA256SUMS"
+        sha256sum *.zip CHANGELOG.md > SHA256SUMS
+
+        echo "Alle Dateien erzeugt."
+
     - name: Release erstellen und Assets hochladen
       uses: ncipollo/release-action@v1
       with:
@@ -59,5 +59,5 @@ jobs:
         draft: true
         prerelease: true
         allowUpdates: true
-        artifacts: "ucri2-api-${{ github.ref_name }}.zip,ucri2-apps-${{ github.ref_name }}.zip,ucri2-all-${{ github.ref_name }}.zip,SHA256SUMS,CHANGELOG.md"
-        bodyFile: CHANGELOG.md #  Fügt den Inhalt der Changelog-Datei auch als Release-Beschreibung hinzu
+        artifacts: "ucri2-*-${{ github.ref_name }}.zip,SHA256SUMS,CHANGELOG.md"
+        bodyFile: CHANGELOG.md
