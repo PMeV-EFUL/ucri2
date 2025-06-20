@@ -21,12 +21,15 @@ jobs:
       run: |
         echo "Erzeuge Dateien für Upload"
 
+        echo "Erzeuge API"
         zip -r ucri2-api-${{ github.ref_name }}.zip api/ -x "*.zip"
+        echo "Erzeuge APPS"
         zip -r ucri2-apps-${{ github.ref_name }}.zip apps/ -x "*.zip"
+        echo "Erzeuge ALL"
         zip -r ucri2-all-${{ github.ref_name }}.zip . -x "*.zip"
-
-        find . -name "*.pdf" -exec basename {} \; | xargs zip -j ucri2-doc-${{ github.ref_name }}.zip
-
+        echo "Erzeuge DOC"
+        find . -name "*.pdf" -exec  zip -j ucri2-doc-${{ github.ref_name }}.zip "{}" \;
+        echo "Erzeuge SHA256SUMS"
         sha256sum *.zip > SHA256SUMS
 
         echo "Alle Dateien erzeugt."
