@@ -31,51 +31,12 @@ jobs:
 
     - name: Release erstellen oder abrufen
       id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: ncipollo/release-action@v1
       with:
-        tag_name: ${{ github.ref }} # Verwendet das gepushte Tag (z.B. refs/tags/v1.0.0)
-        release_name: Release ${{ github.ref_name }} # Name des Releases (z.B. Release v1.0.0)
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref }}
+        name: Release ${{ github.ref_name }}
         draft: true
         prerelease: true
-
-    - name: Lade API hoch
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./ucri2-api-${{ github.ref_name }}.zip
-        asset_name: ucri2-api-${{ github.ref_name }}.zip
-        asset_content_type: application/zip
-
-    - name: Lade APPS hoch
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./ucri2-apps-${{ github.ref_name }}.zip
-        asset_name: ucri2-apps-${{ github.ref_name }}.zip
-        asset_content_type: application/zip
-
-    - name: Lade ALL hoch
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./ucri2-all-${{ github.ref_name }}.zip
-        asset_name: ucri2-all-${{ github.ref_name }}.zip
-        asset_content_type: application/zip
-
-    - name: Lade SHA256SUMS hoch
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./SHA256SUMS
-        asset_name: SHA256SUMS
-        asset_content_type: text/plain
+        allowUpdates: true
+        artifacts: "ucri2-*-${{ github.ref_name }}.zip,SHA256SUMS"
