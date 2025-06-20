@@ -25,6 +25,8 @@ jobs:
         zip -r ucri2-apps-${{ github.ref_name }}.zip apps/ -x "*.zip"
         zip -r ucri2-all-${{ github.ref_name }}.zip . -x "*.zip"
 
+        find . -name "*.pdf" -exec basename {} \; | xargs zip -j ucri2-doc-${{ github.ref_name }}.zip
+
         sha256sum *.zip > SHA256SUMS
 
         echo "Alle Dateien erzeugt."
