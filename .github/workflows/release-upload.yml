@@ -1,0 +1,79 @@
+name: Erstellt ein UCRI2-Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # Löst den Workflow aus, wenn ein Tag wie v1.0.0 oder v1.2.3 gepusht wird
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Code auschecken
+      uses: actions/checkout@v4
+
+    - name: Release-Dateien erzeugen
+      run: |
+        echo "Erzeuge Dateien für Upload"
+
+        zip -r ucri2-api-${{ github.ref_name }}.zip api/ -x "*.zip"
+
+        zip -r ucri2-apps-${{ github.ref_name }}.zip apps/ -x "*.zip"
+
+        zip -r ucri2-all-${{ github.ref_name }}.zip . -x "*.zip"
+
+        sha256sum *.zip > SHA256SUMS
+
+        echo "Alle Dateien erzeugt."
+
+    - name: Release erstellen oder abrufen
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }} # Verwendet das gepushte Tag (z.B. refs/tags/v1.0.0)
+        release_name: Release ${{ github.ref_name }} # Name des Releases (z.B. Release v1.0.0)
+        draft: true
+        prerelease: true
+
+    - name: Lade API hoch
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./ucri2-api-${{ github.ref_name }}.zip
+        asset_name: ucri2-api-${{ github.ref_name }}.zip
+        asset_content_type: application/zip
+
+    - name: Lade APPS hoch
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./ucri2-apps-${{ github.ref_name }}.zip
+        asset_name: ucri2-apps-${{ github.ref_name }}.zip
+        asset_content_type: application/zip
+
+    - name: Lade ALL hoch
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./ucri2-all-${{ github.ref_name }}.zip
+        asset_name: ucri2-all-${{ github.ref_name }}.zip
+        asset_content_type: application/zip
+
+    - name: Lade SHA256SUMS hoch
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./SHA256SUMS
+        asset_name: SHA256SUMS
+        asset_content_type: text/plain
