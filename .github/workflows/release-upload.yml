@@ -9,28 +9,43 @@ jobs:
   build_and_release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # Dies ist wichtig! Stellt sicher, dass der Token Schreibzugriff hat.
 
     steps:
     - name: Code auschecken
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Wichtig: Benötigt den gesamten Verlauf für die Git-Log-Befehle
 
     - name: Release-Dateien erzeugen
       run: |
         echo "Erzeuge Dateien für Upload"
 
         zip -r ucri2-api-${{ github.ref_name }}.zip api/ -x "*.zip"
-
         zip -r ucri2-apps-${{ github.ref_name }}.zip apps/ -x "*.zip"
-
         zip -r ucri2-all-${{ github.ref_name }}.zip . -x "*.zip"
 
         sha256sum *.zip > SHA256SUMS
 
         echo "Alle Dateien erzeugt."
 
-    - name: Release erstellen oder abrufen
-      id: create_release
+    - name: Changelog erstellen
+      id: create_changelog
+      run: |
+        LAST_RELEASE_TAG=$(git describe --tags --abbrev=0 @^ || echo "")
+        echo "Letzter Release-Tag: ${LAST_RELEASE_TAG}"
+
+        if [ -n "${LAST_RELEASE_TAG}" ]; then
+          echo "## Änderungen seit ${LAST_RELEASE_TAG}" > CHANGELOG.md
+          git log ${LAST_RELEASE_TAG}..HEAD --oneline --no-merges >> CHANGELOG.md
+        else
+          echo "## Erster Release - Alle Commits" > CHANGELOG.md
+          git log --oneline --no-merges >> CHANGELOG.md
+        fi
+
+        echo "Changelog erstellt."
+
+    - name: Release erstellen und Assets hochladen
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -39,4 +54,5 @@ jobs:
         draft: true
         prerelease: true
         allowUpdates: true
-        artifacts: "ucri2-*-${{ github.ref_name }}.zip,SHA256SUMS"
+        artifacts: "ucri2-api-${{ github.ref_name }}.zip,ucri2-apps-${{ github.ref_name }}.zip,ucri2-all-${{ github.ref_name }}.zip,SHA256SUMS,CHANGELOG.md"
+        bodyFile: CHANGELOG.md #  Fügt den Inhalt der Changelog-Datei auch als Release-Beschreibung hinzu
