@@ -15,7 +15,7 @@ jobs:
 
     - name: Release-Dateien erzeugen
       run: |
-        echo "Erzeuge ZIP-Dateien für Upload"
+        echo "Erzeuge Dateien für Upload"
 
         zip -r ucri2-api-${{ github.ref_name }}.zip api/ -x "*.zip"
 
