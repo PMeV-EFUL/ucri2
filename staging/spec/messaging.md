@@ -10,7 +10,7 @@ Im Weiteren werden einzelne Aspekte der Nachrichtenübermittlung detailliert bes
 
 - [Adressierungskonzept](addressing_concept.md)
 - [UCRI Leitstellenmodul](ucrm_api.md)
-- [P2P-Protokoll](p2p_protocol.md)
+- [Kommunikationsprotokoll](p2p_protocol.md)
 
 ---
 [Zu der Hauptseite](index.md)

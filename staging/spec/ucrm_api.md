@@ -82,4 +82,6 @@ Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsie
 - KT - für die Kommunikation von KT-Systemen zu UCRM
 - UCRM - für Inter-CRM-Kommunikation
 
+Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben. 
+
 [Vermittlungsebene](messaging.md)

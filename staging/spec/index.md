@@ -8,6 +8,6 @@ TODO Einführung
 - [Vermittlungsebene](messaging.md)
   - [Adressierungskonzept](addressing_concept.md)
   - [UCRI Leitstellenmodul](ucrm_api.md)
-  - [P2P-Protokoll](p2p_protocol.md)
+  - [Kommunikationsrotokoll](p2p_protocol.md)
 - [Anwendungen](applications.md)
 <!-- tocstop -->
