@@ -16,6 +16,8 @@ Wird die Transportanforderung abgelehnt, so kann ein Alternativ-Vorschlag (alter
 3.  B-> A: Zieltermin übermitteln (optional)
 4. B->A: Übergabe ablehnen
 
+<!-- include ../../general_incident_app_notes.md -->
+
 # App-Nachrichten
 <!-- include ../../general_schema_documentation.md -->
 <!-- include incident.schema.md -->

@@ -104,6 +104,9 @@ Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänge
 2. B->A: Einsatz annehmen oder ablehnen
 3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
+Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
+Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+
 # App-Nachrichten
 ### Verwendete Datentypen
 In diesem Kapitel werden die in den Nachrichten-Schemata verwendeten Datentypen beschrieben. Die beschriebenen Datentypen kommen nicht alle auch notwendigerweise in den Schemata vor.

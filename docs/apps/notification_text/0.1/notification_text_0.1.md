@@ -31,6 +31,9 @@ Nachrichten, die bereits existierende App-Nachrichten nachbilden (z.b. Einsatzan
 
 1. A->B: Einsatzbezogene Textnachricht übermitteln
 
+Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
+Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+
 # App-Nachrichten
 ### Verwendete Datentypen
 In diesem Kapitel werden die in den Nachrichten-Schemata verwendeten Datentypen beschrieben. Die beschriebenen Datentypen kommen nicht alle auch notwendigerweise in den Schemata vor.
