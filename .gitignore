@@ -1,3 +1,5 @@
 # Ignore specific Intellij IDE directory
 .idea/
+# ignore Intellij project configuration
+ucri2.iml
 *.zip
