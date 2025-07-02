@@ -4,7 +4,7 @@
   "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentExtendedBase.schema.json",
   "unevaluatedProperties": false,
   "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
-  "description": "Ein Einsatz mit Patientendaten",
+  "description": "Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
   "required": [ "sharedIncidentId","sentByDispatcherAt","patients","missionLocation" ],
   "type": "object",
   "properties": {

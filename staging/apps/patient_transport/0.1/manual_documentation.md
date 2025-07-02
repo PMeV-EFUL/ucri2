@@ -14,7 +14,7 @@ Wird die Transportanforderung abgelehnt, so kann ein Alternativ-Vorschlag (alter
 1.  A->B: Einsatz mit Patient und Zieltermin übergeben
 2.  B->A: Übergabe bestätigen
 3.  B-> A: Zieltermin übermitteln (optional)
-4. B->A: Übergabe ablehnen
+4.  B->A: Übergabe ablehnen
 
 <!-- include ../../general_incident_app_notes.md -->
 
