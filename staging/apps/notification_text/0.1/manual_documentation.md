@@ -11,6 +11,8 @@ Nachrichten, die bereits existierende App-Nachrichten nachbilden (z.b. Einsatzan
 
 1. A->B: Einsatzbezogene Textnachricht übermitteln
 
+<!-- include ../../general_incident_app_notes.md -->
+
 # App-Nachrichten
 <!-- include ../../general_schema_documentation.md -->
 <!-- include notification.schema.md -->

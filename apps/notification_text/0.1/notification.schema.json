@@ -2,12 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/notification_text/0.1/notification.schema.json",
   "unevaluatedProperties": false,
-  "title": "App-Nachricht notification - Einsatzbezogene Textnachricht",
-  "description": "Eine einsatzbezogene Textnachricht",
+  "title": "App-Nachricht notification - Einsatzbezogene Textnachrichten",
+  "description": "Einsatzbezogene Textnachrichten",
   "required": [
     "sharedIncidentId",
-    "timestamp",
-    "message"
+    "notifications"
   ],
   "type": "object",
   "properties": {
@@ -15,38 +14,74 @@
       "type": "string",
       "format": "uuid",
       "title": "globale Einsatz-UUID",
-      "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+      "description": "global eindeutige UUID des Einsatzes, auf den sich die Benachrichtigungen beziehem."
     },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time",
-      "title": "Zeitstempel",
-      "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
-    },
-    "message": {
-      "title": "Benachrichtigungstext",
-      "description": "Inhalt der Benachrichtigung",
-      "type": "string"
-    },
-    "category": {
-      "title": "Benachrichtigungskategorie",
-      "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
-      "type": "string"
-    },
-    "silent": {
-      "title": "Benachrichtigungs-Sichtbarkeit",
-      "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
-      "type": "boolean"
+    "notifications": {
+      "title": "Nachrichten",
+      "description": "Liste der einsatzbezogenen Nachrichten.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Nachricht",
+        "description": "Eine einsatzbezogene Nachricht.",
+        "$ref": "#/$defs/notification.schema.json"
+      }
     }
   },
   "examples": [
     {
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-      "timestamp": "2024-01-01T10:06:09",
-      "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-      "category": "information",
-      "silent": true
+      "notifications": [
+        {
+          "timestamp": "2024-01-01T10:06:09",
+          "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+          "category": "information",
+          "silent": true
+        }
+      ]
     }
   ],
-  "$defs": {}
+  "$defs": {
+    "notification.schema.json": {
+      "unevaluatedProperties": false,
+      "title": "Einsatzbezogene Text-Benachrichtigung",
+      "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+      "required": [
+        "timestamp",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Zeitstempel",
+          "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+        },
+        "message": {
+          "title": "Benachrichtigungstext",
+          "description": "Inhalt der Benachrichtigung",
+          "type": "string"
+        },
+        "category": {
+          "title": "Benachrichtigungskategorie",
+          "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
+          "type": "string"
+        },
+        "silent": {
+          "title": "Benachrichtigungs-Sichtbarkeit",
+          "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+          "type": "boolean"
+        }
+      },
+      "examples": [
+        {
+          "timestamp": "2024-01-01T10:06:09",
+          "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+          "category": "information",
+          "silent": true
+        }
+      ]
+    }
+  }
 }
