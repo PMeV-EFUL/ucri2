@@ -4,15 +4,9 @@
   "unevaluatedProperties": false,
   "title": "Einsatzbezogene Text-Benachrichtigung",
   "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
-  "required": ["sharedIncidentId","timestamp","message"],
+  "required": ["timestamp","message"],
   "type": "object",
   "properties": {
-    "sharedIncidentId": {
-      "type": "string",
-      "format": "uuid",
-      "title": "globale Einsatz-UUID",
-      "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
-    },
     "timestamp": {
       "type": "string",
       "format": "date-time",
@@ -36,7 +30,6 @@
     }
   },
   "examples": [{
-    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "timestamp": "2024-01-01T10:06:09",
     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
     "category": "information",

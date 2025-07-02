@@ -35,7 +35,6 @@
       - [informers.additionalInfo](#informersadditionalinfo)
     + [protocolRemarks](#protocolremarks)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
-      - [protocolRemarks.sharedIncidentId](#protocolremarkssharedincidentid)
       - [protocolRemarks.timestamp](#protocolremarkstimestamp)
       - [protocolRemarks.message](#protocolremarksmessage)
       - [protocolRemarks.category](#protocolremarkscategory)
@@ -216,7 +215,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "startTimestamp": "2024-01-01T09:55:15",
     "protocolRemarks": [
         {
-            "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
             "timestamp": "2024-01-01T10:06:09",
             "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
             "category": "information",
@@ -781,7 +779,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!</td>
+      <td colspan="2">Protokollvermerke, die mit dem Einsatz übertragen werden.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
@@ -796,31 +794,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkssharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkscategory">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
-
-
-#### protocolRemarks.sharedIncidentId
-
-
-<table class="jssd-property-table">
-  <tbody>
-    <tr>
-      <th>Titel</th>
-      <td colspan="2">globale Einsatz-UUID</td>
-    </tr>
-    <tr>
-      <th>Beschreibung</th>
-      <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht.</td>
-    </tr>
-    <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Format</th>
-      <td colspan="2">uuid</td>
-    </tr>
-  </tbody>
-</table>
-
-
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#protocolremarkstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarksmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#protocolremarkscategory">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarkssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
 
 
 #### protocolRemarks.timestamp
@@ -2868,7 +2842,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "protocolRemarks": {
             "title": "Protokollvermerke",
-            "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
+            "description": "Protokollvermerke, die mit dem Einsatz übertragen werden.",
             "type": "array",
             "minItems": 1,
             "items": {
@@ -2950,7 +2924,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "startTimestamp": "2024-01-01T09:55:15",
             "protocolRemarks": [
                 {
-                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
                     "timestamp": "2024-01-01T10:06:09",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
@@ -3179,18 +3152,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "title": "Einsatzbezogene Text-Benachrichtigung",
             "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
             "required": [
-                "sharedIncidentId",
                 "timestamp",
                 "message"
             ],
             "type": "object",
             "properties": {
-                "sharedIncidentId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "title": "globale Einsatz-UUID",
-                    "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
-                },
                 "timestamp": {
                     "type": "string",
                     "format": "date-time",
@@ -3215,7 +3181,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             },
             "examples": [
                 {
-                    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
                     "timestamp": "2024-01-01T10:06:09",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
