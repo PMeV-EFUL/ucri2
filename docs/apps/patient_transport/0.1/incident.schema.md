@@ -546,6 +546,31 @@
 
 
 
+### informers.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 
 ### informers.additionalInfo
 
@@ -1079,6 +1104,31 @@
       <th>Pattern</th>
       <td colspan="2">^[A-Z]{2}$</td>
     </tr>
+  </tbody>
+</table>
+
+
+
+
+### pickupLocation.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
   </tbody>
 </table>
 
@@ -1624,6 +1674,31 @@
       <th>Pattern</th>
       <td colspan="2">^[A-Z]{2}$</td>
     </tr>
+  </tbody>
+</table>
+
+
+
+
+### destinationLocation.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
   </tbody>
 </table>
 
@@ -2263,6 +2338,31 @@
       <th>Pattern</th>
       <td colspan="2">^[A-Z]{2}$</td>
     </tr>
+  </tbody>
+</table>
+
+
+
+
+### patient.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
   </tbody>
 </table>
 
@@ -2983,6 +3083,11 @@
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
                     "pattern": "^[A-Z]{2}$"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
@@ -2994,7 +3099,8 @@
                     "city": "Musterhausen",
                     "cityDistrict": "Musterberg",
                     "state": "Brandenburg",
-                    "country": "DE"
+                    "country": "DE",
+                    "additionalInformation": "2. OG VH"
                 }
             ]
         },

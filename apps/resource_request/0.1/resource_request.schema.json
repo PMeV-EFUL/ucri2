@@ -3,7 +3,7 @@
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_request.schema.json",
   "unevaluatedProperties": false,
   "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
-  "description": "Ein Einsatz mit Patientendaten",
+  "description": "Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
   "required": [
     "sharedIncidentId",
     "sentByDispatcherAt",
@@ -274,6 +274,11 @@
           "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
           "type": "string",
           "pattern": "^[A-Z]{2}$"
+        },
+        "additionalInformation": {
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+          "type": "string"
         }
       },
       "unevaluatedProperties": false,
@@ -285,7 +290,8 @@
           "city": "Musterhausen",
           "cityDistrict": "Musterberg",
           "state": "Brandenburg",
-          "country": "DE"
+          "country": "DE",
+          "additionalInformation": "2. OG VH"
         }
       ]
     },

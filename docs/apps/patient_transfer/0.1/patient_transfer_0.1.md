@@ -32,6 +32,7 @@
       - [informers.address.cityDistrict](#informersaddresscitydistrict)
       - [informers.address.state](#informersaddressstate)
       - [informers.address.country](#informersaddresscountry)
+      - [informers.address.additionalInformation](#informersaddressadditionalinformation)
       - [informers.additionalInfo](#informersadditionalinfo)
     + [protocolRemarks](#protocolremarks)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
@@ -54,6 +55,7 @@
       - [patient.address.cityDistrict](#patientaddresscitydistrict)
       - [patient.address.state](#patientaddressstate)
       - [patient.address.country](#patientaddresscountry)
+      - [patient.address.additionalInformation](#patientaddressadditionalinformation)
       - [patient.additionalInfo](#patientadditionalinfo)
       - [patient.gender](#patientgender)
       - [patient.dateOfBirth](#patientdateofbirth)
@@ -640,6 +642,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### informers.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 
 #### informers.additionalInfo
 
@@ -1133,6 +1160,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Pattern</th>
       <td colspan="2">^[A-Z]{2}$</td>
     </tr>
+  </tbody>
+</table>
+
+
+
+
+#### patient.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
   </tbody>
 </table>
 
@@ -1771,6 +1823,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
                     "pattern": "^[A-Z]{2}$"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
@@ -1782,7 +1839,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "city": "Musterhausen",
                     "cityDistrict": "Musterberg",
                     "state": "Brandenburg",
-                    "country": "DE"
+                    "country": "DE",
+                    "additionalInformation": "2. OG VH"
                 }
             ]
         },

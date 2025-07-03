@@ -32,6 +32,7 @@
       - [informers.address.cityDistrict](#informersaddresscitydistrict)
       - [informers.address.state](#informersaddressstate)
       - [informers.address.country](#informersaddresscountry)
+      - [informers.address.additionalInformation](#informersaddressadditionalinformation)
       - [informers.additionalInfo](#informersadditionalinfo)
     + [protocolRemarks](#protocolremarks)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
@@ -56,6 +57,7 @@
       - [missionLocation.address.cityDistrict](#missionlocationaddresscitydistrict)
       - [missionLocation.address.state](#missionlocationaddressstate)
       - [missionLocation.address.country](#missionlocationaddresscountry)
+      - [missionLocation.address.additionalInformation](#missionlocationaddressadditionalinformation)
       - [missionLocation.object](#missionlocationobject)
       - [missionLocation.object.name](#missionlocationobjectname)
       - [missionLocation.object.additionalInfo](#missionlocationobjectadditionalinfo)
@@ -86,7 +88,11 @@
 <!-- tocstop -->
 
 # Überblick
-Im Gegensatz zur Einsatzübergabe mit Patientendaten ist die Einsatzübergabe ohne Patientendaten explizit dafür gedacht Einsätze zwischen Systemen übertragen zu können, die keine Patientendaten enthalten.
+Bei der Einsatzübergabe entscheidet der Disponent einer Leitstelle (A), dass der Einsatz nicht in seinen Zuständigkeitsbereich fällt, sondern in den Zuständigkeitsbereich der Leitstelle (B). Die Leitstelle (B) kann sowohl aus organisatorischen Gründen - beispielsweise die Einsatzübergabe von einer Rettungsleitstelle an eine Polizeileitstelle als auch aus geografischen Gründen (Nachbarleitstelle) erfolgen. Dieser Use Case beschränkt sich bewusst auf die Kernelemente eines Einsatzes ohne jegliche strukturierte Datenobjekte für beteiligte Personen um mit den hier übermittelten Einsatzbasisdaten eine möglichst große Interoperabilität der am Markt befindlichen Systeme zu erreichen.
+Die Einsatzübergabe via UCRI verfolgt das Ziel einer gesicherten Übergabe der Verantwortung/Zuständigkeit mit einer Datenübergabe ohne Medienbruch und mit minimalem Zeitverzug.
+Dementsprechend wird die Übergabe durch einen Disponenten der empfangenen Leitstelle (B) bestätigt (oder abgelehnt) und ist als Transaktion erst mit Empfang dieser Quittung in der Leitstelle (A) für diese abgeschlossen.
+UCRI regelt nicht, wie der Einsatz in der abgebenden Leitstelle (A) behandelt wird. Technisch und fachlich kann es durchaus möglich sein, dass der Einsatz dann auch in Leitstelle (A) noch für Nachdokumentationen offen bleibt.
+
 
 # Ablaufbeschreibung
 
@@ -616,6 +622,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Pattern</th>
       <td colspan="2">^[A-Z]{2}$</td>
     </tr>
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
   </tbody>
 </table>
 
@@ -1186,6 +1217,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### missionLocation.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 
 #### missionLocation.object
 
@@ -1606,6 +1662,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
                     "pattern": "^[A-Z]{2}$"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
@@ -1617,7 +1678,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "city": "Musterhausen",
                     "cityDistrict": "Musterberg",
                     "state": "Brandenburg",
-                    "country": "DE"
+                    "country": "DE",
+                    "additionalInformation": "2. OG VH"
                 }
             ]
         },

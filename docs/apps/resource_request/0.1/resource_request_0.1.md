@@ -32,6 +32,7 @@
       - [informers.address.cityDistrict](#informersaddresscitydistrict)
       - [informers.address.state](#informersaddressstate)
       - [informers.address.country](#informersaddresscountry)
+      - [informers.address.additionalInformation](#informersaddressadditionalinformation)
       - [informers.additionalInfo](#informersadditionalinfo)
     + [protocolRemarks](#protocolremarks)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
@@ -56,6 +57,7 @@
       - [missionLocation.address.cityDistrict](#missionlocationaddresscitydistrict)
       - [missionLocation.address.state](#missionlocationaddressstate)
       - [missionLocation.address.country](#missionlocationaddresscountry)
+      - [missionLocation.address.additionalInformation](#missionlocationaddressadditionalinformation)
       - [missionLocation.object](#missionlocationobject)
       - [missionLocation.object.name](#missionlocationobjectname)
       - [missionLocation.object.additionalInfo](#missionlocationobjectadditionalinfo)
@@ -79,6 +81,7 @@
       - [patients.address.cityDistrict](#patientsaddresscitydistrict)
       - [patients.address.state](#patientsaddressstate)
       - [patients.address.country](#patientsaddresscountry)
+      - [patients.address.additionalInformation](#patientsaddressadditionalinformation)
       - [patients.additionalInfo](#patientsadditionalinfo)
       - [patients.gender](#patientsgender)
       - [patients.dateOfBirth](#patientsdateofbirth)
@@ -179,7 +182,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 ## App-Nachricht incident - Ein Einsatz mit Patientendaten
 
-<p>Ein Einsatz mit Patientendaten</p>
+<p>Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.</p>
 
 <table>
 <tbody>
@@ -713,6 +716,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Pattern</th>
       <td colspan="2">^[A-Z]{2}$</td>
     </tr>
+  </tbody>
+</table>
+
+
+
+
+#### informers.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
   </tbody>
 </table>
 
@@ -1283,6 +1311,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### missionLocation.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 
 #### missionLocation.object
 
@@ -1824,6 +1877,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### patients.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 
 #### patients.additionalInfo
 
@@ -2311,7 +2389,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_request.schema.json",
     "unevaluatedProperties": false,
     "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
-    "description": "Ein Einsatz mit Patientendaten",
+    "description": "Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
     "required": [
         "sharedIncidentId",
         "sentByDispatcherAt",
@@ -2582,6 +2660,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
                     "pattern": "^[A-Z]{2}$"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
@@ -2593,7 +2676,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "city": "Musterhausen",
                     "cityDistrict": "Musterberg",
                     "state": "Brandenburg",
-                    "country": "DE"
+                    "country": "DE",
+                    "additionalInformation": "2. OG VH"
                 }
             ]
         },
