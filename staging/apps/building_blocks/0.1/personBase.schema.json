@@ -31,7 +31,7 @@
       "title": "MeldeAdresse",
       "description": "Die Meldeadresse."
     },
-    "additionalInfo": {
+    "additionalInformation": {
       "title": "Zusatzinformationen",
       "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
@@ -51,6 +51,6 @@
       "state": "Brandenburg",
       "country": "DE"
     },
-    "additionalInfo": "weitere Informationen"
+    "additionalInformation": "weitere Informationen"
   }]
 }

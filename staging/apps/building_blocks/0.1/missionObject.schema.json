@@ -11,7 +11,7 @@
       "description": "Der Name des Objekts.",
       "type": "string"
     },
-    "additionalInfo": {
+    "additionalInformation": {
       "title": "Zusatzinformationen",
       "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
@@ -20,6 +20,6 @@
   "unevaluatedProperties": false,
   "examples": [{
     "name": "Krankenhaus Musterstift",
-    "additionalInfo": "Weitere Informationen"
+    "additionalInformation": "Weitere Informationen"
   }]
 }

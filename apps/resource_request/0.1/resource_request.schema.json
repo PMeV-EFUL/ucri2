@@ -23,7 +23,7 @@
       "title": "Sender-interne Einsatz-ID",
       "description": "Sender-interne ID des Einsatzes"
     },
-    "additionalInfo": {
+    "additionalInformation": {
       "title": "Zusatzinformationen",
       "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
@@ -143,7 +143,7 @@
       ],
       "issue": "Notfall",
       "flashingLights": true,
-      "additionalInfo": "Zusatzinformationen",
+      "additionalInformation": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08",
       "startTimestamp": "2024-01-01T09:55:15",
       "missionLocation": {
@@ -162,15 +162,15 @@
         },
         "object": {
           "name": "Abteilung IV, Haus 3",
-          "additionalInfo": "Campus West"
+          "additionalInformation": "Campus West"
         },
         "superiorObject": {
           "name": "Krankenhaus Musterstift",
-          "additionalInfo": "Weitere Informationen"
+          "additionalInformation": "Weitere Informationen"
         },
         "floor": "3. OG",
         "room": "412",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
       },
       "patients": [
         {
@@ -187,7 +187,7 @@
             "state": "Brandenburg",
             "country": "DE"
           },
-          "additionalInfo": "weitere Informationen",
+          "additionalInformation": "weitere Informationen",
           "gender": "Male",
           "dateOfBirth": "19801230",
           "age": 55,
@@ -328,7 +328,7 @@
           "title": "MeldeAdresse",
           "description": "Die Meldeadresse."
         },
-        "additionalInfo": {
+        "additionalInformation": {
           "title": "Zusatzinformationen",
           "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
@@ -349,7 +349,7 @@
             "state": "Brandenburg",
             "country": "DE"
           },
-          "additionalInfo": "weitere Informationen"
+          "additionalInformation": "weitere Informationen"
         }
       ],
       "unevaluatedProperties": false
@@ -440,7 +440,7 @@
           "description": "Der Name des Objekts.",
           "type": "string"
         },
-        "additionalInfo": {
+        "additionalInformation": {
           "title": "Zusatzinformationen",
           "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
@@ -450,7 +450,7 @@
       "examples": [
         {
           "name": "Krankenhaus Musterstift",
-          "additionalInfo": "Weitere Informationen"
+          "additionalInformation": "Weitere Informationen"
         }
       ]
     },
@@ -501,7 +501,7 @@
           "description": "Die Zimmernummer.",
           "type": "string"
         },
-        "additionalInfo": {
+        "additionalInformation": {
           "title": "Zusatzinformationen",
           "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
@@ -525,15 +525,15 @@
           },
           "object": {
             "name": "Abteilung IV, Haus 3",
-            "additionalInfo": "Campus West"
+            "additionalInformation": "Campus West"
           },
           "superiorObject": {
             "name": "Krankenhaus Musterstift",
-            "additionalInfo": "Weitere Informationen"
+            "additionalInformation": "Weitere Informationen"
           },
           "floor": "3. OG",
           "room": "412",
-          "additionalInfo": "Weitere Informationen"
+          "additionalInformation": "Weitere Informationen"
         }
       ]
     },
@@ -650,7 +650,7 @@
           "title": "MeldeAdresse",
           "description": "Die Meldeadresse."
         },
-        "additionalInfo": {
+        "additionalInformation": {
           "title": "Zusatzinformationen",
           "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
@@ -718,7 +718,7 @@
             "state": "Brandenburg",
             "country": "DE"
           },
-          "additionalInfo": "weitere Informationen",
+          "additionalInformation": "weitere Informationen",
           "gender": "Male",
           "dateOfBirth": "19801230",
           "age": 55,

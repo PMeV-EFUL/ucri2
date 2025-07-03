@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#starttimestamp">startTimestamp</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocation">pickupLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#destinationlocation">destinationLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#pickuptime">pickupTime</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#arrivaltime">arrivalTime</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#arrivaltimefixed">arrivalTimeFixed</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#starttimestamp">startTimestamp</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocation">pickupLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#destinationlocation">destinationLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#pickuptime">pickupTime</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#arrivaltime">arrivalTime</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#arrivaltimefixed">arrivalTimeFixed</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -28,7 +28,7 @@
         "A1"
     ],
     "issue": "Verlegung",
-    "additionalInfo": "Zusatzinformationen",
+    "additionalInformation": "Zusatzinformationen",
     "startTimestamp": "2024-01-01T09:55:15",
     "sentByDispatcherAt": "2024-01-01T10:05:08",
     "pickupLocation": {
@@ -43,15 +43,15 @@
         },
         "object": {
             "name": "Abteilung IV, Haus 3",
-            "additionalInfo": "Campus West"
+            "additionalInformation": "Campus West"
         },
         "superiorObject": {
             "name": "Krankenhaus Musterstift",
-            "additionalInfo": "Weitere Informationen"
+            "additionalInformation": "Weitere Informationen"
         },
         "floor": "3. OG",
         "room": "412",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
     },
     "destinationLocation": {
         "address": {
@@ -68,11 +68,11 @@
         },
         "superiorObject": {
             "name": "Krankenhaus Musteringen",
-            "additionalInfo": "Weitere Informationen"
+            "additionalInformation": "Weitere Informationen"
         },
         "floor": "2. OG",
         "room": "201",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
     },
     "pickupTime": "2024-01-01T11:00:00",
     "arrivalTime": "2024-01-01T11:30:00",
@@ -91,7 +91,7 @@
             "state": "Brandenburg",
             "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInformation": "weitere Informationen",
         "gender": "Male",
         "dateOfBirth": "19801230",
         "age": 55,
@@ -179,7 +179,7 @@
 
 
 
-## additionalInfo
+## additionalInformation
 
 
 <table class="jssd-property-table">
@@ -258,7 +258,7 @@
 </table>
 
 ### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### informers.name
@@ -572,7 +572,7 @@
 
 
 
-### informers.additionalInfo
+### informers.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -815,7 +815,7 @@
 </table>
 
 ### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#pickuplocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#pickuplocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#pickuplocationadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### pickupLocation.coordinate
@@ -1185,7 +1185,7 @@
 
 
 
-### pickupLocation.object.additionalInfo
+### pickupLocation.object.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1260,7 +1260,7 @@
 
 
 
-### pickupLocation.superiorObject.additionalInfo
+### pickupLocation.superiorObject.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1336,7 +1336,7 @@
 
 
 
-### pickupLocation.additionalInfo
+### pickupLocation.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1385,7 +1385,7 @@
 </table>
 
 ### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#destinationlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#destinationlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#destinationlocationadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### destinationLocation.coordinate
@@ -1755,7 +1755,7 @@
 
 
 
-### destinationLocation.object.additionalInfo
+### destinationLocation.object.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1830,7 +1830,7 @@
 
 
 
-### destinationLocation.superiorObject.additionalInfo
+### destinationLocation.superiorObject.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1906,7 +1906,7 @@
 
 
 
-### destinationLocation.additionalInfo
+### destinationLocation.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -2036,7 +2036,7 @@
 </table>
 
 ### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientsurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienthealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienttransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientsurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienthealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienttransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### patient.name
@@ -2370,7 +2370,7 @@
 
 
 
-### patient.additionalInfo
+### patient.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -2850,7 +2850,7 @@
             "title": "Sender-interne Einsatz-ID",
             "description": "Sender-interne ID des Einsatzes"
         },
-        "additionalInfo": {
+        "additionalInformation": {
             "title": "Zusatzinformationen",
             "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
             "type": "string"
@@ -2946,7 +2946,7 @@
                 "A1"
             ],
             "issue": "Verlegung",
-            "additionalInfo": "Zusatzinformationen",
+            "additionalInformation": "Zusatzinformationen",
             "startTimestamp": "2024-01-01T09:55:15",
             "sentByDispatcherAt": "2024-01-01T10:05:08",
             "pickupLocation": {
@@ -2961,15 +2961,15 @@
                 },
                 "object": {
                     "name": "Abteilung IV, Haus 3",
-                    "additionalInfo": "Campus West"
+                    "additionalInformation": "Campus West"
                 },
                 "superiorObject": {
                     "name": "Krankenhaus Musterstift",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 },
                 "floor": "3. OG",
                 "room": "412",
-                "additionalInfo": "Weitere Informationen"
+                "additionalInformation": "Weitere Informationen"
             },
             "destinationLocation": {
                 "address": {
@@ -2986,11 +2986,11 @@
                 },
                 "superiorObject": {
                     "name": "Krankenhaus Musteringen",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 },
                 "floor": "2. OG",
                 "room": "201",
-                "additionalInfo": "Weitere Informationen"
+                "additionalInformation": "Weitere Informationen"
             },
             "pickupTime": "2024-01-01T11:00:00",
             "arrivalTime": "2024-01-01T11:30:00",
@@ -3009,7 +3009,7 @@
                     "state": "Brandenburg",
                     "country": "DE"
                 },
-                "additionalInfo": "weitere Informationen",
+                "additionalInformation": "weitere Informationen",
                 "gender": "Male",
                 "dateOfBirth": "19801230",
                 "age": 55,
@@ -3137,7 +3137,7 @@
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -3158,7 +3158,7 @@
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen"
+                    "additionalInformation": "weitere Informationen"
                 }
             ],
             "unevaluatedProperties": false
@@ -3249,7 +3249,7 @@
                     "description": "Der Name des Objekts.",
                     "type": "string"
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -3259,7 +3259,7 @@
             "examples": [
                 {
                     "name": "Krankenhaus Musterstift",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -3310,7 +3310,7 @@
                     "description": "Die Zimmernummer.",
                     "type": "string"
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -3334,15 +3334,15 @@
                     },
                     "object": {
                         "name": "Abteilung IV, Haus 3",
-                        "additionalInfo": "Campus West"
+                        "additionalInformation": "Campus West"
                     },
                     "superiorObject": {
                         "name": "Krankenhaus Musterstift",
-                        "additionalInfo": "Weitere Informationen"
+                        "additionalInformation": "Weitere Informationen"
                     },
                     "floor": "3. OG",
                     "room": "412",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -3459,7 +3459,7 @@
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -3527,7 +3527,7 @@
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen",
+                    "additionalInformation": "weitere Informationen",
                     "gender": "Male",
                     "dateOfBirth": "19801230",
                     "age": 55,

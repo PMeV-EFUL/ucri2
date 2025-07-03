@@ -39,7 +39,7 @@
 			"description": "Die Zimmernummer.",
 			"type": "string"
 		},
-		"additionalInfo": {
+		"additionalInformation": {
 			"title": "Zusatzinformationen",
 			"description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
 			"type": "string"
@@ -62,14 +62,14 @@
 		},
 		"object": {
 			"name": "Abteilung IV, Haus 3",
-			"additionalInfo": "Campus West"
+			"additionalInformation": "Campus West"
 		},
 		"superiorObject": {
 			"name": "Krankenhaus Musterstift",
-			"additionalInfo": "Weitere Informationen"
+			"additionalInformation": "Weitere Informationen"
 		},
 		"floor": "3. OG",
 		"room": "412",
-		"additionalInfo": "Weitere Informationen"
+		"additionalInformation": "Weitere Informationen"
 	}]
 }
