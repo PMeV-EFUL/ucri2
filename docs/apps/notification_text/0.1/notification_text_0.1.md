@@ -11,14 +11,16 @@
       - [Zeichenketten - type: string](#zeichenketten---type-string)
       - [Objekte - type: object](#objekte---type-object)
       - [Listen - type: array](#listen---type-array)
-  * [App-Nachricht notification - Einsatzbezogene Textnachricht](#app-nachricht-notification---einsatzbezogene-textnachricht)
+  * [App-Nachricht notification - Einsatzbezogene Textnachrichten](#app-nachricht-notification---einsatzbezogene-textnachrichten)
     + [Eigenschaften](#eigenschaften)
     + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
-    + [timestamp](#timestamp)
-    + [message](#message)
-    + [category](#category)
-    + [silent](#silent)
+    + [notifications](#notifications)
+      - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
+      - [notifications.timestamp](#notificationstimestamp)
+      - [notifications.message](#notificationsmessage)
+      - [notifications.category](#notificationscategory)
+      - [notifications.silent](#notificationssilent)
     + [Schema](#schema)
 
 <!-- tocstop -->
@@ -30,6 +32,9 @@ Nachrichten, die bereits existierende App-Nachrichten nachbilden (z.b. Einsatzan
 # Ablaufbeschreibung
 
 1. A->B: Einsatzbezogene Textnachricht übermitteln
+
+Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
+Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
 
 # App-Nachrichten
 ### Verwendete Datentypen
@@ -61,9 +66,9 @@ Die Anzahl an minimal vorhandenen Eigenschaften kann über das Attribut "minProp
 JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Typ der Listenelemente über das Attribut "items" beschrieben. Gemischt typisierte Listen sind generell unzulässig. Im Attribut "minItems" kann die minimale Anzahl von Listenelementen beschränkt werden.
 
 
-## App-Nachricht notification - Einsatzbezogene Textnachricht
+## App-Nachricht notification - Einsatzbezogene Textnachrichten
 
-<p>Eine einsatzbezogene Textnachricht</p>
+<p>Einsatzbezogene Textnachrichten</p>
 
 <table>
 <tbody>
@@ -74,7 +79,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 ### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#timestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#message">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#category">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#silent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#notifications">notifications</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr></tbody></table>
 
 
 ### Beispiel
@@ -84,10 +89,14 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "timestamp": "2024-01-01T10:06:09",
-    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-    "category": "information",
-    "silent": true
+    "notifications": [
+        {
+            "timestamp": "2024-01-01T10:06:09",
+            "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+            "category": "information",
+            "silent": true
+        }
+    ]
 }
 ```
 
@@ -107,7 +116,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht.</td>
+      <td colspan="2">global eindeutige UUID des Einsatzes, auf den sich die Benachrichtigungen beziehem.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -124,7 +133,36 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### timestamp
+### notifications
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Nachrichten</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Liste der einsatzbezogenen Nachrichten.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Ja</td>
+    </tr>
+    <tr>
+      <th>Min Items</th>
+      <td colspan="2">1</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Eigenschaften der Objekte im Array
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#notificationstimestamp">timestamp</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#notificationsmessage">message</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#notificationscategory">category</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#notificationssilent">silent</a></td><td>Boolean</td><td>Nein</td></tr></tbody></table>
+
+
+#### notifications.timestamp
 
 
 <table class="jssd-property-table">
@@ -139,10 +177,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Ja</td>
-    </tr>
-    <tr>
       <th>Format</th>
       <td colspan="2">date-time</td>
     </tr>
@@ -152,7 +186,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### message
+#### notifications.message
 
 
 <table class="jssd-property-table">
@@ -166,10 +200,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <td colspan="2">Inhalt der Benachrichtigung</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Ja</td>
-    </tr>
     
   </tbody>
 </table>
@@ -177,7 +207,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### category
+#### notifications.category
 
 
 <table class="jssd-property-table">
@@ -191,10 +221,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <td colspan="2">Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
@@ -202,7 +228,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### silent
+#### notifications.silent
 
 
 <table class="jssd-property-table">
@@ -216,13 +242,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <td colspan="2">true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Boolean</td></tr>
-    <tr>
-      <th>Obligat?</th>
-      <td colspan="2">Nein</td>
-    </tr>
     
   </tbody>
 </table>
+
 
 
 
@@ -240,12 +263,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/notification_text/0.1/notification.schema.json",
     "unevaluatedProperties": false,
-    "title": "App-Nachricht notification - Einsatzbezogene Textnachricht",
-    "description": "Eine einsatzbezogene Textnachricht",
+    "title": "App-Nachricht notification - Einsatzbezogene Textnachrichten",
+    "description": "Einsatzbezogene Textnachrichten",
     "required": [
         "sharedIncidentId",
-        "timestamp",
-        "message"
+        "notifications"
     ],
     "type": "object",
     "properties": {
@@ -253,39 +275,75 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "type": "string",
             "format": "uuid",
             "title": "globale Einsatz-UUID",
-            "description": "global eindeutige UUID des Einsatzes, auf den sich diese Benachrichtigung bezieht."
+            "description": "global eindeutige UUID des Einsatzes, auf den sich die Benachrichtigungen beziehem."
         },
-        "timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Zeitstempel",
-            "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
-        },
-        "message": {
-            "title": "Benachrichtigungstext",
-            "description": "Inhalt der Benachrichtigung",
-            "type": "string"
-        },
-        "category": {
-            "title": "Benachrichtigungskategorie",
-            "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
-            "type": "string"
-        },
-        "silent": {
-            "title": "Benachrichtigungs-Sichtbarkeit",
-            "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
-            "type": "boolean"
+        "notifications": {
+            "title": "Nachrichten",
+            "description": "Liste der einsatzbezogenen Nachrichten.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "title": "Nachricht",
+                "description": "Eine einsatzbezogene Nachricht.",
+                "$ref": "#/$defs/notification.schema.json"
+            }
         }
     },
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "timestamp": "2024-01-01T10:06:09",
-            "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
-            "category": "information",
-            "silent": true
+            "notifications": [
+                {
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+                    "category": "information",
+                    "silent": true
+                }
+            ]
         }
     ],
-    "$defs": {}
+    "$defs": {
+        "notification.schema.json": {
+            "unevaluatedProperties": false,
+            "title": "Einsatzbezogene Text-Benachrichtigung",
+            "description": "Eine textbasierte, einsatzbezogene Benachrichtigung, die protokolliert werden sollte.",
+            "required": [
+                "timestamp",
+                "message"
+            ],
+            "type": "object",
+            "properties": {
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "Zeitstempel",
+                    "description": "Zeitpunkt an dem Benachrichtigung senderseitig hinzugefügt wurde"
+                },
+                "message": {
+                    "title": "Benachrichtigungstext",
+                    "description": "Inhalt der Benachrichtigung",
+                    "type": "string"
+                },
+                "category": {
+                    "title": "Benachrichtigungskategorie",
+                    "description": "Kategorie der Benachrichtigung. Aktuell ist diese Kategorie frei wählbar",
+                    "type": "string"
+                },
+                "silent": {
+                    "title": "Benachrichtigungs-Sichtbarkeit",
+                    "description": "true, falls die Benachrichtigung dem empfangenden Nutzer angezeigt werden soll, false, falls die Benachrichtigung nur als Protokollvermerk gespeichert, aber nicht angezeigt werden soll.",
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "timestamp": "2024-01-01T10:06:09",
+                    "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+                    "category": "information",
+                    "silent": true
+                }
+            ]
+        }
+    }
 }
 ```

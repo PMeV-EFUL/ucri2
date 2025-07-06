@@ -41,7 +41,7 @@
     },
     "protocolRemarks": {
       "title": "Protokollvermerke",
-      "description": "Protokollvermerke, die mit dem Einsatz übertragen werden. Die sharedIncidentId jedes Vermerks muss mit der sharedIncidentId des Einsatzes übereinstimmen!",
+      "description": "Protokollvermerke, die mit dem Einsatz übertragen werden.",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -65,7 +65,6 @@
       }
     ],
     "protocolRemarks":[{
-      "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
       "timestamp": "2024-01-01T10:06:09",
       "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
       "category": "information",

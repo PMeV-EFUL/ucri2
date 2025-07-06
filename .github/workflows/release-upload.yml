@@ -1,0 +1,63 @@
+name: Erstellt ein UCRI2-Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # Löst den Workflow aus, wenn ein Tag wie v1.0.0 oder v1.2.3 gepusht wird
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Dies ist wichtig! Stellt sicher, dass der Token Schreibzugriff hat.
+
+    steps:
+    - name: Code auschecken
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Wichtig: Benötigt den gesamten Verlauf für die Git-Log-Befehle
+
+    - name: Changelog erstellen
+      id: create_changelog
+      run: |
+        LAST_RELEASE_TAG=$(git describe --tags --abbrev=0 @^ || echo "")
+        echo "Letzter Release-Tag: ${LAST_RELEASE_TAG}"
+
+        if [ -n "${LAST_RELEASE_TAG}" ]; then
+          echo "## Änderungen seit ${LAST_RELEASE_TAG}" > CHANGELOG.md
+          git log ${LAST_RELEASE_TAG}..HEAD --oneline --no-merges >> CHANGELOG.md
+        else
+          echo "## Erster Release - Alle Commits" > CHANGELOG.md
+          git log --oneline --no-merges >> CHANGELOG.md
+        fi
+
+        echo "Changelog erstellt."
+
+    - name: Release-Dateien erzeugen
+      run: |
+        echo "Erzeuge Dateien für Upload"
+
+        echo "Erzeuge API"
+        zip -r ucri2-api-${{ github.ref_name }}.zip api/ -x "*.zip"
+        echo "Erzeuge APPS"
+        zip -r ucri2-apps-${{ github.ref_name }}.zip apps/ -x "*.zip"
+        echo "Erzeuge ALL"
+        zip -r ucri2-all-${{ github.ref_name }}.zip . -x "*.zip"
+        echo "Erzeuge DOC"
+        find . -name "*.pdf" -exec  zip -j ucri2-doc-${{ github.ref_name }}.zip "{}" \;
+        echo "Erzeuge SHA256SUMS"
+        sha256sum *.zip CHANGELOG.md > SHA256SUMS
+
+        echo "Alle Dateien erzeugt."
+
+    - name: Release erstellen und Assets hochladen
+      uses: ncipollo/release-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref }}
+        name: Release ${{ github.ref_name }}
+        draft: true
+        prerelease: true
+        allowUpdates: true
+        artifacts: "ucri2-*-${{ github.ref_name }}.zip,SHA256SUMS,CHANGELOG.md"
+        bodyFile: CHANGELOG.md
