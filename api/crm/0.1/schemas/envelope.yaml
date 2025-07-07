@@ -45,7 +45,10 @@ properties:
     items:
       type: string
       pattern: "^([0-9]+\\.?)+$"
-    description: Empfänger-Adressen, OID-Liste
+    minItems: 1
+    maxItems: 1
+    description: Empfänger-Adressen, OID-Liste. In der UCRI 2.0 kann eine Nachricht nur an einen Empfänger gesendet werden.
+      Diese Einschränkung kann in späteren UCRI-Versionen rückwärtskompatibel aufgehoben werden.
   tags:
     type: array
     items:
