@@ -1,6 +1,5 @@
 required:
   - source
-  - destination
   - payload
 type: object
 properties:
@@ -40,15 +39,6 @@ properties:
     type: string
     pattern: "^([0-9]+\\.?)+$"
     description: Sender-Adresse, OID
-  destination:
-    type: array
-    items:
-      type: string
-      pattern: "^([0-9]+\\.?)+$"
-    minItems: 1
-    maxItems: 1
-    description: Empfänger-Adressen, OID-Liste. In der UCRI 2.0 kann eine Nachricht nur an einen Empfänger gesendet werden.
-      Diese Einschränkung kann in späteren UCRI-Versionen rückwärtskompatibel aufgehoben werden.
   tags:
     type: array
     items:
@@ -61,28 +51,3 @@ properties:
     description: eine Signatur der Nachricht zur Überprüfung ihrer Authentizität und Unverfälschtheit,
       formatiert als JWS Compact Serialization, siehe https://datatracker.ietf.org/doc/html/rfc7517
 description: Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload
-example:
-  messageId: "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"
-  description: Einsatzübergabe am 13.11.2023 um 20:20
-  sentDate: 2023-11-13T20:20:39+00:00
-  timeout: 300
-  ack: NACK
-  source: 1.2.3.4.5.6
-  destination: [1.2.3.4.5.7]
-  payload:
-    appId: incident
-    appVersion: "0.1"
-    schemaId: incidentAck    
-    contentType: application/json
-    data: "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
-  signatur: eyJhbGciOiJSUzI1NiJ9
-    .
-    eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt
-    cGxlLmNvbS9pc19yb290Ijp0cnVlfQ
-    .
-    cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7
-    AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4
-    BAynRFdiuB--f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K
-    0GarZRmB_eSN9383LcOLn6_dO--xi12jzDwusC-eOkHWEsqtFZESc6BfI7noOPqv
-    hJ1phCnvWh6IeYI2w9QOYEUipUTI8np6LbgGY9Fs98rqVt5AXLIhWkWywlVmtVrB
-    p0igcN_IoypGlUPQGe77Rw
