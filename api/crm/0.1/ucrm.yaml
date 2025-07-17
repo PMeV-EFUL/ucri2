@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Control Room Module API
+  title: UCRI Control Room Module (UCRM) API
   description: |
-    Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
+    UCRI Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
     wie zum Beispiel Leitstellensysteme, andere technische Knoten, sowie weitere externe Systeme.
   version: "0.1"
 servers:
@@ -14,7 +14,7 @@ servers:
         enum:
           - https://ucri.mycompany.com
       basePath:
-        default: crm/v0
+        default: ucrm/v0
         description: API base path
 tags:
   - name: Messaging
@@ -36,18 +36,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SenderRequest'
-            example:
-              description: Einsatzübergabe am 13.11.2023 um 20:20
-              timeout: 300
-              ack: NACK
-              source: 1.2.3.4.5.6
-              destination: [1.2.3.4.5.7]
-              payload:
-                appId: incident_transfer
-                appVersion: "0.1"
-                schemaId: transfer
-                contentType: application/json
-                data: "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
         required: true
       responses:
         '200':
@@ -231,12 +219,12 @@ paths:
     get:
       tags:
         - Info
-      summary: CRM Information
-      description: Liefert CRM Information
+      summary: UCRM Information
+      description: Liefert UCRM Information
       operationId: info
       responses:
         '200':
-          description: OK, CRM Information
+          description: OK, UCRM Information
           content:
             application/json:
               schema:

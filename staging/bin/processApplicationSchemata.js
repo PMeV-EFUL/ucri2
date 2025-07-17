@@ -20,6 +20,8 @@ general notes:
 const stagedAppsPath="../apps";
 const bundledAppsPath="../../apps";
 const docsPath="../../docs/apps";
+const specDocsPath="../spec";
+const specDocsOutputPath="../../docs/spec";
 
 const missingPropertyMessages=[]
 function checkForMissingProperties(path,obj) {
@@ -49,6 +51,9 @@ function checkForMissingProperties(path,obj) {
 }
 
 async function process(){
+  console.log("STEP 0: generating merged docs for spec...");
+  await generateSpecDocs();
+
   const schemaDirs=collectInputSchemata();
   console.log(`Processing the following app/version directories with schema files:\n ${JSON.stringify(schemaDirs,null,2)}`);
   //   {
@@ -192,11 +197,15 @@ async function process(){
       console.log("transforming merged docs to pdf...");
       //transform to PDF
       const outputFileNamePdf=`${docsPath}/${schemaDir}/${schemaDirs[schemaDir].appName}_${schemaDirs[schemaDir].appVersion}.pdf`
-      await mdToPdf({ content: completeMarkdown }, { dest: outputFileNamePdf });
+      await mdToPdf({ path: outputFileName }, { dest: outputFileNamePdf });
     }else{
       console.log("not generating merged docs for building blocks...");
     }
   }
+
+
+
+
   if (missingPropertyMessages.length>0){
     console.warn("There were missing documentation properties detected (fix issues in building blocks first, then issues remaining in message schema files:)");
     console.warn(missingPropertyMessages.join("\n"));
@@ -208,6 +217,35 @@ async function process(){
   }else{
     console.log("processing finished sucessfully.");
   }
+}
+
+async function generateSpecDocs(){
+  let completeMarkdown=fs.readFileSync(`${specDocsPath}/index_pdf.md`, 'utf8');
+  //include per-message docs as indicated by comments
+  let includeRegexMatch;
+  const includeRegex= /(<!-- include )(.*)( -->)/g;
+  const includedFilenames=[];
+  while ((includeRegexMatch = includeRegex.exec(completeMarkdown)) !== null) {
+    includedFilenames.push(includeRegexMatch[2]);
+  }
+  for (const includedFilename of includedFilenames){
+    //read schema markdown, push all headings one level down
+    const includedMarkdown=fs.readFileSync(`${specDocsPath}/${includedFilename}`, 'utf8');//.replaceAll("# ","## ");
+    completeMarkdown=completeMarkdown.replaceAll(`<!-- include ${includedFilename} -->`,includedMarkdown);
+  }
+
+  //remove backlinks
+  completeMarkdown=completeMarkdown.replaceAll("[Zu der Hauptseite](index.md)","");
+  //insert table of contents (needs <!-- toc --><!-- tocstop --> in manual_documentation.md)
+  completeMarkdown=toc.insert(completeMarkdown);
+  //write completed markdown
+  const outputFileName=`${specDocsPath}/complete_spec.md`
+  fs.writeFileSync(outputFileName,completeMarkdown);
+  console.log("transforming merged docs to pdf...");
+  //transform to PDF
+  const outputFileNamePdf=`${specDocsOutputPath}/complete_spec.pdf`
+  await mdToPdf({ path: outputFileName }, { dest: outputFileNamePdf });
+  //END step 6
 }
 
 function collectInputSchemata(){
