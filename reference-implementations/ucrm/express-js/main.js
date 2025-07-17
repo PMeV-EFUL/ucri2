@@ -10,7 +10,7 @@ const {
 const port = 3002;
 const app = express();
 // const apiSpec = path.join(__dirname, 'api.yaml');
-const apiSpec = path.join(__dirname, '../../../api/crm/0.1/crm.yaml');
+const apiSpec = path.join(__dirname, '../../../api/crm/0.1/ucrm.yaml');
 
 // 1. Install bodyParsers for the request types your API will support
 app.use(express.urlencoded({ extended: false }));

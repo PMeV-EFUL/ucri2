@@ -6,7 +6,7 @@ info:
     wie zum Beispiel Leitstellensysteme, andere technische Knoten, sowie weitere externe Systeme.
   version: "0.1"
 servers:
-  - url: '{apiRoot}/{basePath}'
+  - url: '/ucrm/v0'#{apiRoot}/{basePath}'
     variables:
       apiRoot:
         default: https://ucri.mycompany.com

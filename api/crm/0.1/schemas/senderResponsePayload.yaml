@@ -1,0 +1,36 @@
+required:
+  - appId
+  - appVersion
+  - schemaId
+  - contentType
+  - data
+type: object
+properties:
+  appId:
+    type: string
+    description: Name der UCRI2-Applikation
+  appVersion:
+# set to major minor semver or a.b.c?
+    type: string
+    description: Version der UCRI2-Applikation
+  schemaId:
+    type: string
+    description: Name des Schemas für diese Nachricht
+  contentType:
+    type: string
+    enum:
+      - application/json
+      - application/jose
+    description: Inhalt der übergebenen Nachricht,
+      application/json - unverschlüsselte Nachricht, application/jose - verschlüsselte Nachricht
+  data:
+    type: string
+    format: binary
+    description: Applikationsspezifische Nachricht, Inhalt entsprechend dem 'contentType'
+description: Applikationsspezifische Nachricht mit Meta-Informationen
+example:
+  appId: incident_transfer
+  appVersion: "0.1"
+  schemaId: transfer
+  contentType: application/json
+  data: "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"

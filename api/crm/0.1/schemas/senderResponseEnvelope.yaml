@@ -1,0 +1,53 @@
+required:
+  - source
+  - payload
+type: object
+properties:
+  description:
+    type: string
+    description: Freitext-Beschreibung einer Meldung
+  messageId:
+    type: string
+    format: uuid
+    description: Meldungs-ID - dient der formalen Verarbeitung und Zuordnung der Meldung.
+      Falls nicht übergeben, wird die Meldungs-ID automatisch generiert.
+      Bei der Weiterleitung einer Meldung zwischen CRM (Routing) muss die ursprüngliche Meldungs-ID weitergegeben werden.
+  sentDate:
+    type: string
+    format: date-time
+    description: Sendedatum
+      Falls nicht übergeben, wird das Sendedatum automatisch gesetzt.
+      Bei der Weiterleitung einer Meldung zwischen CRM (Routing) soll das ursprüngliche Sendedatum weitergegeben werden.
+  timeout:
+    type: integer
+    description: Anzahl der Sekunden, welche die Meldung auf der Vermittlungsebene verweilen darf, bevor die Zustellversuche
+      abgebrochen und die Meldung - mit Fehlermeldung an den Sender - verworfen wird. Defaultwert falls nicht definiert.
+      Bei der Weiterleitung einer Meldung zwischen CRM (Routing) soll das ursprüngliche Timeout weitergegeben werden.
+    default: 3600
+    minimum: 10
+    maximum: 86400
+  ack:
+    type: string
+    description: Erwartete technische Bestätigung,
+      NONE - keine Bestätigungen, NACK - nur negative Bestätigungen, ALL - alle Bestätigungen
+    enum:
+      - NONE
+      - NACK
+      - ALL
+    default: NONE
+  source:
+    type: string
+    pattern: "^([0-9]+\\.?)+$"
+    description: Sender-Adresse, OID
+  tags:
+    type: array
+    items:
+      type: string
+    description: Liste an Zeichenketten, die eine inhaltliche Zusammenführung von Nachrichten zu einem Thema erlauben.
+  payload:
+    $ref: 'senderResponsePayload.yaml'
+  signature:
+    type: string
+    description: eine Signatur der Nachricht zur Überprüfung ihrer Authentizität und Unverfälschtheit,
+      formatiert als JWS Compact Serialization, siehe https://datatracker.ietf.org/doc/html/rfc7517
+description: Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload
