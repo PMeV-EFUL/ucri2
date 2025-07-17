@@ -1,5 +1,5 @@
 allOf:
-  - $ref: 'senderResponseEnvelope.yaml'
+  - $ref: 'envelope.yaml'
   - type: object
     required:
       - messageId

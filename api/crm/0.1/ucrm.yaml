@@ -243,6 +243,10 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    # Obwohl die Envelope auf dieser Ebene gar nicht direkt $ref-ereziert wird, muss diese hier auftauchen, damit Tools wie ajv.js diese
+    # Spezifikation korrekt laden können!
+    Envelope:
+      $ref: 'schemas/envelope.yaml'
     SenderRequest:
       $ref: 'schemas/senderRequest.yaml'
     SenderResponse:
