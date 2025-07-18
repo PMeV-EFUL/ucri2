@@ -1,14 +1,14 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const http = require('http');
-const fsPromises = require('fs/promises');
-const replaceInFiles = require('replace-in-files');
+import express from 'express';
+import path from 'path';
+import logger from 'morgan';
+import http from 'http';
+import fsPromises from 'fs/promises';
+import replaceInFiles from 'replace-in-files';
 
-const {
-  middleware: openApiMiddleware,
+import {
+  middleware,
   resolvers,
-} = require('express-openapi-validator');
+} from 'express-openapi-validator';
 
 const port = 3002;
 const app = express();
@@ -31,7 +31,7 @@ async function prepareSpec(){
 
 async function start(){
   await prepareSpec();
-  const apiSpec = path.join(__dirname, 'spec/ucrm.yaml');
+  const apiSpec = 'spec/ucrm.yaml';
 
 // 1. Install bodyParsers for the request types your API will support
   app.use(express.urlencoded({ extended: false }));
@@ -44,7 +44,7 @@ async function start(){
 
 //  2. Install the OpenApiValidator middleware
   app.use(
-    openApiMiddleware({
+    middleware({
       apiSpec,
       validateRequests: {
         // return all validation errors, not only the first one.
@@ -69,18 +69,18 @@ async function start(){
       },
       operationHandlers: {
         // 3. Provide the path to the controllers directory
-        basePath: path.join(__dirname, 'routes'),
+        basePath: './routes',
         validateResponses: true, // default false
         // 4. Provide a function responsible for resolving an Express RequestHandler
         //    function from the current OpenAPI Route object.
-        resolver:(basePath, route,apiDoc) => {
+        resolver:async (basePath, route,apiDoc) => {
           const pathKey = route.openApiRoute.substring(route.basePath.length)
           const schema = apiDoc.paths[pathKey][route.method.toLowerCase()]
           const controllerName = schema['operationId'];
           const functionName = route.method.toLowerCase();
-          // Get path to module and attempt to require it
-          const modulePath = path.join(basePath, controllerName);
-          const handler = require(modulePath)
+          // Get path to module and attempt to dynamically import it
+          const modulePath = `./${basePath}/${controllerName}.js`;
+          const handler= await import(modulePath);
           // Simplistic error checking to make sure the function actually exists
           // on the handler module
           if (handler[functionName] === undefined) {
@@ -130,4 +130,4 @@ async function start(){
   console.log(`Listening on port ${port}`);
 }
 
-module.exports = app;
+// export app;

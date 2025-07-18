@@ -1,5 +1,6 @@
-module.exports = {
-  get: (req, res) => res.json(
+export function get (req, res)
+{
+  res.json(
     {
       commParticipants: [
         {
@@ -30,5 +31,5 @@ module.exports = {
         }
       ]
     }
-  ),
-};
+  );
+}

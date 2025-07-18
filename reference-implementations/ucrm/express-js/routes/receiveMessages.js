@@ -1,5 +1,5 @@
-module.exports = {
-  post: (req, res) => res.json(
+export function post (req, res) {
+  res.json(
     {
       "messages": [
         {
@@ -23,5 +23,5 @@ module.exports = {
       ],
       "maxMessages": 5
     }
-  ),
-};
+  );
+}

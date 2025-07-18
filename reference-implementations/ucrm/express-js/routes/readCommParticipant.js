@@ -1,5 +1,5 @@
-module.exports = {
-  get: (req, res) => res.json(
+export function get (req, res) {
+  res.status(200).json(
     {
       "id": "1.2.3.1.276.5.1.58.28.2.1",
       "systemName": "ELS Essen",
@@ -26,5 +26,5 @@ module.exports = {
         "e-mail": "abc@lst-essen.de"
       }
     }
-  ),
-};
+  );
+}
