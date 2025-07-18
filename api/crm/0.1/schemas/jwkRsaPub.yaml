@@ -10,12 +10,13 @@ properties:
     description: Key Type Parameter
   n:
     type: string
-    format: base64
+#TODO if we switch to OpenAPI 3.1 contentEncoding:base64url should be used! (see https://spec.openapis.org/registry/format/base64url)
+    format: base64url
     description: The "n" (modulus) parameter contains the modulus value for the RSA public key.
       It is represented as a Base64urlUInt-encoded value.
   e:
     type: string
-    format: base64
+    format: base64url
     description: The "e" (exponent) parameter contains the exponent value for the RSA public key.
       It is represented as a Base64urlUInt-encoded value.
 description: RSA Public Key als JSON Web Key (JWK) nach https://datatracker.ietf.org/doc/html/rfc7517
