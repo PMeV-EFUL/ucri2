@@ -59,13 +59,14 @@ async function start(){
         allErrors:true,
       },
       //neither ajv nor ajv-formats support the base64url format natively, so we need to add it manually
-      formats:[
-        {
-          name: 'base64url',
+      //note that contrary to the eov docs, the formats should be passed in an object, not an array (array form is
+      //deprecated in ajv)
+      formats: {
+        base64url:{
           type: 'string',
-          validate: (v) => /^[A-Za-z0-9_-]+$/.test(v),
-        },
-      ],
+          validate : (v) => /^[A-Za-z0-9_-]+$/.test(v),
+        }
+      },
       operationHandlers: {
         // 3. Provide the path to the controllers directory
         basePath: path.join(__dirname, 'routes'),
