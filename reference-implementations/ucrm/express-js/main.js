@@ -19,10 +19,10 @@ start();
 
 async function prepareSpec(){
   //as we need to adapt the API spec a little (serverUrl may not contain Variables), we copy over the spec
-  await fsPromises.cp('../../../api/crm/0.1','./spec',{recursive:true});
+  await fsPromises.cp('../../../api/crm/0.1','./transport-spec',{recursive:true});
   //replace server url variables
   await replaceInFiles({
-    files: './spec/ucrm.yaml',
+    files: './transport-spec/ucrm.yaml',
     from: '{apiRoot}/{basePath}',
     to: '/ucrm/v0'
   });
@@ -31,7 +31,7 @@ async function prepareSpec(){
 
 async function start(){
   await prepareSpec();
-  const apiSpec = 'spec/ucrm.yaml';
+  const apiSpec = 'transport-spec/ucrm.yaml';
 
 // 1. Install bodyParsers for the request types your API will support
 //   app.use(express.urlencoded({ extended: false }));
