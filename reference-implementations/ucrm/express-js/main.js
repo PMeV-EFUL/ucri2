@@ -34,8 +34,8 @@ async function start(){
   const apiSpec = 'spec/ucrm.yaml';
 
 // 1. Install bodyParsers for the request types your API will support
-  app.use(express.urlencoded({ extended: false }));
-  app.use(express.text());
+//   app.use(express.urlencoded({ extended: false }));
+//   app.use(express.text());
   app.use(express.json());
 
   app.use(logger('dev'));
@@ -76,20 +76,25 @@ async function start(){
         resolver:async (basePath, route,apiDoc) => {
           const pathKey = route.openApiRoute.substring(route.basePath.length)
           const schema = apiDoc.paths[pathKey][route.method.toLowerCase()]
-          const controllerName = schema['operationId'];
-          const functionName = route.method.toLowerCase();
+          const tagName = schema.tags[0];
+          const operationName = schema['operationId'];
+          const methodName = route.method.toLowerCase();
+          // const routerFileName = `./${basePath}/${operationName}.js`;
+          // const routerMethodName = methodName;
+          const routerFileName = `./${basePath}/${tagName.toLowerCase()}.js`;
+          const routerMethodName = `${methodName}${upperCaseFirstLetter(operationName)}`;
           // Get path to module and attempt to dynamically import it
-          const modulePath = `./${basePath}/${controllerName}.js`;
+          const modulePath = routerFileName;
           const handler= await import(modulePath);
           // Simplistic error checking to make sure the function actually exists
           // on the handler module
-          if (handler[functionName] === undefined) {
+          if (handler[routerMethodName] === undefined) {
             throw new Error(
-              `Could not find a [${functionName}] function in ${modulePath} when trying to route [${route.method} ${route.expressRoute}].`
+              `Could not find a [${routerMethodName}] function in ${routerFileName} when trying to route [${route.method} ${route.expressRoute}].`
             )
           }
           // Finally return our function
-          return handler[functionName]
+          return handler[routerMethodName]
         }
       },
     }),
@@ -128,6 +133,10 @@ async function start(){
 
   http.createServer(app).listen(port);
   console.log(`Listening on port ${port}`);
+}
+
+function upperCaseFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // export app;
