@@ -17,5 +17,5 @@ properties:
     description: maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert
 description: Meldungsabfrage
 example:
-  destinations: [1.2.3.4.5.6]
+  destinations: [1.2.3.4.5.7]
   maxMessages: 5
