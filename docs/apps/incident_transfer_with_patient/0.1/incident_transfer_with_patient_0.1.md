@@ -188,8 +188,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "issue": "Notfall",
     "flashingLights": true,
     "additionalInfo": "Zusatzinformationen",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
-    "startTimestamp": "2024-01-01T09:55:15",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "startTimestamp": "2024-01-01T09:55:15Z",
     "missionLocation": {
         "coordinate": {
             "lat": 65.453323,
@@ -2294,8 +2294,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "issue": "Notfall",
             "flashingLights": true,
             "additionalInfo": "Zusatzinformationen",
-            "sentByDispatcherAt": "2024-01-01T10:05:08",
-            "startTimestamp": "2024-01-01T09:55:15",
+            "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+            "startTimestamp": "2024-01-01T09:55:15Z",
             "missionLocation": {
                 "coordinate": {
                     "lat": 65.453323,
@@ -2520,7 +2520,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
@@ -2903,7 +2903,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
     "status": "rejected",
     "cause": "Einsatzort ist unbekannt!"
 }
@@ -3075,7 +3075,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
             "status": "rejected",
             "cause": "Einsatzort ist unbekannt!"
         }
@@ -3111,7 +3111,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "completedAt": "2024-01-01T10:15:09",
+    "completedAt": "2024-01-01T10:15:09Z",
     "status": "aborted",
     "additionalInformation": "Keine Person angetroffen"
 }
@@ -3283,7 +3283,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "completedAt": "2024-01-01T10:15:09",
+            "completedAt": "2024-01-01T10:15:09Z",
             "status": "aborted",
             "additionalInformation": "Keine Person angetroffen"
         }

@@ -23,7 +23,7 @@
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "completedAt": "2024-01-01T10:15:09",
+    "completedAt": "2024-01-01T10:15:09Z",
     "status": "aborted",
     "additionalInformation": "Keine Person angetroffen"
 }
@@ -195,7 +195,7 @@
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "completedAt": "2024-01-01T10:15:09",
+            "completedAt": "2024-01-01T10:15:09Z",
             "status": "aborted",
             "additionalInformation": "Keine Person angetroffen"
         }

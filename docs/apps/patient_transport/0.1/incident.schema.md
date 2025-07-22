@@ -29,8 +29,8 @@
     ],
     "issue": "Verlegung",
     "additionalInfo": "Zusatzinformationen",
-    "startTimestamp": "2024-01-01T09:55:15",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "startTimestamp": "2024-01-01T09:55:15Z",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "pickupLocation": {
         "address": {
             "street": "Musterstrasse",
@@ -74,8 +74,8 @@
         "room": "201",
         "additionalInfo": "Weitere Informationen"
     },
-    "pickupTime": "2024-01-01T11:00:00",
-    "arrivalTime": "2024-01-01T11:30:00",
+    "pickupTime": "2024-01-01T11:00:00Z",
+    "arrivalTime": "2024-01-01T11:30:00Z",
     "arrivalTimeFixed": false,
     "patient": {
         "name": "Mustermann",
@@ -2847,8 +2847,8 @@
             ],
             "issue": "Verlegung",
             "additionalInfo": "Zusatzinformationen",
-            "startTimestamp": "2024-01-01T09:55:15",
-            "sentByDispatcherAt": "2024-01-01T10:05:08",
+            "startTimestamp": "2024-01-01T09:55:15Z",
+            "sentByDispatcherAt": "2024-01-01T10:05:08Z",
             "pickupLocation": {
                 "address": {
                     "street": "Musterstrasse",
@@ -2892,8 +2892,8 @@
                 "room": "201",
                 "additionalInfo": "Weitere Informationen"
             },
-            "pickupTime": "2024-01-01T11:00:00",
-            "arrivalTime": "2024-01-01T11:30:00",
+            "pickupTime": "2024-01-01T11:00:00Z",
+            "arrivalTime": "2024-01-01T11:30:00Z",
             "arrivalTimeFixed": false,
             "patient": {
                 "name": "Mustermann",
@@ -3091,7 +3091,7 @@
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true

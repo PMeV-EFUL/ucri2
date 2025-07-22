@@ -2,7 +2,7 @@
 
 # App-Nachricht incident - Ein Einsatz mit Patientendaten
 
-<p>Ein Einsatz mit Patientendaten</p>
+<p>Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.</p>
 
 <table>
 <tbody>
@@ -31,8 +31,8 @@
     "issue": "Notfall",
     "flashingLights": true,
     "additionalInfo": "Zusatzinformationen",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
-    "startTimestamp": "2024-01-01T09:55:15",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "startTimestamp": "2024-01-01T09:55:15Z",
     "missionLocation": {
         "coordinate": {
             "lat": 65.453323,
@@ -2134,7 +2134,7 @@
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_request.schema.json",
     "unevaluatedProperties": false,
     "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
-    "description": "Ein Einsatz mit Patientendaten",
+    "description": "Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
     "required": [
         "sharedIncidentId",
         "sentByDispatcherAt",
@@ -2275,8 +2275,8 @@
             "issue": "Notfall",
             "flashingLights": true,
             "additionalInfo": "Zusatzinformationen",
-            "sentByDispatcherAt": "2024-01-01T10:05:08",
-            "startTimestamp": "2024-01-01T09:55:15",
+            "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+            "startTimestamp": "2024-01-01T09:55:15Z",
             "missionLocation": {
                 "coordinate": {
                     "lat": 65.453323,
@@ -2513,7 +2513,7 @@
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true

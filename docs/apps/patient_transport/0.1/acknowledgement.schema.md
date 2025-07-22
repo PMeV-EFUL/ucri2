@@ -23,9 +23,9 @@
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
     "status": "accepted",
-    "plannedPickupTime": "2024-01-01T14:15:00"
+    "plannedPickupTime": "2024-01-01T14:15:00Z"
 }
 ```
 
@@ -37,7 +37,7 @@
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
     "status": "rejected",
     "alternativeProposal": "Transport am nächsten Tag um 9:00 Uhr möglich"
 }
@@ -243,13 +243,13 @@
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
             "status": "accepted",
-            "plannedPickupTime": "2024-01-01T14:15:00"
+            "plannedPickupTime": "2024-01-01T14:15:00Z"
         },
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
             "status": "rejected",
             "alternativeProposal": "Transport am nächsten Tag um 9:00 Uhr möglich"
         }

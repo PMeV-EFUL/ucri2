@@ -144,7 +144,7 @@ Wird die Transportanforderung abgelehnt, so kann ein Alternativ-Vorschlag (alter
 1.  A->B: Einsatz mit Patient und Zieltermin übergeben
 2.  B->A: Übergabe bestätigen
 3.  B-> A: Zieltermin übermitteln (optional)
-4. B->A: Übergabe ablehnen
+4.  B->A: Übergabe ablehnen
 
 Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
 Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
@@ -208,8 +208,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     ],
     "issue": "Verlegung",
     "additionalInfo": "Zusatzinformationen",
-    "startTimestamp": "2024-01-01T09:55:15",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "startTimestamp": "2024-01-01T09:55:15Z",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "pickupLocation": {
         "address": {
             "street": "Musterstrasse",
@@ -253,8 +253,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "room": "201",
         "additionalInfo": "Weitere Informationen"
     },
-    "pickupTime": "2024-01-01T11:00:00",
-    "arrivalTime": "2024-01-01T11:30:00",
+    "pickupTime": "2024-01-01T11:00:00Z",
+    "arrivalTime": "2024-01-01T11:30:00Z",
     "arrivalTimeFixed": false,
     "patient": {
         "name": "Mustermann",
@@ -3026,8 +3026,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             ],
             "issue": "Verlegung",
             "additionalInfo": "Zusatzinformationen",
-            "startTimestamp": "2024-01-01T09:55:15",
-            "sentByDispatcherAt": "2024-01-01T10:05:08",
+            "startTimestamp": "2024-01-01T09:55:15Z",
+            "sentByDispatcherAt": "2024-01-01T10:05:08Z",
             "pickupLocation": {
                 "address": {
                     "street": "Musterstrasse",
@@ -3071,8 +3071,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "room": "201",
                 "additionalInfo": "Weitere Informationen"
             },
-            "pickupTime": "2024-01-01T11:00:00",
-            "arrivalTime": "2024-01-01T11:30:00",
+            "pickupTime": "2024-01-01T11:00:00Z",
+            "arrivalTime": "2024-01-01T11:30:00Z",
             "arrivalTimeFixed": false,
             "patient": {
                 "name": "Mustermann",
@@ -3270,7 +3270,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
@@ -3653,9 +3653,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
     "status": "accepted",
-    "plannedPickupTime": "2024-01-01T14:15:00"
+    "plannedPickupTime": "2024-01-01T14:15:00Z"
 }
 ```
 
@@ -3667,7 +3667,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
     "status": "rejected",
     "alternativeProposal": "Transport am nächsten Tag um 9:00 Uhr möglich"
 }
@@ -3873,13 +3873,13 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
             "status": "accepted",
-            "plannedPickupTime": "2024-01-01T14:15:00"
+            "plannedPickupTime": "2024-01-01T14:15:00Z"
         },
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
             "status": "rejected",
             "alternativeProposal": "Transport am nächsten Tag um 9:00 Uhr möglich"
         }

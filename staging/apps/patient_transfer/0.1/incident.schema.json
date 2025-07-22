@@ -27,9 +27,9 @@
     "internalId": "f123456",
     "issue": "consultation_needed",
     "additionalInfo": "Zusatzinformationen",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "protocolRemarks":[{
-      "timestamp": "2024-01-01T10:06:09",
+      "timestamp": "2024-01-01T10:06:09Z",
       "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
       "category": "information",
       "silent": false

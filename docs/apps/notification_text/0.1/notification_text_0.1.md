@@ -91,7 +91,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "notifications": [
         {
-            "timestamp": "2024-01-01T10:06:09",
+            "timestamp": "2024-01-01T10:06:09Z",
             "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
             "category": "information",
             "silent": true
@@ -294,7 +294,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
             "notifications": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
@@ -337,7 +337,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true

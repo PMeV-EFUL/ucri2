@@ -211,11 +211,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "issue": "Notfall",
     "flashingLights": true,
     "additionalInfo": "Zusatzinformationen",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
-    "startTimestamp": "2024-01-01T09:55:15",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "startTimestamp": "2024-01-01T09:55:15Z",
     "protocolRemarks": [
         {
-            "timestamp": "2024-01-01T10:06:09",
+            "timestamp": "2024-01-01T10:06:09Z",
             "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
             "category": "information",
             "silent": true
@@ -301,7 +301,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         "vehicleType": "M1",
         "vin": "X1234567890",
         "vehiclePropulsionStorageType": "gasolineTank",
-        "timestamp": "2024-01-01T10:05:08",
+        "timestamp": "2024-01-01T10:05:08Z",
         "vehiclePosition": {
             "lat": 65.453323,
             "lon": 14.542343
@@ -2466,7 +2466,10 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
       <th>Obligat?</th>
       <td colspan="2">Ja</td>
     </tr>
-    
+    <tr>
+      <th>Format</th>
+      <td colspan="2">date-time</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2920,11 +2923,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "issue": "Notfall",
             "flashingLights": true,
             "additionalInfo": "Zusatzinformationen",
-            "sentByDispatcherAt": "2024-01-01T10:05:08",
-            "startTimestamp": "2024-01-01T09:55:15",
+            "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+            "startTimestamp": "2024-01-01T09:55:15Z",
             "protocolRemarks": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
@@ -3010,7 +3013,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "vehicleType": "M1",
                 "vin": "X1234567890",
                 "vehiclePropulsionStorageType": "gasolineTank",
-                "timestamp": "2024-01-01T10:05:08",
+                "timestamp": "2024-01-01T10:05:08Z",
                 "vehiclePosition": {
                     "lat": 65.453323,
                     "lon": 14.542343
@@ -3181,7 +3184,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
@@ -3446,7 +3449,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "timestamp": {
                     "title": "Zeitstempel",
                     "description": "Zeitpunkt des eCall aus MSD",
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "vehiclePosition": {
                     "$ref": "#/$defs/coordinate.schema.json",
@@ -3482,7 +3486,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "vehicleType": "M1",
                     "vin": "X1234567890",
                     "vehiclePropulsionStorageType": "gasolineTank",
-                    "timestamp": "2024-01-01T10:05:08",
+                    "timestamp": "2024-01-01T10:05:08Z",
                     "vehiclePosition": {
                         "lat": 65.453323,
                         "lon": 14.542343
@@ -3531,7 +3535,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+    "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
     "status": "rejected",
     "cause": "Einsatzort ist unbekannt!"
 }
@@ -3703,7 +3707,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09",
+            "acknowledgedByDispatcherAt": "2024-01-01T10:06:09Z",
             "status": "rejected",
             "cause": "Einsatzort ist unbekannt!"
         }
@@ -3739,7 +3743,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 ```
 {
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-    "completedAt": "2024-01-01T10:15:09",
+    "completedAt": "2024-01-01T10:15:09Z",
     "status": "aborted",
     "additionalInformation": "Keine Person angetroffen"
 }
@@ -3911,7 +3915,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "examples": [
         {
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
-            "completedAt": "2024-01-01T10:15:09",
+            "completedAt": "2024-01-01T10:15:09Z",
             "status": "aborted",
             "additionalInformation": "Keine Person angetroffen"
         }
