@@ -17,6 +17,9 @@
     "morgan": "^1.10.0",
     "replace-in-files": "^3.0.0",
     "@redocly/openapi-core": "^1.34.3",
+    "@hyperjump/json-schema": "^1.11.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

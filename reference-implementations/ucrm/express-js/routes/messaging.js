@@ -9,8 +9,8 @@ export function postReceiveMessages (req, res) {
   }
 }
 
-export function postSendMessage (req, res) {
-  res.status(200).json(sendMessage(req.body));
+export async function postSendMessage (req, res) {
+  res.status(200).json(await sendMessage(req.body));
 }
 
 export function postCommitMessage (req, res) {

@@ -1,4 +1,5 @@
 import {UcrmError} from "../util/ucrmError.js"
+import {ucrmErrors} from "../util/ucrmErrorCodes.js"
 
 let commParticipants = {
   "1.2.3.1.276.5.1.58.28.2.1": {
@@ -57,7 +58,7 @@ let commParticipants = {
 
 export function getCommParticipant(id) {
   if (!commParticipants[id]) {
-    throw new UcrmError(404,`CommParticipant with id '${id}' not found.`);
+    throw new UcrmError(404,`CommParticipant with id '${id}' not found.`,ucrmErrors.REGISTRY_UNKNOWN_ID);
   }
   return commParticipants[id];
 }
