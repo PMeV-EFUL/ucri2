@@ -17,16 +17,36 @@ import {
 } from 'express-openapi-validator';
 import fs from "fs";
 
-const port = 3002;
-const app = express();
-
 const ajv = new Ajv2020({
   strict:false,
   allErrors: true
 });
 addFormats(ajv);
 
-start();
+const app = express();
+
+let config;
+
+if (await initConfiguration()){
+  start();
+};
+
+async function initConfiguration(){
+  if (process.argv.length != 3){
+    console.error("Usage: node main.js <path to of config.js file>\nexample: node main.js ./config/a.config.js\nnote the leading './' for the config file path");
+    return false;
+  }
+  try{
+    let configPath = process.argv[2];
+    console.log(`loading configuration from ${configPath}`);
+    config=(await import(configPath)).config;
+    console.log("configuration loaded.")
+    return true;
+  }catch(err){
+    console.error(err.message);
+    return false;
+  }
+}
 
 async function prepareSpec(){
   //as we need to adapt the TS-API spec a little (serverUrl may not contain Variables), we copy over the spec
@@ -146,8 +166,8 @@ async function start(){
     });
   });
 
-  http.createServer(app).listen(port);
-  console.log(`Listening on port ${port}`);
+  http.createServer(app).listen(config.port);
+  console.log(`Listening on port ${config.port}`);
 }
 
 function upperCaseFirstLetter(str) {
@@ -155,6 +175,7 @@ function upperCaseFirstLetter(str) {
 }
 
 async function compileAppSchemata(){
+  console.log("compiling app schemata...")
   const out={}
   const appsPath="./app-spec";
   const appList = fs.readdirSync(appsPath);
@@ -167,7 +188,9 @@ async function compileAppSchemata(){
       for (const schemaFileName of schemaFileNames){
         //compile schema
         const schemaName = schemaFileName.replace(".schema.json","");
-        const schema=JSON.parse(fs.readFileSync(`${appsPath}/${appName}/${versionName}/${schemaFileName}`, 'utf8'));
+        let schemaFilePath = `${appsPath}/${appName}/${versionName}/${schemaFileName}`;
+        console.log(`compiling app schema '${schemaFilePath}' ...`);
+        const schema=JSON.parse(fs.readFileSync(schemaFilePath, 'utf8'));
         // registerSchema(schema,`http://ucri2/${schemaName}`);
         out[appName][versionName][schemaName] = ajv.compile(schema);//await validate(`http://ucri2/${schemaName}`,BASIC);
       }
