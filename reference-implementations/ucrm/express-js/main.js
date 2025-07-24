@@ -10,6 +10,7 @@ import Ajv2020 from "ajv/dist/2020.js"
 import addFormats from "ajv-formats"
 import { setAppSchemata } from "./services/messageBus.js";
 import {ucrmErrors} from "./util/ucrmErrorCodes.js"
+import {addCommParticipants} from "./services/commParticipantRegistry.js";
 
 import {
   middleware,
@@ -40,6 +41,8 @@ async function initConfiguration(){
     let configPath = process.argv[2];
     console.log(`loading configuration from ${configPath}`);
     config=(await import(configPath)).config;
+    //add local participants
+    addCommParticipants(config.commParticipants,"self");
     console.log("configuration loaded.")
     return true;
   }catch(err){

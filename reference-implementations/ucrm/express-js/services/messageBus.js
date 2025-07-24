@@ -1,6 +1,7 @@
 import {v4 as uuidv4} from "uuid";
 import {UcrmError} from "../util/ucrmError.js"
 import {ucrmErrors} from "../util/ucrmErrorCodes.js"
+import {getCommParticipant} from "./commParticipantRegistry.js"
 
 export function setAppSchemata(appSchemataToUse){
   appSchemata = appSchemataToUse;
@@ -16,11 +17,19 @@ export async function sendMessage(senderRequest){
     senderRequest.messageId = uuidv4();
   }
   senderRequest.sentDate = new Date().toISOString();
-  //validate payload
+  
   const appId=senderRequest.payload.appId;
   const appVersion=senderRequest.payload.appVersion;
   const schemaId=senderRequest.payload.schemaId;
 
+
+  //check if target OID is known and get supported Apps
+  const commParticipant = getCommParticipant(destinationId,400);
+  if (commParticipant.supportedApps.filter((app) => app.appId===appId && app.appVersion===appVersion).length===0){
+    throw new UcrmError(400,`Unsupported version '${appVersion}' for UCRI2 App '${appId}' for destination '${destinationId}'`,ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_APPID_OR_APPVERSION);
+  }
+  
+  //validate payload
   if (!appSchemata[appId]){
     throw new UcrmError(400,`Unknown UCRI2 App '${appId}'`,ucrmErrors.REQUEST_PAYLOAD_UNKNOWN_APPID);
   }

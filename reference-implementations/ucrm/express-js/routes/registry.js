@@ -9,6 +9,6 @@ export function getListCommParticipant (req, res)
 
 export function getReadCommParticipant (req, res) {
   res.status(200).json(
-    getCommParticipant(req.params.id)
+    getCommParticipant(req.params.id,404)
   );
 }
