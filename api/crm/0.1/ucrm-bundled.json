@@ -35,7 +35,78 @@
       "name": "Info"
     }
   ],
+  "security": [
+    {
+      "oAuth2ClientCredentials": []
+    }
+  ],
   "paths": {
+    "/token": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Json Web Token erhalten",
+        "operationId": "authorize",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Token im Body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "token"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "JWT-Token"
+                    }
+                  },
+                  "description": "JSON-Objekt mit dem JWT-Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/messaging/send": {
       "post": {
         "tags": [
@@ -378,6 +449,23 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "basic": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "HTTP Basic auth, wird AUSSCHLIESSLICH für den /token-Endpunkt genutzt."
+      },
+      "oAuth2ClientCredentials": {
+        "type": "oauth2",
+        "description": "OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "/ucrm/v0/token",
+            "scopes": {}
+          }
+        }
+      }
+    },
     "schemas": {
       "Envelope": {
         "$ref": "#/components/schemas/envelope"
