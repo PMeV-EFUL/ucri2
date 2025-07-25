@@ -1,5 +1,29 @@
 export const config={
   port:3002,
+  auth:{
+    //be aware that directly storing secrets in configuration files ist NOT a desirable behaviour for production use.
+    //instead, you should store sensitive information in .env-Files and ignore them in your .gitignore !
+    jwtSecret:"test1234",
+    accounts: {
+      userA: {
+        username: "userA",
+        password: "test",
+        role: "client"
+      },
+      crmB: {
+        username: "crmB",
+        password: "test",
+        role: "ucrm"
+      }
+    }
+  },
+  remoteUcrms: {
+    b:{
+      baseUrl:"http://localhost:3003/ucrm/v0",
+      username:"crmA",
+      password:"test",
+    }
+  },
   commParticipants:{
     "1.2.3.4.5.6": {
       "id": "1.2.3.4.5.6",
@@ -26,38 +50,6 @@ export const config={
         "phone": "001-555-1234",
         "e-mail": "abc@lst-essen.de"
       }
-    },
-    //FIXME remove later, belongs to B
-    "1.2.3.4.5.7": {
-      "id": "1.2.3.4.5.7",
-      "systemName": "ELS Trinken",
-      "operatorName": "Einsatzleitstelle Trinken",
-      "operatorShortName": "ELS T",
-      "supportedApps": [
-        {
-          "appId": "incident",
-          "appVersion": "0.1"
-        },
-        {
-          "appId": "incident_transfer",
-          "appVersion": "0.1"
-        }
-      ],
-      "key": {
-        "kty": "RSA",
-        "n": "ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx",
-        "e": "AQAB"
-      },
-      "status": "off",
-      "techSupport": {
-        "phone": "001-555-1234",
-        "e-mail": "abc@lst-trinken.de"
-      }
-    }
-  },
-  remoteUcrms:{
-    b:{
-      url:"http://localhost:3002/ucrm/v0"
     }
   }
 }

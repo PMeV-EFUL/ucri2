@@ -1,5 +1,29 @@
 export const config={
   port:3003,
+  auth:{
+    //be aware that directly storing secrets in configuration files ist NOT a desirable behaviour for production use.
+    //instead, you should store sensitive information in .env-Files and ignore them in your .gitignore !
+    jwtSecret:"test1234",
+    accounts: {
+      userA: {
+        username: "userB",
+        password: "test",
+        role: "client"
+      },
+      crmA: {
+        username: "crmA",
+        password: "test",
+        role: "ucrm"
+      }
+    }
+  },
+  remoteUcrms: {
+    a:{
+      baseUrl:"http://localhost:3002/ucrm/v0",
+      username:"crmB",
+      password:"test",
+    }
+  },
   commParticipants:{
     "1.2.3.4.5.7": {
       "id": "1.2.3.4.5.7",
@@ -26,11 +50,6 @@ export const config={
         "phone": "001-555-1234",
         "e-mail": "abc@lst-trinken.de"
       }
-    }
-  },
-  remoteUcrms:{
-    a:{
-      url:"http://localhost:3001/ucrm/v0"
     }
   }
 }

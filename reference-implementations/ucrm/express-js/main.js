@@ -9,8 +9,13 @@ import { BASIC } from "@hyperjump/json-schema/experimental";
 import Ajv2020 from "ajv/dist/2020.js"
 import addFormats from "ajv-formats"
 import { setAppSchemata } from "./services/messageBus.js";
+import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "./util/ucrmErrorCodes.js"
-import {addCommParticipants} from "./services/commParticipantRegistry.js";
+import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetchParticipantsFromRemoteUcrms} from "./services/commParticipantRegistry.js";
+import jwt from "jsonwebtoken";
+import {setConfiguration,checkBasicCredentials,checkJWTCredentials,authenticateRemoteUcrm} from "./services/authManager.js"
+
+
 
 import {
   middleware,
@@ -29,7 +34,7 @@ const app = express();
 let config;
 
 if (await initConfiguration()){
-  start();
+  await start();
 };
 
 async function initConfiguration(){
@@ -43,6 +48,8 @@ async function initConfiguration(){
     config=(await import(configPath)).config;
     //add local participants
     addCommParticipants(config.commParticipants,"self");
+    setConfiguration(config);
+    setConfigurationOnRegistry(config);
     console.log("configuration loaded.")
     return true;
   }catch(err){
@@ -65,11 +72,23 @@ async function prepareSpec(){
   console.log("transport layer and app specs were prepared...");
 }
 
+async function authorizeWithRemoteUcrms(){
+  for (const [ucrmId,ucrmData] of Object.entries(config.remoteUcrms)){
+    if (!await authenticateRemoteUcrm(ucrmId)){
+      console.error("remote UCRM authentication failed. Please check your credentials and restart!")
+      return false;
+    };
+  }
+  return true;
+}
+
 async function start(){
   await prepareSpec();
   const appSchemata= await compileAppSchemata();
   setAppSchemata(appSchemata);
   const apiSpec = 'transport-spec/ucrm.yaml';
+
+
 
 // 1. Install bodyParsers for the request types your API will support
 //   app.use(express.urlencoded({ extended: false }));
@@ -135,6 +154,16 @@ async function start(){
           return handler[routerMethodName]
         }
       },
+      validateSecurity: {
+        handlers: {
+          basic: (req, scopes, schema) => {
+            return checkBasicCredentials(req);
+          },
+          oAuth2ClientCredentials: (req, scopes, schema) => {
+            return checkJWTCredentials(req);
+          }
+        }
+      }
     }),
   );
 
@@ -154,7 +183,7 @@ async function start(){
         errorHttpCode = 500;
         errorUcriCode = ucrmErrors.RESPONSE_INVALID_PER_TRANSPORT_SPEC;
         errorDescription = `HTTP error ${errorHttpCode}: Response validation failed. See message field for details.`
-      }else{
+      }else if (err.stack.includes("RequestValidator")){
         errorHttpCode = 400;
         errorUcriCode = ucrmErrors.REQUEST_INVALID_PER_TRANSPORT_SPEC;
         errorDescription = `HTTP error ${errorHttpCode}: Request validation failed. See message field for details.`
@@ -171,6 +200,17 @@ async function start(){
 
   http.createServer(app).listen(config.port);
   console.log(`Listening on port ${config.port}`);
+
+  const remoteUcrmAuthorizeSuccessful=await authorizeWithRemoteUcrms();
+  if (!remoteUcrmAuthorizeSuccessful){
+    return;
+  }
+
+  const fetchParticipantsSucessful =await fetchParticipantsFromRemoteUcrms();
+  if (!fetchParticipantsSucessful){
+    return;
+  }
+  setInterval(fetchParticipantsFromRemoteUcrms,60*1000);
 }
 
 function upperCaseFirstLetter(str) {

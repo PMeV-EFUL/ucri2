@@ -3,7 +3,7 @@ import {getCommParticipant,getAllCommParticipants} from "../services/commPartici
 export function getListCommParticipant (req, res)
 {
   res.status(200).json(
-    getAllCommParticipants()
+    getAllCommParticipants(req.claims.role)
   );
 }
 
