@@ -29,10 +29,10 @@ export const config={
       "id": "1.2.3.4.5.7",
       "systemName": "ELS Trinken",
       "operatorName": "Einsatzleitstelle Trinken",
-      "operatorShortName": "ELS T",
+      "operatorShortName": "ELS B",
       "supportedApps": [
         {
-          "appId": "incident",
+          "appId": "incident_transfer",
           "appVersion": "0.1"
         },
         {

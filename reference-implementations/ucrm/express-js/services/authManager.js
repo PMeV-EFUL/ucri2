@@ -58,6 +58,10 @@ export function checkJWTCredentials(req){
 
   const payload = jwt.verify(token, jwtSecret ,{maxAge:"3600s"});
   req.claims = payload;
+  if (!req.claims || !req.claims.role){
+    //TODO should we use a general error number here?
+    throw new UcrmError(400,`provided JWT does not contain 'role' claim.`,ucrmErrors.REQUEST_INVALID_PER_TRANSPORT_SPEC);
+  }
   return true;
 }
 
