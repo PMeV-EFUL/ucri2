@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: UCRI Control Room Module (UCRM) API
   description: |
@@ -44,8 +44,7 @@ paths:
                 type: object
                 properties:
                   token:
-                    type: string
-                    description: JWT-Token
+                    $ref: '#/components/schemas/JWTToken'
                 description: JSON-Objekt mit dem JWT-Token
         '400':
           description: Bad Request
@@ -294,7 +293,8 @@ components:
       description: OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.
       flows:
         clientCredentials:
-          tokenUrl: /ucrm/v0/token
+          #FIXME some tools incorrectly disallow relative URIs like /token for the tokenURL when using OpenAPI 3.1.0
+          tokenUrl: https://ucri.mycompany.com/ucrm/v0/token
           scopes: { }
 
   schemas:
@@ -333,3 +333,25 @@ components:
           description: Detailliertere Fehlerbeschreibung eventuell mit Angabe der Korrektivmaßnahmen
             in für Menschen verständlicher Sprache
       description: Fehlerbeschreibung, gewöhnlich für eine HTTP Error Response-Code (3xx, 4xx, 5xx)
+    JWTToken:
+      type: string
+      contentMediaType: application/jwt
+      contentSchema:
+        type: array
+        minItems: 2
+        prefixItems:
+          - const:
+              typ: JWT
+              alg: HS256
+          - type: object
+            required:
+              - ait
+              - exp
+              - role
+            properties:
+              role:
+                type: string
+              iat:
+                type: integer
+              exp:
+                type: integer
