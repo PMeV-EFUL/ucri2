@@ -26,11 +26,11 @@ export function checkBasicCredentials(req){
   try{
     [username,password]=base64Decode(authHeader).split(":");
   }catch (err){
-    throw new UcrmError(401,`Invalid Authorization header`,ucrmErrors.UNAUTHORIZED);
+    throw new UcrmError(401,`Invalid Authorization header`,ucrmErrors.REQUEST_UNAUTHORIZED);
   }
 
   if (!username || !users[username] || users[username].password!==password) {
-    throw new UcrmError(401,`User/password combination for username '${username}' is unknown.`,ucrmErrors.UNAUTHORIZED);
+    throw new UcrmError(401,`User/password combination for username '${username}' is unknown.`,ucrmErrors.REQUEST_UNAUTHORIZED);
   }
 
   //store username in req.auth

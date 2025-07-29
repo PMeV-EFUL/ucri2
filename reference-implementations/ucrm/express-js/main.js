@@ -8,7 +8,7 @@ import { registerSchema, validate} from "@hyperjump/json-schema/draft-2020-12";
 import { BASIC } from "@hyperjump/json-schema/experimental";
 import Ajv2020 from "ajv/dist/2020.js"
 import addFormats from "ajv-formats"
-import { setAppSchemata } from "./services/messageBus.js";
+import { setAppSchemata,setConfiguration as setConfigurationOnMessageBus } from "./services/messageBus.js";
 import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "./util/ucrmErrorCodes.js"
 import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetchParticipantsFromRemoteUcrms} from "./services/commParticipantRegistry.js";
@@ -50,6 +50,7 @@ async function initConfiguration(){
     addCommParticipants(config.commParticipants,"self");
     setConfiguration(config);
     setConfigurationOnRegistry(config);
+    setConfigurationOnMessageBus(config);
     console.log("configuration loaded.")
     return true;
   }catch(err){

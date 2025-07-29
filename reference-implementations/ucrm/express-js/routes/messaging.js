@@ -12,8 +12,8 @@ export function postReceiveMessages (req, res) {
 }
 
 export async function postSendMessage (req, res) {
-  checkRole(req,["client","ucrm"]);
-  res.status(200).json(await sendMessage(req.body));
+  const role=checkRole(req,["client","ucrm"]);
+  res.status(200).json(await sendMessage(req.body,role));
 }
 
 export function postCommitMessage (req, res) {

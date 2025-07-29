@@ -4,8 +4,9 @@ import {Buffer} from "buffer";
 
 export function checkRole(req,allowedRoles){
   if (!req.claims || !req.claims.role || allowedRoles.indexOf(req.claims.role) === -1){
-    throw new UcrmError(400,`Role may not access this resource.`,ucrmErrors.ROLE_MISMATCH);
+    throw new UcrmError(400,`Role may not access this resource.`,ucrmErrors.REQUEST_ROLE_FORBIDDEN);
   }
+  return req.claims.role;
 }
 
 export function base64Encode(str){
