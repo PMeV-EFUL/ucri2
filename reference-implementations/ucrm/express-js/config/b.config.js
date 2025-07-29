@@ -36,8 +36,8 @@ export const config={
           "appVersion": "0.1"
         },
         {
-          "appId": "incident",
-          "appVersion": "0.2"
+          "appId": "transport_layer_messages",
+          "appVersion": "0.1"
         }
       ],
       "key": {

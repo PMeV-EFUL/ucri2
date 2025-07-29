@@ -8,7 +8,7 @@ import { registerSchema, validate} from "@hyperjump/json-schema/draft-2020-12";
 import { BASIC } from "@hyperjump/json-schema/experimental";
 import Ajv2020 from "ajv/dist/2020.js"
 import addFormats from "ajv-formats"
-import { setAppSchemata,setConfiguration as setConfigurationOnMessageBus } from "./services/messageBus.js";
+import { setAppSchemata,setConfiguration as setConfigurationOnMessageBus, start as startMessageBus } from "./services/messageBus.js";
 import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "./util/ucrmErrorCodes.js"
 import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetchParticipantsFromRemoteUcrms} from "./services/commParticipantRegistry.js";
@@ -22,6 +22,10 @@ import {
   resolvers,
 } from 'express-openapi-validator';
 import fs from "fs";
+
+const REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS=60*1000;
+const TRANSPORT_LAYER_APPID="transport_layer_messages";
+const TRANSPORT_LAYER_APP_VERSION="0.1";
 
 const ajv = new Ajv2020({
   strict:false,
@@ -46,6 +50,12 @@ async function initConfiguration(){
     let configPath = process.argv[2];
     console.log(`loading configuration from ${configPath}`);
     config=(await import(configPath)).config;
+    //check local participants for support of transport layer app
+    for (const commParticipant of Object.values(config.commParticipants)){
+      if (commParticipant.supportedApps.filter((app) => app.appId === TRANSPORT_LAYER_APPID && app.appVersion === TRANSPORT_LAYER_APP_VERSION).length === 0) {
+        throw new Error(`local commParticipant '${commParticipant.id}' does not support the required transport layer app '${TRANSPORT_LAYER_APPID}' ín version '${TRANSPORT_LAYER_APP_VERSION}'`);
+      }
+    }
     //add local participants
     addCommParticipants(config.commParticipants,"self");
     setConfiguration(config);
@@ -60,13 +70,14 @@ async function initConfiguration(){
 }
 
 async function prepareSpec(){
-  //as we need to adapt the TS-API spec a little (serverUrl may not contain Variables), we copy over the spec
+  //as we need to adapt the TS-API spec , we copy over the spec
   await fsPromises.cp('../../../api/crm/0.1','./transport-spec',{recursive:true});
   //replace server url variables
   await replaceInFiles({
     files: './transport-spec/ucrm.yaml',
     from: '{apiRoot}/{basePath}',
     to: '/ucrm/v0'
+  //replace relative tokenUrl
   }).pipe({
     from: 'tokenUrl: /token',
     to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
@@ -178,7 +189,7 @@ async function start(){
     let errorHttpCode = err.status || 500;
     let errorDescription = `HTTP error ${errorHttpCode}: ${err.description||err.message}`;
     let errorMessage = `HTTP error ${errorHttpCode}: ${err.message}`;
-    let errorUcriCode = err.ucriErrorCode || 100;
+    let errorUcriCode = err.ucriErrorCode || ucrmErrors.REQUEST_UNAUTHORIZED;
     
     //express-openapi-validator errors can be identified by the presence of the the err.errors array
     if (err.errors && err.status) {
@@ -206,6 +217,8 @@ async function start(){
   http.createServer(app).listen(config.port);
   console.log(`Listening on port ${config.port}`);
 
+  startMessageBus();
+
   const remoteUcrmAuthorizeSuccessful=await authorizeWithRemoteUcrms();
   if (!remoteUcrmAuthorizeSuccessful){
     return;
@@ -215,7 +228,7 @@ async function start(){
   if (!fetchParticipantsSucessful){
     return;
   }
-  setInterval(fetchParticipantsFromRemoteUcrms,60*1000);
+  setInterval(fetchParticipantsFromRemoteUcrms,REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS);
 }
 
 function upperCaseFirstLetter(str) {
