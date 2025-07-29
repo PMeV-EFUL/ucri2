@@ -325,6 +325,7 @@ components:
         code:
           type: integer
           description: Anwendungsspezifische Fehler-Code
+          # TODO add valid error codes as enum
         reason:
           type: string
           description: Fehlerursache in für Menschen verständlicher Sprache
