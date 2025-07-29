@@ -293,8 +293,8 @@ components:
       description: OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.
       flows:
         clientCredentials:
-          #FIXME some tools incorrectly disallow relative URIs like /token for the tokenURL when using OpenAPI 3.1.0
-          tokenUrl: https://ucri.mycompany.com/ucrm/v0/token
+          # Einige Tools verbieten inkorrekterweise relative URIs wie /token für die tokenURL in OpenAPI 3.1.0, daher muss die TokenUrl in diesen Fällen zu einer vollständigen URL geändert werden!
+          tokenUrl: /token
           scopes: { }
 
   schemas:

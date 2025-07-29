@@ -67,8 +67,12 @@ async function prepareSpec(){
     files: './transport-spec/ucrm.yaml',
     from: '{apiRoot}/{basePath}',
     to: '/ucrm/v0'
+  }).pipe({
+    from: 'tokenUrl: /token',
+    to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
   });
-  //as we need to adapt the app spec is copied 1:1
+
+  //the app spec is copied 1:1
   await fsPromises.cp('../../../apps','./app-spec',{recursive:true});
   console.log("transport layer and app specs were prepared...");
 }
