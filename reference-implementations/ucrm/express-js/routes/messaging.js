@@ -2,8 +2,8 @@ import {sendMessage,receiveMessages,confirmMessages} from "../services/messageBu
 import {checkRole} from "../util/util.js"
 
 export function postReceiveMessages (req, res) {
-  checkRole(req,["client"]);
-  let receiverResponse = receiveMessages(req.body);
+  const role=checkRole(req,["client"]);
+  let receiverResponse = receiveMessages(req.body,role,req.claims.username);
   if (receiverResponse.messages.length === 0){
     res.status(204).send();
   }else{
@@ -13,11 +13,11 @@ export function postReceiveMessages (req, res) {
 
 export async function postSendMessage (req, res) {
   const role=checkRole(req,["client","ucrm"]);
-  res.status(200).json(await sendMessage(req.body,role));
+  res.status(200).json(await sendMessage(req.body,role,req.claims.username));
 }
 
 export function postCommitMessage (req, res) {
-  checkRole(req,["client"]);
-  confirmMessages(req.body);
+  const role=checkRole(req,["client"]);
+  confirmMessages(req.body,role,req.claims.username);
   res.status(204).send();
 }

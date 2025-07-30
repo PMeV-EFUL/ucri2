@@ -2,7 +2,7 @@ import {v4 as uuidv4} from "uuid";
 import {UcrmError} from "../util/ucrmError.js"
 import {ucrmErrors} from "../util/ucrmErrorCodes.js"
 import {getCommParticipant, getUcrmIdFromParticipantId} from "./commParticipantRegistry.js"
-import {getRemoteUcrmToken} from "./authManager.js";
+import {checkIfClientMayUseOID, getRemoteUcrmToken} from "./authManager.js";
 
 export function setAppSchemata(appSchemataToUse) {
   appSchemata = appSchemataToUse;
@@ -30,7 +30,9 @@ export function start(){
   setInterval(checkForTimeouts,TIMEOUT_TRACKING_INVERVAL_MS);
 }
 
-export async function sendMessage(senderRequest, role) {
+export async function sendMessage(senderRequest, role,username) {
+  //the client access checks should only be performed on this level as the handleXXX() methods will be called from within the messageBus too!
+  checkIfClientMayUseOID(role,username,senderRequest.source,"source");
   switch (role) {
     case "ucrm":
       return handleIncomingMessage(senderRequest);
@@ -258,7 +260,10 @@ async function processUnsentMessages() {
   }
 }
 
-export function receiveMessages(receiverRequest) {
+export function receiveMessages(receiverRequest,role,username) {
+  for (const destination of receiverRequest.destinations) {
+    checkIfClientMayUseOID(role,username,destination,"destinations");
+  }
   const destinations = receiverRequest.destinations;
   const maxMessageCount = receiverRequest.maxMessages || 1;
   let messagesToReturn = [];
@@ -279,8 +284,10 @@ export function receiveMessages(receiverRequest) {
   return {messages: messagesToReturn, maxMessages: maxMessageCount};
 }
 
-export function confirmMessages(messageRef) {
+export function confirmMessages(messageRef,role,username) {
   const destinationId = messageRef.destination;
+  checkIfClientMayUseOID(role,username,destinationId,"destination");
+
   const sequenceId = messageRef.sequenceId;
   let pendingMessagesForDestination = pendingMessagesPerDestination[destinationId];
   if (!pendingMessagesForDestination) {

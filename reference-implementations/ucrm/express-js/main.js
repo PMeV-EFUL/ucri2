@@ -15,8 +15,6 @@ import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetch
 import jwt from "jsonwebtoken";
 import {setConfiguration,checkBasicCredentials,checkJWTCredentials,authenticateRemoteUcrm} from "./services/authManager.js"
 
-
-
 import {
   middleware,
   resolvers,
@@ -71,7 +69,8 @@ async function initConfiguration(){
 
 async function prepareSpec(){
   //as we need to adapt the TS-API spec , we copy over the spec
-  await fsPromises.cp('../../../api/crm/0.1','./transport-spec',{recursive:true});
+  await fsPromises.cp('../../../api/crm/0.1','./transport-spec',{recursive:true,
+  filter: (src,dst)=>!src.includes("spectral.yaml")});
   //replace server url variables
   await replaceInFiles({
     files: './transport-spec/ucrm.yaml',

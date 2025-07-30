@@ -44,7 +44,7 @@ export function checkBasicCredentials(req){
 export function getToken(username){
   return jwt.sign({
     username,
-    role:users[username].role
+    role:users[username].role,
   }, jwtSecret,{expiresIn:'3600s'});
 }
 
@@ -58,9 +58,9 @@ export function checkJWTCredentials(req){
 
   const payload = jwt.verify(token, jwtSecret ,{maxAge:"3600s"});
   req.claims = payload;
-  if (!req.claims || !req.claims.role){
+  if (!req.claims || !req.claims.role || !req.claims.username){
     //TODO should we use a general error number here?
-    throw new UcrmError(400,`provided JWT does not contain 'role' claim.`,ucrmErrors.REQUEST_INVALID_PER_TRANSPORT_SPEC);
+    throw new UcrmError(400,`provided JWT does not contain 'role' or 'username' claim.`,ucrmErrors.REQUEST_INVALID_PER_TRANSPORT_SPEC);
   }
   return true;
 }
@@ -69,6 +69,19 @@ export function checkJWTCredentials(req){
 
 export function getRemoteUcrmToken(ucrmId){
   return remoteUcrmTokens[ucrmId];
+}
+
+export function checkIfClientMayUseOID(role,username,oid,propertyName){
+  if (role==="ucrm"){
+    return;
+  }
+  let userData = users[username];
+  if (!userData){
+    throw new UcrmError(400,`username '${username}' is unknown.`,ucrmErrors.REQUEST_UNAUTHORIZED);
+  }
+  if (!userData.oids || !userData.oids.includes(oid)){
+    throw new UcrmError(400,`username '${username}' may not use OID '${oid}' in ${propertyName}.`,ucrmErrors.REQUEST_UNAUTHORIZED);
+  }
 }
 
 export async function authenticateRemoteUcrm(ucrmId){

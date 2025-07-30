@@ -8,11 +8,13 @@ export const config = {
       userA1: {
         username: "userA1",
         password: "test",
+        oids:["1.2.3.4.5.6"],
         role: "client"
       },
       userA2: {
         username: "userA2",
         password: "test",
+        oids:["1.2.3.4.5.8"],
         role: "client"
       },
       crmB: {
