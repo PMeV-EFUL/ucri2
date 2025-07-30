@@ -20,7 +20,6 @@ const TIMEOUT_TRACKING_INVERVAL_MS=5000;
 let appSchemata;
 let config;
 const unsentOutgoingMessages = []
-const outgoingMessagesPendingDeliveryResponseOrTimeout = []
 const pendingMessagesPerDestination = {}
 const messageSeqNumbersPerDestination = {}
 const trackedOutgoingMessagesPerMessageId = {};
@@ -45,7 +44,7 @@ export async function sendMessage(senderRequest, role) {
 }
 
 function handleIncomingMessage(senderRequest) {
-  console.log("incoming P2P message...");
+  console.log("incoming message...");
   //as the P2P receive endpoint is the same as the one for client send, some fields are optional in the schema but mandatory for P2P send
   if (!senderRequest.destinations || senderRequest.destinations.length !== 1) {
     throw new UcrmError(400, `Missing destination for P2P message`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
@@ -59,7 +58,7 @@ function handleIncomingMessage(senderRequest) {
   validateSenderRequest(senderRequest);
 
   const destinationId = senderRequest.destinations[0];
-  //checkAndHandlePotentialStatusMessage will indicate with its return value if this message should be suppressen (returns false in this case)
+  //checkAndHandlePotentialStatusMessage will indicate with its return value if this message should be suppressed (returns false in this case)
   if (checkAndHandlePotentialStatusMessage(senderRequest)){
     getPendingMessagesForDestination(destinationId).push(senderRequest);
   }
@@ -97,7 +96,7 @@ function handleOutgoingMessage(senderRequest,allowTransportLayerMessages) {
       timeoutSeconds:senderRequest.timeout
     }
   }
-
+  //we ignore the asyncness of processUnsentMessages here as we want to return directly...
   processUnsentMessages();
   return senderRequest;
 }
@@ -174,12 +173,9 @@ async function processUnsentMessages() {
       const targetUcrmId = getUcrmIdFromParticipantId(destinationId);
       console.log(`about to send message with id '${senderRequest.messageId}' directed at participant '${destinationId}' connected via UCRM '${targetUcrmId}'`);
       if (targetUcrmId === "self") {
-        //TODO it would be better to call handleIncomingMessage instead to have a consistent flow here
-        console.log("message is local, no sending to remote ucrm necessary...");
+        console.log("message is local, no sending to remote ucrm necessary, looping back to handleIncomingMessage()...");
         sentMessageIds.push(messageId);
-        if (checkAndHandlePotentialStatusMessage(senderRequest)){
-          getPendingMessagesForDestination(destinationId).push(senderRequest);
-        }
+        handleIncomingMessage(senderRequest);
       }else{
         const remoteConfig=config.remoteUcrms[targetUcrmId]
         const sendUrl = `${remoteConfig.baseUrl}/messaging/send`;
@@ -291,7 +287,8 @@ function getNextSequenceIdForDestination(destinationId) {
 }
 
 function checkForTimeouts(){
-  console.log("Checking for Message timeouts...");
+  //as we are executed quite often we do not want to spam the log
+  // console.log("Checking for Message timeouts...");
   const now=new Date().getTime();
   for (const [messageId,trackingData] of Object.entries(trackedOutgoingMessagesPerMessageId)){
     if (now>trackingData.timeoutAt){
