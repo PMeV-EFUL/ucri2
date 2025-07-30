@@ -45,6 +45,10 @@ export async function sendMessage(senderRequest, role) {
 
 function handleIncomingMessage(senderRequest) {
   console.log("incoming message...");
+  //FIXME this logic is just for testing and should be configurable instead of being hardcoded!!!!
+  if (senderRequest.description && senderRequest.description.startsWith("X-GETERROR")){
+    throw new UcrmError(400, `Envelope Description stated X-GETERROR so an error is returned for testing purposes!`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
+  }
   //as the P2P receive endpoint is the same as the one for client send, some fields are optional in the schema but mandatory for P2P send
   if (!senderRequest.destinations || senderRequest.destinations.length !== 1) {
     throw new UcrmError(400, `Missing destination for P2P message`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
@@ -96,8 +100,7 @@ function handleOutgoingMessage(senderRequest,allowTransportLayerMessages) {
       timeoutSeconds:senderRequest.timeout
     }
   }
-  //we ignore the asyncness of processUnsentMessages here as we want to return directly...
-  processUnsentMessages();
+  setImmediate(processUnsentMessages);
   return senderRequest;
 }
 
@@ -163,6 +166,37 @@ function validateSenderRequest(senderRequest) {
   }
 }
 
+function notifyMessageSendingErrorToSender(senderRequest,errorMessageText, responseJSON) {
+  let messageId = senderRequest.messageId;
+  if (senderRequest.ack==="NONE"){
+    console.log(`as message.ack='NONE' indicates no status updates are desired at all, no failure status message will be sent for message id ${messageId}`);
+    return;
+  }
+  let originalSource = senderRequest.source;
+  console.log(`sending delivery failure message for messageId ${messageId} back to message source ${originalSource}...`);
+  let originalDestination = senderRequest.destinations[0];
+  const errorMessage={
+    "refMessageId": messageId,
+    "destination": originalDestination,
+    "statusCode": 500,
+    "statusMessage": errorMessageText
+  }
+  if (responseJSON && Number.isInteger(responseJSON.code) && typeof responseJSON.reason === "string") {
+    //the response object seems to be a valid, but still there could be additional errorneous fields in there, so we create a new object
+    const cause={
+      code: responseJSON.code,
+      reason: responseJSON.reason,
+    }
+    if (typeof responseJSON.message === "string"){
+      cause.message = responseJSON.message;
+    }
+    errorMessage.cause = cause;
+  }
+  const errorEnvelope=createMessageDeliveryStatusEnvelope(originalDestination,originalSource,errorMessage);
+  getPendingMessagesForDestination(originalSource).push(errorEnvelope);
+  delete trackedOutgoingMessagesPerMessageId[messageId];
+}
+
 async function processUnsentMessages() {
   if (unsentOutgoingMessages.length > 0) {
     console.log(`sending ${unsentOutgoingMessages.length} outgoing message(s)...`);
@@ -196,8 +230,17 @@ async function processUnsentMessages() {
             console.log(`success response from remote ucrm ${targetUcrmId} for messageId ${messageId}: ${JSON.stringify(respJSON, null, 2)}`);
             sentMessageIds.push(messageId);
           } else {
-            let respJSON = await response.json();
-            console.error(`received HTTP error ${response.status}, aborting... Response:\n ${JSON.stringify(respJSON, null, 2)}`)
+            let respJSON,respText;
+            try{
+              respJSON = await response.json();
+              respText = `Response received as valid JSON:\n${JSON.stringify(respJSON, null, 2)}`;
+            }catch (err){
+              respText = `Response received as invalid JSON:\n${await response.text()}`;
+            }
+            const errorMessage=`Remote UCRM at ${sendUrl} returned an HTTP Error ${response.status}.`;
+            const fullErrorMessage = `${errorMessage}: ${respText}`;
+            console.error(fullErrorMessage);
+            notifyMessageSendingErrorToSender(senderRequest,fullErrorMessage,respJSON);
           }
         } catch (err) {
           console.error(`remote ucrm '${targetUcrmId}' is not responding, aborting...`);
