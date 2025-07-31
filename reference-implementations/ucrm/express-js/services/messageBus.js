@@ -145,12 +145,6 @@ function validateSenderRequest(senderRequest) {
   const schemaId = senderRequest.payload.schemaId;
 
 
-  //check if target OID is known and get supported Apps
-  const commParticipant = getCommParticipant(destinationId, 400);
-  if (commParticipant.supportedApps.filter((app) => app.appId === appId && app.appVersion === appVersion).length === 0) {
-    throw new UcrmError(400, `Unsupported version '${appVersion}' for UCRI2 App '${appId}' for destination '${destinationId}'`, ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_APPID_OR_APPVERSION);
-  }
-
   //validate payload
   if (!appSchemata[appId]) {
     throw new UcrmError(400, `Unknown UCRI2 App '${appId}'`, ucrmErrors.REQUEST_PAYLOAD_UNKNOWN_APPID);
@@ -160,6 +154,12 @@ function validateSenderRequest(senderRequest) {
   }
   if (!appSchemata[appId][appVersion][schemaId]) {
     throw new UcrmError(400, `Unknown message name '${schemaId}' for UCRI2 App '${appId}' version '${appVersion}' `, ucrmErrors.REQUEST_PAYLOAD_UNKNOWN_SCHEMAID);
+  }
+
+  //check if target OID is known and get supported Apps
+  const commParticipant = getCommParticipant(destinationId, 400);
+  if (commParticipant.supportedApps.filter((app) => app.appId === appId && app.appVersion === appVersion).length === 0) {
+    throw new UcrmError(400, `Unsupported version '${appVersion}' for UCRI2 App '${appId}' for destination '${destinationId}'`, ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_APPID_OR_APPVERSION);
   }
 
   let payloadObject;
@@ -300,7 +300,7 @@ export function confirmMessages(messageRef,role,username) {
   const sequenceId = messageRef.sequenceId;
   let pendingMessagesForDestination = pendingMessagesPerDestination[destinationId];
   if (!pendingMessagesForDestination) {
-    throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`);
+    throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
   let confirmedMessageCount = 0;
   let i = pendingMessagesForDestination.length;
@@ -325,7 +325,7 @@ export function confirmMessages(messageRef,role,username) {
     }
   }
   if (confirmedMessageCount === 0) {
-    throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`);
+    throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
 
 }
