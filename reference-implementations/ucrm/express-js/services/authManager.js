@@ -1,6 +1,6 @@
 import {UcrmError} from "../util/ucrmError.js"
-import {ucrmErrors} from "../util/ucrmErrorCodes.js"
-import {base64Decode,base64Encode,sleep} from "../util/util.js"
+import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js"
+import {base64Decode,base64Encode,sleep} from "../../../shared-js/util.js"
 import {Buffer} from "buffer";
 import jwt from "jsonwebtoken";
 
@@ -13,6 +13,13 @@ export function setConfiguration(conf){
   users = conf.auth.accounts;
   jwtSecret = conf.auth.jwtSecret;
   remoteUcrms = conf.remoteUcrms;
+}
+
+export function checkRole(req, allowedRoles) {
+  if (!req.claims || !req.claims.role || allowedRoles.indexOf(req.claims.role) === -1) {
+    throw new UcrmError(400, `Role may not access this resource.`, ucrmErrors.REQUEST_ROLE_FORBIDDEN);
+  }
+  return req.claims.role;
 }
 
 export function checkBasicCredentials(req){

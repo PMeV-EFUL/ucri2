@@ -1,8 +1,8 @@
 import {UcrmError} from "../util/ucrmError.js";
-import {ucrmErrors} from "../util/ucrmErrorCodes.js";
+import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js";
 import fetch from 'node-fetch';
 import {getRemoteUcrmToken} from "./authManager.js";
-import {base64Encode} from "../util/util.js"
+import {base64Encode} from "../../../shared-js/util.js"
 
 export function addCommParticipants(participants, ucrmId) {
   Object.assign(commParticipants, participants);

@@ -15,7 +15,7 @@ import {
   start as startMessageBus
 } from "./services/messageBus.js";
 import {UcrmError} from "./util/ucrmError.js"
-import {ucrmErrors} from "./util/ucrmErrorCodes.js"
+import {ucrmErrors} from "../../shared-js/ucrmErrorCodes.js"
 import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetchParticipantsFromRemoteUcrms} from "./services/commParticipantRegistry.js";
 import jwt from "jsonwebtoken";
 import {setConfiguration,checkBasicCredentials,checkJWTCredentials,authenticateRemoteUcrm} from "./services/authManager.js"

@@ -1,6 +1,6 @@
 import {v4 as uuidv4} from "uuid";
 import {UcrmError} from "../util/ucrmError.js"
-import {ucrmErrors} from "../util/ucrmErrorCodes.js"
+import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js"
 import {getCommParticipant, getUcrmIdFromParticipantId} from "./commParticipantRegistry.js"
 import {checkIfClientMayUseOID, getRemoteUcrmToken} from "./authManager.js";
 

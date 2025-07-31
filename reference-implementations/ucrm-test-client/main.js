@@ -1,8 +1,8 @@
 import {steps} from "./test/standalone-tests.js"
 import {spawn} from "child_process";
 import {resolve} from "path";
-import {Buffer} from "buffer";
 import {writeFileSync} from "fs";
+import {sleep,base64Encode} from "../shared-js/util.js";
 import jwt from "jsonwebtoken";
 
 const ucrmChildProcesses = {}
@@ -190,14 +190,6 @@ function cleanUp() {
     console.log(`terminating UCRM with id ${ucrmId} ...`);
     childProcess.kill("SIGKILL");
   }
-}
-
-export function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export function base64Encode(str) {
-  return Buffer.from(str, "utf8").toString("base64")
 }
 
 await runTests();

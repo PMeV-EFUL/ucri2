@@ -1,5 +1,5 @@
 import {sendMessage,receiveMessages,confirmMessages} from "../services/messageBus.js"
-import {checkRole} from "../util/util.js"
+import {checkRole} from "../services/authManager.js";
 
 export function postReceiveMessages (req, res) {
   const role=checkRole(req,["client"]);
