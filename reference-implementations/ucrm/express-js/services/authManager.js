@@ -87,7 +87,7 @@ export function checkIfClientMayUseOID(role,username,oid,propertyName){
     throw new UcrmError(400,`username '${username}' is unknown.`,ucrmErrors.REQUEST_UNAUTHORIZED);
   }
   if (!userData.oids || !userData.oids.includes(oid)){
-    throw new UcrmError(400,`username '${username}' may not use OID '${oid}' in ${propertyName}.`,ucrmErrors.REQUEST_UNAUTHORIZED);
+    throw new UcrmError(400,`username '${username}' may not use OID '${oid}' in ${propertyName}.`,ucrmErrors.REQUEST_OID_FORBIDDEN);
   }
 }
 
