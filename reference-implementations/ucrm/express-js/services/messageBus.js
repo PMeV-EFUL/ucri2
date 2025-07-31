@@ -12,6 +12,10 @@ export function setConfiguration(conf){
   config=conf;
 }
 
+export function notifyDiscoveryFinished(){
+  discoveryFinished=true;
+}
+
 const TRANSPORT_LAYER_APPID="transport_layer_messages";
 const STATUS_MESSAGE_SCHEMAID="message_delivery_status";
 const TIMEOUT_TRACKING_INVERVAL_MS=5000;
@@ -19,6 +23,7 @@ const TIMEOUT_TRACKING_INVERVAL_MS=5000;
 
 let appSchemata;
 let config;
+let discoveryFinished = false;
 const unsentOutgoingMessages = []
 const pendingMessagesPerDestination = {}
 const messageSeqNumbersPerDestination = {}
@@ -31,6 +36,10 @@ export function start(){
 }
 
 export async function sendMessage(senderRequest, role,username) {
+  //first check if discovery is finished for send requests
+  if (!discoveryFinished){
+    throw new UcrmError(500, `Remote UCRM participant discovery is in process, please try again later!`, ucrmErrors.REQUEST_TRY_LATER_UCRM_IS_IN_DISCOVERY_MODE);
+  }
   //the client access checks should only be performed on this level as the handleXXX() methods will be called from within the messageBus too!
   checkIfClientMayUseOID(role,username,senderRequest.source,"source");
   switch (role) {

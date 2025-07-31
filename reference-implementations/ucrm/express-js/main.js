@@ -8,7 +8,12 @@ import { registerSchema, validate} from "@hyperjump/json-schema/draft-2020-12";
 import { BASIC } from "@hyperjump/json-schema/experimental";
 import Ajv2020 from "ajv/dist/2020.js"
 import addFormats from "ajv-formats"
-import { setAppSchemata,setConfiguration as setConfigurationOnMessageBus, start as startMessageBus } from "./services/messageBus.js";
+import {
+  notifyDiscoveryFinished,
+  setAppSchemata,
+  setConfiguration as setConfigurationOnMessageBus,
+  start as startMessageBus
+} from "./services/messageBus.js";
 import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "./util/ucrmErrorCodes.js"
 import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetchParticipantsFromRemoteUcrms} from "./services/commParticipantRegistry.js";
@@ -68,19 +73,19 @@ async function initConfiguration(){
 }
 
 async function prepareSpec(){
-  //as we need to adapt the TS-API spec , we copy over the spec
-  await fsPromises.cp('../../../api/crm/0.1','./transport-spec',{recursive:true,
-  filter: (src,dst)=>!src.includes("spectral.yaml")});
-  //replace server url variables
-  await replaceInFiles({
-    files: './transport-spec/ucrm.yaml',
-    from: '{apiRoot}/{basePath}',
-    to: '/ucrm/v0'
-  //replace relative tokenUrl
-  }).pipe({
-    from: 'tokenUrl: /token',
-    to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
-  });
+  // //as we need to adapt the TS-API spec , we copy over the spec
+  // await fsPromises.cp('../../../api/crm/0.1','./transport-spec',{recursive:true,
+  // filter: (src,dst)=>!src.includes("spectral.yaml")});
+  // //replace server url variables
+  // await replaceInFiles({
+  //   files: './transport-spec/ucrm.yaml',
+  //   from: '{apiRoot}/{basePath}',
+  //   to: '/ucrm/v0'
+  // //replace relative tokenUrl
+  // }).pipe({
+  //   from: 'tokenUrl: /token',
+  //   to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
+  // });
 
   //the app spec is copied 1:1
   await fsPromises.cp('../../../apps','./app-spec',{recursive:true});
@@ -227,6 +232,8 @@ async function start(){
   if (!fetchParticipantsSucessful){
     return;
   }
+  console.log("Fetching participants sucessful");
+  notifyDiscoveryFinished();
   setInterval(fetchParticipantsFromRemoteUcrms,REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS);
 }
 

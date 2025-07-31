@@ -74,5 +74,6 @@ export async function fetchParticipantsFromRemoteUcrms() {
       return false;
     }
   }
+  return true;
 }
 
