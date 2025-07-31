@@ -13,6 +13,7 @@ const testFailures = [];
 async function runTests() {
   let testNumber = 0;
   for (const testStep of steps) {
+    console.log(`executing step ${testNumber}: ${JSON.stringify(testStep,null,2)}`);
     switch (testStep.type) {
       case "startUcrm":
         const startDir = resolve(testStep.startDir)
@@ -121,20 +122,29 @@ async function performFetch(step, testNumber) {
   let responseHttpCode;
   try {
     let authHeader = `bearer ${userTokens[username]}`;
-    const response = await fetch(url, {
+    let request = {
       "headers": {
         "Content-Type": "application/json",
         "Authorization": authHeader,
       },
       "method": method
-    })
+    };
+    if (step.body){
+      request.body = JSON.stringify(step.body);
+    }
+    const response = await fetch(url, request);
     responseHttpCode = response.status;
-    let respJSON = await response.json();
-    console.log(`response with HTTP status code ${responseHttpCode} from remote ucrm ${ucrmId}: ${JSON.stringify(respJSON, null, 2)}`);
-    if (step.expect.responseChecker) {
-      const checkErrorMessage = step.expect.responseChecker(respJSON);
-      if (checkErrorMessage) {
-        reportTestFailure(step, testNumber, `response checker error: '${checkErrorMessage}'`,respJSON);
+    if (responseHttpCode === 204) {
+      console.log(`response with HTTP status code ${responseHttpCode} (no content) from remote ucrm ${ucrmId}`);
+    }else{
+      //in all other cases there MUST be a json in the response!
+      let respJSON = await response.json();
+      console.log(`response with HTTP status code ${responseHttpCode} from remote ucrm ${ucrmId}: ${JSON.stringify(respJSON, null, 2)}`);
+      if (step.expect.responseChecker) {
+        const checkErrorMessage = step.expect.responseChecker(respJSON);
+        if (checkErrorMessage) {
+          reportTestFailure(step, testNumber, `response checker error: '${checkErrorMessage}'`,respJSON);
+        }
       }
     }
   } catch (err) {
@@ -144,42 +154,6 @@ async function performFetch(step, testNumber) {
   if (step.expect.http !== responseHttpCode) {
     reportTestFailure(step, testNumber, `http status code mismatch, expected '${step.expect.http}' but got '${responseHttpCode}'`);
   }
-  //
-  //
-  // const ucrmId = step.ucrmId;
-  // const url = `${ucrmData[ucrmId].baseUrl}/token`;
-  // const authInfo = base64Encode(`${username}:${step.password}`);
-  // console.log(`Authenticating username '${username}' on remote UCRM with id '${ucrmId}' at authUrl ${url}'`);
-  // let responseHttpCode;
-  // try {
-  //   //request token
-  //   const response = await fetch(url, {
-  //     "headers": {
-  //       "Content-Type": "application/json",
-  //       "Authorization": `basic ${authInfo}`,
-  //     },
-  //     "method": "GET"
-  //   })
-  //   responseHttpCode = response.status;
-  //   if (responseHttpCode === 200) {
-  //     let respJSON = await response.json();
-  //     let token = respJSON.token;
-  //     userTokens[username] = token;
-  //     console.log(`received token ${token}`);
-  //     const decodedToken=jwt.decode(token);
-  //     let expectedRole = step.expect.role;
-  //     let actualRole = decodedToken.role;
-  //     if (actualRole!==expectedRole){
-  //       reportTestFailure(step,testNumber,`returned JWT has role claim mismatch, expected '${expectedRole}' but got '${actualRole}`);
-  //     }
-  //   }
-  // } catch (err) {
-  //   console.warn("remote ucrm is not available or 200 response was malformed");
-  //   responseHttpCode = -1;
-  // }
-  // if (step.expect.http !== responseHttpCode){
-  //   reportTestFailure(step,testNumber,`Token endpoint http status code mismatch, expected '${step.expect.http}' but got '${responseHttpCode}`);
-  // }
 }
 
 function cleanUp() {
@@ -189,6 +163,13 @@ function cleanUp() {
   for (const [ucrmId, childProcess] of Object.entries(ucrmChildProcesses)) {
     console.log(`terminating UCRM with id ${ucrmId} ...`);
     childProcess.kill("SIGKILL");
+  }
+  if (testFailures.length === 0){
+    console.log("All tests have passed, yay!");
+    process.exit(0);
+  }else{
+    console.error(`There were ${testFailures.length} tests that have failed`);
+    process.exit(1);
   }
 }
 
