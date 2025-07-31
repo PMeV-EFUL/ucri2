@@ -50,6 +50,10 @@ Die OID-Adresse der einzelnen Kommunikationsteilnehmer (KT) wird nach dem [amtli
 
 Beispiel OID Feuerwehr ELS in Ratingen: 1.2.3.1.276.5.1.1.58.28.1.1
 
+Folgende OID wird zur Identifizierung der UCRI-Infrastruktur als Sender von technischen Quittungen (siehe UCRI2-App Technische Quittungen) festgelegt:
+
+UCRI-Infrastruktur: 1.2.3.1.276.5.0.0.0.0.1.1
+
 ---
 
 [Vermittlungsebene](messaging.md)

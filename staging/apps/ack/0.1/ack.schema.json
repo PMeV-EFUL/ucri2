@@ -4,13 +4,18 @@
   "unevaluatedProperties": false,
   "title": "Technische Quittung",
   "description": "Automatisch generierte Quittung über die Zustellung einer zuvor gesendeten Nachricht",
-  "required": [ "refMessageId", "statusCode" ],
+  "required": [ "refMessageId", "receiverOID", "statusCode" ],
   "type": "object",
   "properties": {
     "refMessageId": {
       "title": "Systemweit eindeutige UUID der referenzierten Nachricht",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "receiverOID": {
+      "title": "OID des Empfängers der referenzierten Nachricht für den diese Quittung relevant ist",
+      "type": "string",
+      "pattern": "(\\d{1,6})*(\\.\\d{1,6})*$"
     },
     "statusCode": {
       "title": "Status-Code",
