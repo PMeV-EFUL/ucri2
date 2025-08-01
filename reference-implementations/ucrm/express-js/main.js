@@ -1,23 +1,22 @@
 import express from 'express';
-import path from 'path';
 import logger from 'morgan';
 import http from 'http';
 import fsPromises from 'fs/promises';
 import replaceInFiles from 'replace-in-files';
-import { registerSchema, validate} from "@hyperjump/json-schema/draft-2020-12";
-import { BASIC } from "@hyperjump/json-schema/experimental";
 import Ajv2020 from "ajv/dist/2020.js"
 import addFormats from "ajv-formats"
 import {
-  notifyDiscoveryFinished,
+  notifyDiscoveryFinished as notifyDiscoveryFinishedOnMessageBus,
   setAppSchemata,
   setConfiguration as setConfigurationOnMessageBus,
   start as startMessageBus
 } from "./services/messageBus.js";
+import {
+  notifyDiscoveryFinished as notifyDiscoveryFinishedOnInfoEndpoint,
+} from "./routes/info.js";
 import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "../../shared-js/ucrmErrorCodes.js"
 import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetchParticipantsFromRemoteUcrms} from "./services/commParticipantRegistry.js";
-import jwt from "jsonwebtoken";
 import {setConfiguration,checkBasicCredentials,checkJWTCredentials,authenticateRemoteUcrm} from "./services/authManager.js"
 
 import {
@@ -73,19 +72,19 @@ async function initConfiguration(){
 }
 
 async function prepareSpec(){
-  // //as we need to adapt the TS-API spec , we copy over the spec
-  // await fsPromises.cp('../../../api/crm/0.1','./transport-spec',{recursive:true,
-  // filter: (src,dst)=>!src.includes("spectral.yaml")});
-  // //replace server url variables
-  // await replaceInFiles({
-  //   files: './transport-spec/ucrm.yaml',
-  //   from: '{apiRoot}/{basePath}',
-  //   to: '/ucrm/v0'
-  // //replace relative tokenUrl
-  // }).pipe({
-  //   from: 'tokenUrl: /token',
-  //   to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
-  // });
+  //as we need to adapt the TS-API spec , we copy over the spec
+  await fsPromises.cp('../../../api/crm/0.1','./transport-layer-spec',{recursive:true,
+  filter: (src,dst)=>!src.includes("spectral.yaml")});
+  //replace server url variables
+  await replaceInFiles({
+    files: './transport-layer-spec/ucrm.yaml',
+    from: '{apiRoot}/{basePath}',
+    to: '/ucrm/v0'
+  //replace relative tokenUrl
+  }).pipe({
+    from: 'tokenUrl: /token',
+    to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
+  });
 
   //the app spec is copied 1:1
   await fsPromises.cp('../../../apps','./app-spec',{recursive:true});
@@ -106,7 +105,7 @@ async function start(){
   await prepareSpec();
   const appSchemata= await compileAppSchemata();
   setAppSchemata(appSchemata);
-  const apiSpec = 'transport-spec/ucrm.yaml';
+  const apiSpec = 'transport-layer-spec/ucrm.yaml';
 
 
 
@@ -233,7 +232,8 @@ async function start(){
     return;
   }
   console.log("Fetching participants sucessful");
-  notifyDiscoveryFinished();
+  notifyDiscoveryFinishedOnInfoEndpoint();
+  notifyDiscoveryFinishedOnMessageBus();
   setInterval(fetchParticipantsFromRemoteUcrms,REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS);
 }
 

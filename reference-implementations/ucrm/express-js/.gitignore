@@ -1,4 +1,5 @@
 package-lock.json
 node_modules/
 transport-spec/**/*
+transport-layer-spec/**/*
 app-spec/**/*

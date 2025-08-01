@@ -5,7 +5,7 @@ export const config={
     //instead, you should store sensitive information in .env-Files and ignore them in your .gitignore !
     jwtSecret:"test1234",
     accounts: {
-      userA: {
+      userB: {
         username: "userB",
         password: "test",
         oids:["1.2.3.4.5.7"],
