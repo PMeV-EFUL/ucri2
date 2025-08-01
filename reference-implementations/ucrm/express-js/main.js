@@ -191,8 +191,8 @@ async function start(){
   app.use((err, req, res, next) => {
     console.error(err);
     let errorHttpCode = err.status || 500;
-    let errorDescription = `HTTP error ${errorHttpCode}: ${err.description||err.message}`;
-    let errorMessage = `HTTP error ${errorHttpCode}: ${err.message}`;
+    let errorDescription = `HTTP error ${errorHttpCode}: ${err.message}`;
+    let errorMessage = `HTTP error ${errorHttpCode}: ${err.description||err.message}`;
     let errorUcriCode = err.ucriErrorCode || ucrmErrors.REQUEST_UNAUTHORIZED;
     
     //express-openapi-validator errors can be identified by the presence of the the err.errors array

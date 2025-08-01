@@ -271,6 +271,9 @@ async function processUnsentMessages() {
 
 export function receiveMessages(receiverRequest,role,username) {
   for (const destination of receiverRequest.destinations) {
+    if (getUcrmIdFromParticipantId(destination)!=="self"){
+      throw new UcrmError(400, `destination OID '${destination}' is not registered here.`,ucrmErrors.REQUEST_UNKNOWN_DESTINATION_ID);
+    }
     checkIfClientMayUseOID(role,username,destination,"destinations");
   }
   const destinations = receiverRequest.destinations;
