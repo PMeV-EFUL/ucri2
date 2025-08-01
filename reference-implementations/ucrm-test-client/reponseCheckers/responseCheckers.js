@@ -14,9 +14,16 @@ export function checkReceiveResponse(numberOfExpectedMessages,response){
 }
 
 export function checkInfoResponse (response){
-  if (typeof (response.apiVersion) !== "string" || typeof (response.crmProvider) !== "string"){
-    return "apiVersion or crmProvider not set or not of type string";
+  if (typeof (response.apiVersion) !== "string" || typeof (response.crmProvider) !== "string" || !Number.isInteger(response.status) ){
+    return "apiVersion or crmProvider not set or not of type string OR status not set or not of type integer";
   }
+}
+
+export function checkInfoResponseForStatus (status,response){
+  if (!response.status===status){
+    return `response status mismatch, expected ${status}, got ${response.status}`;
+  }
+  return checkInfoResponse(response);
 }
 
 export function createErrorResponseChecker(expectedUcriErrorCode){

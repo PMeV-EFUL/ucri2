@@ -1,0 +1,85 @@
+[
+  {
+    "testNumber": 20,
+    "errorMessage": "response checker error: 'messages must be an array with length==2'",
+    "stepData": {
+      "type": "fetch",
+      "expect": {
+        "http": 200
+      },
+      "ucrmId": "ucrmA",
+      "username": "userA1",
+      "desc": "post messaging receive two delivery success messages",
+      "body": {
+        "destinations": [
+          "1.2.3.4.5.6"
+        ],
+        "maxMessages": 5
+      },
+      "endpoint": "messaging/receive",
+      "method": "POST"
+    },
+    "offendingObject": {
+      "messages": [
+        {
+          "messageId": "2f844af5-e62c-4199-a2df-fa71569d463c",
+          "sentDate": "2025-08-01T12:06:22.521Z",
+          "timeout": 10,
+          "ack": "NONE",
+          "source": "1.2.3.4.5.7",
+          "destinations": [
+            "1.2.3.4.5.6"
+          ],
+          "payload": {
+            "appId": "transport_layer_messages",
+            "appVersion": "0.1",
+            "schemaId": "message_delivery_status",
+            "contentType": "application/json",
+            "data": "{\"refMessageId\":\"5df14c26-4892-4ea1-8b3b-5d6d5f8aa65c\",\"destination\":\"1.2.3.4.5.7\",\"statusCode\":200}"
+          },
+          "sequenceId": 1,
+          "destination": "1.2.3.4.5.6"
+        },
+        {
+          "messageId": "2f844af5-e62c-4199-a2df-fa71569d463c",
+          "sentDate": "2025-08-01T12:06:22.521Z",
+          "timeout": 10,
+          "ack": "NONE",
+          "source": "1.2.3.4.5.7",
+          "destinations": [
+            "1.2.3.4.5.6"
+          ],
+          "payload": {
+            "appId": "transport_layer_messages",
+            "appVersion": "0.1",
+            "schemaId": "message_delivery_status",
+            "contentType": "application/json",
+            "data": "{\"refMessageId\":\"5df14c26-4892-4ea1-8b3b-5d6d5f8aa65c\",\"destination\":\"1.2.3.4.5.7\",\"statusCode\":200}"
+          },
+          "sequenceId": 2,
+          "destination": "1.2.3.4.5.6"
+        },
+        {
+          "messageId": "b0a91a28-82b8-4f31-bcd0-34c3b5638f7e",
+          "sentDate": "2025-08-01T12:06:22.532Z",
+          "timeout": 10,
+          "ack": "NONE",
+          "source": "1.2.3.4.5.7",
+          "destinations": [
+            "1.2.3.4.5.6"
+          ],
+          "payload": {
+            "appId": "transport_layer_messages",
+            "appVersion": "0.1",
+            "schemaId": "message_delivery_status",
+            "contentType": "application/json",
+            "data": "{\"refMessageId\":\"d81e9499-013e-428a-82e6-168a52f9d72b\",\"destination\":\"1.2.3.4.5.7\",\"statusCode\":200}"
+          },
+          "sequenceId": 3,
+          "destination": "1.2.3.4.5.6"
+        }
+      ],
+      "maxMessages": 5
+    }
+  }
+]

@@ -1,0 +1,298 @@
+[
+  {
+    "type": "startUcrm",
+    "desc": "start UCRM A",
+    "ucrmId": "ucrmA",
+    "startDir": "../ucrm/express-js",
+    "startCmd": "node",
+    "startCmdParms": [
+      "main.js",
+      "./config/a.config.js"
+    ],
+    "baseUrl": "http://localhost:3002/ucrm/v0",
+    "readyLogString": "Listening on port",
+    "logStdOut": false,
+    "logStdErr": false,
+    "ready": true
+  },
+  {
+    "type": "authorize",
+    "desc": "authorize with correct credentials (userA1)",
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "password": "test",
+    "expect": {
+      "http": 200,
+      "role": "client"
+    }
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "get info while p2p discovery is active (status must be 1)",
+    "endpoint": "info",
+    "method": "GET"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 500
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "post messaging send while discovery is active (leads to try again later error)",
+    "body": {
+      "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+      "timeout": 20,
+      "ack": "ALL",
+      "source": "1.2.3.4.5.6",
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "payload": {
+        "appId": "incident_transfer",
+        "appVersion": "0.1",
+        "schemaId": "incident",
+        "contentType": "application/json",
+        "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInfo\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInfo\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInfo\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInfo\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
+      }
+    },
+    "endpoint": "messaging/send",
+    "method": "POST"
+  },
+  {
+    "type": "startUcrm",
+    "desc": "start UCRM B",
+    "ucrmId": "ucrmB",
+    "startDir": "../ucrm/express-js",
+    "startCmd": "node",
+    "startCmdParms": [
+      "main.js",
+      "./config/b.config.js"
+    ],
+    "baseUrl": "http://localhost:3003/ucrm/v0",
+    "readyLogString": "Listening on port",
+    "logStdOut": false,
+    "logStdErr": false,
+    "ready": true
+  },
+  {
+    "type": "authorize",
+    "desc": "authorize with correct credentials (userB1)",
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "password": "test",
+    "expect": {
+      "http": 200,
+      "role": "client"
+    }
+  },
+  {
+    "type": "awaitDiscoveryComplete",
+    "ucrmId": "ucrmA",
+    "username": "userA1"
+  },
+  {
+    "type": "awaitDiscoveryComplete",
+    "ucrmId": "ucrmB",
+    "username": "userB"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "post messaging send first message (valid message)",
+    "body": {
+      "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+      "timeout": 20,
+      "ack": "ALL",
+      "source": "1.2.3.4.5.6",
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "payload": {
+        "appId": "incident_transfer",
+        "appVersion": "0.1",
+        "schemaId": "incident",
+        "contentType": "application/json",
+        "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInfo\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInfo\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInfo\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInfo\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
+      }
+    },
+    "endpoint": "messaging/send",
+    "method": "POST"
+  },
+  {
+    "type": "sleep",
+    "durationMs": 2000
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "desc": "post messaging receive first message",
+    "body": {
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "maxMessages": 5
+    },
+    "endpoint": "messaging/receive",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "post messaging send second message (valid message)",
+    "body": {
+      "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+      "timeout": 20,
+      "ack": "ALL",
+      "source": "1.2.3.4.5.6",
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "payload": {
+        "appId": "incident_transfer",
+        "appVersion": "0.1",
+        "schemaId": "incident",
+        "contentType": "application/json",
+        "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInfo\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInfo\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInfo\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInfo\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
+      }
+    },
+    "endpoint": "messaging/send",
+    "method": "POST"
+  },
+  {
+    "type": "sleep",
+    "durationMs": 2000
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "desc": "post messaging receive first and second message",
+    "body": {
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "maxMessages": 5
+    },
+    "endpoint": "messaging/receive",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "desc": "post messaging receive first message (maxMessages=1)",
+    "body": {
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "maxMessages": 1
+    },
+    "endpoint": "messaging/receive",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 204
+    },
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "desc": "post messaging commit first message",
+    "body": {
+      "destination": "1.2.3.4.5.7",
+      "sequenceId": 1
+    },
+    "endpoint": "messaging/commit",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "desc": "post messaging receive second message (first was already committed)",
+    "body": {
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "maxMessages": 5
+    },
+    "endpoint": "messaging/receive",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 204
+    },
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "desc": "post messaging commit second message",
+    "body": {
+      "destination": "1.2.3.4.5.7",
+      "sequenceId": 2
+    },
+    "endpoint": "messaging/commit",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 204
+    },
+    "ucrmId": "ucrmB",
+    "username": "userB",
+    "desc": "post messaging receive no messages (first and second was already committed)",
+    "body": {
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "maxMessages": 5
+    },
+    "endpoint": "messaging/receive",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "post messaging receive two delivery success messages",
+    "body": {
+      "destinations": [
+        "1.2.3.4.5.6"
+      ],
+      "maxMessages": 5
+    },
+    "endpoint": "messaging/receive",
+    "method": "POST"
+  }
+]
