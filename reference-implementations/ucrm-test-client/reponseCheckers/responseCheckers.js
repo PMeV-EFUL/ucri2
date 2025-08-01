@@ -1,3 +1,18 @@
+export function resetResponseCheckers(){
+  lastSequenceId=-1;
+}
+
+let lastSequenceId=-1;
+
+export function checkReceiveResponse(numberOfExpectedMessages,response){
+  let messages = response.messages;
+  if (!Array.isArray(messages) || messages.length !== numberOfExpectedMessages){
+    return `messages must be an array with length==${numberOfExpectedMessages}`;
+  }
+  lastSequenceId=messages[messages.length - 1].sequenceId;
+  console.log(`highest message sequenceId is ${lastSequenceId}`)
+}
+
 export function checkInfoResponse (response){
   if (typeof (response.apiVersion) !== "string" || typeof (response.crmProvider) !== "string"){
     return "apiVersion or crmProvider not set or not of type string";

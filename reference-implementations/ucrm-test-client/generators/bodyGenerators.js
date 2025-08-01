@@ -1,22 +1,22 @@
 import deepMerge from '@75lb/deep-merge';
 
-export function generateBodyReceiveRequest(destination){
+export function genBodyReceiveRequest(destination, maxMessages=5){
   return {
     "destinations": [
       destination
     ],
-    "maxMessages": 5
+    maxMessages
   }
 }
 
-export function generateBodyCommitRequest(destination,sequenceId){
+export function genBodyCommitRequest(destination, sequenceId){
   return {
     destination,
     sequenceId
   }
 }
 
-export function generateBodySendRequest(source,destination,bodyOverride){
+export function genBodySendRequest(source, destination, bodyOverride){
   let body = {
     "description": "Einsatzübergabe am 13.11.2023 um 20:20",
     "timeout": 20,

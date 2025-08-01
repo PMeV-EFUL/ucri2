@@ -1,52 +1,37 @@
-import {steps} from "./test/standalone-tests.js"
+import {standaloneSteps} from "./tests/standalone-tests.js"
 import {spawn} from "child_process";
 import {resolve} from "path";
 import {writeFileSync} from "fs";
 import {sleep,base64Encode} from "../shared-js/util.js";
 import jwt from "jsonwebtoken";
 
-const ucrmChildProcesses = {}
-const ucrmData = {};
-const userTokens = {};
-const testFailures = [];
+let ucrmChildProcesses = {}
+let ucrmData = {};
+let userTokens = {};
+let testFailures = [];
+let totalNumOfTestFailures = 0;
+const numOfTestFailuresPerSuite = {};
 
-async function runTests() {
-  let testNumber = 0;
+await runTestSuite("standalone",standaloneSteps);
+finish();
+
+async function runTestSuite(testSuiteName,testSuiteSteps){
+  console.log(`Running test suite '${testSuiteName}' with a total of ${testSuiteSteps.length} test steps...`);
+  await runTestSteps(testSuiteSteps);
+  cleanUp(testSuiteName,testSuiteSteps);
+}
+
+async function runTestSteps(steps) {
+  let testNumber = 1;
   for (const testStep of steps) {
     console.log(`executing step ${testNumber}: ${JSON.stringify(testStep,null,2)}`);
     switch (testStep.type) {
       case "startUcrm":
-        const startDir = resolve(testStep.startDir)
-        console.log(`starting UCRM with id ${testStep.ucrmId} from '${startDir}' ...`);
-        const childProcess = spawn(testStep.startCmd, testStep.startCmdParms, {cwd: testStep.startDir});
-        ucrmChildProcesses[testStep.ucrmId] = childProcess;
-        ucrmData[testStep.ucrmId] = testStep;
-        childProcess.stdout.on('data', (data) => {
-          if (data.includes(testStep.readyLogString)){
-            console.log(`ucrm with id ${testStep.ucrmId} is ready.`);
-            ucrmData[testStep.ucrmId].ready=true;
-          }
-          if (testStep.logStdOut) {
-            console.log(`${testStep.ucrmId} stdout: ${data}`);
-          }
-        });
-        if (testStep.logStdErr) {
-          childProcess.stderr.on('data', (data) => {
-            console.error(`${testStep.ucrmId} stderr: ${data}`);
-          });
-        }
-        childProcess.on('close', (code) => {
-          console.log(`${testStep.ucrmId} child process exited with code ${code}`);
-        });
-        console.log("waiting for UCRM to become ready...");
-        while(!ucrmData[testStep.ucrmId].ready){
-          await sleep(100);
-        }
-        console.log(`ucrm with id ${testStep.ucrmId} has started, continuing...`);
+        await performStartUcrm(testStep);
         break;
       case "sleep": {
-        console.log(`sleeping for ${testStep.duration} seconds...`);
-        await sleep(testStep.duration * 1000);
+        console.log(`sleeping for ${testStep.durationMs} milliseconds...`);
+        await sleep(testStep.durationMs);
         break;
       }
       case "authorize":
@@ -74,6 +59,44 @@ function reportTestFailure(stepData, testNumber, message,offendingObject) {
     failure.offendingObject = offendingObject;
   }
   testFailures.push(failure);
+}
+
+function createUcrmStdOutListener(testStep){
+  return (data) => {
+    if (data.includes(testStep.readyLogString)){
+      console.log(`ucrm with id ${testStep.ucrmId} is ready.`);
+      ucrmData[testStep.ucrmId].ready=true;
+    }
+    if (testStep.logStdOut) {
+      console.log(`${testStep.ucrmId} stdout: ${data}`);
+    }
+  }
+}
+
+function createUcrmStdErrListener(testStep){
+  return (data) => {
+    console.error(`${testStep.ucrmId} stderr: ${data}`);
+  }
+}
+
+async function performStartUcrm(testStep) {
+  const startDir = resolve(testStep.startDir)
+  console.log(`starting UCRM with id ${testStep.ucrmId} from '${startDir}' ...`);
+  const childProcess = spawn(testStep.startCmd, testStep.startCmdParms, {cwd: testStep.startDir});
+  ucrmChildProcesses[testStep.ucrmId] = childProcess;
+  ucrmData[testStep.ucrmId] = testStep;
+  childProcess.stdout.on('data', createUcrmStdOutListener(testStep) );
+  if (testStep.logStdErr) {
+    childProcess.stderr.on('data', createUcrmStdErrListener(testStep) );
+  }
+  childProcess.on('close', (code) => {
+    console.log(`${testStep.ucrmId} child process exited with code ${code}`);
+  });
+  console.log("waiting for UCRM to become ready...");
+  while(!ucrmData[testStep.ucrmId].ready){
+    await sleep(100);
+  }
+  console.log(`ucrm with id ${testStep.ucrmId} has started, continuing...`);
 }
 
 async function performAuthorize(authorizeStep, testNumber) {
@@ -156,15 +179,31 @@ async function performFetch(step, testNumber) {
   }
 }
 
-function cleanUp() {
-  console.log("Cleaning up...");
-  console.log("writing test failures to file...");
-  writeFileSync("test-failures.json", JSON.stringify(testFailures, null, 2));
+function cleanUp(testSuiteName,testSteps) {
+  console.log(`Cleaning up after test suite '${testSuiteName}'...`);
+  console.log("writing performed steps and test failures to file...");
+  writeFileSync(`./logs/${testSuiteName}-tests.json`, JSON.stringify(testSteps, null, 2));
+  writeFileSync(`./logs/${testSuiteName}-failures.json`, JSON.stringify(testFailures, null, 2));
   for (const [ucrmId, childProcess] of Object.entries(ucrmChildProcesses)) {
     console.log(`terminating UCRM with id ${ucrmId} ...`);
     childProcess.kill("SIGKILL");
   }
-  if (testFailures.length === 0){
+  totalNumOfTestFailures+=testFailures.length;
+  numOfTestFailuresPerSuite[testSuiteName] = testFailures.length;
+
+  ucrmChildProcesses = {}
+  ucrmData = {};
+  userTokens = {};
+  testFailures = [];
+}
+
+function finish(){
+  console.log("testing is finished. Results:");
+  for (const [suiteName, numOfFailures] of Object.entries(numOfTestFailuresPerSuite)) {
+    console.log(`Test Suite ${suiteName} had ${numOfFailures} failed tests.`);
+  }
+  console.log("for detailed results, see logs in the ./logs directory ([suiteName]-tests.json for the performed testing steps and [suiteName]-failed.json for test failure details...");
+  if (totalNumOfTestFailures === 0){
     console.log("All tests have passed, yay!");
     process.exit(0);
   }else{
@@ -173,5 +212,3 @@ function cleanUp() {
   }
 }
 
-await runTests();
-cleanUp();
