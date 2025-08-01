@@ -1,6 +1,7 @@
 required:
   - apiVersion
   - crmProvider
+  - status
 type: object
 properties:
   apiVersion:
@@ -9,6 +10,13 @@ properties:
   crmProvider:
     type: string
     description: Hersteller des CRM Moduls
+  status:
+    type: integer
+    description: Aktueller Betriebszustand des UCRM (0=Normaler Betriebszustand,1=Teilnehmer-Discovery läuft (keine MessageSend-Operationen möglich),2=Fehlerhafter Betriebszustand)
+    enum:
+      - 0
+      - 1
+      - 2
 description: CRM Information
 example:
   apiVersion: "0.1"
