@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "UCRI Control Room Module (UCRM) API",
     "description": "UCRI Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer\nwie zum Beispiel Leitstellensysteme, andere technische Knoten, sowie weitere externe Systeme.\n",
@@ -65,8 +65,7 @@
                   "type": "object",
                   "properties": {
                     "token": {
-                      "type": "string",
-                      "description": "JWT-Token"
+                      "$ref": "#/components/schemas/JWTToken"
                     }
                   },
                   "description": "JSON-Objekt mit dem JWT-Token"
@@ -460,7 +459,7 @@
         "description": "OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.",
         "flows": {
           "clientCredentials": {
-            "tokenUrl": "/ucrm/v0/token",
+            "tokenUrl": "/token",
             "scopes": {}
           }
         }
@@ -512,6 +511,41 @@
           }
         },
         "description": "Fehlerbeschreibung, gewöhnlich für eine HTTP Error Response-Code (3xx, 4xx, 5xx)"
+      },
+      "JWTToken": {
+        "type": "string",
+        "contentMediaType": "application/jwt",
+        "contentSchema": {
+          "type": "array",
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": {
+                "typ": "JWT",
+                "alg": "HS256"
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "ait",
+                "exp",
+                "role"
+              ],
+              "properties": {
+                "role": {
+                  "type": "string"
+                },
+                "iat": {
+                  "type": "integer"
+                },
+                "exp": {
+                  "type": "integer"
+                }
+              }
+            }
+          ]
+        }
       },
       "payload": {
         "required": [
@@ -997,7 +1031,8 @@
       "info": {
         "required": [
           "apiVersion",
-          "crmProvider"
+          "crmProvider",
+          "status"
         ],
         "type": "object",
         "properties": {
@@ -1008,6 +1043,15 @@
           "crmProvider": {
             "type": "string",
             "description": "Hersteller des CRM Moduls"
+          },
+          "status": {
+            "type": "integer",
+            "description": "Aktueller Betriebszustand des UCRM (0=Normaler Betriebszustand,1=Teilnehmer-Discovery läuft (keine MessageSend-Operationen möglich),2=Fehlerhafter Betriebszustand)",
+            "enum": [
+              0,
+              1,
+              2
+            ]
           }
         },
         "description": "CRM Information",
