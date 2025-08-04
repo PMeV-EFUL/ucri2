@@ -184,7 +184,10 @@ export const ucrmP2PSteps = [
       http: 204
     }
   },"receiver"),
-
+  {
+    type:"sleep",
+    durationMs: DURATION_FOR_MESSAGE_DELIVERY_MS
+  },
   //as the ACK of all sent messages was ALL, sender should now have two delivery notifications
   genStepMessagingReceive({
     //TODO check that the two messages are actual delivery success messages
@@ -195,6 +198,52 @@ export const ucrmP2PSteps = [
       responseChecker:curry(checkReceiveResponse)(2)
     }
   },"sender"),
+  genStepMessagingCommit({
+    desc: "commit both delivery success messages",
+    body: genBodyCommitRequest(senderOID, 2),
+    expect: {
+      http: 204
+    }
+  },"sender"),
+
+  //next up is a round with a timed out message
+  genStepMessagingSend({
+    desc: "post messaging send (correct message with ACK=ALL and 5sec timeout)",
+    body: genBodySendRequest(senderOID, receiverOID,{
+      //lower timeouts are invalid as per spec
+      timeout:10,
+    }),
+    expect: {
+      http: 200
+    }
+  },"sender"),
+
+  //sleep to generate a timeout
+  {
+    type:"sleep",
+    durationMs:12500,
+  },
+
+  genStepMessagingReceive({
+    //TODO check that messages is an actual delivery timeout messages
+    desc: "post messaging receive one delivery timeout message",
+    body: genBodyReceiveRequest(senderOID),
+    expect: {
+      http: 200,
+      responseChecker:curry(checkReceiveResponse)(1)
+    }
+  },"sender"),
+  genStepMessagingCommit({
+    desc: "commit one delivery timeout message",
+    body: genBodyCommitRequest(senderOID, 3),
+    expect: {
+      http: 204
+    }
+  },"sender"),
+
+  //TODO receiver still has an incoming message in the receive queue now
+  //TODO create a test which fails on the remote UCRM
+  //TODO create a test with ACK=NONE and check if no timeout message is returned to the sender
 ];
 
 const otherSteps = [
