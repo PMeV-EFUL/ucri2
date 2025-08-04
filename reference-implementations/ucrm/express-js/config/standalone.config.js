@@ -1,6 +1,6 @@
 export const config = {
   port: 3001,
-  copySpec:false,
+  copySpec:true,
   auth: {
     //be aware that directly storing secrets in configuration files ist NOT a desirable behaviour for production use.
     //instead, you should store sensitive information in .env-Files and ignore them in your .gitignore !

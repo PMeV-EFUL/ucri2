@@ -25,6 +25,9 @@ The code will retry 10 times with a delay of 5 Seconds, so you should have 50 se
 Because errorneous requests will be handled using expceptions internally, regular usage will produce exception logs in the console. Be aware that all Exceptions of type "UcrmError" are regular ones.
 All other exceptions might indicate a bug in the code
 
+# Configuring the UCRM
+note that the ./config/a.config.js carries comments explaining the different configuration settings. Please see this file for reference!
+
 # Testing the UCRM
 Automated tests can be performed using the ucrm-test-client in this repo at /reference-implementations/ucrm-test-client. It provides out-of-the-box tests for both standalone and p2p mode. See the README.md of the ucrm-test-client for more details...
 
