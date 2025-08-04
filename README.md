@@ -12,6 +12,14 @@ OpenAPI Spec für CRM
 
 Unterverzeichnisse für verschiedene UCRI-2-Anwendungen
 
+### staging
+
+Staging-Verzeichnis für die Erstellung von App-Schemata und deren Dokumentation. Für Details bitte die README.md im staging-Ordner konsultieren.
+
+### reference-implementations
+
+Testimplementierungen für UCRI-2-UCRMs und Testclients. Für Details bitte die README.md in den jeweiligen Ordnern konsultieren.
+
 ## Erstellung eines neuen Releases
 
 ```shell
