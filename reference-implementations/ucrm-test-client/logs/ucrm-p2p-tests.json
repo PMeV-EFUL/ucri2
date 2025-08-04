@@ -279,6 +279,10 @@
     "method": "POST"
   },
   {
+    "type": "sleep",
+    "durationMs": 2000
+  },
+  {
     "type": "fetch",
     "expect": {
       "http": 200
@@ -293,6 +297,84 @@
       "maxMessages": 5
     },
     "endpoint": "messaging/receive",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 204
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "commit both delivery success messages",
+    "body": {
+      "destination": "1.2.3.4.5.6",
+      "sequenceId": 2
+    },
+    "endpoint": "messaging/commit",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "post messaging send (correct message with ACK=ALL and 5sec timeout)",
+    "body": {
+      "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+      "timeout": 10,
+      "ack": "ALL",
+      "source": "1.2.3.4.5.6",
+      "destinations": [
+        "1.2.3.4.5.7"
+      ],
+      "payload": {
+        "appId": "incident_transfer",
+        "appVersion": "0.1",
+        "schemaId": "incident",
+        "contentType": "application/json",
+        "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInfo\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInfo\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInfo\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInfo\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
+      }
+    },
+    "endpoint": "messaging/send",
+    "method": "POST"
+  },
+  {
+    "type": "sleep",
+    "durationMs": 12500
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "post messaging receive one delivery timeout message",
+    "body": {
+      "destinations": [
+        "1.2.3.4.5.6"
+      ],
+      "maxMessages": 5
+    },
+    "endpoint": "messaging/receive",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 204
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "commit one delivery timeout message",
+    "body": {
+      "destination": "1.2.3.4.5.6",
+      "sequenceId": 3
+    },
+    "endpoint": "messaging/commit",
     "method": "POST"
   }
 ]

@@ -14,7 +14,7 @@ let testFailures = [];
 let totalNumOfTestFailures = 0;
 const numOfTestFailuresPerSuite = {};
 
-// await runTestSuite("standalone",standaloneSteps);
+await runTestSuite("standalone",standaloneSteps);
 await runTestSuite("ucrm-p2p", ucrmP2PSteps);
 finish();
 
