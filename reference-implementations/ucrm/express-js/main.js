@@ -102,7 +102,12 @@ async function authorizeWithRemoteUcrms(){
 }
 
 async function start(){
-  await prepareSpec();
+  if (config.copySpec){
+    await prepareSpec();
+  }else{
+    console.log("as config:copySpec==false -> not copying spec automatically. Please either enable auto spec copy or make sure that the transport layer spec resides in ./transport-layer-spec and the app spec in ./app-spec. \n also make sure that the TL spec has been correctly adapted (see main.js:prepareSpec for the necessary steps...)")
+  }
+
   const appSchemata= await compileAppSchemata();
   setAppSchemata(appSchemata);
   const apiSpec = 'transport-layer-spec/ucrm.yaml';
