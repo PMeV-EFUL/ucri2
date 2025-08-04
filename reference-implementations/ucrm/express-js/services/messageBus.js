@@ -18,7 +18,7 @@ export function notifyDiscoveryFinished(){
 
 const TRANSPORT_LAYER_APPID="transport_layer_messages";
 const STATUS_MESSAGE_SCHEMAID="message_delivery_status";
-const TIMEOUT_TRACKING_INVERVAL_MS=5000;
+const TIMEOUT_TRACKING_INVERVAL_MS=1000;
 
 
 let appSchemata;
@@ -208,7 +208,15 @@ function notifyMessageSendingErrorToSender(senderRequest,errorMessageText, respo
   delete trackedOutgoingMessagesPerMessageId[messageId];
 }
 
+let messageSendingInProgress=false;
+
 async function processUnsentMessages() {
+  if (messageSendingInProgress) {
+    console.log("message sending in progress, delaying next send...");
+    setTimeout(processUnsentMessages,500);
+    return;
+  }
+  messageSendingInProgress=true;
   if (unsentOutgoingMessages.length > 0) {
     console.log(`sending ${unsentOutgoingMessages.length} outgoing message(s)...`);
     const sentMessageIds=[];
@@ -267,6 +275,7 @@ async function processUnsentMessages() {
       }
     }
   }
+  messageSendingInProgress=false;
 }
 
 export function receiveMessages(receiverRequest,role,username) {
@@ -306,12 +315,14 @@ export function confirmMessages(messageRef,role,username) {
     throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
   let confirmedMessageCount = 0;
-  let i = pendingMessagesForDestination.length;
-  while (i--) {
-    const message = pendingMessagesForDestination[i];
+  let newPendingMessagesForDestination = [];
+  // let i = pendingMessagesForDestination.length;
+  // while (i--) {
+  //   const message = pendingMessagesForDestination[i];
+  for (const message of pendingMessagesForDestination) {
     if (message.sequenceId && message.sequenceId <= sequenceId) {
       confirmedMessageCount++;
-      pendingMessagesForDestination.splice(i, 1);
+      // pendingMessagesForDestination.splice(i, 1);
       //if the message is NOT a transport layer message AND ack is not NONE send a success status message back to the sender
       if (message.payload.appId!=TRANSPORT_LAYER_APPID && message.ack!=="NONE"){
         let originalSource = message.source;
@@ -325,8 +336,11 @@ export function confirmMessages(messageRef,role,username) {
         const successEnvelope=createMessageDeliveryStatusEnvelope(originalDestination,originalSource,successMessage);
         handleOutgoingMessage(successEnvelope, true);
       }
+    }else{
+      newPendingMessagesForDestination.push(message);
     }
   }
+  pendingMessagesPerDestination[destinationId]=newPendingMessagesForDestination;
   if (confirmedMessageCount === 0) {
     throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
