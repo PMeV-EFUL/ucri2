@@ -1,1 +1,88 @@
-[]
+[
+  {
+    "testNumber": 7,
+    "errorMessage": "response checker error: 'response array with name ${arrayPropertyName} was expected to contain 1 but 2 elements were encountered!'",
+    "stepData": {
+      "type": "fetch",
+      "expect": {
+        "http": 200
+      },
+      "ucrmId": "standalone",
+      "username": "userA1",
+      "desc": "get registry entries",
+      "endpoint": "registry",
+      "method": "GET"
+    },
+    "offendingObject": {
+      "commParticipants": [
+        {
+          "id": "1.2.3.4.5.6",
+          "systemName": "ELS Essen 1",
+          "operatorName": "Einsatzleitstelle Essen 1",
+          "operatorShortName": "ELS A1",
+          "supportedApps": [
+            {
+              "appId": "incident_transfer",
+              "appVersion": "0.1"
+            },
+            {
+              "appId": "transport_layer_messages",
+              "appVersion": "0.1"
+            }
+          ],
+          "key": {
+            "kty": "RSA",
+            "n": "ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx",
+            "e": "AQAB"
+          },
+          "status": "on",
+          "techSupport": {
+            "phone": "001-555-1234",
+            "e-mail": "abc@lst-essen.de"
+          }
+        },
+        {
+          "id": "1.2.3.4.5.8",
+          "systemName": "ELS Essen 2",
+          "operatorName": "Einsatzleitstelle Essen 2",
+          "operatorShortName": "ELS A2",
+          "supportedApps": [
+            {
+              "appId": "incident_transfer",
+              "appVersion": "0.1"
+            },
+            {
+              "appId": "transport_layer_messages",
+              "appVersion": "0.1"
+            }
+          ],
+          "key": {
+            "kty": "RSA",
+            "n": "ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx",
+            "e": "AQAB"
+          },
+          "status": "on",
+          "techSupport": {
+            "phone": "001-555-1234",
+            "e-mail": "abc@lst-essen.de"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "testNumber": 8,
+    "errorMessage": "http status code mismatch, expected '200' but got '-1'",
+    "stepData": {
+      "type": "fetch",
+      "expect": {
+        "http": 200
+      },
+      "ucrmId": "standalone",
+      "username": "userA1",
+      "endpoint": "registry/1.2.3.4.5.8",
+      "method": "GET",
+      "desc": "get individual registry entry (existing)"
+    }
+  }
+]

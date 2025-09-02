@@ -39,3 +39,23 @@ export function createErrorResponseChecker(expectedUcriErrorCode){
     }
   }
 }
+
+export function checkArrayResponse(arrayPropertyName,expectedElementCount,optionalElementCheckerFunction,response){
+  let arrayObject = response[arrayPropertyName];
+  if (!Array.isArray(arrayObject)){
+    return `response must contain an array property named '${arrayPropertyName}'`;
+  }
+  if (arrayObject.length!==expectedElementCount){
+    return `response array with name $\{arrayPropertyName} was expected to contain ${expectedElementCount} but ${arrayObject.length} elements were encountered!`;
+  }
+  if (typeof(optionalElementCheckerFunction)==="function"){
+    let i=0;
+    for (const el of arrayObject){
+      const checkResult = optionalElementCheckerFunction(el);
+      if (checkResult){
+        return `array element at index ${i} was errorneous: ${checkResult}`;
+      }
+      i++;
+    }
+  }
+}

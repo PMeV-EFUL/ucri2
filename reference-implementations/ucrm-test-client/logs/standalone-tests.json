@@ -71,6 +71,28 @@
   {
     "type": "fetch",
     "expect": {
+      "http": 200
+    },
+    "ucrmId": "standalone",
+    "username": "userA1",
+    "desc": "get registry entries",
+    "endpoint": "registry",
+    "method": "GET"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "standalone",
+    "username": "userA1",
+    "endpoint": "registry/1.2.3.4.5.8",
+    "method": "GET",
+    "desc": "get individual registry entry (existing)"
+  },
+  {
+    "type": "fetch",
+    "expect": {
       "http": 204
     },
     "ucrmId": "standalone",
@@ -526,28 +548,6 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST"
-  },
-  {
-    "type": "fetch",
-    "expect": {
-      "http": 200
-    },
-    "ucrmId": "standalone",
-    "username": "userA1",
-    "desc": "get registry entries",
-    "endpoint": "registry",
-    "method": "GET"
-  },
-  {
-    "type": "fetch",
-    "expect": {
-      "http": 200
-    },
-    "ucrmId": "standalone",
-    "username": "userA1",
-    "endpoint": "registry/1.2.3.4.5.8",
-    "method": "GET",
-    "desc": "get individual registry entry (existing)"
   },
   {
     "type": "fetch",

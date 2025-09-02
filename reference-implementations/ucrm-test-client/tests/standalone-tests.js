@@ -1,4 +1,5 @@
 import {
+  checkArrayResponse,
   checkInfoResponse,
   checkReceiveResponse,
   createErrorResponseChecker
@@ -105,6 +106,24 @@ export const standaloneSteps = [
     expect: {
       http: 200,
       responseChecker: checkInfoResponse
+    }
+  },"sender"),
+
+  //now to check the registry
+  genStepRegistry({
+    desc: "get registry entries (should be 2)",
+    expect:{
+      http: 200,
+      responseChecker:curry(checkArrayResponse)("commParticipants",2,false)
+
+    }
+  },"sender"),
+  genStepGenericFetch({
+    endpoint:`registry/${receiverOID}`,
+    method:"GET",
+    desc: "get individual registry entry (existing)",
+    expect:{
+      http: 200
     }
   },"sender"),
   genStepMessagingReceive({
@@ -282,22 +301,6 @@ export const standaloneSteps = [
       http: 204
     }
   },"receiver"),
-
-  //now to check the registry
-  genStepRegistry({
-    desc: "get registry entries",
-    expect:{
-      http: 200
-    }
-  },"sender"),
-  genStepGenericFetch({
-    endpoint:`registry/${receiverOID}`,
-    method:"GET",
-    desc: "get individual registry entry (existing)",
-    expect:{
-      http: 200
-    }
-  },"sender"),
   genStepGenericFetch({
     endpoint:`registry/${unknownOID}`,
     method:"GET",

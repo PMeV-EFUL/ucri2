@@ -40,6 +40,28 @@
   {
     "type": "fetch",
     "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "get registry entries while p2p discovery is active (should be 2)",
+    "endpoint": "registry",
+    "method": "GET"
+  },
+  {
+    "type": "authorize",
+    "desc": "authorize with correct credentials (p2p user ucrmB on ucrmA)",
+    "ucrmId": "ucrmA",
+    "username": "crmB",
+    "password": "test",
+    "expect": {
+      "http": 200,
+      "role": "ucrm"
+    }
+  },
+  {
+    "type": "fetch",
+    "expect": {
       "http": 500
     },
     "ucrmId": "ucrmA",
@@ -100,6 +122,28 @@
     "type": "awaitDiscoveryComplete",
     "ucrmId": "ucrmB",
     "username": "userB"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "userA1",
+    "desc": "get registry entries after p2p discovery is complete (should be 3)",
+    "endpoint": "registry",
+    "method": "GET"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 200
+    },
+    "ucrmId": "ucrmA",
+    "username": "crmB",
+    "desc": "get local registry entries after p2p discovery is complete (should be 2)",
+    "endpoint": "registry",
+    "method": "GET"
   },
   {
     "type": "fetch",

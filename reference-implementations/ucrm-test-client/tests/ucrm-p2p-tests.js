@@ -1,4 +1,5 @@
 import {
+  checkArrayResponse,
   checkInfoResponse, checkInfoResponseForStatus,
   checkReceiveResponse,
   createErrorResponseChecker
@@ -29,6 +30,13 @@ setFetchStepProfile({
   ucrmId: "ucrmB",
   username: "userB"
 }, "receiver")
+
+//fetch defaults for p2p ucrm user
+setFetchStepProfile({
+  ucrmId: "ucrmA",
+  username: "crmB"
+},"crmBOnCrmA")
+
 
 const senderOID = "1.2.3.4.5.6";
 const receiverOID = "1.2.3.4.5.7";
@@ -67,6 +75,25 @@ export const ucrmP2PSteps = [
       responseChecker: curry(checkInfoResponseForStatus)(1)
     }
   },"sender"),
+  genStepRegistry({
+    desc: "get registry entries while p2p discovery is active (should be 2)",
+    expect:{
+      http: 200,
+      responseChecker:curry(checkArrayResponse)("commParticipants",2,false)
+    }
+  },"sender"),
+  //get auth for ucrmB user on ucrm A
+  {
+    type: "authorize",
+    desc: "authorize with correct credentials (p2p user ucrmB on ucrmA)",
+    ucrmId: "ucrmA",
+    username: "crmB",
+    password: "test",
+    expect: {
+      http: 200,
+      role: "ucrm"
+    }
+  },
   genStepMessagingSend({
     desc: "post messaging send while discovery is active (leads to try again later error)",
     body: genBodySendRequest(senderOID, receiverOID),
@@ -107,7 +134,20 @@ export const ucrmP2PSteps = [
     ucrmId: "ucrmB",
     username: "userB",
   },
-
+  genStepRegistry({
+    desc: "get registry entries after p2p discovery is complete (should be 3)",
+    expect:{
+      http: 200,
+      responseChecker:curry(checkArrayResponse)("commParticipants",3,false)
+    }
+  },"sender"),
+  genStepRegistry({
+    desc: "get local registry entries after p2p discovery is complete (should be 2)",
+    expect:{
+      http: 200,
+      responseChecker:curry(checkArrayResponse)("commParticipants",2,false)
+    }
+  },"crmBOnCrmA"),
   //send a message from userA1@ucrmA to userB@ucrmB and check for the returned delivery notification
   genStepMessagingSend({
     desc: "post messaging send first message (valid message)",
