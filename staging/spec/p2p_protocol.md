@@ -9,16 +9,18 @@ UCRI2 unterscheidet zwei Kommunikationsdomäne, siehe Abbildung:
 
 ![UCRI2 Kommunikationsdomäne](ucrm-protocol.drawio.svg)
 
-Die Infrastruktur eines KTs sollte eine P-A-P-Struktur aufweisen, die aus Paketfilter als Trennung zu vertrauenswürden internen Systemen (Leitstelle), Application-Layer-Gateway (UCRM) und
+Die Infrastruktur eines KTs sollte eine P-A-P-Struktur aufweisen, die aus Paketfilter als Trennung zu vertrauenswürdigen internen Systemen (Leitstelle), Application-Layer-Gateway (UCRM) und
 Paketfilter als Trennung zu nicht vertrauenswürdigem Netz (Internet) besteht. Vgl. [Netzarchitektur und -design - BSI](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-GS-Kompendium_Einzel_PDFs_2023/09_NET_Netze_und_Kommunikation/NET_1_1_Netzarchitektur_und_design_Edition_2023.pdf?__blob=publicationFile&v=3).
 
-Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet. Somit unterscheidet die UCRM API Implementierung zwei Client-Rollen: KT und UCRM.
+Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.
 
-Zwischen zwei UCRM wird mTLS als Sicherung der beidseitigen Kommunikation verwendet. Der Paketfilter terminiert die mTLS-Verbindung und beinhaltet eine Liste von zugelassenen KT-Domainnamen (White Listing). Somit wird die Kommunikation auf eine geschlossene Gruppe der Teilnehmer beschränkt. Das Zertifikatsmanagement (sowohl Client- als auch Server-Zertifikate) wird an eine zentrale (z.B. eine öffentliche) Zertifizierungsstelle delegiert.
+UCRM API Implementierung verwendet OAuth2 zur sicheren Authentifizierung und Autorisierung von Clients. Dabei sind zwei Rollen definiert, die unterschiedliche Zugriffsrechte und Berechtigungen steuern, um eine fein granulare Zugriffskontrolle zu gewährleisten. Diese Rollen sind:
+- KT: zur Anbindung von KT-Systemen und 
+- UCRM: für Inter-CRM-Kommunikation
+
+Zwischen zwei UCRM wird zusätzlich mTLS als Sicherung der beidseitigen Kommunikation verwendet. Der Paketfilter terminiert die mTLS-Verbindung und beinhaltet eine Liste von zugelassenen KT-Domainnamen (White Listing). Somit wird die Kommunikation auf eine geschlossene Gruppe der Teilnehmer beschränkt. Das Zertifikatsmanagement (sowohl Client- als auch Server-Zertifikate) wird an eine zentrale (z.B. eine öffentliche) Zertifizierungsstelle delegiert.
 
 Die Kommunikation zwischen einem KT-System und dem CRM-Module kann je nach lokalen Anforderungen wahlweise per TLS oder mTLS erfolgen.
-
-Paketfilter terminieren Client-Verbindungen und sorgen dafür, dass entsprechende Client-Rolle als HTTP-Header an die UCRM-Implementierung weitergeleitet wird.  
 
 ## Nachrichtenübermittlung
 
