@@ -28,6 +28,7 @@ import fs from "fs";
 const REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS=60*1000;
 const TRANSPORT_LAYER_APPID="transport_layer_messages";
 const TRANSPORT_LAYER_APP_VERSION="0.1";
+const TRANSPORT_LAYER_SPEC_DIR = "transport-layer-spec";
 
 const ajv = new Ajv2020({
   strict:false,
@@ -73,11 +74,11 @@ async function initConfiguration(){
 
 async function prepareSpec(){
   //as we need to adapt the TS-API spec , we copy over the spec
-  await fsPromises.cp('../../../api/crm/0.1','./transport-layer-spec',{recursive:true,
+  await fsPromises.cp('../../../api/crm/0.1',`./${TRANSPORT_LAYER_SPEC_DIR}`,{recursive:true,
   filter: (src,dst)=>!src.includes("spectral.yaml")});
   //replace server url variables
   await replaceInFiles({
-    files: './transport-layer-spec/ucrm.yaml',
+    files: `./${TRANSPORT_LAYER_SPEC_DIR}/ucrm.yaml`,
     from: '{apiRoot}/{basePath}',
     to: '/ucrm/v0'
   //replace relative tokenUrl
@@ -110,7 +111,7 @@ async function start(){
 
   const appSchemata= await compileAppSchemata();
   setAppSchemata(appSchemata);
-  const apiSpec = 'transport-layer-spec/ucrm.yaml';
+  const apiSpec = `${TRANSPORT_LAYER_SPEC_DIR}/ucrm.yaml`;
 
 
 

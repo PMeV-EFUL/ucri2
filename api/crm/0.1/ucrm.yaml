@@ -200,6 +200,8 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - commParticipants
                 properties:
                   commParticipants:
                     type: array

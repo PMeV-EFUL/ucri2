@@ -31,19 +31,20 @@ export function getCommParticipant(id, httpErrorNumber) {
 }
 
 export function getAllCommParticipants(role) {
+  let out=[];
   if (role === "ucrm") {
     console.log("role is ucrm, filtering results to own participants...");
     //filter results to only include own ones
-    const out = {}
     for (const [participantId, ucrmId] of Object.entries(ucrmIdsByParticipantIds)) {
       if (ucrmId === "self") {
-        out[participantId] = commParticipants[participantId];
+        out.push(commParticipants[participantId]);
       }
     }
-    return out;
   } else {
-    return commParticipants;
+    out=Object.values(commParticipants);
   }
+  // console.log(`COMMPARTICIPANTS ARE: ${JSON.stringify(out, null, 2)}`);
+  return {commParticipants:out};
 }
 
 export async function fetchParticipantsFromRemoteUcrms() {
@@ -63,7 +64,11 @@ export async function fetchParticipantsFromRemoteUcrms() {
       if (response.status === 200) {
         let respJSON = await response.json();
         console.log(`success response from remote ucrm ${ucrmId}: ${JSON.stringify(respJSON, null, 2)}`);
-        addCommParticipants(respJSON, ucrmId);
+        const participantMap={};
+        for (const participant of respJSON.commParticipants) {
+          participantMap[participant.id] = participant;
+        }
+        addCommParticipants(participantMap, ucrmId);
       } else {
         let respJSON = await response.json();
         console.error(`received HTTP error ${response.status}, aborting... Response:\n ${JSON.stringify(respJSON, null, 2)}`)

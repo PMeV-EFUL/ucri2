@@ -259,6 +259,7 @@ async function processUnsentMessages() {
             const errorMessage=`Remote UCRM at ${sendUrl} returned an HTTP Error ${response.status}.`;
             const fullErrorMessage = `${errorMessage}: ${respText}`;
             console.error(fullErrorMessage);
+            //TODO add to sentMessageIds to prevent duplicate handling?
             notifyMessageSendingErrorToSender(senderRequest,fullErrorMessage,respJSON);
           }
         } catch (err) {
