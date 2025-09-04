@@ -1,6 +1,9 @@
 # Universal Control Room Interface Version 2 (UCRI2)
 
-TODO Einführung
+UCRI steht für Universal Control Room Interface - ein Protokoll für die Kommunikation zwischen zwei oder
+mehreren Einsatzleitsystemen.
+
+Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden viele Erfahrungen gesammelt und Anforderungen identifiziert, die Weiterentwicklung des UCRI Protokolls auf einer neuen architektonischen Basis erforderten. UCRI2 ist eine komplett überarbeitete Version des Protokolls, die alle Anwendungsfälle der Vorgängerversionen (die letzte UCRI Version 1.1) unterstützt und Grundlage für flexible Weiterentwicklung des Protokolls darstellt.
 
 <!-- toc -->
 
@@ -175,6 +178,10 @@ Die OID-Adresse der einzelnen Kommunikationsteilnehmer (KT) wird nach dem [amtli
 
 Beispiel OID Feuerwehr ELS in Ratingen: 1.2.3.1.276.5.1.1.58.28.1.1
 
+Folgende OID wird zur Identifizierung der UCRI-Infrastruktur als Sender von technischen Quittungen (siehe UCRI2-App Technische Quittungen) festgelegt:
+
+UCRI-Infrastruktur: 1.2.3.1.276.5.0.0.0.0.1.1
+
 ---
 
 [Vermittlungsebene](messaging.md)
@@ -276,16 +283,18 @@ UCRI2 unterscheidet zwei Kommunikationsdomäne, siehe Abbildung:
 
 ![UCRI2 Kommunikationsdomäne](ucrm-protocol.drawio.svg)
 
-Die Infrastruktur eines KTs sollte eine P-A-P-Struktur aufweisen, die aus Paketfilter als Trennung zu vertrauenswürden internen Systemen (Leitstelle), Application-Layer-Gateway (UCRM) und
+Die Infrastruktur eines KTs sollte eine P-A-P-Struktur aufweisen, die aus Paketfilter als Trennung zu vertrauenswürdigen internen Systemen (Leitstelle), Application-Layer-Gateway (UCRM) und
 Paketfilter als Trennung zu nicht vertrauenswürdigem Netz (Internet) besteht. Vgl. [Netzarchitektur und -design - BSI](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-GS-Kompendium_Einzel_PDFs_2023/09_NET_Netze_und_Kommunikation/NET_1_1_Netzarchitektur_und_design_Edition_2023.pdf?__blob=publicationFile&v=3).
 
-Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet. Somit unterscheidet die UCRM API Implementierung zwei Client-Rollen: KT und UCRM.
+Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.
 
-Zwischen zwei UCRM wird mTLS als Sicherung der beidseitigen Kommunikation verwendet. Der Paketfilter terminiert die mTLS-Verbindung und beinhaltet eine Liste von zugelassenen KT-Domainnamen (White Listing). Somit wird die Kommunikation auf eine geschlossene Gruppe der Teilnehmer beschränkt. Das Zertifikatsmanagement (sowohl Client- als auch Server-Zertifikate) wird an eine zentrale (z.B. eine öffentliche) Zertifizierungsstelle delegiert.
+UCRM API Implementierung verwendet OAuth2 zur sicheren Authentifizierung und Autorisierung von Clients. Dabei sind zwei Rollen definiert, die unterschiedliche Zugriffsrechte und Berechtigungen steuern, um eine fein granulare Zugriffskontrolle zu gewährleisten. Diese Rollen sind:
+- KT: zur Anbindung von KT-Systemen und 
+- UCRM: für Inter-CRM-Kommunikation
+
+Zwischen zwei UCRM wird zusätzlich mTLS als Sicherung der beidseitigen Kommunikation verwendet. Der Paketfilter terminiert die mTLS-Verbindung und beinhaltet eine Liste von zugelassenen KT-Domainnamen (White Listing). Somit wird die Kommunikation auf eine geschlossene Gruppe der Teilnehmer beschränkt. Das Zertifikatsmanagement (sowohl Client- als auch Server-Zertifikate) wird an eine zentrale (z.B. eine öffentliche) Zertifizierungsstelle delegiert.
 
 Die Kommunikation zwischen einem KT-System und dem CRM-Module kann je nach lokalen Anforderungen wahlweise per TLS oder mTLS erfolgen.
-
-Paketfilter terminieren Client-Verbindungen und sorgen dafür, dass entsprechende Client-Rolle als HTTP-Header an die UCRM-Implementierung weitergeleitet wird.  
 
 ## Nachrichtenübermittlung
 
@@ -394,4 +403,4 @@ Meldungen werden in UCRM m.H.v. Meldungs-Schemata validiert. Die Validierung erf
 
 # UCRI2 Anwendungen
 
-Detaillierte Beschreibung der UCRI2 Anwendungen befindet sich in dem Verzeichnis [staging/apps](../apps) bzw. in einem separat ausgelieferten Dokument "UCRI2 App im Überblick".
+Detaillierte Beschreibung der UCRI2 Anwendungen befindet sich in dem Verzeichnis [docs/apps](../apps). Hierbei gibt das Dokument "UCRI2 App im Überblick" einen Überblick über die verschiedenen Apps und die PDF-Dateien in den Unterordnern beinhalten die detaillierte Dokumentation für verschiedenen Apps.
