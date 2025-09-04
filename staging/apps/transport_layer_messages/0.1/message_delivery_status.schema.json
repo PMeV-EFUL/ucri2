@@ -25,11 +25,11 @@
     },
     "statusCode": {
       "title": "Annahme- oder Ablehnungsstatus",
-      "description": "Status-Code: 200 - Zustellbestätigung; 504 - Timeout; 500 - Fehler bei Zustellung an entferntes UCRM",
+      "description": "Status-Code: 200 - Zustellbestätigung; 504 - Timeout; 502 - Fehler bei Zustellung an entferntes UCRM",
       "type": "integer",
       "enum": [
         200,
-        500,
+        502,
         504
       ]
     },
