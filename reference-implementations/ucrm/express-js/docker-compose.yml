@@ -1,0 +1,10 @@
+version: '3.9'
+name: ucri2-ucrm-test
+services:
+  ucrm:
+    restart: on-failure
+    build: .
+    logging:
+      driver: "local"
+    ports:
+      - '8200:3001'

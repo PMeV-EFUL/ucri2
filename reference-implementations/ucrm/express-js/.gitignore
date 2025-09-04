@@ -3,3 +3,6 @@ node_modules/
 transport-spec/**/*
 transport-layer-spec/**/*
 app-spec/**/*
+shared-js/
+config/hosted.config.js
+zi-docker-internal/
