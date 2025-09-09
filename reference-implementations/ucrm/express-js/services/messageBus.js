@@ -1,6 +1,11 @@
 import {v4 as uuidv4} from "uuid";
+import canonicalize from "canonicalize";
+import sha3 from "js-sha3";
+import * as jose from 'jose';
+
 import {UcrmError} from "../util/ucrmError.js"
 import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js"
+import {verifyEnvelope,init as initCrypto} from "../../../shared-js/crypto.js"
 import {getCommParticipant, getUcrmIdFromParticipantId} from "./commParticipantRegistry.js"
 import {checkIfClientMayUseOID, getRemoteUcrmToken} from "./authManager.js";
 
@@ -32,6 +37,7 @@ const trackedOutgoingMessagesPerMessageId = {};
 export function start(){
   console.log("starting messageBus...");
   console.log("Starting message timeout tracking...");
+  initCrypto(UcrmError,canonicalize,sha3,jose);
   setInterval(checkForTimeouts,TIMEOUT_TRACKING_INVERVAL_MS);
 }
 
@@ -45,19 +51,17 @@ export async function sendMessage(senderRequest, role,username) {
   switch (role) {
     case "ucrm":
       return handleIncomingMessage(senderRequest);
-      break;
     case "client":
       return handleOutgoingMessage(senderRequest,false);
-      break;
     default:
       throw new UcrmError(400, `Unknown role '${role}'`, ucrmErrors.REQUEST_ROLE_UNKNOWN);
   }
 }
 
-function handleIncomingMessage(senderRequest) {
+async function handleIncomingMessage(senderRequest) {
   console.log("incoming message...");
   //FIXME this logic is just for testing and should be configurable instead of being hardcoded!!!!
-  if (senderRequest.description && senderRequest.description.startsWith("X-GETERROR")){
+  if (senderRequest.description && senderRequest.description.startsWith("X-GETERROR")) {
     throw new UcrmError(400, `Envelope Description stated X-GETERROR so an error is returned for testing purposes!`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
   }
   //as the P2P receive endpoint is the same as the one for client send, some fields are optional in the schema but mandatory for P2P send
@@ -70,17 +74,17 @@ function handleIncomingMessage(senderRequest) {
   if (!senderRequest.messageId) {
     throw new UcrmError(400, `Missing messageId for P2P message`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
   }
-  validateSenderRequest(senderRequest);
+  await validateSenderRequest(senderRequest);
 
   const destinationId = senderRequest.destinations[0];
   //checkAndHandlePotentialStatusMessage will indicate with its return value if this message should be suppressed (returns false in this case)
-  if (checkAndHandlePotentialStatusMessage(senderRequest)){
+  if (checkAndHandlePotentialStatusMessage(senderRequest)) {
     getPendingMessagesForDestination(destinationId).push(senderRequest);
   }
   return senderRequest;
 }
 
-function handleOutgoingMessage(senderRequest,allowTransportLayerMessages) {
+async function handleOutgoingMessage(senderRequest, allowTransportLayerMessages) {
   console.log("outgoing message...");
   if (!senderRequest.messageId) {
     senderRequest.messageId = uuidv4();
@@ -89,26 +93,26 @@ function handleOutgoingMessage(senderRequest,allowTransportLayerMessages) {
   senderRequest.sentDate = sentDate.toISOString();
 
   const appId = senderRequest.payload.appId;
-  const isTransportLayerApp=TRANSPORT_LAYER_APPID===appId
+  const isTransportLayerApp = TRANSPORT_LAYER_APPID === appId
 
   if (!allowTransportLayerMessages && isTransportLayerApp) {
     //clients may not send forbidden app messages
     throw new UcrmError(400, `AppId '${appId}' may not be used by clients.`, ucrmErrors.REQUEST_PAYLOAD_FORBIDDEN_APPID);
   }
 
-  validateSenderRequest(senderRequest);
+  await validateSenderRequest(senderRequest);
 
   unsentOutgoingMessages.push(senderRequest);
 
   //if the message is not a transport layer message and ack is not NONE, we add the message to the (timeout) tracking
   let ack = senderRequest.ack;
-  if (!isTransportLayerApp && ack && senderRequest.ack!=="NONE" && senderRequest.timeout) {
-    trackedOutgoingMessagesPerMessageId[senderRequest.messageId]={
-      source:senderRequest.source,
-      destination:senderRequest.destinations[0],
-      ack:ack,
-      timeoutAt:sentDate.getTime()+(senderRequest.timeout*1000),
-      timeoutSeconds:senderRequest.timeout
+  if (!isTransportLayerApp && ack && senderRequest.ack !== "NONE" && senderRequest.timeout) {
+    trackedOutgoingMessagesPerMessageId[senderRequest.messageId] = {
+      source: senderRequest.source,
+      destination: senderRequest.destinations[0],
+      ack: ack,
+      timeoutAt: sentDate.getTime() + (senderRequest.timeout * 1000),
+      timeoutSeconds: senderRequest.timeout
     }
   }
   setImmediate(processUnsentMessages);
@@ -138,12 +142,33 @@ function checkAndHandlePotentialStatusMessage(envelope){
   return true;
 }
 
-function validateSenderRequest(senderRequest) {
+async function validateSignature(senderRequest) {
+  if (!config.checkSignatures){
+    return;
+  }
+  if (!senderRequest.signature) {
+    //FIXME signatures are currently NOT required as per spec, this is highly problematic as an attacker could just remove the signature and be done with it!
+    console.warn("senderRequest.signature is missing!");
+    return;
+  }
+  const signature = senderRequest.signature;
+  const sourceId = senderRequest.source;
+  //fetch source private key
+  const sourceData=getCommParticipant(sourceId,400);
+  if (!sourceData.key){
+    throw new UcrmError(400, `Signature verification failed - no public key found for source OID '${sourceId}'`, ucrmErrors.REQUEST_WRONG_SIGNATURE);
+  }
+  await verifyEnvelope(senderRequest,signature,sourceData.key);
+}
+
+async function validateSenderRequest(senderRequest) {
   const destinationId = senderRequest.destinations[0];
   const appId = senderRequest.payload.appId;
   const appVersion = senderRequest.payload.appVersion;
   const schemaId = senderRequest.payload.schemaId;
 
+  //validate signature
+  await validateSignature(senderRequest);
 
   //validate payload
   if (!appSchemata[appId]) {
@@ -189,7 +214,7 @@ function notifyMessageSendingErrorToSender(senderRequest,errorMessageText, respo
   const errorMessage={
     "refMessageId": messageId,
     "destination": originalDestination,
-    "statusCode": 500,
+    "statusCode": 502,
     "statusMessage": errorMessageText
   }
   if (responseJSON && Number.isInteger(responseJSON.code) && typeof responseJSON.reason === "string") {

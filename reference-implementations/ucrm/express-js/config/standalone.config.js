@@ -1,6 +1,7 @@
 export const config = {
   port: 3001,
   copySpec:true,
+  checkSignatures: true,
   auth: {
     //be aware that directly storing secrets in configuration files ist NOT a desirable behaviour for production use.
     //instead, you should store sensitive information in .env-Files and ignore them in your .gitignore !
@@ -40,7 +41,8 @@ export const config = {
       ],
       "key": {
         "kty": "RSA",
-        "n": "ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx",
+        "alg": "RS256",
+        "n": "riPtU1ZKwnCjfwxcf9w5Le6imUaPueVkqeU4JbzVN5FcFuwbhhKLYa1jRJb64-xLM9PJHTfh74-6HhL0DBgDwhXheYYNJioyvmJ3ceWMjRAHLY-mkpnxE9hwJbfRvqL1wQUYrIFX71N9ujmILfGljijPv7dqSyyPQJjgN-gBTXmIXS8_Jo8cVlaEOpOcE8FYvEmy02lHCErxFI5aogNnwaH1w82XiUuntnDNe9xf0QcKETlV8vipzUQp2OXJhEzv7o3qQIElvCcF66F1VLKxFF7yuO9NDvo5_b4WK9dtB-Zb6r-8N5LrN1Y6BvBq-HzDY6J389DzUHlChFqhV9-V2Q",
         "e": "AQAB"
       },
       "status": "on",

@@ -1,5 +1,5 @@
-import {standaloneSteps} from "./tests/standalone-tests.js"
-import {ucrmP2PSteps} from "./tests/ucrm-p2p-tests.js";
+import {generateSteps as generateStandaloneSteps} from "./tests/standalone-tests.js"
+import {generateSteps as generateUcrmP2PSteps} from "./tests/ucrm-p2p-tests.js";
 
 import {spawn} from "child_process";
 import {resolve} from "path";
@@ -14,8 +14,8 @@ let testFailures = [];
 let totalNumOfTestFailures = 0;
 const numOfTestFailuresPerSuite = {};
 
-await runTestSuite("standalone",standaloneSteps);
-await runTestSuite("ucrm-p2p", ucrmP2PSteps);
+await runTestSuite("standalone",await generateStandaloneSteps());
+await runTestSuite("ucrm-p2p", await generateUcrmP2PSteps());
 finish();
 
 async function runTestSuite(testSuiteName, testSuiteSteps) {

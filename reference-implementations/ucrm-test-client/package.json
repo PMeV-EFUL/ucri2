@@ -16,6 +16,9 @@
     "@75lb/deep-merge": "^1.1.2",
     "jsonwebtoken": "^9.0.2",
     "lodash.curry": "^4.1.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "canonicalize": "^2.1.0",
+    "jose": "^6.1.0",
+    "js-sha3": "^0.9.3"
   }
 }
