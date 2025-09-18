@@ -34,18 +34,18 @@ export const config={
         username: "userB",
         password: "test",
         oids:["1.2.3.4.5.7"],
-        role: "client"
+        type: "client"
       },
       crmA: {
         username: "crmA",
         password: "test",
-        role: "ucrm"
+        type: "p2p"
       }
     }
   },
   remoteUcrms: {
     a:{
-      baseUrl:"http://localhost:3002/ucrm/v0",
+      baseUrl:"http://localhost:3002/ucrm/p2p/v0",
       username:"crmB",
       password:"test",
     }

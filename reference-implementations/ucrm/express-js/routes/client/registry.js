@@ -1,9 +1,9 @@
-import {getCommParticipant,getAllCommParticipants} from "../services/commParticipantRegistry.js"
+import {getCommParticipant,getAllCommParticipants} from "../../services/commParticipantRegistry.js"
 
 export function getListCommParticipant (req, res)
 {
   res.status(200).json(
-    getAllCommParticipants(req.claims.role)
+    getAllCommParticipants("client")
   );
 }
 

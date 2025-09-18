@@ -68,7 +68,7 @@ export async function generateSteps () {
       startDir: "../ucrm/express-js",
       startCmd: "node",
       startCmdParms: ["main.js", "./config/standalone.config.js"],
-      baseUrl: "http://localhost:3001/ucrm/v0",
+      baseUrl: "http://localhost:3001/ucrm/client/v0",
       readyLogString: "Listening on port",
       logStdOut: false,
       logStdErr: false
@@ -100,8 +100,7 @@ export async function generateSteps () {
       username: "userA1",
       password: "test",
       expect: {
-        http: 200,
-        role: "client"
+        http: 200
       }
     },
     {
@@ -111,8 +110,7 @@ export async function generateSteps () {
       username: "userA2",
       password: "test",
       expect: {
-        http: 200,
-        role: "client"
+        http: 200
       }
     },
     //TODO we are currently missing tests for invalid tokens

@@ -9,7 +9,7 @@
       "main.js",
       "./config/a.config.js"
     ],
-    "baseUrl": "http://localhost:3002/ucrm/v0",
+    "baseUrl": "http://localhost:3002/ucrm/client/v0",
     "readyLogString": "Listening on port",
     "logStdOut": false,
     "logStdErr": false,
@@ -22,8 +22,7 @@
     "username": "userA1",
     "password": "test",
     "expect": {
-      "http": 200,
-      "role": "client"
+      "http": 200
     }
   },
   {
@@ -52,11 +51,11 @@
     "type": "authorize",
     "desc": "authorize with correct credentials (p2p user ucrmB on ucrmA)",
     "ucrmId": "ucrmA",
+    "baseUrlOverride": "http://localhost:3002/ucrm/p2p/v0",
     "username": "crmB",
     "password": "test",
     "expect": {
-      "http": 200,
-      "role": "ucrm"
+      "http": 200
     }
   },
   {
@@ -96,7 +95,7 @@
       "main.js",
       "./config/b.config.js"
     ],
-    "baseUrl": "http://localhost:3003/ucrm/v0",
+    "baseUrl": "http://localhost:3003/ucrm/client/v0",
     "readyLogString": "Listening on port",
     "logStdOut": false,
     "logStdErr": false,
@@ -109,8 +108,7 @@
     "username": "userB",
     "password": "test",
     "expect": {
-      "http": 200,
-      "role": "client"
+      "http": 200
     }
   },
   {
@@ -141,6 +139,7 @@
     },
     "ucrmId": "ucrmA",
     "username": "crmB",
+    "baseUrlOverride": "http://localhost:3002/ucrm/p2p/v0",
     "desc": "get local registry entries after p2p discovery is complete (should be 2)",
     "endpoint": "registry",
     "method": "GET"

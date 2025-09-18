@@ -39,7 +39,8 @@ export async function generateSteps(){
 //fetch defaults for p2p ucrm user
   setFetchStepProfile({
     ucrmId: "ucrmA",
-    username: "crmB"
+    username: "crmB",
+    baseUrlOverride: "http://localhost:3002/ucrm/p2p/v0"
   },"crmBOnCrmA")
 
 
@@ -58,7 +59,7 @@ export async function generateSteps(){
       startDir: "../ucrm/express-js",
       startCmd: "node",
       startCmdParms: ["main.js", "./config/a.config.js"],
-      baseUrl: "http://localhost:3002/ucrm/v0",
+      baseUrl: "http://localhost:3002/ucrm/client/v0",
       readyLogString: "Listening on port",
       logStdOut: false,
       logStdErr: false
@@ -70,8 +71,7 @@ export async function generateSteps(){
       username: "userA1",
       password: "test",
       expect: {
-        http: 200,
-        role: "client"
+        http: 200
       }
     },
     genStepInfo({
@@ -93,11 +93,11 @@ export async function generateSteps(){
       type: "authorize",
       desc: "authorize with correct credentials (p2p user ucrmB on ucrmA)",
       ucrmId: "ucrmA",
+      baseUrlOverride: "http://localhost:3002/ucrm/p2p/v0",
       username: "crmB",
       password: "test",
       expect: {
-        http: 200,
-        role: "ucrm"
+        http: 200
       }
     },
     await genStepMessagingSend({
@@ -114,7 +114,7 @@ export async function generateSteps(){
       startDir: "../ucrm/express-js",
       startCmd: "node",
       startCmdParms: ["main.js", "./config/b.config.js"],
-      baseUrl: "http://localhost:3003/ucrm/v0",
+      baseUrl: "http://localhost:3003/ucrm/client/v0",
       readyLogString: "Listening on port",
       logStdOut: false,
       logStdErr: false
@@ -126,8 +126,7 @@ export async function generateSteps(){
       username: "userB",
       password: "test",
       expect: {
-        http: 200,
-        role: "client"
+        http: 200
       }
     },
     {

@@ -1,8 +1,12 @@
 import { bundle, loadConfig } from '@redocly/openapi-core';
 import fs from "fs";
 
-const pathToApi = '../../api/crm/0.1/ucrm.yaml';
-const config = await loadConfig({  });
-const bundleResults = await bundle({ ref: pathToApi, config });
-fs.writeFileSync("../../api/crm/0.1/ucrm-bundled.json",JSON.stringify(bundleResults.bundle.parsed,null,2));
-//console.log('bundleResults', bundleResults);
+await bundleYaml('../../api/crm/0.1/ucrm-client.yaml',"../../api/crm/0.1/ucrm-client-bundled.json");
+await bundleYaml('../../api/crm/0.1/ucrm-p2p.yaml',"../../api/crm/0.1/ucrm-p2p-bundled.json");
+
+async function bundleYaml(pathToApi,pathToBundledJson){
+  const config = await loadConfig({  });
+  const bundleResults = await bundle({ ref: pathToApi, config });
+  fs.writeFileSync(pathToBundledJson,JSON.stringify(bundleResults.bundle.parsed,null,2));
+  //console.log('bundleResults', bundleResults);
+}

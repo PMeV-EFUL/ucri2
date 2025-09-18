@@ -60,10 +60,10 @@ export function getCommParticipant(id, httpErrorNumber) {
   return commParticipants[id];
 }
 
-export function getAllCommParticipants(role) {
+export function getAllCommParticipants(type) {
   let out=[];
-  if (role === "ucrm") {
-    console.log("role is ucrm, filtering results to own participants...");
+  if (type === "p2p") {
+    console.log("type is p2p, filtering results to own participants...");
     //filter results to only include own ones
     for (const [participantId, ucrmId] of Object.entries(ucrmIdsByParticipantIds)) {
       if (ucrmId === "self") {

@@ -38,20 +38,23 @@ export function start(){
   setInterval(checkForTimeouts,TIMEOUT_TRACKING_INVERVAL_MS);
 }
 
-export async function sendMessage(senderRequest, role,username) {
+export async function sendMessage(senderRequest, username,type) {
   //first check if discovery is finished for send requests
   if (!discoveryFinished){
     throw new UcrmError(500, `Remote UCRM participant discovery is in process, please try again later!`, ucrmErrors.REQUEST_TRY_LATER_UCRM_IS_IN_DISCOVERY_MODE);
   }
   //the client access checks should only be performed on this level as the handleXXX() methods will be called from within the messageBus too!
-  checkIfClientMayUseOID(role,username,senderRequest.source,"source");
-  switch (role) {
-    case "ucrm":
+  //also, they should only be performed for type="client"
+  if (type==="client"){
+    checkIfClientMayUseOID(username,senderRequest.source,"source");
+  }
+  switch (type) {
+    case "p2p":
       return handleIncomingMessage(senderRequest);
     case "client":
       return handleOutgoingMessage(senderRequest,false);
     default:
-      throw new UcrmError(400, `Unknown role '${role}'`, ucrmErrors.REQUEST_ROLE_UNKNOWN);
+      throw new UcrmError(400, `Unknown type '${type}'`, ucrmErrors.REQUEST_INTERNAL_ERROR);
   }
 }
 
@@ -302,12 +305,12 @@ async function processUnsentMessages() {
   messageSendingInProgress=false;
 }
 
-export function receiveMessages(receiverRequest,role,username) {
+export function receiveMessages(receiverRequest,username) {
   for (const destination of receiverRequest.destinations) {
     if (getUcrmIdFromParticipantId(destination)!=="self"){
       throw new UcrmError(400, `destination OID '${destination}' is not registered here.`,ucrmErrors.REQUEST_UNKNOWN_DESTINATION_ID);
     }
-    checkIfClientMayUseOID(role,username,destination,"destinations");
+    checkIfClientMayUseOID(username,destination,"destinations");
   }
   const destinations = receiverRequest.destinations;
   const maxMessageCount = receiverRequest.maxMessages || 1;
@@ -329,9 +332,9 @@ export function receiveMessages(receiverRequest,role,username) {
   return {messages: messagesToReturn, maxMessages: maxMessageCount};
 }
 
-export function confirmMessages(messageRef,role,username) {
+export function confirmMessages(messageRef,username) {
   const destinationId = messageRef.destination;
-  checkIfClientMayUseOID(role,username,destinationId,"destination");
+  checkIfClientMayUseOID(username,destinationId,"destination");
 
   const sequenceId = messageRef.sequenceId;
   let pendingMessagesForDestination = pendingMessagesPerDestination[destinationId];

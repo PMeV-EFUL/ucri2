@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "UCRI Control Room Module (UCRM) API",
-    "description": "UCRI Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer\nwie zum Beispiel Leitstellensysteme, andere technische Knoten, sowie weitere externe Systeme.\n",
+    "title": "UCRI Control Room Module (UCRM) P2P API",
+    "description": "UCRI Control Room Module P2P API ist die Kommunikationsschnittstelle für verbundene externe UCRMs. Die Anbindung lokaler Kommunikationsteilnehmer wie Leitsystemen ist NICHT Teil dieser API (vgl. ucrm-client.yaml).\n",
     "version": "0.1"
   },
   "servers": [
     {
-      "url": "{apiRoot}/{basePath}",
+      "url": "{apiRoot}/{basePathP2P}",
       "variables": {
         "apiRoot": {
           "default": "https://ucri.mycompany.com",
@@ -16,8 +16,8 @@
             "https://ucri.mycompany.com"
           ]
         },
-        "basePath": {
-          "default": "ucrm/v0",
+        "basePathP2P": {
+          "default": "ucrm/p2p/v0",
           "description": "API base path"
         }
       }
@@ -78,7 +78,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -88,7 +88,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -98,7 +98,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -141,7 +141,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -151,7 +151,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -161,129 +161,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/messaging/receive": {
-      "post": {
-        "tags": [
-          "Messaging"
-        ],
-        "summary": "Meldungen empfangen",
-        "description": "Meldungen im Empfangspuffer abfragen. Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut. Es werden die ältesten X Meldungen aus der Adressaten-Queue geliefert.",
-        "operationId": "receiveMessages",
-        "requestBody": {
-          "description": "Meldungsabfrage",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/receiverRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK \\\nMindestens eine und bis zu 'maxMessages' ältesten Meldungen werden geliefert.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/receiverResponse"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "No Content \\\nEs liegen aktuell keine Nachrichten in der Adressaten-Queue vor.\n"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/messaging/commit": {
-      "post": {
-        "tags": [
-          "Messaging"
-        ],
-        "summary": "Meldungsempfang bestätigen",
-        "description": "Empfang von Meldungen bis einschliesslich angegebene Meldung (Sequence-ID) bestätigen. Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt.",
-        "operationId": "commitMessage",
-        "requestBody": {
-          "description": "Meldungsreferenz",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/messageRef"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -306,6 +184,9 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "commParticipants"
+                  ],
                   "properties": {
                     "commParticipants": {
                       "type": "array",
@@ -323,7 +204,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -333,70 +214,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/registry/{id}": {
-      "get": {
-        "tags": [
-          "Registry"
-        ],
-        "summary": "Informationen zu einem KT abfragen",
-        "description": "Informationen zu einem KT abfragen",
-        "operationId": "readCommParticipant",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "KT-OID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK, Informationen zu einem KT",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/commParticipant"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -428,7 +246,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -438,7 +256,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/error"
                 }
               }
             }
@@ -491,6 +309,40 @@
         "$ref": "#/components/schemas/info"
       },
       "Error": {
+        "$ref": "#/components/schemas/error"
+      },
+      "JWTToken": {
+        "type": "string",
+        "contentMediaType": "application/jwt",
+        "contentSchema": {
+          "type": "array",
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": {
+                "typ": "JWT",
+                "alg": "HS256"
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "ait",
+                "exp"
+              ],
+              "properties": {
+                "iat": {
+                  "type": "integer"
+                },
+                "exp": {
+                  "type": "integer"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "error": {
         "required": [
           "code",
           "reason"
@@ -511,41 +363,6 @@
           }
         },
         "description": "Fehlerbeschreibung, gewöhnlich für eine HTTP Error Response-Code (3xx, 4xx, 5xx)"
-      },
-      "JWTToken": {
-        "type": "string",
-        "contentMediaType": "application/jwt",
-        "contentSchema": {
-          "type": "array",
-          "minItems": 2,
-          "prefixItems": [
-            {
-              "const": {
-                "typ": "JWT",
-                "alg": "HS256"
-              }
-            },
-            {
-              "type": "object",
-              "required": [
-                "ait",
-                "exp",
-                "role"
-              ],
-              "properties": {
-                "role": {
-                  "type": "string"
-                },
-                "iat": {
-                  "type": "integer"
-                },
-                "exp": {
-                  "type": "integer"
-                }
-              }
-            }
-          ]
-        }
       },
       "payload": {
         "required": [
@@ -741,132 +558,6 @@
           }
         ]
       },
-      "receiverRequest": {
-        "required": [
-          "destinations"
-        ],
-        "type": "object",
-        "properties": {
-          "destinations": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "pattern": "^([0-9]+\\.?)+$"
-            },
-            "minItems": 1,
-            "description": "Adressatenliste, Meldungen an alle Adressen aus dieser Liste werden abgefragt. Gleichzeitig werden Meldungen an alle Adressen aus dem OID-Unterbaum des Adressaten abgefragt. Siehe UCRI2 Adressierungskonzept, Systemkomponente Gateway."
-          },
-          "maxMessages": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert"
-          }
-        },
-        "description": "Meldungsabfrage",
-        "example": {
-          "destinations": [
-            "1.2.3.4.5.7"
-          ],
-          "maxMessages": 5
-        }
-      },
-      "receiverResponseItem": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/envelope"
-          },
-          {
-            "type": "object",
-            "required": [
-              "messageId",
-              "destination",
-              "sequenceId",
-              "sentDate",
-              "timeout"
-            ],
-            "properties": {
-              "destination": {
-                "type": "string",
-                "pattern": "^([0-9]+\\.?)+$"
-              },
-              "sequenceId": {
-                "type": "integer",
-                "format": "int64",
-                "description": "Meldungs-Sequence-ID Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut. Sequence-ID wird verwendet um die erfolgreiche Verarbeitung einer Meldung durch Commit-Operation zu signalisieren. Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt."
-              }
-            }
-          }
-        ]
-      },
-      "receiverResponse": {
-        "required": [
-          "messages",
-          "maxMessages"
-        ],
-        "type": "object",
-        "properties": {
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/receiverResponseItem"
-            },
-            "minItems": 1
-          },
-          "maxMessages": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "maximale Anzahl von Meldungen im Ergebnis"
-          }
-        },
-        "description": "Die bis zu 'maxMessages' ältesten X Meldungen entsprechend der Meldungsabfrage",
-        "example": {
-          "messages": [
-            {
-              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
-              "description": "Einsatzübergabe am 13.11.2023 um 20:20",
-              "sentDate": "2023-11-13T20:20:39+00:00",
-              "timeout": 300,
-              "ack": "NACK",
-              "source": "1.2.3.4.5.6",
-              "destination": "1.2.3.4.5.7",
-              "sequenceId": 123456,
-              "payload": {
-                "appId": "incident_transfer",
-                "appVersion": "0.1",
-                "schemaId": "incident",
-                "contentType": "application/json",
-                "data": "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
-              },
-              "signatur": "eyJhbGciOiJSUzI1NiJ9 . eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ . cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7 AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4 BAynRFdiuB--f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K 0GarZRmB_eSN9383LcOLn6_dO--xi12jzDwusC-eOkHWEsqtFZESc6BfI7noOPqv hJ1phCnvWh6IeYI2w9QOYEUipUTI8np6LbgGY9Fs98rqVt5AXLIhWkWywlVmtVrB p0igcN_IoypGlUPQGe77Rw"
-            }
-          ],
-          "maxMessages": 5
-        }
-      },
-      "messageRef": {
-        "required": [
-          "destination",
-          "sequenceId"
-        ],
-        "type": "object",
-        "properties": {
-          "destination": {
-            "type": "string",
-            "pattern": "^([0-9]+\\.?)+$",
-            "description": "Adressat, diese Referenz zeigt auf eine Meldung, die genau an diese OID adressiert wurde, nicht an eine OID aus einem Unterbaum"
-          },
-          "sequenceId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "eine aufsteigende Meldung-Sequence-ID"
-          }
-        },
-        "description": "Meldungsreferenz",
-        "example": {
-          "destination": "1.2.3.4.5.6",
-          "sequenceId": 123456
-        }
-      },
       "appRef": {
         "required": [
           "appId",
@@ -1058,6 +749,132 @@
         "example": {
           "apiVersion": "0.1",
           "crmProvider": "iSE"
+        }
+      },
+      "receiverRequest": {
+        "required": [
+          "destinations"
+        ],
+        "type": "object",
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^([0-9]+\\.?)+$"
+            },
+            "minItems": 1,
+            "description": "Adressatenliste, Meldungen an alle Adressen aus dieser Liste werden abgefragt. Gleichzeitig werden Meldungen an alle Adressen aus dem OID-Unterbaum des Adressaten abgefragt. Siehe UCRI2 Adressierungskonzept, Systemkomponente Gateway."
+          },
+          "maxMessages": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert"
+          }
+        },
+        "description": "Meldungsabfrage",
+        "example": {
+          "destinations": [
+            "1.2.3.4.5.7"
+          ],
+          "maxMessages": 5
+        }
+      },
+      "receiverResponseItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/envelope"
+          },
+          {
+            "type": "object",
+            "required": [
+              "messageId",
+              "destination",
+              "sequenceId",
+              "sentDate",
+              "timeout"
+            ],
+            "properties": {
+              "destination": {
+                "type": "string",
+                "pattern": "^([0-9]+\\.?)+$"
+              },
+              "sequenceId": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Meldungs-Sequence-ID Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut. Sequence-ID wird verwendet um die erfolgreiche Verarbeitung einer Meldung durch Commit-Operation zu signalisieren. Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt."
+              }
+            }
+          }
+        ]
+      },
+      "receiverResponse": {
+        "required": [
+          "messages",
+          "maxMessages"
+        ],
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/receiverResponseItem"
+            },
+            "minItems": 1
+          },
+          "maxMessages": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "maximale Anzahl von Meldungen im Ergebnis"
+          }
+        },
+        "description": "Die bis zu 'maxMessages' ältesten X Meldungen entsprechend der Meldungsabfrage",
+        "example": {
+          "messages": [
+            {
+              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+              "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+              "sentDate": "2023-11-13T20:20:39+00:00",
+              "timeout": 300,
+              "ack": "NACK",
+              "source": "1.2.3.4.5.6",
+              "destination": "1.2.3.4.5.7",
+              "sequenceId": 123456,
+              "payload": {
+                "appId": "incident_transfer",
+                "appVersion": "0.1",
+                "schemaId": "incident",
+                "contentType": "application/json",
+                "data": "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
+              },
+              "signatur": "eyJhbGciOiJSUzI1NiJ9 . eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ . cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7 AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4 BAynRFdiuB--f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K 0GarZRmB_eSN9383LcOLn6_dO--xi12jzDwusC-eOkHWEsqtFZESc6BfI7noOPqv hJ1phCnvWh6IeYI2w9QOYEUipUTI8np6LbgGY9Fs98rqVt5AXLIhWkWywlVmtVrB p0igcN_IoypGlUPQGe77Rw"
+            }
+          ],
+          "maxMessages": 5
+        }
+      },
+      "messageRef": {
+        "required": [
+          "destination",
+          "sequenceId"
+        ],
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "pattern": "^([0-9]+\\.?)+$",
+            "description": "Adressat, diese Referenz zeigt auf eine Meldung, die genau an diese OID adressiert wurde, nicht an eine OID aus einem Unterbaum"
+          },
+          "sequenceId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "eine aufsteigende Meldung-Sequence-ID"
+          }
+        },
+        "description": "Meldungsreferenz",
+        "example": {
+          "destination": "1.2.3.4.5.6",
+          "sequenceId": 123456
         }
       }
     }

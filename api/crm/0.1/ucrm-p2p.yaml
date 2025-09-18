@@ -1,9 +1,8 @@
 openapi: 3.1.0
 info:
-  title: UCRI Control Room Module (UCRM) API
+  title: UCRI Control Room Module (UCRM) P2P API
   description: |
-    UCRI Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
-    wie zum Beispiel Leitstellensysteme, andere technische Knoten, sowie weitere externe Systeme.
+    UCRI Control Room Module P2P API ist die Kommunikationsschnittstelle für verbundene externe UCRMs. Die Anbindung lokaler Kommunikationsteilnehmer wie Leitsystemen ist NICHT Teil dieser API (vgl. ucrm-client.yaml).
   version: "0.1"
 servers:
   - url: '{apiRoot}/{basePath}'
@@ -14,7 +13,7 @@ servers:
         enum:
           - https://ucri.mycompany.com
       basePath:
-        default: ucrm/v0
+        default: ucrm/p2p/v0
         description: API base path
 tags:
   - name: Messaging
@@ -103,89 +102,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /messaging/receive:
-    post:
-      tags:
-        - Messaging
-      summary: Meldungen empfangen
-      description: Meldungen im Empfangspuffer abfragen.
-        Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut.
-        Es werden die ältesten X Meldungen aus der Adressaten-Queue geliefert.
-      operationId: receiveMessages
-      requestBody:
-        description: Meldungsabfrage
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReceiverRequest'
-        required: true
-      responses:
-        '200':
-          description: |
-            OK \
-            Mindestens eine und bis zu 'maxMessages' ältesten Meldungen werden geliefert.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReceiverResponse'
-        '204':
-          description: |
-            No Content \
-            Es liegen aktuell keine Nachrichten in der Adressaten-Queue vor.
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /messaging/commit:
-    post:
-      tags:
-        - Messaging
-      summary: Meldungsempfang bestätigen
-      description: Empfang von Meldungen bis einschliesslich angegebene Meldung (Sequence-ID) bestätigen.
-        Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt.
-      operationId: commitMessage
-      requestBody:
-        description: Meldungsreferenz
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MessageRef'
-        required: true
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /registry:
     get:
       tags:
@@ -209,45 +125,6 @@ paths:
                       $ref: '#/components/schemas/CommParticipant'
         '401':
           description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /registry/{id}:
-    get:
-      tags:
-        - Registry
-      summary: Informationen zu einem KT abfragen
-      description: Informationen zu einem KT abfragen
-      operationId: readCommParticipant
-      parameters:
-        - name: id
-          in: path
-          description: KT-OID
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK, Informationen zu einem KT
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommParticipant'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: Not Found
           content:
             application/json:
               schema:
@@ -319,23 +196,7 @@ components:
     Info:
       $ref: 'schemas/info.yaml'
     Error:
-      required:
-        - code
-        - reason
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Anwendungsspezifische Fehler-Code
-          # TODO add valid error codes as enum
-        reason:
-          type: string
-          description: Fehlerursache in für Menschen verständlicher Sprache
-        message:
-          type: string
-          description: Detailliertere Fehlerbeschreibung eventuell mit Angabe der Korrektivmaßnahmen
-            in für Menschen verständlicher Sprache
-      description: Fehlerbeschreibung, gewöhnlich für eine HTTP Error Response-Code (3xx, 4xx, 5xx)
+      $ref: 'schemas/error.yaml'
     JWTToken:
       type: string
       contentMediaType: application/jwt
@@ -350,10 +211,7 @@ components:
             required:
               - ait
               - exp
-              - role
             properties:
-              role:
-                type: string
               iat:
                 type: integer
               exp:

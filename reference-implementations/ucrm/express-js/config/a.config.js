@@ -41,20 +41,20 @@ export const config = {
         password: "test",
         //the OIDs this user is allowed to access
         oids:["1.2.3.4.5.6"],
-        //the role of this user (client or urcm, latter for remote UCRMs)
-        role: "client"
+        //the type of this user (client or p2p, latter for remote UCRMs)
+        type: "client"
       },
       userA2: {
         username: "userA2",
         password: "test",
         oids:["1.2.3.4.5.8"],
-        role: "client"
+        type: "client"
       },
       //this is the user for the remote CRM b
       crmB: {
         username: "crmB",
         password: "test",
-        role: "ucrm"
+        type: "p2p"
       }
     }
   },
@@ -64,7 +64,7 @@ export const config = {
     //remote ucrm with id "b"
     b: {
       //the baseURL
-      baseUrl: "http://localhost:3003/ucrm/v0",
+      baseUrl: "http://localhost:3003/ucrm/p2p/v0",
       //these need to be defined as user accounts on the remote UCRM!
       username: "crmA",
       password: "test",

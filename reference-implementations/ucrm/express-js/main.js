@@ -16,7 +16,7 @@ import {
 } from "./services/messageBus.js";
 import {
   notifyDiscoveryFinished as notifyDiscoveryFinishedOnInfoEndpoint,
-} from "./routes/info.js";
+} from "./routes/client/info.js";
 import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "../../shared-js/ucrmErrorCodes.js"
 import {init as initCrypto,getKTRecordSignature} from "../../shared-js/crypto.js"
@@ -113,10 +113,20 @@ async function prepareSpec(){
   filter: (src,dst)=>!src.includes("spectral.yaml")});
   //replace server url variables
   await replaceInFiles({
-    files: `./${TRANSPORT_LAYER_SPEC_DIR}/ucrm.yaml`,
+    files: `./${TRANSPORT_LAYER_SPEC_DIR}/ucrm-client.yaml`,
     from: '{apiRoot}/{basePath}',
-    to: '/ucrm/v0'
+    to: '/ucrm/client/v0'
   //replace relative tokenUrl
+  }).pipe({
+    from: 'tokenUrl: /token',
+    to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
+  });
+  //replace server url variables
+  await replaceInFiles({
+    files: `./${TRANSPORT_LAYER_SPEC_DIR}/ucrm-p2p.yaml`,
+    from: '{apiRoot}/{basePath}',
+    to: '/ucrm/p2p/v0'
+    //replace relative tokenUrl
   }).pipe({
     from: 'tokenUrl: /token',
     to: 'tokenUrl: https://ucri.mycompany.com/ucrm/v0/token'
@@ -146,7 +156,7 @@ async function start(){
 
   const appSchemata= await compileAppSchemata();
   setAppSchemata(appSchemata);
-  const apiSpec = `${TRANSPORT_LAYER_SPEC_DIR}/ucrm.yaml`;
+  const apiSpec = `${TRANSPORT_LAYER_SPEC_DIR}/ucrm-client.yaml`;
 
 
 
@@ -159,73 +169,86 @@ async function start(){
 
   app.use('/spec', express.static(apiSpec));
 
-//  2. Install the OpenApiValidator middleware
-  app.use(
-    middleware({
-      apiSpec,
-      validateRequests: {
-        // return all validation errors, not only the first one.
-        // for productive use, this option should be false to help mitigate slow validations and potential ReDOS attacks.
-        // see https://cdimascio.github.io/express-openapi-validator-documentation/usage-validate-requests/ and
-        // https://ajv.js.org/security.html#security-risks-of-trusted-schemas
-        allErrors: true
-      },
-      validateResponses: {
-        // return all validation errors, not only the first one.
-        // see validateRequests.allErrors notes above!
-        allErrors:true,
-      },
-      //neither ajv nor ajv-formats support the base64url format natively, so we need to add it manually
-      //note that contrary to the eov docs, the formats should be passed in an object, not an array (array form is
-      //deprecated in ajv)
-      formats: {
-        base64url:{
-          type: 'string',
-          validate : (v) => /^[A-Za-z0-9_-]+$/.test(v),
-        }
-      },
-      operationHandlers: {
-        // 3. Provide the path to the controllers directory
-        basePath: './routes',
-        validateResponses: true, // default false
-        // 4. Provide a function responsible for resolving an Express RequestHandler
-        //    function from the current OpenAPI Route object.
-        resolver:async (basePath, route,apiDoc) => {
-          const pathKey = route.openApiRoute.substring(route.basePath.length)
-          const schema = apiDoc.paths[pathKey][route.method.toLowerCase()]
-          const tagName = schema.tags[0];
-          const operationName = schema['operationId'];
-          const methodName = route.method.toLowerCase();
-          // const routerFileName = `./${basePath}/${operationName}.js`;
-          // const routerMethodName = methodName;
-          const routerFileName = `./${basePath}/${tagName.toLowerCase()}.js`;
-          const routerMethodName = `${methodName}${upperCaseFirstLetter(operationName)}`;
-          // Get path to module and attempt to dynamically import it
-          const modulePath = routerFileName;
-          const handler= await import(modulePath);
-          // Simplistic error checking to make sure the function actually exists
-          // on the handler module
-          if (handler[routerMethodName] === undefined) {
-            throw new Error(
-              `Could not find a [${routerMethodName}] function in ${routerFileName} when trying to route [${route.method} ${route.expressRoute}].`
-            )
+//  2. Install the OpenApiValidator middleware for both the client and p2p specs (which will be available at ucrm/client and ucrm/p2p pathes
+  const specs=[
+    {
+      specPath:`${TRANSPORT_LAYER_SPEC_DIR}/ucrm-client.yaml`,
+      type:"client"
+    },
+    {
+      specPath:`${TRANSPORT_LAYER_SPEC_DIR}/ucrm-p2p.yaml`,
+      type:"p2p"
+    },
+  ]
+  for (const spec of specs){
+    app.use(
+      middleware({
+        apiSpec:spec.specPath,
+        validateRequests: {
+          // return all validation errors, not only the first one.
+          // for productive use, this option should be false to help mitigate slow validations and potential ReDOS attacks.
+          // see https://cdimascio.github.io/express-openapi-validator-documentation/usage-validate-requests/ and
+          // https://ajv.js.org/security.html#security-risks-of-trusted-schemas
+          allErrors: true
+        },
+        validateResponses: {
+          // return all validation errors, not only the first one.
+          // see validateRequests.allErrors notes above!
+          allErrors:true,
+        },
+        //neither ajv nor ajv-formats support the base64url format natively, so we need to add it manually
+        //note that contrary to the eov docs, the formats should be passed in an object, not an array (array form is
+        //deprecated in ajv)
+        formats: {
+          base64url:{
+            type: 'string',
+            validate : (v) => /^[A-Za-z0-9_-]+$/.test(v),
           }
-          // Finally return our function
-          return handler[routerMethodName]
-        }
-      },
-      validateSecurity: {
-        handlers: {
-          basic: (req, scopes, schema) => {
-            return checkBasicCredentials(req);
-          },
-          oAuth2ClientCredentials: (req, scopes, schema) => {
-            return checkJWTCredentials(req);
+        },
+        operationHandlers: {
+          // 3. Provide the path to the controllers directory
+          basePath: `./routes/${spec.type}`,
+          validateResponses: true, // default false
+          // 4. Provide a function responsible for resolving an Express RequestHandler
+          //    function from the current OpenAPI Route object.
+          resolver:async (basePath, route,apiDoc) => {
+            const pathKey = route.openApiRoute.substring(route.basePath.length)
+            const schema = apiDoc.paths[pathKey][route.method.toLowerCase()]
+            const tagName = schema.tags[0];
+            const operationName = schema['operationId'];
+            const methodName = route.method.toLowerCase();
+            // const routerFileName = `./${basePath}/${operationName}.js`;
+            // const routerMethodName = methodName;
+            const routerFileName = `./${basePath}/${tagName.toLowerCase()}.js`;
+            const routerMethodName = `${methodName}${upperCaseFirstLetter(operationName)}`;
+            // Get path to module and attempt to dynamically import it
+            const modulePath = routerFileName;
+            const handler= await import(modulePath);
+            // Simplistic error checking to make sure the function actually exists
+            // on the handler module
+            if (handler[routerMethodName] === undefined) {
+              throw new Error(
+                `Could not find a [${routerMethodName}] function in ${routerFileName} when trying to route [${route.method} ${route.expressRoute}].`
+              )
+            }
+            // Finally return our function
+            return handler[routerMethodName]
+          }
+        },
+        validateSecurity: {
+          handlers: {
+            basic: (req, scopes, schema) => {
+              return checkBasicCredentials(req,spec.type);
+            },
+            oAuth2ClientCredentials: (req, scopes, schema) => {
+              return checkJWTCredentials(req,spec.type);
+            }
           }
         }
-      }
-    }),
-  );
+      }),
+    );
+  }
+
 
 // 5. Create a custom error handler
   app.use((err, req, res, next) => {

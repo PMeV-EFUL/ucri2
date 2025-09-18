@@ -15,14 +15,7 @@ export function setConfiguration(conf){
   remoteUcrms = conf.remoteUcrms;
 }
 
-export function checkRole(req, allowedRoles) {
-  if (!req.claims || !req.claims.role || allowedRoles.indexOf(req.claims.role) === -1) {
-    throw new UcrmError(400, `Role may not access this resource.`, ucrmErrors.REQUEST_ROLE_FORBIDDEN);
-  }
-  return req.claims.role;
-}
-
-export function checkBasicCredentials(req){
+export function checkBasicCredentials(req, type){
   //extract username/password from Authorization header...
   let authHeader = req.headers['authorization'];
   if (authHeader && authHeader.length>6){
@@ -36,8 +29,13 @@ export function checkBasicCredentials(req){
     throw new UcrmError(401,`Invalid Authorization header`,ucrmErrors.REQUEST_UNAUTHORIZED);
   }
 
+
   if (!username || !users[username] || users[username].password!==password) {
     throw new UcrmError(401,`User/password combination for username '${username}' is unknown.`,ucrmErrors.REQUEST_UNAUTHORIZED);
+  }
+
+  if (users[username].type !== type) {
+    throw new UcrmError(401,`User type mismatch for '${username}', expected ${type} but user has type ${users[username].type}.`,ucrmErrors.REQUEST_UNAUTHORIZED);
   }
 
   //store username in req.auth
@@ -50,12 +48,11 @@ export function checkBasicCredentials(req){
 
 export function getToken(username){
   return jwt.sign({
-    username,
-    role:users[username].role,
+    usr:username
   }, jwtSecret,{expiresIn:'3600s'});
 }
 
-export function checkJWTCredentials(req){
+export function checkJWTCredentials(req, type){
   //extract token from Authorization header...
   let token = req.headers['authorization'];
   if (token && token.length>7){
@@ -65,10 +62,18 @@ export function checkJWTCredentials(req){
 
   const payload = jwt.verify(token, jwtSecret ,{maxAge:"3600s"});
   req.claims = payload;
-  if (!req.claims || !req.claims.role || !req.claims.username){
-    //TODO should we use a general error number here?
-    throw new UcrmError(400,`provided JWT does not contain 'role' or 'username' claim.`,ucrmErrors.REQUEST_INVALID_PER_TRANSPORT_SPEC);
+  if (!req.claims || !req.claims.usr){
+    throw new UcrmError(401,`provided JWT is valid but does not contain 'usr' claim.`,ucrmErrors.REQUEST_UNAUTHORIZED);
   }
+  const username=req.claims.usr;
+  if (!username || !users[username]) {
+    throw new UcrmError(401,`user '${username}' is unknown.`,ucrmErrors.REQUEST_UNAUTHORIZED);
+  }
+
+  if (users[username].type !== type) {
+    throw new UcrmError(401,`User type mismatch for '${username}', expected ${type} but user has type ${users[username].type}.`,ucrmErrors.REQUEST_UNAUTHORIZED);
+  }
+
   return true;
 }
 
@@ -78,10 +83,7 @@ export function getRemoteUcrmToken(ucrmId){
   return remoteUcrmTokens[ucrmId];
 }
 
-export function checkIfClientMayUseOID(role,username,oid,propertyName){
-  if (role==="ucrm"){
-    return;
-  }
+export function checkIfClientMayUseOID(username,oid,propertyName){
   let userData = users[username];
   if (!userData){
     throw new UcrmError(400,`username '${username}' is unknown.`,ucrmErrors.REQUEST_UNAUTHORIZED);

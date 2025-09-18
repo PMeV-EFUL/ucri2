@@ -1,4 +1,4 @@
-import {getToken} from "../services/authManager.js"
+import {getToken} from "../../services/authManager.js"
 
 export function getAuthorize(req, res) {
   res.status(200).json({

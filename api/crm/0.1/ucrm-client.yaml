@@ -1,0 +1,341 @@
+openapi: 3.1.0
+info:
+  title: UCRI Control Room Module (UCRM) Client API
+  description: |
+    UCRI Control Room Module Client API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
+    wie zum Beispiel Leitstellensysteme. Die Anbindung entfernter UCRMs via UCRI p2p ist NICHT Teil dieser API (vgl. ucrm-p2p.yaml).
+  version: "0.1"
+servers:
+  - url: '{apiRoot}/{basePath}'
+    variables:
+      apiRoot:
+        default: https://ucri.mycompany.com
+        description: API root
+        enum:
+          - https://ucri.mycompany.com
+      basePath:
+        default: ucrm/client/v0
+        description: API base path
+tags:
+  - name: Messaging
+    description: Der Messaging Service beinhaltet Funktionen zum Versenden und Empfangen von Nachrichten,
+      die im Rahmen der UCRI Spezifikation spezifiziert sind.
+  - name: Registry
+  - name: Info
+security:
+  - oAuth2ClientCredentials: [ ]
+paths:
+  /token:
+    get:
+      tags:
+        - Authorization
+      summary: Json Web Token erhalten
+      operationId: authorize
+      security:
+        - basic : []
+      responses:
+        '200':
+          description: OK, Token im Body.
+          content:
+            application/json:
+              schema:
+                required:
+                  - token
+                type: object
+                properties:
+                  token:
+                    $ref: '#/components/schemas/JWTToken'
+                description: JSON-Objekt mit dem JWT-Token
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /messaging/send:
+    post:
+      tags:
+        - Messaging
+      summary: Meldung senden
+      description: Meldung senden
+      operationId: sendMessage
+      requestBody:
+        description: Zu versendende Meldung
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SenderRequest'
+        required: true
+      responses:
+        '200':
+          description: OK, versendete Meldung
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SenderResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /messaging/receive:
+    post:
+      tags:
+        - Messaging
+      summary: Meldungen empfangen
+      description: Meldungen im Empfangspuffer abfragen.
+        Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut.
+        Es werden die ältesten X Meldungen aus der Adressaten-Queue geliefert.
+      operationId: receiveMessages
+      requestBody:
+        description: Meldungsabfrage
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiverRequest'
+        required: true
+      responses:
+        '200':
+          description: |
+            OK \
+            Mindestens eine und bis zu 'maxMessages' ältesten Meldungen werden geliefert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceiverResponse'
+        '204':
+          description: |
+            No Content \
+            Es liegen aktuell keine Nachrichten in der Adressaten-Queue vor.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /messaging/commit:
+    post:
+      tags:
+        - Messaging
+      summary: Meldungsempfang bestätigen
+      description: Empfang von Meldungen bis einschliesslich angegebene Meldung (Sequence-ID) bestätigen.
+        Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt.
+      operationId: commitMessage
+      requestBody:
+        description: Meldungsreferenz
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageRef'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /registry:
+    get:
+      tags:
+        - Registry
+      summary: KT-Register abfragen
+      description: Liefert eine Liste aller Kommunikationsteilnehmer, die diesem UCRM bekannt sind.
+      operationId: listCommParticipant
+      responses:
+        '200':
+          description: OK, Liste aller Kommunikationsteilnehmer
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - commParticipants
+                properties:
+                  commParticipants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CommParticipant'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /registry/{id}:
+    get:
+      tags:
+        - Registry
+      summary: Informationen zu einem KT abfragen
+      description: Informationen zu einem KT abfragen
+      operationId: readCommParticipant
+      parameters:
+        - name: id
+          in: path
+          description: KT-OID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK, Informationen zu einem KT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommParticipant'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /info:
+    get:
+      tags:
+        - Info
+      summary: UCRM Information
+      description: Liefert UCRM Information
+      operationId: info
+      responses:
+        '200':
+          description: OK, UCRM Information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth, wird AUSSCHLIESSLICH für den /token-Endpunkt genutzt.
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.
+      flows:
+        clientCredentials:
+          # Einige Tools verbieten inkorrekterweise relative URIs wie /token für die tokenURL in OpenAPI 3.1.0, daher muss die TokenUrl in diesen Fällen zu einer vollständigen URL geändert werden!
+          tokenUrl: /token
+          scopes: { }
+
+  schemas:
+    # Obwohl die Envelope auf dieser Ebene gar nicht direkt $ref-ereziert wird, muss diese hier auftauchen, damit Tools wie ajv.js diese
+    # Spezifikation korrekt laden können!
+    Envelope:
+      $ref: 'schemas/envelope.yaml'
+    SenderRequest:
+      $ref: 'schemas/senderRequest.yaml'
+    SenderResponse:
+      $ref: 'schemas/senderResponse.yaml'
+    ReceiverRequest:
+      $ref: 'schemas/receiverRequest.yaml'
+    ReceiverResponse:
+      $ref: 'schemas/receiverResponse.yaml'
+    MessageRef:
+      $ref: 'schemas/messageRef.yaml'
+    CommParticipant:
+      $ref: 'schemas/commParticipant.yaml'
+    Info:
+      $ref: 'schemas/info.yaml'
+    Error:
+      $ref: 'schemas/error.yaml'
+    JWTToken:
+      type: string
+      contentMediaType: application/jwt
+      contentSchema:
+        type: array
+        minItems: 2
+        prefixItems:
+          - const:
+              typ: JWT
+              alg: HS256
+          - type: object
+            required:
+              - ait
+              - exp
+            properties:
+              iat:
+                type: integer
+              exp:
+                type: integer

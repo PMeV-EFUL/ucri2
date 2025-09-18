@@ -109,7 +109,12 @@ async function performStartUcrm(testStep) {
 
 async function performAuthorize(authorizeStep, testNumber) {
   const ucrmId = authorizeStep.ucrmId;
-  const authUrl = `${ucrmData[ucrmId].baseUrl}/token`;
+  let baseUrl = `${ucrmData[ucrmId].baseUrl}`;
+  if (authorizeStep.baseUrlOverride){
+    console.log(`using baseUrl override ${authorizeStep.baseUrlOverride}`);
+    baseUrl=authorizeStep.baseUrlOverride;
+  }
+  const authUrl = `${baseUrl}/token`;
   const authInfo = base64Encode(`${authorizeStep.username}:${authorizeStep.password}`);
   console.log(`Authenticating username '${authorizeStep.username}' on remote UCRM with id '${ucrmId}' at authUrl ${authUrl}'`);
   let responseHttpCode;
@@ -128,12 +133,6 @@ async function performAuthorize(authorizeStep, testNumber) {
       let token = respJSON.token;
       userTokens[authorizeStep.username] = token;
       console.log(`received token ${token}`);
-      const decodedToken = jwt.decode(token);
-      let expectedRole = authorizeStep.expect.role;
-      let actualRole = decodedToken.role;
-      if (actualRole !== expectedRole) {
-        reportTestFailure(authorizeStep, testNumber, `returned JWT has role claim mismatch, expected '${expectedRole}' but got '${actualRole}'`);
-      }
     }
   } catch (err) {
     console.warn("remote ucrm is not available or 200 response was malformed");
@@ -185,7 +184,12 @@ async function performAwaitDiscoveryComplete(step,testNumber) {
 async function performFetch(step, testNumber) {
   let username = step.username;
   const ucrmId = step.ucrmId;
-  const url = `${ucrmData[ucrmId].baseUrl}/${step.endpoint}`;
+  let baseUrl = `${ucrmData[ucrmId].baseUrl}`;
+  if (step.baseUrlOverride){
+    console.log(`using baseUrl override ${step.baseUrlOverride}`);
+    baseUrl=step.baseUrlOverride;
+  }
+  const url = `${baseUrl}/${step.endpoint}`;
   const method = step.method;
   console.log(`Fetching data from on remote UCRM with id '${ucrmId}' with token for '${username}' at url ${url}' http method ${method}...`);
   let responseHttpCode;
