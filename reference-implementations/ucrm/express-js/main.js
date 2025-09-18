@@ -5,6 +5,9 @@ import fsPromises from 'fs/promises';
 import replaceInFiles from 'replace-in-files';
 import Ajv2020 from "ajv/dist/2020.js"
 import addFormats from "ajv-formats"
+import canonicalize from "canonicalize";
+import sha3 from "js-sha3";
+import * as jose from 'jose';
 import {
   notifyDiscoveryFinished as notifyDiscoveryFinishedOnMessageBus,
   setAppSchemata,
@@ -16,6 +19,7 @@ import {
 } from "./routes/info.js";
 import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "../../shared-js/ucrmErrorCodes.js"
+import {init as initCrypto,getKTRecordSignature} from "../../shared-js/crypto.js"
 import {setConfiguration as setConfigurationOnRegistry,addCommParticipants,fetchParticipantsFromRemoteUcrms} from "./services/commParticipantRegistry.js";
 import {setConfiguration,checkBasicCredentials,checkJWTCredentials,authenticateRemoteUcrm} from "./services/authManager.js"
 
@@ -30,6 +34,8 @@ const TRANSPORT_LAYER_APPID="transport_layer_messages";
 const TRANSPORT_LAYER_APP_VERSION="0.1";
 const TRANSPORT_LAYER_SPEC_DIR = "transport-layer-spec";
 
+initCrypto(UcrmError,canonicalize,sha3,jose);
+
 const ajv = new Ajv2020({
   strict:false,
   allErrors: true
@@ -42,7 +48,27 @@ let config;
 
 if (await initConfiguration()){
   await start();
-};
+}
+
+async function signKTRecords(){
+  console.log(`signing KT records...`);
+  for (const record of Object.values(config.commParticipants)){
+    const oid = record.id;
+    const domain = record.domain;
+    if (!domain){
+      console.error(`Participant with oid '${oid}' has no domain!`);
+      return false;
+    }
+    let domainPrivateKey = config.domainPrivateKeys[domain];
+    if (!domainPrivateKey){
+      console.error(`Participant with oid '${oid}' has unknown domain '${domain}'!`);
+      return false;
+    }
+    record.signature=await getKTRecordSignature(record,domainPrivateKey);
+  }
+  return true;
+}
+
 
 async function initConfiguration(){
   if (process.argv.length != 3){
@@ -60,10 +86,19 @@ async function initConfiguration(){
       }
     }
     //add local participants
-    addCommParticipants(config.commParticipants,"self");
     setConfiguration(config);
     setConfigurationOnRegistry(config);
     setConfigurationOnMessageBus(config);
+    if (config.useKTSignatures) {
+      //self-sign commParticipants - NEVER to be done in a production UCRM, instead the domain owner should provide signatures!
+      if (!await signKTRecords()) {
+        return false;
+      }
+    }
+    if (!await addCommParticipants(config.commParticipants,"self")){
+      return false;
+    }
+
     console.log("configuration loaded.")
     return true;
   }catch(err){

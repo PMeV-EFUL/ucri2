@@ -3,12 +3,42 @@ import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js";
 import fetch from 'node-fetch';
 import {getRemoteUcrmToken} from "./authManager.js";
 import {base64Encode} from "../../../shared-js/util.js"
+import {verifyKTRecord} from "../../../shared-js/crypto.js"
+import {co} from "replace-in-files/lib/helpers.js";
 
-export function addCommParticipants(participants, ucrmId) {
-  Object.assign(commParticipants, participants);
-  for (let id of Object.keys(participants)) {
+export async function addCommParticipants(participants, ucrmId) {
+  const validParticipants = {};
+  let errorOccured = false;
+  for (const [oid,participant] of Object.entries(participants)) {
+    if (config.useKTSignatures){
+      if (!participant.domain){
+        console.error(`Participant with oid '${oid}' has no domain!`);
+        errorOccured = true;
+        continue;
+      }
+      let domainPublicKey = config.domainPublicKeys[participant.domain];
+      if (!domainPublicKey){
+        console.error(`Participant with oid '${oid}' has unknown domain '${participant.domain}'!`);
+        errorOccured = true;
+        continue;
+      }
+      try{
+        await verifyKTRecord(participant,domainPublicKey);
+        validParticipants[oid]=participant;
+      }catch(err){
+        console.error(`KT signature verification fail for oid '${oid}', reason: ${err.message}`);
+        errorOccured = true;
+        continue;
+      }
+    }else{
+      validParticipants[oid]=participant;
+    }
+  }
+  Object.assign(commParticipants, validParticipants);
+  for (let id of Object.keys(validParticipants)) {
     ucrmIdsByParticipantIds[id] = ucrmId;
   }
+  return !errorOccured;
 }
 
 export function setConfiguration(conf) {
@@ -68,7 +98,7 @@ export async function fetchParticipantsFromRemoteUcrms() {
         for (const participant of respJSON.commParticipants) {
           participantMap[participant.id] = participant;
         }
-        addCommParticipants(participantMap, ucrmId);
+        await addCommParticipants(participantMap, ucrmId);
       } else {
         let respJSON = await response.json();
         console.error(`received HTTP error ${response.status}, aborting... Response:\n ${JSON.stringify(respJSON, null, 2)}`)

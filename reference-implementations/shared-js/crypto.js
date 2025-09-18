@@ -13,10 +13,11 @@ export function init(ucrmError,canonicalizeFunction,sha,joseLib) {
   jose = joseLib;
 }
 
-export const ignoredPropertiesForSignature=["signature","messageId","sentDate","timeout","ack"]
+export const ignoredPropertiesForEnvelope=["signature","messageId","sentDate","timeout","ack"]
+export const ignoredPropertiesForKTRecord=["signature","status"]
 
 export function getSigningHash(envelope){
-  return getHash(envelope,ignoredPropertiesForSignature);
+  return getHash(envelope,ignoredPropertiesForEnvelope);
 }
 
 function getHash(obj,propertyNamesToIgnore){
@@ -45,7 +46,11 @@ export async function sign(payload,privateKey){
 }
 
 export async function getEnvelopeSignature(obj,privateKey){
-  return getObjectSignature(obj,ignoredPropertiesForSignature,privateKey);
+  return getObjectSignature(obj,ignoredPropertiesForEnvelope,privateKey);
+}
+
+export async function getKTRecordSignature(obj,privateKey){
+  return getObjectSignature(obj,ignoredPropertiesForKTRecord,privateKey);
 }
 
 export async function getObjectSignature(obj,propertyNamesToIgnore,privateKey){
@@ -54,7 +59,11 @@ export async function getObjectSignature(obj,propertyNamesToIgnore,privateKey){
 }
 
 export async function verifyEnvelope(obj,jws,publicKey){
-  return verifyObject(obj,ignoredPropertiesForSignature,jws,publicKey);
+  return verifyObject(obj,ignoredPropertiesForEnvelope,jws,publicKey);
+}
+
+export async function verifyKTRecord(obj,publicKey){
+  return verifyObject(obj,ignoredPropertiesForKTRecord,obj.signature,publicKey);
 }
 
 async function verifyObject(obj,propertyNamesToIgnore,jws,publicKey){

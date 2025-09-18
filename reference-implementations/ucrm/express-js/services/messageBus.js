@@ -1,11 +1,9 @@
 import {v4 as uuidv4} from "uuid";
-import canonicalize from "canonicalize";
-import sha3 from "js-sha3";
-import * as jose from 'jose';
+
 
 import {UcrmError} from "../util/ucrmError.js"
 import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js"
-import {verifyEnvelope,init as initCrypto} from "../../../shared-js/crypto.js"
+import {verifyEnvelope} from "../../../shared-js/crypto.js"
 import {getCommParticipant, getUcrmIdFromParticipantId} from "./commParticipantRegistry.js"
 import {checkIfClientMayUseOID, getRemoteUcrmToken} from "./authManager.js";
 
@@ -37,7 +35,6 @@ const trackedOutgoingMessagesPerMessageId = {};
 export function start(){
   console.log("starting messageBus...");
   console.log("Starting message timeout tracking...");
-  initCrypto(UcrmError,canonicalize,sha3,jose);
   setInterval(checkForTimeouts,TIMEOUT_TRACKING_INVERVAL_MS);
 }
 
