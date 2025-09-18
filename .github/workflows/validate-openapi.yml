@@ -8,8 +8,13 @@ jobs:
     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
     - name: Check out repository code
       uses: actions/checkout@v4
-    - name: Validate OpenAPI definition
+    - name: Validate OpenAPI transport layer client API definition
       uses: stoplightio/spectral-action@v0.8.11
       with:
-        file_glob: api/crm/0.1/crm.yaml
+        file_glob: api/crm/0.1/crm-client.yaml
+        spectral_ruleset: api/crm/0.1/.spectral.yaml
+    - name: Validate OpenAPI transport layer p2p API definition
+      uses: stoplightio/spectral-action@v0.8.11
+      with:
+        file_glob: api/crm/0.1/crm-p2p.yaml
         spectral_ruleset: api/crm/0.1/.spectral.yaml
