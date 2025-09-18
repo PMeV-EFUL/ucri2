@@ -44,13 +44,13 @@ export async function sendMessage(senderRequest, username,type) {
     throw new UcrmError(500, `Remote UCRM participant discovery is in process, please try again later!`, ucrmErrors.REQUEST_TRY_LATER_UCRM_IS_IN_DISCOVERY_MODE);
   }
   //the client access checks should only be performed on this level as the handleXXX() methods will be called from within the messageBus too!
-  //also, they should only be performed for type="client"
+  //also, they should only be performed for type==="client"
   if (type==="client"){
     checkIfClientMayUseOID(username,senderRequest.source,"source");
   }
   switch (type) {
     case "p2p":
-      return handleIncomingMessage(senderRequest);
+      return handleIncomingP2PMessage(senderRequest);
     case "client":
       return handleOutgoingMessage(senderRequest,false);
     default:
@@ -58,22 +58,13 @@ export async function sendMessage(senderRequest, username,type) {
   }
 }
 
-async function handleIncomingMessage(senderRequest) {
+async function handleIncomingP2PMessage(senderRequest) {
   console.log("incoming message...");
   //FIXME this logic is just for testing and should be configurable instead of being hardcoded!!!!
   if (senderRequest.description && senderRequest.description.startsWith("X-GETERROR")) {
     throw new UcrmError(400, `Envelope Description stated X-GETERROR so an error is returned for testing purposes!`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
   }
-  //as the P2P receive endpoint is the same as the one for client send, some fields are optional in the schema but mandatory for P2P send
-  if (!senderRequest.destinations || senderRequest.destinations.length !== 1) {
-    throw new UcrmError(400, `Missing destination for P2P message`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
-  }
-  if (!senderRequest.sentDate) {
-    throw new UcrmError(400, `Missing sentDate for P2P message`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
-  }
-  if (!senderRequest.messageId) {
-    throw new UcrmError(400, `Missing messageId for P2P message`, ucrmErrors.REQUEST_INVALID_PER_P2P_SPEC);
-  }
+
   await validateSenderRequest(senderRequest);
 
   const destinationId = senderRequest.destinations[0];
@@ -253,7 +244,7 @@ async function processUnsentMessages() {
       if (targetUcrmId === "self") {
         console.log("message is local, no sending to remote ucrm necessary, looping back to handleIncomingMessage()...");
         sentMessageIds.push(messageId);
-        handleIncomingMessage(senderRequest);
+        handleIncomingP2PMessage(senderRequest);
       }else{
         const remoteConfig=config.remoteUcrms[targetUcrmId]
         const sendUrl = `${remoteConfig.baseUrl}/messaging/send`;

@@ -68,7 +68,7 @@ paths:
       tags:
         - Messaging
       summary: Meldung senden
-      description: Meldung senden
+      description: Meldung senden. Im Gegensatz zum Endpunkt in der Client-API sind die dort optionalen Felder messageId,sentDate,timeout und ack hier obligat.
       operationId: sendMessage
       requestBody:
         description: Zu versendende Meldung
