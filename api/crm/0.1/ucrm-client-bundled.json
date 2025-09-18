@@ -297,7 +297,7 @@
           "Registry"
         ],
         "summary": "KT-Register abfragen",
-        "description": "Liefert eine Liste aller Kommunikationsteilnehmer, die diesem UCRM bekannt sind.",
+        "description": "Liefert eine Liste aller Kommunikationsteilnehmer, die diesem UCRM bekannt sind (inklusive Kommunikationsteilnehmern, die durch entfernte UCRMs via P2P angebunden sind.",
         "operationId": "listCommParticipant",
         "responses": {
           "200": {

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "{apiRoot}/{basePathP2P}",
+      "url": "{apiRoot}/{basePath}",
       "variables": {
         "apiRoot": {
           "default": "https://ucri.mycompany.com",
@@ -16,7 +16,7 @@
             "https://ucri.mycompany.com"
           ]
         },
-        "basePathP2P": {
+        "basePath": {
           "default": "ucrm/p2p/v0",
           "description": "API base path"
         }
@@ -119,7 +119,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/senderRequest"
+                "$ref": "#/components/schemas/senderRequestP2P"
               }
             }
           },
@@ -175,7 +175,7 @@
           "Registry"
         ],
         "summary": "KT-Register abfragen",
-        "description": "Liefert eine Liste aller Kommunikationsteilnehmer.",
+        "description": "Liefert eine Liste aller über dieses UCRM angebundenen Kommunikationsteilnehmer. In KEINEM Falle dürfen hier die Kommunikationsteilnehmer übertragen werden, welche durch andere entfernte UCRMs via P2P angebunden sind!",
         "operationId": "listCommParticipant",
         "responses": {
           "200": {
@@ -287,17 +287,11 @@
       "Envelope": {
         "$ref": "#/components/schemas/envelope"
       },
-      "SenderRequest": {
-        "$ref": "#/components/schemas/senderRequest"
+      "SenderRequestP2P": {
+        "$ref": "#/components/schemas/senderRequestP2P"
       },
       "SenderResponse": {
         "$ref": "#/components/schemas/senderResponse"
-      },
-      "ReceiverRequest": {
-        "$ref": "#/components/schemas/receiverRequest"
-      },
-      "ReceiverResponse": {
-        "$ref": "#/components/schemas/receiverResponse"
       },
       "MessageRef": {
         "$ref": "#/components/schemas/messageRef"
@@ -469,7 +463,7 @@
         },
         "description": "Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload"
       },
-      "senderRequest": {
+      "senderRequestP2P": {
         "allOf": [
           {
             "$ref": "#/components/schemas/envelope"
@@ -477,6 +471,10 @@
           {
             "type": "object",
             "required": [
+              "messageId",
+              "sentDate",
+              "timeout",
+              "ack",
               "destinations"
             ],
             "properties": {
@@ -492,6 +490,7 @@
               }
             },
             "example": {
+              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
               "description": "Einsatzübergabe am 13.11.2023 um 20:20",
               "timeout": 300,
               "ack": "NACK",
@@ -749,108 +748,6 @@
         "example": {
           "apiVersion": "0.1",
           "crmProvider": "iSE"
-        }
-      },
-      "receiverRequest": {
-        "required": [
-          "destinations"
-        ],
-        "type": "object",
-        "properties": {
-          "destinations": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "pattern": "^([0-9]+\\.?)+$"
-            },
-            "minItems": 1,
-            "description": "Adressatenliste, Meldungen an alle Adressen aus dieser Liste werden abgefragt. Gleichzeitig werden Meldungen an alle Adressen aus dem OID-Unterbaum des Adressaten abgefragt. Siehe UCRI2 Adressierungskonzept, Systemkomponente Gateway."
-          },
-          "maxMessages": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert"
-          }
-        },
-        "description": "Meldungsabfrage",
-        "example": {
-          "destinations": [
-            "1.2.3.4.5.7"
-          ],
-          "maxMessages": 5
-        }
-      },
-      "receiverResponseItem": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/envelope"
-          },
-          {
-            "type": "object",
-            "required": [
-              "messageId",
-              "destination",
-              "sequenceId",
-              "sentDate",
-              "timeout"
-            ],
-            "properties": {
-              "destination": {
-                "type": "string",
-                "pattern": "^([0-9]+\\.?)+$"
-              },
-              "sequenceId": {
-                "type": "integer",
-                "format": "int64",
-                "description": "Meldungs-Sequence-ID Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut. Sequence-ID wird verwendet um die erfolgreiche Verarbeitung einer Meldung durch Commit-Operation zu signalisieren. Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt."
-              }
-            }
-          }
-        ]
-      },
-      "receiverResponse": {
-        "required": [
-          "messages",
-          "maxMessages"
-        ],
-        "type": "object",
-        "properties": {
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/receiverResponseItem"
-            },
-            "minItems": 1
-          },
-          "maxMessages": {
-            "type": "integer",
-            "minimum": 1,
-            "description": "maximale Anzahl von Meldungen im Ergebnis"
-          }
-        },
-        "description": "Die bis zu 'maxMessages' ältesten X Meldungen entsprechend der Meldungsabfrage",
-        "example": {
-          "messages": [
-            {
-              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
-              "description": "Einsatzübergabe am 13.11.2023 um 20:20",
-              "sentDate": "2023-11-13T20:20:39+00:00",
-              "timeout": 300,
-              "ack": "NACK",
-              "source": "1.2.3.4.5.6",
-              "destination": "1.2.3.4.5.7",
-              "sequenceId": 123456,
-              "payload": {
-                "appId": "incident_transfer",
-                "appVersion": "0.1",
-                "schemaId": "incident",
-                "contentType": "application/json",
-                "data": "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
-              },
-              "signatur": "eyJhbGciOiJSUzI1NiJ9 . eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ . cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7 AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4 BAynRFdiuB--f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K 0GarZRmB_eSN9383LcOLn6_dO--xi12jzDwusC-eOkHWEsqtFZESc6BfI7noOPqv hJ1phCnvWh6IeYI2w9QOYEUipUTI8np6LbgGY9Fs98rqVt5AXLIhWkWywlVmtVrB p0igcN_IoypGlUPQGe77Rw"
-            }
-          ],
-          "maxMessages": 5
         }
       },
       "messageRef": {
