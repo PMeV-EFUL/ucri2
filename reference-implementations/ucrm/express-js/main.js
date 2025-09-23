@@ -17,6 +17,9 @@ import {
 import {
   notifyDiscoveryFinished as notifyDiscoveryFinishedOnInfoEndpoint,
 } from "./routes/client/info.js";
+import {
+  notifyDiscoveryFinished as notifyDiscoveryFinishedOnInfoP2PEndpoint,
+} from "./routes/p2p/info.js";
 import {UcrmError} from "./util/ucrmError.js"
 import {ucrmErrors} from "../../shared-js/ucrmErrorCodes.js"
 import {init as initCrypto,getKTRecordSignature} from "../../shared-js/crypto.js"
@@ -307,6 +310,7 @@ async function start(){
   }
   console.log("Fetching participants sucessful");
   notifyDiscoveryFinishedOnInfoEndpoint();
+  notifyDiscoveryFinishedOnInfoP2PEndpoint();
   notifyDiscoveryFinishedOnMessageBus();
   setInterval(fetchParticipantsFromRemoteUcrms,REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS);
 }
