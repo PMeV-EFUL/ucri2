@@ -3,7 +3,7 @@ info:
   title: UCRI Control Room Module (UCRM) Client API
   description: |
     UCRI Control Room Module Client API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
-    wie zum Beispiel Leitstellensysteme. Die Anbindung entfernter UCRMs via UCRI p2p ist NICHT Teil dieser API (vgl. ucrm-p2p.yaml).
+    wie zum Beispiel Leitstellensysteme. Die Anbindung entfernter UCRMs via UCRI P2P Protokoll ist NICHT Teil dieser API (vgl. ucrm-p2p.yaml).
   version: "0.1"
 servers:
   - url: '{apiRoot}/{basePath}'
@@ -21,7 +21,11 @@ tags:
     description: Der Messaging Service beinhaltet Funktionen zum Versenden und Empfangen von Nachrichten,
       die im Rahmen der UCRI Spezifikation spezifiziert sind.
   - name: Registry
+    description: Das KT-Register (Registry Service) beinhaltet Funktionen zum Abfragen von KT-Informationen.  
   - name: Info
+    description: Liefert Informationen zu der UCRM-Implementierung.  
+  - name: Authorization
+    description: OAuth 2.0 Endpunkt zum Abholen eines Zugriffstokens anhand OAuth Client Credentials Grant Type.  
 security:
   - oAuth2ClientCredentials: [ ]
 paths:
