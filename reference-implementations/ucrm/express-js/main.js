@@ -79,6 +79,16 @@ async function initConfiguration(){
     let configPath = process.argv[2];
     console.log(`loading configuration from ${configPath}`);
     config=(await import(configPath)).config;
+    //check presence of ownOID and privateSigningKey fields
+    if (!config.ownOid){
+      throw new Error("Config is missing mandatory 'ownOid' property!");
+    }
+    if (!config.privateSigningKey){
+      throw new Error("Config is missing mandatory 'privateSigningKey' property!");
+    }
+    if (config.commParticipants.length<1 || !config.commParticipants[config.ownOid] || config.commParticipants[config.ownOid].type!=="ucrm"){
+      throw new Error("Config error: commParticipants do not have an entry with ownOid as its id or is not of type 'ucrm' !");
+    }
     //check local participants for support of transport layer app
     for (const commParticipant of Object.values(config.commParticipants)){
       if (commParticipant.supportedApps.filter((app) => app.appId === TRANSPORT_LAYER_APPID && app.appVersion === TRANSPORT_LAYER_APP_VERSION).length === 0) {

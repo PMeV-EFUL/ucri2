@@ -13,7 +13,7 @@ export async function postSendMessage (req, res) {
   res.status(200).json(await sendMessage(req.body,req.claims.usr,"client"));
 }
 
-export function postCommitMessage (req, res) {
-  confirmMessages(req.body,req.claims.usr);
+export async function postCommitMessage (req, res) {
+  await confirmMessages(req.body,req.claims.usr);
   res.status(204).send();
 }

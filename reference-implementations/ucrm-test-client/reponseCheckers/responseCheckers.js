@@ -46,7 +46,7 @@ export function checkArrayResponse(arrayPropertyName,expectedElementCount,option
     return `response must contain an array property named '${arrayPropertyName}'`;
   }
   if (arrayObject.length!==expectedElementCount){
-    return `response array with name $\{arrayPropertyName} was expected to contain ${expectedElementCount} but ${arrayObject.length} elements were encountered!`;
+    return `response array with name ${arrayPropertyName} was expected to contain ${expectedElementCount} but ${arrayObject.length} elements were encountered!`;
   }
   if (typeof(optionalElementCheckerFunction)==="function"){
     let i=0;

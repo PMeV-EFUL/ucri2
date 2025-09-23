@@ -12,6 +12,12 @@ properties:
     pattern: "^([0-9]+\\.?)+$"
     description: KT-OID. Beim Anlegen eines KT-Kontos darf KT-OID auf Ebene 9 (CRM) beschränkt sein.
       In diesem Fall wird die OID um die fortlaufende KT-Nummer (Ebene 10) ergänzt.
+  type:
+    type: string
+    enum:
+      - "client"
+      - "ucrm"
+    description: Der Typ eines Teilnehmers, entweder "ucrm" für ein UCRM oder "client" für einen an ein UCRM angebundenen Teilnehmer.
   systemName:
     type: string
     description: Systemname

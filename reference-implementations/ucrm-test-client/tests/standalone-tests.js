@@ -125,10 +125,10 @@ export async function generateSteps () {
 
     //now to check the registry
     genStepRegistry({
-      desc: "get registry entries (should be 2)",
+      desc: "get registry entries (should be 3)",
       expect: {
         http: 200,
-        responseChecker: curry(checkArrayResponse)("commParticipants", 2, false)
+        responseChecker: curry(checkArrayResponse)("commParticipants", 3, false)
 
       }
     }, "sender"),

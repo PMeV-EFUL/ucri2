@@ -73,7 +73,7 @@
     },
     "ucrmId": "standalone",
     "username": "userA1",
-    "desc": "get registry entries (should be 2)",
+    "desc": "get registry entries (should be 3)",
     "endpoint": "registry",
     "method": "GET"
   },

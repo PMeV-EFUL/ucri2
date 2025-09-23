@@ -3,7 +3,7 @@ import {v4 as uuidv4} from "uuid";
 
 import {UcrmError} from "../util/ucrmError.js"
 import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js"
-import {verifyEnvelope} from "../../../shared-js/crypto.js"
+import {verifyEnvelope,getEnvelopeSignature} from "../../../shared-js/crypto.js"
 import {getCommParticipant, getUcrmIdFromParticipantId} from "./commParticipantRegistry.js"
 import {checkIfClientMayUseOID, getRemoteUcrmToken} from "./authManager.js";
 
@@ -139,7 +139,7 @@ async function validateSignature(senderRequest) {
   }
   if (!senderRequest.signature) {
     //FIXME signatures are currently NOT required as per spec, this is highly problematic as an attacker could just remove the signature and be done with it!
-    console.warn("senderRequest.signature is missing!");
+    console.warn("Signature verification: senderRequest.signature is missing!");
     return;
   }
   const signature = senderRequest.signature;
@@ -193,7 +193,7 @@ async function validateSenderRequest(senderRequest) {
   }
 }
 
-function notifyMessageSendingErrorToSender(senderRequest,errorMessageText, responseJSON) {
+async function notifyMessageSendingErrorToSender(senderRequest,errorMessageText, responseJSON) {
   let messageId = senderRequest.messageId;
   if (senderRequest.ack==="NONE"){
     console.log(`as message.ack='NONE' indicates no status updates are desired at all, no failure status message will be sent for message id ${messageId}`);
@@ -219,7 +219,7 @@ function notifyMessageSendingErrorToSender(senderRequest,errorMessageText, respo
     }
     errorMessage.cause = cause;
   }
-  const errorEnvelope=createMessageDeliveryStatusEnvelope(originalDestination,originalSource,errorMessage);
+  const errorEnvelope=await createMessageDeliveryStatusEnvelope(originalDestination,originalSource,errorMessage);
   getPendingMessagesForDestination(originalSource).push(errorEnvelope);
   delete trackedOutgoingMessagesPerMessageId[messageId];
 }
@@ -277,7 +277,7 @@ async function processUnsentMessages() {
             console.error(fullErrorMessage);
             //this implementation will directly give up sending after one error while production implementations should retry sending instead...
             sentMessageIds.push(messageId);
-            notifyMessageSendingErrorToSender(senderRequest,fullErrorMessage,respJSON);
+            await notifyMessageSendingErrorToSender(senderRequest,fullErrorMessage,respJSON);
           }
         } catch (err) {
           console.error(`remote ucrm '${targetUcrmId}' is not responding, aborting...`);
@@ -323,7 +323,7 @@ export function receiveMessages(receiverRequest,username) {
   return {messages: messagesToReturn, maxMessages: maxMessageCount};
 }
 
-export function confirmMessages(messageRef,username) {
+export async function confirmMessages(messageRef,username) {
   const destinationId = messageRef.destination;
   checkIfClientMayUseOID(username,destinationId,"destination");
 
@@ -351,8 +351,8 @@ export function confirmMessages(messageRef,username) {
           "destination": originalDestination,
           "statusCode": 200
         }
-        const successEnvelope=createMessageDeliveryStatusEnvelope(originalDestination,originalSource,successMessage);
-        handleOutgoingMessage(successEnvelope, true);
+        const successEnvelope=await createMessageDeliveryStatusEnvelope(originalDestination,originalSource,successMessage);
+        await handleOutgoingMessage(successEnvelope, true);
       }
     }else{
       newPendingMessagesForDestination.push(message);
@@ -380,7 +380,7 @@ function getNextSequenceIdForDestination(destinationId) {
   return messageSeqNumbersPerDestination[destinationId];
 }
 
-function checkForTimeouts(){
+async function checkForTimeouts(){
   //as we are executed quite often we do not want to spam the log
   // console.log("Checking for Message timeouts...");
   const now=new Date().getTime();
@@ -393,7 +393,7 @@ function checkForTimeouts(){
         "statusCode": 504,
         "statusMessage": `Message was not delivered within ${trackingData.timeoutSeconds} seconds.`
       }
-      const timeoutEnvelope=createMessageDeliveryStatusEnvelope(trackingData.destination,trackingData.source,timeoutMessage)
+      const timeoutEnvelope=await createMessageDeliveryStatusEnvelope(trackingData.destination,trackingData.source,timeoutMessage)
 
       getPendingMessagesForDestination(trackingData.source).push(timeoutEnvelope);
       delete trackedOutgoingMessagesPerMessageId[messageId];
@@ -401,15 +401,14 @@ function checkForTimeouts(){
   }
 }
 
-function createMessageDeliveryStatusEnvelope(sourceId,destinationId,message){
-  return {
+async function createMessageDeliveryStatusEnvelope(sourceId,destinationId,message){
+  const envelope = {
     "messageId":uuidv4(),
     "sentDate": new Date().toISOString(),
     //FIXME timeout should be optional???
     "timeout" : 10,
     "ack": "NONE",
-    //TODO we should manage OIDS for UCRMS too and use the UCRM here
-    "source": sourceId,
+    "source": config.ownOid,
     "destinations": [
       destinationId
     ],
@@ -421,4 +420,8 @@ function createMessageDeliveryStatusEnvelope(sourceId,destinationId,message){
       "data": JSON.stringify(message)
     }
   };
+  //sign message with private signing key
+  envelope.signature = await getEnvelopeSignature(envelope,config.privateSigningKey);
+  console.log(`Signature verification - generated Signature is ${envelope.signature}`);
+  return envelope;
 }

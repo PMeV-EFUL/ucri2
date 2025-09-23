@@ -22,6 +22,8 @@ import {genExpectedError, genExpectedError400} from "../generators/miscGenerator
 
 
 const DURATION_FOR_MESSAGE_DELIVERY_MS = 2000;
+const LOG_UCRM_A_CONSOLE = true;
+const LOG_UCRM_B_CONSOLE = true;
 
 export async function generateSteps(){
   //fetch defaults for the sending user (which is used by default)
@@ -48,8 +50,19 @@ export async function generateSteps(){
   const receiverOID = "1.2.3.4.5.7";
   const unknownOID = "1.2.3.4.5.1";
 
-//no signing desired ATM
-  setSigningKey(senderOID,null);
+  setSigningKey(senderOID,{
+    "kty": "RSA",
+    "alg": "RS256",
+    "kid": "ce0c04df-245d-4142-93b2-6b1e2d46a9b2",
+    "n": "riPtU1ZKwnCjfwxcf9w5Le6imUaPueVkqeU4JbzVN5FcFuwbhhKLYa1jRJb64-xLM9PJHTfh74-6HhL0DBgDwhXheYYNJioyvmJ3ceWMjRAHLY-mkpnxE9hwJbfRvqL1wQUYrIFX71N9ujmILfGljijPv7dqSyyPQJjgN-gBTXmIXS8_Jo8cVlaEOpOcE8FYvEmy02lHCErxFI5aogNnwaH1w82XiUuntnDNe9xf0QcKETlV8vipzUQp2OXJhEzv7o3qQIElvCcF66F1VLKxFF7yuO9NDvo5_b4WK9dtB-Zb6r-8N5LrN1Y6BvBq-HzDY6J389DzUHlChFqhV9-V2Q",
+    "e": "AQAB",
+    "d": "n3cK5xvIThIzxi4droCOY_95Kn8xMnxcGDBtoDEx1zbna54-_iGRPZs3oiHYEkvZ-dXg_z6jSWsGdm_IyCJdnqfG2C_nbqGJ4kntM4GPmcWprRE06l7KIvA6km-oRLiZ722pUJ8JVYHRSm1QxTHZ9zpsNBXT4o8lh3P3L3rnZnd3sOxU1bXioWdgGNJkC1ydCNuyu5d5AZ74mVfKATsQacpBfYuJaxvoCdWKkynSuPgScTRn84-8-d-MTkBXTjMC7NbnyRCZI1fk1GGKPkFGugySFdCACUzEAp43RN1prv-OM3znrScYqy3VXZT2VAptn6swIDpNtpsPzieRFD9gWQ",
+    "p": "0Z0xbVmSRWQLxNeIM9SSoBOz2BXYqNSwMJk0nTpN0LZf1oekT55E7BC6bbxL9Mf_KDnIY8CBaAExanBRBBcKienI9C7gfF0p-iY_uIhcrdnjiGV_zfvNXuvqonQieBTu8NtrRwGO-p0IPyzo0qt4UGSmoX7GQAeVnz5JRUNC4Lc",
+    "q": "1K0evAdQOTjWbvPafkr4UuPxfck3xSAcSEYdAg1vRIZysar2QmdxFp49oNBX9Up0St-_QkW_fVbMlc1RBGTy0Deo2Qc-SSwAMXymiBV6LDujBpn2LmuiHzqqIG4WRYJA7XuLl0jxcdWYZX7297yYeCyUjuPnnqS-LMbVg_2tje8",
+    "dp": "DsrqHw5wLSd3USfou8enpVZencRE6v0_hd56ARKJRU5piwk9hkTkFkjD71SXg6nNjvgs9SUzvLRA2YMdpI0_uCXggaMBQqWMfdPPMWWmLLqwvQJ0t4OqpaU-hMJvYEwR5LuHYZZxkawdVeAEekGRlxLTU5hPw1sFqxxJLXMmuBc",
+    "dq": "icWoblgygQ8v4mp4NW4tlczySPEL_thBWhSJgCXh2btbG3tL0lKecO-Lrtyozk8wLLzrcmwqk3CiUbzS6gzXO0mDSSynDdHCQkykuO1o2rS7dHBSiVnSiXaAdUe7h8XMd8ub7yIivwKGmeF47Z2wC9GdXz-GcT_5rpoUAVBZmOM",
+    "qi": "ML7z92hUzkHlYAQixyFh1RTjrIuNz_rL6yLFuKPyvquCTt6LJAlU0yXhhewwj6cUFibyeoNQ_Jafir1rhSxPPj5BrxiFKTIuEkcPrlHHC04aSFboglG67TKA8K1GEBBs-SyQuuGWz9uz1YXrG9ZwGM9LDPZ08vAmXPEf3G1JIJw"
+  });
 
   return [
     {
@@ -61,8 +74,8 @@ export async function generateSteps(){
       startCmdParms: ["main.js", "./config/a.config.js"],
       baseUrl: "http://localhost:3002/ucrm/client/v0",
       readyLogString: "Listening on port",
-      logStdOut: false,
-      logStdErr: false
+      logStdOut: LOG_UCRM_A_CONSOLE,
+      logStdErr: LOG_UCRM_A_CONSOLE
     },
     {
       type: "authorize",
@@ -82,10 +95,10 @@ export async function generateSteps(){
       }
     },"sender"),
     genStepRegistry({
-      desc: "get registry entries while p2p discovery is active (should be 2)",
+      desc: "get registry entries while p2p discovery is active (should be 3)",
       expect:{
         http: 200,
-        responseChecker:curry(checkArrayResponse)("commParticipants",2,false)
+        responseChecker:curry(checkArrayResponse)("commParticipants",3,false)
       }
     },"sender"),
     //get auth for ucrmB user on ucrm A
@@ -116,8 +129,8 @@ export async function generateSteps(){
       startCmdParms: ["main.js", "./config/b.config.js"],
       baseUrl: "http://localhost:3003/ucrm/client/v0",
       readyLogString: "Listening on port",
-      logStdOut: false,
-      logStdErr: false
+      logStdOut: LOG_UCRM_B_CONSOLE,
+      logStdErr: LOG_UCRM_B_CONSOLE
     },
     {
       type: "authorize",
@@ -140,17 +153,17 @@ export async function generateSteps(){
       username: "userB",
     },
     genStepRegistry({
-      desc: "get registry entries after p2p discovery is complete (should be 3)",
+      desc: "get registry entries after p2p discovery is complete (should be 5)",
       expect:{
         http: 200,
-        responseChecker:curry(checkArrayResponse)("commParticipants",3,false)
+        responseChecker:curry(checkArrayResponse)("commParticipants",5,false)
       }
     },"sender"),
     genStepRegistry({
-      desc: "get local registry entries after p2p discovery is complete (should be 2)",
+      desc: "get local registry entries after p2p discovery is complete (should be 3)",
       expect:{
         http: 200,
-        responseChecker:curry(checkArrayResponse)("commParticipants",2,false)
+        responseChecker:curry(checkArrayResponse)("commParticipants",3,false)
       }
     },"crmBOnCrmA"),
     //send a message from userA1@ucrmA to userB@ucrmB and check for the returned delivery notification
