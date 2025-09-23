@@ -1,7 +1,6 @@
 export const config = {
   port: 3001,
   copySpec:true,
-  checkSignatures: true,
   useKTSignatures:false,
   //Note that production UCRMS should NEVER have access to the private domain key. Instead, they would be provided signatures for their KT records from the domain owner
   domainPrivateKeys: {

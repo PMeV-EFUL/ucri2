@@ -4,8 +4,6 @@ export const config = {
   //shall the apps and transport layer specs be copied from the /api and /apps folders on startup? Note that if you switch this to off, you need to provide the spec files yourself and
   //must update the ucrm.yaml according to main.js:processSpec() by replacing two things.
   copySpec:true,
-  //shall message signature checks be performed
-  checkSignatures: true,
   //shall KT signature checks be performed?
   useKTSignatures:false,
   //Note that production UCRMS should NEVER have access to the private domain key. Instead, they would be provided signatures for their KT records from the domain owner

@@ -22,8 +22,8 @@ import {genExpectedError, genExpectedError400} from "../generators/miscGenerator
 
 
 const DURATION_FOR_MESSAGE_DELIVERY_MS = 2000;
-const LOG_UCRM_A_CONSOLE = true;
-const LOG_UCRM_B_CONSOLE = true;
+const LOG_UCRM_A_CONSOLE = false;
+const LOG_UCRM_B_CONSOLE = false;
 
 export async function generateSteps(){
   //fetch defaults for the sending user (which is used by default)

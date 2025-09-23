@@ -44,6 +44,9 @@ properties:
       - "off"
       - "unknown"
     description: Verfügbarkeitsstatus des KT
+  transmitsUnsignedMessages:
+    type: boolean
+    description: Gibt an, ob dieser Teilnehmer auf die Signierung von Nachrichten verzichtet (true) oder ob alle Nachrichten dieses Teilnehmers signiert sind (false).
 description: Beschreibung eines Kommunikationsteilnehmers
 example:
   id: 1.2.3.1.276.5.1.58.28.2.1

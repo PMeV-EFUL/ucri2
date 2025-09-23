@@ -11,8 +11,8 @@
     ],
     "baseUrl": "http://localhost:3002/ucrm/client/v0",
     "readyLogString": "Listening on port",
-    "logStdOut": true,
-    "logStdErr": true,
+    "logStdOut": false,
+    "logStdErr": false,
     "ready": true
   },
   {
@@ -98,8 +98,8 @@
     ],
     "baseUrl": "http://localhost:3003/ucrm/client/v0",
     "readyLogString": "Listening on port",
-    "logStdOut": true,
-    "logStdErr": true,
+    "logStdOut": false,
+    "logStdErr": false,
     "ready": true
   },
   {

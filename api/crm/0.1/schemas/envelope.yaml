@@ -49,5 +49,5 @@ properties:
   signature:
     type: string
     description: eine Signatur der Nachricht zur Überprüfung ihrer Authentizität und Unverfälschtheit,
-      formatiert als JWS Compact Serialization, siehe https://datatracker.ietf.org/doc/html/rfc7517
+      formatiert als JWS Compact Serialization, siehe https://datatracker.ietf.org/doc/html/rfc7517 . Falls keine Signierung gewünscht ist, muss im KT-Registrierungseintrag dieses Teilnehmers "transmitsUnsignedMessages:true" gesetzt sein, ansonsten ist dieses Feld obligat.
 description: Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload

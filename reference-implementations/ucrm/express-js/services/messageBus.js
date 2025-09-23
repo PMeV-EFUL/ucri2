@@ -134,18 +134,20 @@ function checkAndHandlePotentialStatusMessage(envelope){
 }
 
 async function validateSignature(senderRequest) {
-  if (!config.checkSignatures){
-    return;
-  }
-  if (!senderRequest.signature) {
-    //FIXME signatures are currently NOT required as per spec, this is highly problematic as an attacker could just remove the signature and be done with it!
-    console.warn("Signature verification: senderRequest.signature is missing!");
-    return;
-  }
   const signature = senderRequest.signature;
   const sourceId = senderRequest.source;
-  //fetch source private key
+
   const sourceData=getCommParticipant(sourceId,400);
+  if (sourceData.transmitsUnsignedMessages){
+    console.log("Signature verification: sender has opted out of message signing, not checking signature...");
+    return;
+  }
+  if (!signature) {
+    console.error("Signature verification: senderRequest.signature is missing!");
+    throw new UcrmError(400, `Signature verification failed - message is missing signature field`, ucrmErrors.REQUEST_WRONG_SIGNATURE);
+  }
+  //fetch source private key
+
   if (!sourceData.key){
     throw new UcrmError(400, `Signature verification failed - no public key found for source OID '${sourceId}'`, ucrmErrors.REQUEST_WRONG_SIGNATURE);
   }

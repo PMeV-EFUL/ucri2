@@ -19,6 +19,8 @@ import curry from "lodash.curry";
 import {ucrmErrors} from "../../shared-js/ucrmErrorCodes.js"
 import {genExpectedError, genExpectedError400} from "../generators/miscGenerators.js";
 
+const LOG_UCRM_CONSOLE = false;
+
 /*
 Each step has a type, currently supported are:
 startUcrm: Start an Ucrm (will wait until step.readyLogString appears in the process stdout, will be killed during cleanup)
@@ -43,6 +45,7 @@ export async function generateSteps () {
   const senderOID = "1.2.3.4.5.6";
   const receiverOID = "1.2.3.4.5.8";
   const unknownOID = "1.2.3.4.5.1";
+
 
   setSigningKey(senderOID,{
     "kty": "RSA",
@@ -70,8 +73,8 @@ export async function generateSteps () {
       startCmdParms: ["main.js", "./config/standalone.config.js"],
       baseUrl: "http://localhost:3001/ucrm/client/v0",
       readyLogString: "Listening on port",
-      logStdOut: false,
-      logStdErr: false
+      logStdOut: LOG_UCRM_CONSOLE,
+      logStdErr: LOG_UCRM_CONSOLE
     },
     {
       type: "authorize",
