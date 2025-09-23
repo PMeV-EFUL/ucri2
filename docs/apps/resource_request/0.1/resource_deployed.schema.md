@@ -46,7 +46,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the original resource request.</td>
+      <td colspan="2">Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -71,7 +71,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Unique identifier of the deployed resource.</td>
+      <td colspan="2">Eindeutige Kennung der disponierten Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -92,11 +92,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Name</td>
+      <td colspan="2">Ressourcenname</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Name of the deployed resource.</td>
+      <td colspan="2">Name der disponierten Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -117,11 +117,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Type</td>
+      <td colspan="2">Ressourcentyp</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Type of the deployed resource (from resource type catalog).</td>
+      <td colspan="2">Typ der disponierten Ressource (laut Ressourcentypkatalog).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -142,11 +142,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Deployed At</td>
+      <td colspan="2">Ausrückzeitpunkt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the resource was deployed (moved out).</td>
+      <td colspan="2">Zeitpunkt, zu dem die Ressource ausgerückt ist.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -174,7 +174,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or additional information.</td>
+      <td colspan="2">Optionaler Kommentar oder zusätzliche Informationen.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -206,33 +206,33 @@
     "properties": {
         "resourceRequestId": {
             "title": "Resource Request ID",
-            "description": "The unique identifier of the original resource request.",
+            "description": "Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.",
             "type": "string"
         },
         "resourceId": {
             "title": "Resource ID",
-            "description": "Unique identifier of the deployed resource.",
+            "description": "Eindeutige Kennung der disponierten Ressource.",
             "type": "string"
         },
         "resourceName": {
-            "title": "Resource Name",
-            "description": "Name of the deployed resource.",
+            "title": "Ressourcenname",
+            "description": "Name der disponierten Ressource.",
             "type": "string"
         },
         "resourceType": {
-            "title": "Resource Type",
-            "description": "Type of the deployed resource (from resource type catalog).",
+            "title": "Ressourcentyp",
+            "description": "Typ der disponierten Ressource (laut Ressourcentypkatalog).",
             "type": "string"
         },
         "deployedAt": {
-            "title": "Deployed At",
-            "description": "Timestamp when the resource was deployed (moved out).",
+            "title": "Ausrückzeitpunkt",
+            "description": "Zeitpunkt, zu dem die Ressource ausgerückt ist.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or additional information.",
+            "description": "Optionaler Kommentar oder zusätzliche Informationen.",
             "type": "string"
         }
     },

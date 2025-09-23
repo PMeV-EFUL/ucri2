@@ -1,8 +1,8 @@
 
 
-# App-Nachricht incident - Ein Einsatz mit Patientendaten
+# App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung
 
-<p>Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.</p>
+<p>Ein Einsatz mit Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.</p>
 
 <table>
 <tbody>
@@ -2208,8 +2208,8 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_request.schema.json",
     "unevaluatedProperties": false,
-    "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
-    "description": "Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
+    "title": "App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung",
+    "description": "Ein Einsatz mit Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
     "required": [
         "sharedIncidentId",
         "sentByDispatcherAt",

@@ -11,7 +11,7 @@
       - [Zeichenketten - type: string](#zeichenketten---type-string)
       - [Objekte - type: object](#objekte---type-object)
       - [Listen - type: array](#listen---type-array)
-  * [App-Nachricht incident - Ein Einsatz mit Patientendaten](#app-nachricht-incident---ein-einsatz-mit-patientendaten)
+  * [App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung](#app-nachricht-incident---ein-einsatz-mit-einsatzmittelanforderung)
     + [Eigenschaften](#eigenschaften)
     + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
@@ -104,7 +104,7 @@
       - [requestedResources.resourceType](#requestedresourcesresourcetype)
       - [requestedResources.resourceName](#requestedresourcesresourcename)
     + [Schema](#schema)
-  * [Resource Request Acknowledgement](#resource-request-acknowledgement)
+  * [Ressourcenanforderungsbestätigung](#ressourcenanforderungsbestatigung)
     + [Eigenschaften](#eigenschaften-2)
     + [Beispiel](#beispiel-1)
     + [Beispiel](#beispiel-2)
@@ -180,9 +180,9 @@ Die Anzahl an minimal vorhandenen Eigenschaften kann über das Attribut "minProp
 JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Typ der Listenelemente über das Attribut "items" beschrieben. Gemischt typisierte Listen sind generell unzulässig. Im Attribut "minItems" kann die minimale Anzahl von Listenelementen beschränkt werden.
 
 
-## App-Nachricht incident - Ein Einsatz mit Patientendaten
+## App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung
 
-<p>Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.</p>
+<p>Ein Einsatz mit Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.</p>
 
 <table>
 <tbody>
@@ -2388,8 +2388,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_request.schema.json",
     "unevaluatedProperties": false,
-    "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
-    "description": "Ein Einsatz mit Patientendaten für die Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
+    "title": "App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung",
+    "description": "Ein Einsatz mit Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
     "required": [
         "sharedIncidentId",
         "sentByDispatcherAt",
@@ -3133,9 +3133,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-## Resource Request Acknowledgement
+## Ressourcenanforderungsbestätigung
 
-<p>Acknowledgement for a resource request, indicating whether the request is accepted or rejected as a whole.</p>
+<p>Bestätigung einer Ressourcenanforderung. Es wird angegeben, ob die Anforderung insgesamt akzeptiert oder abgelehnt wurde.</p>
 
 <table>
 <tbody>
@@ -3171,7 +3171,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "resourceRequestId": "10002005",
     "acknowledgementStatus": "rejected",
     "acknowledgedAt": "2025-06-11T10:16:00Z",
-    "comment": "Not enough resources available."
+    "comment": "Nicht genügend Ressourcen verfügbar."
 }
 ```
 
@@ -3187,11 +3187,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Request ID</td>
+      <td colspan="2">Ressourcenanforderungs-ID</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the resource request being acknowledged.</td>
+      <td colspan="2">Die eindeutige Kennung der bestätigten Ressourcenanforderung.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3212,11 +3212,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledgement Status</td>
+      <td colspan="2">Bestätigungsstatus</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Indicates if the resource request is accepted or rejected as a whole.</td>
+      <td colspan="2">Gibt an, ob die Ressourcenanforderung insgesamt akzeptiert oder abgelehnt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3240,11 +3240,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledged At</td>
+      <td colspan="2">Bestätigt am</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the acknowledgement was issued.</td>
+      <td colspan="2">Zeitpunkt, zu dem die Bestätigung erstellt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3272,7 +3272,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or reason for rejection.</td>
+      <td colspan="2">Optionaler Kommentar oder Ablehnungsgrund.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3298,18 +3298,18 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/acknowledgement.schema.json",
-    "title": "Resource Request Acknowledgement",
-    "description": "Acknowledgement for a resource request, indicating whether the request is accepted or rejected as a whole.",
+    "title": "Ressourcenanforderungsbestätigung",
+    "description": "Bestätigung einer Ressourcenanforderung. Es wird angegeben, ob die Anforderung insgesamt akzeptiert oder abgelehnt wurde.",
     "type": "object",
     "properties": {
         "resourceRequestId": {
-            "title": "Resource Request ID",
-            "description": "The unique identifier of the resource request being acknowledged.",
+            "title": "Ressourcenanforderungs-ID",
+            "description": "Die eindeutige Kennung der bestätigten Ressourcenanforderung.",
             "type": "string"
         },
         "acknowledgementStatus": {
-            "title": "Acknowledgement Status",
-            "description": "Indicates if the resource request is accepted or rejected as a whole.",
+            "title": "Bestätigungsstatus",
+            "description": "Gibt an, ob die Ressourcenanforderung insgesamt akzeptiert oder abgelehnt wurde.",
             "type": "string",
             "enum": [
                 "accepted",
@@ -3317,14 +3317,14 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             ]
         },
         "acknowledgedAt": {
-            "title": "Acknowledged At",
-            "description": "Timestamp when the acknowledgement was issued.",
+            "title": "Bestätigt am",
+            "description": "Zeitpunkt, zu dem die Bestätigung erstellt wurde.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or reason for rejection.",
+            "description": "Optionaler Kommentar oder Ablehnungsgrund.",
             "type": "string"
         }
     },
@@ -3343,7 +3343,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "resourceRequestId": "10002005",
             "acknowledgementStatus": "rejected",
             "acknowledgedAt": "2025-06-11T10:16:00Z",
-            "comment": "Not enough resources available."
+            "comment": "Nicht genügend Ressourcen verfügbar."
         }
     ]
 }
@@ -3408,7 +3408,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the resource request being acknowledged.</td>
+      <td colspan="2">Die eindeutige Kennung der Ressourcenanforderung, auf die sich die Bestätigung bezieht.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3429,11 +3429,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledged Resources</td>
+      <td colspan="2">Bestätigte Ressourcen</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">List of specific resources that are acknowledged/provided in response to the request.</td>
+      <td colspan="2">Liste der spezifischen Ressourcen, die als Antwort auf die Anforderung bestätigt/zur Verfügung gestellt werden.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
@@ -3458,11 +3458,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource ID</td>
+      <td colspan="2">Ressourcen-ID</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Unique identifier of the specific resource.</td>
+      <td colspan="2">Eindeutige Kennung der spezifischen Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -3479,11 +3479,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Name</td>
+      <td colspan="2">Ressourcenname</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Name of the specific resource.</td>
+      <td colspan="2">Name der spezifischen Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -3500,11 +3500,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Type</td>
+      <td colspan="2">Ressourcentyp</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Type of the resource (from resource type catalog).</td>
+      <td colspan="2">Typ der Ressource (laut Ressourcentypkatalog).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -3522,11 +3522,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledged At</td>
+      <td colspan="2">Bestätigt am</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the resource acknowledgement was issued.</td>
+      <td colspan="2">Zeitpunkt, zu dem die Ressourcenbestätigung erstellt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3554,7 +3554,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or additional information.</td>
+      <td colspan="2">Optionaler Kommentar oder zusätzliche Informationen.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3586,16 +3586,16 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "properties": {
         "resourceRequestId": {
             "title": "Resource Request ID",
-            "description": "The unique identifier of the resource request being acknowledged.",
+            "description": "Die eindeutige Kennung der Ressourcenanforderung, auf die sich die Bestätigung bezieht.",
             "type": "string"
         },
         "acknowledgedResources": {
-            "title": "Acknowledged Resources",
-            "description": "List of specific resources that are acknowledged/provided in response to the request.",
+            "title": "Bestätigte Ressourcen",
+            "description": "Liste der spezifischen Ressourcen, die als Antwort auf die Anforderung bestätigt/zur Verfügung gestellt werden.",
             "type": "array",
             "minItems": 1,
             "items": {
-                "title": "Acknowledged Resource",
+                "title": "Bestätigte Ressource",
                 "description": "Die bestätigten Ressourcen",
                 "type": "object",
                 "required": [
@@ -3605,32 +3605,32 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 ],
                 "properties": {
                     "resourceId": {
-                        "title": "Resource ID",
-                        "description": "Unique identifier of the specific resource.",
+                        "title": "Ressourcen-ID",
+                        "description": "Eindeutige Kennung der spezifischen Ressource.",
                         "type": "string"
                     },
                     "resourceName": {
-                        "title": "Resource Name",
-                        "description": "Name of the specific resource.",
+                        "title": "Ressourcenname",
+                        "description": "Name der spezifischen Ressource.",
                         "type": "string"
                     },
                     "resourceType": {
-                        "title": "Resource Type",
-                        "description": "Type of the resource (from resource type catalog).",
+                        "title": "Ressourcentyp",
+                        "description": "Typ der Ressource (laut Ressourcentypkatalog).",
                         "type": "string"
                     }
                 }
             }
         },
         "acknowledgedAt": {
-            "title": "Acknowledged At",
-            "description": "Timestamp when the resource acknowledgement was issued.",
+            "title": "Bestätigt am",
+            "description": "Zeitpunkt, zu dem die Ressourcenbestätigung erstellt wurde.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or additional information.",
+            "description": "Optionaler Kommentar oder zusätzliche Informationen.",
             "type": "string"
         }
     },
@@ -3710,7 +3710,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the original resource request.</td>
+      <td colspan="2">Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3735,7 +3735,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Unique identifier of the deployed resource.</td>
+      <td colspan="2">Eindeutige Kennung der disponierten Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3756,11 +3756,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Name</td>
+      <td colspan="2">Ressourcenname</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Name of the deployed resource.</td>
+      <td colspan="2">Name der disponierten Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3781,11 +3781,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Type</td>
+      <td colspan="2">Ressourcentyp</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Type of the deployed resource (from resource type catalog).</td>
+      <td colspan="2">Typ der disponierten Ressource (laut Ressourcentypkatalog).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3806,11 +3806,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Deployed At</td>
+      <td colspan="2">Ausrückzeitpunkt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the resource was deployed (moved out).</td>
+      <td colspan="2">Zeitpunkt, zu dem die Ressource ausgerückt ist.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3838,7 +3838,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or additional information.</td>
+      <td colspan="2">Optionaler Kommentar oder zusätzliche Informationen.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3870,33 +3870,33 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "properties": {
         "resourceRequestId": {
             "title": "Resource Request ID",
-            "description": "The unique identifier of the original resource request.",
+            "description": "Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.",
             "type": "string"
         },
         "resourceId": {
             "title": "Resource ID",
-            "description": "Unique identifier of the deployed resource.",
+            "description": "Eindeutige Kennung der disponierten Ressource.",
             "type": "string"
         },
         "resourceName": {
-            "title": "Resource Name",
-            "description": "Name of the deployed resource.",
+            "title": "Ressourcenname",
+            "description": "Name der disponierten Ressource.",
             "type": "string"
         },
         "resourceType": {
-            "title": "Resource Type",
-            "description": "Type of the deployed resource (from resource type catalog).",
+            "title": "Ressourcentyp",
+            "description": "Typ der disponierten Ressource (laut Ressourcentypkatalog).",
             "type": "string"
         },
         "deployedAt": {
-            "title": "Deployed At",
-            "description": "Timestamp when the resource was deployed (moved out).",
+            "title": "Ausrückzeitpunkt",
+            "description": "Zeitpunkt, zu dem die Ressource ausgerückt ist.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or additional information.",
+            "description": "Optionaler Kommentar oder zusätzliche Informationen.",
             "type": "string"
         }
     },
