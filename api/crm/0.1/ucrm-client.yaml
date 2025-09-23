@@ -1,9 +1,9 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
-  title: Control Room Module API
+  title: UCRI Control Room Module (UCRM) Client API
   description: |
-    Control Room Module API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
-    wie zum Beispiel Leitstellensysteme, andere technische Knoten, sowie weitere externe Systeme.
+    UCRI Control Room Module Client API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer
+    wie zum Beispiel Leitstellensysteme. Die Anbindung entfernter UCRMs via UCRI P2P Protokoll ist NICHT Teil dieser API (vgl. ucrm-p2p.yaml).
   version: "0.1"
 servers:
   - url: '{apiRoot}/{basePath}'
@@ -14,15 +14,60 @@ servers:
         enum:
           - https://ucri.mycompany.com
       basePath:
-        default: crm/v0
+        default: ucrm/client/v0
         description: API base path
 tags:
   - name: Messaging
     description: Der Messaging Service beinhaltet Funktionen zum Versenden und Empfangen von Nachrichten,
       die im Rahmen der UCRI Spezifikation spezifiziert sind.
   - name: Registry
+    description: Das KT-Register (Registry Service) beinhaltet Funktionen zum Abfragen von KT-Informationen.  
   - name: Info
+    description: Liefert Informationen zu der UCRM-Implementierung.  
+  - name: Authorization
+    description: OAuth 2.0 Endpunkt zum Abholen eines Zugriffstokens anhand OAuth Client Credentials Grant Type.  
+security:
+  - oAuth2ClientCredentials: [ ]
 paths:
+  /token:
+    get:
+      tags:
+        - Authorization
+      summary: Json Web Token erhalten
+      operationId: authorize
+      security:
+        - basic : []
+      responses:
+        '200':
+          description: OK, Token im Body.
+          content:
+            application/json:
+              schema:
+                required:
+                  - token
+                type: object
+                properties:
+                  token:
+                    $ref: '#/components/schemas/JWTToken'
+                description: JSON-Objekt mit dem JWT-Token
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /messaging/send:
     post:
       tags:
@@ -36,18 +81,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SenderRequest'
-            example:
-              description: Einsatzübergabe am 13.11.2023 um 20:20
-              timeout: 300
-              ack: NACK
-              source: 1.2.3.4.5.6
-              destination: [1.2.3.4.5.7]
-              payload:
-                appId: incident_transfer
-                appVersion: "0.1"
-                schemaId: transfer
-                contentType: application/json
-                data: "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
         required: true
       responses:
         '200':
@@ -162,7 +195,7 @@ paths:
       tags:
         - Registry
       summary: KT-Register abfragen
-      description: Liefert eine Liste aller Kommunikationsteilnehmer.
+      description: Liefert eine Liste aller Kommunikationsteilnehmer, die diesem UCRM bekannt sind (inklusive Kommunikationsteilnehmern, die durch entfernte UCRMs via P2P angebunden sind.
       operationId: listCommParticipant
       responses:
         '200':
@@ -171,6 +204,8 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - commParticipants
                 properties:
                   commParticipants:
                     type: array
@@ -231,12 +266,12 @@ paths:
     get:
       tags:
         - Info
-      summary: CRM Information
-      description: Liefert CRM Information
+      summary: UCRM Information
+      description: Liefert UCRM Information
       operationId: info
       responses:
         '200':
-          description: OK, CRM Information
+          description: OK, UCRM Information
           content:
             application/json:
               schema:
@@ -254,7 +289,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth, wird AUSSCHLIESSLICH für den /token-Endpunkt genutzt.
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.
+      flows:
+        clientCredentials:
+          # Einige Tools verbieten inkorrekterweise relative URIs wie /token für die tokenURL in OpenAPI 3.1.0, daher muss die TokenUrl in diesen Fällen zu einer vollständigen URL geändert werden!
+          tokenUrl: /token
+          scopes: { }
+
   schemas:
+    # Obwohl die Envelope auf dieser Ebene gar nicht direkt $ref-ereziert wird, muss diese hier auftauchen, damit Tools wie ajv.js diese
+    # Spezifikation korrekt laden können!
+    Envelope:
+      $ref: 'schemas/envelope.yaml'
     SenderRequest:
       $ref: 'schemas/senderRequest.yaml'
     SenderResponse:
@@ -270,19 +323,23 @@ components:
     Info:
       $ref: 'schemas/info.yaml'
     Error:
-      required:
-        - code
-        - reason
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Anwendungsspezifische Fehler-Code
-        reason:
-          type: string
-          description: Fehlerursache in für Menschen verständlicher Sprache
-        message:
-          type: string
-          description: Detailliertere Fehlerbeschreibung eventuell mit Angabe der Korrektivmaßnahmen
-            in für Menschen verständlicher Sprache
-      description: Fehlerbeschreibung, gewöhnlich für eine HTTP Error Response-Code (3xx, 4xx, 5xx)
+      $ref: 'schemas/error.yaml'
+    JWTToken:
+      type: string
+      contentMediaType: application/jwt
+      contentSchema:
+        type: array
+        minItems: 2
+        prefixItems:
+          - const:
+              typ: JWT
+              alg: HS256
+          - type: object
+            required:
+              - ait
+              - exp
+            properties:
+              iat:
+                type: integer
+              exp:
+                type: integer

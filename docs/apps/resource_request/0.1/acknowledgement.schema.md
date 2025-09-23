@@ -1,8 +1,8 @@
 
 
-# Resource Request Acknowledgement
+# Ressourcenanforderungsbestätigung
 
-<p>Acknowledgement for a resource request, indicating whether the request is accepted or rejected as a whole.</p>
+<p>Bestätigung einer Ressourcenanforderung. Es wird angegeben, ob die Anforderung insgesamt akzeptiert oder abgelehnt wurde.</p>
 
 <table>
 <tbody>
@@ -38,7 +38,7 @@
     "resourceRequestId": "10002005",
     "acknowledgementStatus": "rejected",
     "acknowledgedAt": "2025-06-11T10:16:00Z",
-    "comment": "Not enough resources available."
+    "comment": "Nicht genügend Ressourcen verfügbar."
 }
 ```
 
@@ -54,11 +54,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Request ID</td>
+      <td colspan="2">Ressourcenanforderungs-ID</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the resource request being acknowledged.</td>
+      <td colspan="2">Die eindeutige Kennung der bestätigten Ressourcenanforderung.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -79,11 +79,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledgement Status</td>
+      <td colspan="2">Bestätigungsstatus</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Indicates if the resource request is accepted or rejected as a whole.</td>
+      <td colspan="2">Gibt an, ob die Ressourcenanforderung insgesamt akzeptiert oder abgelehnt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -107,11 +107,11 @@
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledged At</td>
+      <td colspan="2">Bestätigt am</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the acknowledgement was issued.</td>
+      <td colspan="2">Zeitpunkt, zu dem die Bestätigung erstellt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -139,7 +139,7 @@
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or reason for rejection.</td>
+      <td colspan="2">Optionaler Kommentar oder Ablehnungsgrund.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -165,18 +165,18 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/acknowledgement.schema.json",
-    "title": "Resource Request Acknowledgement",
-    "description": "Acknowledgement for a resource request, indicating whether the request is accepted or rejected as a whole.",
+    "title": "Ressourcenanforderungsbestätigung",
+    "description": "Bestätigung einer Ressourcenanforderung. Es wird angegeben, ob die Anforderung insgesamt akzeptiert oder abgelehnt wurde.",
     "type": "object",
     "properties": {
         "resourceRequestId": {
-            "title": "Resource Request ID",
-            "description": "The unique identifier of the resource request being acknowledged.",
+            "title": "Ressourcenanforderungs-ID",
+            "description": "Die eindeutige Kennung der bestätigten Ressourcenanforderung.",
             "type": "string"
         },
         "acknowledgementStatus": {
-            "title": "Acknowledgement Status",
-            "description": "Indicates if the resource request is accepted or rejected as a whole.",
+            "title": "Bestätigungsstatus",
+            "description": "Gibt an, ob die Ressourcenanforderung insgesamt akzeptiert oder abgelehnt wurde.",
             "type": "string",
             "enum": [
                 "accepted",
@@ -184,14 +184,14 @@
             ]
         },
         "acknowledgedAt": {
-            "title": "Acknowledged At",
-            "description": "Timestamp when the acknowledgement was issued.",
+            "title": "Bestätigt am",
+            "description": "Zeitpunkt, zu dem die Bestätigung erstellt wurde.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or reason for rejection.",
+            "description": "Optionaler Kommentar oder Ablehnungsgrund.",
             "type": "string"
         }
     },
@@ -210,7 +210,7 @@
             "resourceRequestId": "10002005",
             "acknowledgementStatus": "rejected",
             "acknowledgedAt": "2025-06-11T10:16:00Z",
-            "comment": "Not enough resources available."
+            "comment": "Nicht genügend Ressourcen verfügbar."
         }
     ]
 }

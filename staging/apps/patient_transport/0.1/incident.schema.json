@@ -48,9 +48,9 @@
       "A1"
     ],
     "issue": "Verlegung",
-    "additionalInfo": "Zusatzinformationen",
-    "startTimestamp": "2024-01-01T09:55:15",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "additionalInformation": "Zusatzinformationen",
+    "startTimestamp": "2024-01-01T09:55:15Z",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "pickupLocation": {
       "address": {
         "street": "Musterstrasse",
@@ -63,15 +63,15 @@
       },
       "object": {
         "name": "Abteilung IV, Haus 3",
-        "additionalInfo": "Campus West"
+        "additionalInformation": "Campus West"
       },
       "superiorObject": {
         "name": "Krankenhaus Musterstift",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
       },
       "floor": "3. OG",
       "room": "412",
-      "additionalInfo": "Weitere Informationen"
+      "additionalInformation": "Weitere Informationen"
     },
     "destinationLocation": {
       "address": {
@@ -88,14 +88,14 @@
       },
       "superiorObject": {
         "name": "Krankenhaus Musteringen",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
       },
       "floor": "2. OG",
       "room": "201",
-      "additionalInfo": "Weitere Informationen"
+      "additionalInformation": "Weitere Informationen"
     },
-    "pickupTime": "2024-01-01T11:00:00",
-    "arrivalTime": "2024-01-01T11:30:00",
+    "pickupTime": "2024-01-01T11:00:00Z",
+    "arrivalTime": "2024-01-01T11:30:00Z",
     "arrivalTimeFixed": false,
     "patient":
     {
@@ -112,7 +112,7 @@
         "state": "Brandenburg",
         "country": "DE"
       },
-      "additionalInfo": "weitere Informationen",
+      "additionalInformation": "weitere Informationen",
       "gender": "Male",
       "dateOfBirth": "19801230",
       "age": 55,

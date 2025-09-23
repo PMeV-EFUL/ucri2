@@ -11,12 +11,12 @@
       - [Zeichenketten - type: string](#zeichenketten---type-string)
       - [Objekte - type: object](#objekte---type-object)
       - [Listen - type: array](#listen---type-array)
-  * [App-Nachricht incident - Ein Einsatz mit Patientendaten](#app-nachricht-incident---ein-einsatz-mit-patientendaten)
+  * [App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung](#app-nachricht-incident---ein-einsatz-mit-einsatzmittelanforderung)
     + [Eigenschaften](#eigenschaften)
     + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
     + [internalId](#internalid)
-    + [additionalInfo](#additionalinfo)
+    + [additionalInformation](#additionalinformation)
     + [sentByDispatcherAt](#sentbydispatcherat)
     + [informers](#informers)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
@@ -32,7 +32,8 @@
       - [informers.address.cityDistrict](#informersaddresscitydistrict)
       - [informers.address.state](#informersaddressstate)
       - [informers.address.country](#informersaddresscountry)
-      - [informers.additionalInfo](#informersadditionalinfo)
+      - [informers.address.additionalInformation](#informersaddressadditionalinformation)
+      - [informers.additionalInformation](#informersadditionalinformation)
     + [protocolRemarks](#protocolremarks)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
       - [protocolRemarks.timestamp](#protocolremarkstimestamp)
@@ -56,15 +57,16 @@
       - [missionLocation.address.cityDistrict](#missionlocationaddresscitydistrict)
       - [missionLocation.address.state](#missionlocationaddressstate)
       - [missionLocation.address.country](#missionlocationaddresscountry)
+      - [missionLocation.address.additionalInformation](#missionlocationaddressadditionalinformation)
       - [missionLocation.object](#missionlocationobject)
       - [missionLocation.object.name](#missionlocationobjectname)
-      - [missionLocation.object.additionalInfo](#missionlocationobjectadditionalinfo)
+      - [missionLocation.object.additionalInformation](#missionlocationobjectadditionalinformation)
       - [missionLocation.superiorObject](#missionlocationsuperiorobject)
       - [missionLocation.superiorObject.name](#missionlocationsuperiorobjectname)
-      - [missionLocation.superiorObject.additionalInfo](#missionlocationsuperiorobjectadditionalinfo)
+      - [missionLocation.superiorObject.additionalInformation](#missionlocationsuperiorobjectadditionalinformation)
       - [missionLocation.floor](#missionlocationfloor)
       - [missionLocation.room](#missionlocationroom)
-      - [missionLocation.additionalInfo](#missionlocationadditionalinfo)
+      - [missionLocation.additionalInformation](#missionlocationadditionalinformation)
     + [patients](#patients)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-2)
       - [patients.name](#patientsname)
@@ -79,7 +81,8 @@
       - [patients.address.cityDistrict](#patientsaddresscitydistrict)
       - [patients.address.state](#patientsaddressstate)
       - [patients.address.country](#patientsaddresscountry)
-      - [patients.additionalInfo](#patientsadditionalinfo)
+      - [patients.address.additionalInformation](#patientsaddressadditionalinformation)
+      - [patients.additionalInformation](#patientsadditionalinformation)
       - [patients.gender](#patientsgender)
       - [patients.dateOfBirth](#patientsdateofbirth)
       - [patients.age](#patientsage)
@@ -101,7 +104,7 @@
       - [requestedResources.resourceType](#requestedresourcesresourcetype)
       - [requestedResources.resourceName](#requestedresourcesresourcename)
     + [Schema](#schema)
-  * [Resource Request Acknowledgement](#resource-request-acknowledgement)
+  * [Ressourcenanforderungsbestätigung](#ressourcenanforderungsbestatigung)
     + [Eigenschaften](#eigenschaften-2)
     + [Beispiel](#beispiel-1)
     + [Beispiel](#beispiel-2)
@@ -177,9 +180,9 @@ Die Anzahl an minimal vorhandenen Eigenschaften kann über das Attribut "minProp
 JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Typ der Listenelemente über das Attribut "items" beschrieben. Gemischt typisierte Listen sind generell unzulässig. Im Attribut "minItems" kann die minimale Anzahl von Listenelementen beschränkt werden.
 
 
-## App-Nachricht incident - Ein Einsatz mit Patientendaten
+## App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung
 
-<p>Ein Einsatz mit Patientendaten</p>
+<p>Ein Einsatz mit Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.</p>
 
 <table>
 <tbody>
@@ -190,7 +193,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 ### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#starttimestamp">startTimestamp</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr><tr><td colspan="2"><a href="#requestedresources">requestedResources</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#starttimestamp">startTimestamp</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr><tr><td colspan="2"><a href="#requestedresources">requestedResources</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr></tbody></table>
 
 
 ### Beispiel
@@ -207,9 +210,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     ],
     "issue": "Notfall",
     "flashingLights": true,
-    "additionalInfo": "Zusatzinformationen",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
-    "startTimestamp": "2024-01-01T09:55:15",
+    "additionalInformation": "Zusatzinformationen",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "startTimestamp": "2024-01-01T09:55:15Z",
     "missionLocation": {
         "coordinate": {
             "lat": 65.453323,
@@ -226,15 +229,15 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "object": {
             "name": "Abteilung IV, Haus 3",
-            "additionalInfo": "Campus West"
+            "additionalInformation": "Campus West"
         },
         "superiorObject": {
             "name": "Krankenhaus Musterstift",
-            "additionalInfo": "Weitere Informationen"
+            "additionalInformation": "Weitere Informationen"
         },
         "floor": "3. OG",
         "room": "412",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
     },
     "patients": [
         {
@@ -251,7 +254,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "state": "Brandenburg",
                 "country": "DE"
             },
-            "additionalInfo": "weitere Informationen",
+            "additionalInformation": "weitere Informationen",
             "gender": "Male",
             "dateOfBirth": "19801230",
             "age": 55,
@@ -352,7 +355,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### additionalInfo
+### additionalInformation
 
 
 <table class="jssd-property-table">
@@ -431,7 +434,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### informers.name
@@ -719,8 +722,33 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### informers.address.additionalInformation
 
-#### informers.additionalInfo
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+#### informers.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -988,7 +1016,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### missionLocation.coordinate
@@ -1283,6 +1311,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### missionLocation.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 
 #### missionLocation.object
 
@@ -1333,7 +1386,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-#### missionLocation.object.additionalInfo
+#### missionLocation.object.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1408,7 +1461,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-#### missionLocation.superiorObject.additionalInfo
+#### missionLocation.superiorObject.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1484,7 +1537,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-#### missionLocation.additionalInfo
+#### missionLocation.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1536,7 +1589,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientsname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientshealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientstransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientsname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientshealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientstransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### patients.name
@@ -1824,8 +1877,33 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### patients.address.additionalInformation
 
-#### patients.additionalInfo
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+#### patients.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -2310,8 +2388,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_request.schema.json",
     "unevaluatedProperties": false,
-    "title": "App-Nachricht incident - Ein Einsatz mit Patientendaten",
-    "description": "Ein Einsatz mit Patientendaten",
+    "title": "App-Nachricht incident - Ein Einsatz mit Einsatzmittelanforderung",
+    "description": "Ein Einsatz mit Einsatzmittelanforderung. Einsatzmittelanforderungen können sowohl mit als auch ohne Patientendaten erfolgen.",
     "required": [
         "sharedIncidentId",
         "sentByDispatcherAt",
@@ -2331,7 +2409,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "title": "Sender-interne Einsatz-ID",
             "description": "Sender-interne ID des Einsatzes"
         },
-        "additionalInfo": {
+        "additionalInformation": {
             "title": "Zusatzinformationen",
             "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
             "type": "string"
@@ -2451,9 +2529,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             ],
             "issue": "Notfall",
             "flashingLights": true,
-            "additionalInfo": "Zusatzinformationen",
-            "sentByDispatcherAt": "2024-01-01T10:05:08",
-            "startTimestamp": "2024-01-01T09:55:15",
+            "additionalInformation": "Zusatzinformationen",
+            "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+            "startTimestamp": "2024-01-01T09:55:15Z",
             "missionLocation": {
                 "coordinate": {
                     "lat": 65.453323,
@@ -2470,15 +2548,15 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 },
                 "object": {
                     "name": "Abteilung IV, Haus 3",
-                    "additionalInfo": "Campus West"
+                    "additionalInformation": "Campus West"
                 },
                 "superiorObject": {
                     "name": "Krankenhaus Musterstift",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 },
                 "floor": "3. OG",
                 "room": "412",
-                "additionalInfo": "Weitere Informationen"
+                "additionalInformation": "Weitere Informationen"
             },
             "patients": [
                 {
@@ -2495,7 +2573,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen",
+                    "additionalInformation": "weitere Informationen",
                     "gender": "Male",
                     "dateOfBirth": "19801230",
                     "age": 55,
@@ -2582,6 +2660,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
                     "pattern": "^[A-Z]{2}$"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
@@ -2630,7 +2713,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -2651,7 +2734,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen"
+                    "additionalInformation": "weitere Informationen"
                 }
             ],
             "unevaluatedProperties": false
@@ -2690,7 +2773,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
@@ -2742,7 +2825,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Der Name des Objekts.",
                     "type": "string"
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -2752,7 +2835,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "examples": [
                 {
                     "name": "Krankenhaus Musterstift",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -2803,7 +2886,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Die Zimmernummer.",
                     "type": "string"
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -2827,15 +2910,15 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     },
                     "object": {
                         "name": "Abteilung IV, Haus 3",
-                        "additionalInfo": "Campus West"
+                        "additionalInformation": "Campus West"
                     },
                     "superiorObject": {
                         "name": "Krankenhaus Musterstift",
-                        "additionalInfo": "Weitere Informationen"
+                        "additionalInformation": "Weitere Informationen"
                     },
                     "floor": "3. OG",
                     "room": "412",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -2952,7 +3035,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -3020,7 +3103,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen",
+                    "additionalInformation": "weitere Informationen",
                     "gender": "Male",
                     "dateOfBirth": "19801230",
                     "age": 55,
@@ -3050,9 +3133,9 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-## Resource Request Acknowledgement
+## Ressourcenanforderungsbestätigung
 
-<p>Acknowledgement for a resource request, indicating whether the request is accepted or rejected as a whole.</p>
+<p>Bestätigung einer Ressourcenanforderung. Es wird angegeben, ob die Anforderung insgesamt akzeptiert oder abgelehnt wurde.</p>
 
 <table>
 <tbody>
@@ -3088,7 +3171,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "resourceRequestId": "10002005",
     "acknowledgementStatus": "rejected",
     "acknowledgedAt": "2025-06-11T10:16:00Z",
-    "comment": "Not enough resources available."
+    "comment": "Nicht genügend Ressourcen verfügbar."
 }
 ```
 
@@ -3104,11 +3187,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Request ID</td>
+      <td colspan="2">Ressourcenanforderungs-ID</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the resource request being acknowledged.</td>
+      <td colspan="2">Die eindeutige Kennung der bestätigten Ressourcenanforderung.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3129,11 +3212,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledgement Status</td>
+      <td colspan="2">Bestätigungsstatus</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Indicates if the resource request is accepted or rejected as a whole.</td>
+      <td colspan="2">Gibt an, ob die Ressourcenanforderung insgesamt akzeptiert oder abgelehnt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3157,11 +3240,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledged At</td>
+      <td colspan="2">Bestätigt am</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the acknowledgement was issued.</td>
+      <td colspan="2">Zeitpunkt, zu dem die Bestätigung erstellt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3189,7 +3272,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or reason for rejection.</td>
+      <td colspan="2">Optionaler Kommentar oder Ablehnungsgrund.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3215,18 +3298,18 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/acknowledgement.schema.json",
-    "title": "Resource Request Acknowledgement",
-    "description": "Acknowledgement for a resource request, indicating whether the request is accepted or rejected as a whole.",
+    "title": "Ressourcenanforderungsbestätigung",
+    "description": "Bestätigung einer Ressourcenanforderung. Es wird angegeben, ob die Anforderung insgesamt akzeptiert oder abgelehnt wurde.",
     "type": "object",
     "properties": {
         "resourceRequestId": {
-            "title": "Resource Request ID",
-            "description": "The unique identifier of the resource request being acknowledged.",
+            "title": "Ressourcenanforderungs-ID",
+            "description": "Die eindeutige Kennung der bestätigten Ressourcenanforderung.",
             "type": "string"
         },
         "acknowledgementStatus": {
-            "title": "Acknowledgement Status",
-            "description": "Indicates if the resource request is accepted or rejected as a whole.",
+            "title": "Bestätigungsstatus",
+            "description": "Gibt an, ob die Ressourcenanforderung insgesamt akzeptiert oder abgelehnt wurde.",
             "type": "string",
             "enum": [
                 "accepted",
@@ -3234,14 +3317,14 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             ]
         },
         "acknowledgedAt": {
-            "title": "Acknowledged At",
-            "description": "Timestamp when the acknowledgement was issued.",
+            "title": "Bestätigt am",
+            "description": "Zeitpunkt, zu dem die Bestätigung erstellt wurde.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or reason for rejection.",
+            "description": "Optionaler Kommentar oder Ablehnungsgrund.",
             "type": "string"
         }
     },
@@ -3260,7 +3343,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "resourceRequestId": "10002005",
             "acknowledgementStatus": "rejected",
             "acknowledgedAt": "2025-06-11T10:16:00Z",
-            "comment": "Not enough resources available."
+            "comment": "Nicht genügend Ressourcen verfügbar."
         }
     ]
 }
@@ -3325,7 +3408,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the resource request being acknowledged.</td>
+      <td colspan="2">Die eindeutige Kennung der Ressourcenanforderung, auf die sich die Bestätigung bezieht.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3346,11 +3429,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledged Resources</td>
+      <td colspan="2">Bestätigte Ressourcen</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">List of specific resources that are acknowledged/provided in response to the request.</td>
+      <td colspan="2">Liste der spezifischen Ressourcen, die als Antwort auf die Anforderung bestätigt/zur Verfügung gestellt werden.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Array (vom Typ Object)</td></tr>
     <tr>
@@ -3375,11 +3458,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource ID</td>
+      <td colspan="2">Ressourcen-ID</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Unique identifier of the specific resource.</td>
+      <td colspan="2">Eindeutige Kennung der spezifischen Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -3396,11 +3479,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Name</td>
+      <td colspan="2">Ressourcenname</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Name of the specific resource.</td>
+      <td colspan="2">Name der spezifischen Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -3417,11 +3500,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Type</td>
+      <td colspan="2">Ressourcentyp</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Type of the resource (from resource type catalog).</td>
+      <td colspan="2">Typ der Ressource (laut Ressourcentypkatalog).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     
@@ -3439,11 +3522,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Acknowledged At</td>
+      <td colspan="2">Bestätigt am</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the resource acknowledgement was issued.</td>
+      <td colspan="2">Zeitpunkt, zu dem die Ressourcenbestätigung erstellt wurde.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3471,7 +3554,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or additional information.</td>
+      <td colspan="2">Optionaler Kommentar oder zusätzliche Informationen.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3503,16 +3586,16 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "properties": {
         "resourceRequestId": {
             "title": "Resource Request ID",
-            "description": "The unique identifier of the resource request being acknowledged.",
+            "description": "Die eindeutige Kennung der Ressourcenanforderung, auf die sich die Bestätigung bezieht.",
             "type": "string"
         },
         "acknowledgedResources": {
-            "title": "Acknowledged Resources",
-            "description": "List of specific resources that are acknowledged/provided in response to the request.",
+            "title": "Bestätigte Ressourcen",
+            "description": "Liste der spezifischen Ressourcen, die als Antwort auf die Anforderung bestätigt/zur Verfügung gestellt werden.",
             "type": "array",
             "minItems": 1,
             "items": {
-                "title": "Acknowledged Resource",
+                "title": "Bestätigte Ressource",
                 "description": "Die bestätigten Ressourcen",
                 "type": "object",
                 "required": [
@@ -3522,32 +3605,32 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 ],
                 "properties": {
                     "resourceId": {
-                        "title": "Resource ID",
-                        "description": "Unique identifier of the specific resource.",
+                        "title": "Ressourcen-ID",
+                        "description": "Eindeutige Kennung der spezifischen Ressource.",
                         "type": "string"
                     },
                     "resourceName": {
-                        "title": "Resource Name",
-                        "description": "Name of the specific resource.",
+                        "title": "Ressourcenname",
+                        "description": "Name der spezifischen Ressource.",
                         "type": "string"
                     },
                     "resourceType": {
-                        "title": "Resource Type",
-                        "description": "Type of the resource (from resource type catalog).",
+                        "title": "Ressourcentyp",
+                        "description": "Typ der Ressource (laut Ressourcentypkatalog).",
                         "type": "string"
                     }
                 }
             }
         },
         "acknowledgedAt": {
-            "title": "Acknowledged At",
-            "description": "Timestamp when the resource acknowledgement was issued.",
+            "title": "Bestätigt am",
+            "description": "Zeitpunkt, zu dem die Ressourcenbestätigung erstellt wurde.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or additional information.",
+            "description": "Optionaler Kommentar oder zusätzliche Informationen.",
             "type": "string"
         }
     },
@@ -3627,7 +3710,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">The unique identifier of the original resource request.</td>
+      <td colspan="2">Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3652,7 +3735,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Unique identifier of the deployed resource.</td>
+      <td colspan="2">Eindeutige Kennung der disponierten Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3673,11 +3756,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Name</td>
+      <td colspan="2">Ressourcenname</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Name of the deployed resource.</td>
+      <td colspan="2">Name der disponierten Ressource.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3698,11 +3781,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Resource Type</td>
+      <td colspan="2">Ressourcentyp</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Type of the deployed resource (from resource type catalog).</td>
+      <td colspan="2">Typ der disponierten Ressource (laut Ressourcentypkatalog).</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3723,11 +3806,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
   <tbody>
     <tr>
       <th>Titel</th>
-      <td colspan="2">Deployed At</td>
+      <td colspan="2">Ausrückzeitpunkt</td>
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Timestamp when the resource was deployed (moved out).</td>
+      <td colspan="2">Zeitpunkt, zu dem die Ressource ausgerückt ist.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3755,7 +3838,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Optional comment or additional information.</td>
+      <td colspan="2">Optionaler Kommentar oder zusätzliche Informationen.</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">String</td></tr>
     <tr>
@@ -3787,33 +3870,33 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "properties": {
         "resourceRequestId": {
             "title": "Resource Request ID",
-            "description": "The unique identifier of the original resource request.",
+            "description": "Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.",
             "type": "string"
         },
         "resourceId": {
             "title": "Resource ID",
-            "description": "Unique identifier of the deployed resource.",
+            "description": "Eindeutige Kennung der disponierten Ressource.",
             "type": "string"
         },
         "resourceName": {
-            "title": "Resource Name",
-            "description": "Name of the deployed resource.",
+            "title": "Ressourcenname",
+            "description": "Name der disponierten Ressource.",
             "type": "string"
         },
         "resourceType": {
-            "title": "Resource Type",
-            "description": "Type of the deployed resource (from resource type catalog).",
+            "title": "Ressourcentyp",
+            "description": "Typ der disponierten Ressource (laut Ressourcentypkatalog).",
             "type": "string"
         },
         "deployedAt": {
-            "title": "Deployed At",
-            "description": "Timestamp when the resource was deployed (moved out).",
+            "title": "Ausrückzeitpunkt",
+            "description": "Zeitpunkt, zu dem die Ressource ausgerückt ist.",
             "type": "string",
             "format": "date-time"
         },
         "comment": {
             "title": "Kommentar",
-            "description": "Optional comment or additional information.",
+            "description": "Optionaler Kommentar oder zusätzliche Informationen.",
             "type": "string"
         }
     },

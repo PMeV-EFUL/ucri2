@@ -35,7 +35,8 @@
     "timestamp": {
       "title": "Zeitstempel",
       "description": "Zeitpunkt des eCall aus MSD",
-      "type": "string"
+      "type": "string",
+      "format": "date-time"
     },
     "vehiclePosition": {
       "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json",
@@ -70,7 +71,7 @@
     "vehicleType": "M1",
     "vin": "X1234567890",
     "vehiclePropulsionStorageType": "gasolineTank",
-    "timestamp": "2024-01-01T10:05:08",
+    "timestamp": "2024-01-01T10:05:08Z",
     "vehiclePosition": {
       "lat": 65.453323,
       "lon": 14.542343

@@ -1,0 +1,214 @@
+openapi: 3.1.0
+info:
+  title: UCRI Control Room Module (UCRM) P2P API
+  description: |
+    UCRI Control Room Module P2P API ist die Kommunikationsschnittstelle für verbundene externe UCRMs. Die Anbindung lokaler Kommunikationsteilnehmer wie Leitsystemen ist NICHT Teil dieser API (vgl. ucrm-client.yaml).
+  version: "0.1"
+servers:
+  - url: '{apiRoot}/{basePath}'
+    variables:
+      apiRoot:
+        default: https://ucri.mycompany.com
+        description: API root
+        enum:
+          - https://ucri.mycompany.com
+      basePath:
+        default: ucrm/p2p/v0
+        description: API base path
+tags:
+  - name: Messaging
+    description: Der Messaging Service beinhaltet Funktionen zum Versenden und Empfangen von Nachrichten,
+      die im Rahmen der UCRI Spezifikation spezifiziert sind.
+  - name: Registry
+  - name: Info
+security:
+  - oAuth2ClientCredentials: [ ]
+paths:
+  /token:
+    get:
+      tags:
+        - Authorization
+      summary: Json Web Token erhalten
+      operationId: authorize
+      security:
+        - basic : []
+      responses:
+        '200':
+          description: OK, Token im Body.
+          content:
+            application/json:
+              schema:
+                required:
+                  - token
+                type: object
+                properties:
+                  token:
+                    $ref: '#/components/schemas/JWTToken'
+                description: JSON-Objekt mit dem JWT-Token
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /messaging/send:
+    post:
+      tags:
+        - Messaging
+      summary: Meldung senden
+      description: Meldung senden. Im Gegensatz zum Endpunkt in der Client-API sind die dort optionalen Felder messageId,sentDate,timeout und ack hier obligat.
+      operationId: sendMessage
+      requestBody:
+        description: Zu versendende Meldung
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SenderRequestP2P'
+        required: true
+      responses:
+        '200':
+          description: OK, versendete Meldung
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SenderResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /registry:
+    get:
+      tags:
+        - Registry
+      summary: KT-Register abfragen
+      description: Liefert eine Liste aller über dieses UCRM angebundenen Kommunikationsteilnehmer. In KEINEM Falle dürfen hier die Kommunikationsteilnehmer übertragen werden, welche durch andere entfernte UCRMs via P2P angebunden sind!
+      operationId: listCommParticipant
+      responses:
+        '200':
+          description: OK, Liste aller Kommunikationsteilnehmer
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - commParticipants
+                properties:
+                  commParticipants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CommParticipant'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /info:
+    get:
+      tags:
+        - Info
+      summary: UCRM Information
+      description: Liefert UCRM Information
+      operationId: info
+      responses:
+        '200':
+          description: OK, UCRM Information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth, wird AUSSCHLIESSLICH für den /token-Endpunkt genutzt.
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.
+      flows:
+        clientCredentials:
+          # Einige Tools verbieten inkorrekterweise relative URIs wie /token für die tokenURL in OpenAPI 3.1.0, daher muss die TokenUrl in diesen Fällen zu einer vollständigen URL geändert werden!
+          tokenUrl: /token
+          scopes: { }
+
+  schemas:
+    # Obwohl die Envelope auf dieser Ebene gar nicht direkt $ref-ereziert wird, muss diese hier auftauchen, damit Tools wie ajv.js diese
+    # Spezifikation korrekt laden können!
+    Envelope:
+      $ref: 'schemas/envelope.yaml'
+    SenderRequestP2P:
+      $ref: 'schemas/senderRequestP2P.yaml'
+    SenderResponse:
+      $ref: 'schemas/senderResponse.yaml'
+    MessageRef:
+      $ref: 'schemas/messageRef.yaml'
+    CommParticipant:
+      $ref: 'schemas/commParticipant.yaml'
+    Info:
+      $ref: 'schemas/info.yaml'
+    Error:
+      $ref: 'schemas/error.yaml'
+    JWTToken:
+      type: string
+      contentMediaType: application/jwt
+      contentSchema:
+        type: array
+        minItems: 2
+        prefixItems:
+          - const:
+              typ: JWT
+              alg: HS256
+          - type: object
+            required:
+              - ait
+              - exp
+            properties:
+              iat:
+                type: integer
+              exp:
+                type: integer

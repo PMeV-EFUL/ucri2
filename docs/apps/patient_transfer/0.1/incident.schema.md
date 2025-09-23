@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patient">patient</a></td><td>Object</td><td>Ja</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -25,11 +25,11 @@
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "internalId": "f123456",
     "issue": "consultation_needed",
-    "additionalInfo": "Zusatzinformationen",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
+    "additionalInformation": "Zusatzinformationen",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "protocolRemarks": [
         {
-            "timestamp": "2024-01-01T10:06:09",
+            "timestamp": "2024-01-01T10:06:09Z",
             "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
             "category": "information",
             "silent": false
@@ -49,7 +49,7 @@
             "state": "Brandenburg",
             "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInformation": "weitere Informationen",
         "gender": "Male",
         "dateOfBirth": "19801230",
         "age": 55,
@@ -137,7 +137,7 @@
 
 
 
-## additionalInfo
+## additionalInformation
 
 
 <table class="jssd-property-table">
@@ -216,7 +216,7 @@
 </table>
 
 ### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### informers.name
@@ -504,8 +504,33 @@
 
 
 
+### informers.address.additionalInformation
 
-### informers.additionalInfo
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+### informers.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -695,7 +720,7 @@
 </table>
 
 ### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientsurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientphone">phone</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienthealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienttransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientsurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientphone">phone</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienthealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patienttransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 ### patient.name
@@ -1003,8 +1028,33 @@
 
 
 
+### patient.address.additionalInformation
 
-### patient.additionalInfo
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+### patient.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1480,7 +1530,7 @@
             "title": "Sender-interne Einsatz-ID",
             "description": "Sender-interne ID des Einsatzes"
         },
-        "additionalInfo": {
+        "additionalInformation": {
             "title": "Zusatzinformationen",
             "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
             "type": "string"
@@ -1537,11 +1587,11 @@
             "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
             "internalId": "f123456",
             "issue": "consultation_needed",
-            "additionalInfo": "Zusatzinformationen",
-            "sentByDispatcherAt": "2024-01-01T10:05:08",
+            "additionalInformation": "Zusatzinformationen",
+            "sentByDispatcherAt": "2024-01-01T10:05:08Z",
             "protocolRemarks": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
                     "category": "information",
                     "silent": false
@@ -1561,7 +1611,7 @@
                     "state": "Brandenburg",
                     "country": "DE"
                 },
-                "additionalInfo": "weitere Informationen",
+                "additionalInformation": "weitere Informationen",
                 "gender": "Male",
                 "dateOfBirth": "19801230",
                 "age": 55,
@@ -1635,6 +1685,11 @@
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
                     "pattern": "^[A-Z]{2}$"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
@@ -1683,7 +1738,7 @@
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -1704,7 +1759,7 @@
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen"
+                    "additionalInformation": "weitere Informationen"
                 }
             ],
             "unevaluatedProperties": false
@@ -1743,7 +1798,7 @@
             },
             "examples": [
                 {
-                    "timestamp": "2024-01-01T10:06:09",
+                    "timestamp": "2024-01-01T10:06:09Z",
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
@@ -1863,7 +1918,7 @@
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -1931,7 +1986,7 @@
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen",
+                    "additionalInformation": "weitere Informationen",
                     "gender": "Male",
                     "dateOfBirth": "19801230",
                     "age": 55,

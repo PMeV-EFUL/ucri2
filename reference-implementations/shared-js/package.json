@@ -1,0 +1,19 @@
+{
+  "name": "shared-js",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PMeV-EFUL/ucri2.git"
+  },
+  "private": true,
+  "dependencies": {
+    "canonicalize": "^2.1.0",
+    "jose": "^6.1.0",
+    "js-sha3": "^0.9.3"
+  }
+}

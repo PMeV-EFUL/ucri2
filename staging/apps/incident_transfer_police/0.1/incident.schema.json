@@ -54,11 +54,11 @@
     ],
     "issue": "Notfall",
     "flashingLights": true,
-    "additionalInfo": "Zusatzinformationen",
-    "sentByDispatcherAt": "2024-01-01T10:05:08",
-    "startTimestamp": "2024-01-01T09:55:15",
+    "additionalInformation": "Zusatzinformationen",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "startTimestamp": "2024-01-01T09:55:15Z",
     "protocolRemarks":[{
-      "timestamp": "2024-01-01T10:06:09",
+      "timestamp": "2024-01-01T10:06:09Z",
       "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
       "category": "information",
       "silent": true
@@ -79,15 +79,15 @@
       },
       "object": {
         "name": "Abteilung IV, Haus 3",
-        "additionalInfo": "Campus West"
+        "additionalInformation": "Campus West"
       },
       "superiorObject": {
         "name": "Krankenhaus Musterstift",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
       },
       "floor": "3. OG",
       "room": "412",
-      "additionalInfo": "Weitere Informationen"
+      "additionalInformation": "Weitere Informationen"
     },
     "accusedPersons": [
       {
@@ -104,7 +104,7 @@
           "state": "Brandenburg",
           "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInformation": "weitere Informationen",
         "dateOfBirth": "1980-05-15",
         "nationality": "DE"
       }
@@ -124,7 +124,7 @@
           "state": "Berlin",
           "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInformation": "weitere Informationen",
         "dateOfBirth": "1990-07-20",
         "nationality": "DE"
       }
@@ -143,7 +143,7 @@
       "vehicleType": "M1",
       "vin": "X1234567890",
       "vehiclePropulsionStorageType": "gasolineTank",
-      "timestamp": "2024-01-01T10:05:08",
+      "timestamp": "2024-01-01T10:05:08Z",
       "vehiclePosition": {
         "lat": 65.453323,
         "lon": 14.542343

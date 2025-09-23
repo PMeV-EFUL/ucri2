@@ -1,30 +1,30 @@
 {
   "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/acknowledgement.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Resource Request Acknowledgement",
-  "description": "Acknowledgement for a resource request, indicating whether the request is accepted or rejected as a whole.",
+  "title": "Ressourcenanforderungsbestätigung",
+  "description": "Bestätigung einer Ressourcenanforderung. Es wird angegeben, ob die Anforderung insgesamt akzeptiert oder abgelehnt wurde.",
   "type": "object",
   "properties": {
     "resourceRequestId": {
-      "title": "Resource Request ID",
-      "description": "The unique identifier of the resource request being acknowledged.",
+      "title": "Ressourcenanforderungs-ID",
+      "description": "Die eindeutige Kennung der bestätigten Ressourcenanforderung.",
       "type": "string"
     },
     "acknowledgementStatus": {
-      "title": "Acknowledgement Status",
-      "description": "Indicates if the resource request is accepted or rejected as a whole.",
+      "title": "Bestätigungsstatus",
+      "description": "Gibt an, ob die Ressourcenanforderung insgesamt akzeptiert oder abgelehnt wurde.",
       "type": "string",
       "enum": ["accepted", "rejected"]
     },
     "acknowledgedAt": {
-      "title": "Acknowledged At",
-      "description": "Timestamp when the acknowledgement was issued.",
+      "title": "Bestätigt am",
+      "description": "Zeitpunkt, zu dem die Bestätigung erstellt wurde.",
       "type": "string",
       "format": "date-time"
     },
     "comment": {
       "title": "Kommentar",
-      "description": "Optional comment or reason for rejection.",
+      "description": "Optionaler Kommentar oder Ablehnungsgrund.",
       "type": "string"
     }
   },
@@ -39,7 +39,7 @@
       "resourceRequestId": "10002005",
       "acknowledgementStatus": "rejected",
       "acknowledgedAt": "2025-06-11T10:16:00Z",
-      "comment": "Not enough resources available."
+      "comment": "Nicht genügend Ressourcen verfügbar."
     }
   ]
 }

@@ -1,0 +1,804 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "UCRI Control Room Module (UCRM) P2P API",
+    "description": "UCRI Control Room Module P2P API ist die Kommunikationsschnittstelle für verbundene externe UCRMs. Die Anbindung lokaler Kommunikationsteilnehmer wie Leitsystemen ist NICHT Teil dieser API (vgl. ucrm-client.yaml).\n",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "{apiRoot}/{basePath}",
+      "variables": {
+        "apiRoot": {
+          "default": "https://ucri.mycompany.com",
+          "description": "API root",
+          "enum": [
+            "https://ucri.mycompany.com"
+          ]
+        },
+        "basePath": {
+          "default": "ucrm/p2p/v0",
+          "description": "API base path"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Messaging",
+      "description": "Der Messaging Service beinhaltet Funktionen zum Versenden und Empfangen von Nachrichten, die im Rahmen der UCRI Spezifikation spezifiziert sind."
+    },
+    {
+      "name": "Registry"
+    },
+    {
+      "name": "Info"
+    }
+  ],
+  "security": [
+    {
+      "oAuth2ClientCredentials": []
+    }
+  ],
+  "paths": {
+    "/token": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Json Web Token erhalten",
+        "operationId": "authorize",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Token im Body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "token"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "$ref": "#/components/schemas/JWTToken"
+                    }
+                  },
+                  "description": "JSON-Objekt mit dem JWT-Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/send": {
+      "post": {
+        "tags": [
+          "Messaging"
+        ],
+        "summary": "Meldung senden",
+        "description": "Meldung senden. Im Gegensatz zum Endpunkt in der Client-API sind die dort optionalen Felder messageId,sentDate,timeout und ack hier obligat.",
+        "operationId": "sendMessage",
+        "requestBody": {
+          "description": "Zu versendende Meldung",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/senderRequestP2P"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK, versendete Meldung",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/senderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registry": {
+      "get": {
+        "tags": [
+          "Registry"
+        ],
+        "summary": "KT-Register abfragen",
+        "description": "Liefert eine Liste aller über dieses UCRM angebundenen Kommunikationsteilnehmer. In KEINEM Falle dürfen hier die Kommunikationsteilnehmer übertragen werden, welche durch andere entfernte UCRMs via P2P angebunden sind!",
+        "operationId": "listCommParticipant",
+        "responses": {
+          "200": {
+            "description": "OK, Liste aller Kommunikationsteilnehmer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "commParticipants"
+                  ],
+                  "properties": {
+                    "commParticipants": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/commParticipant"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "tags": [
+          "Info"
+        ],
+        "summary": "UCRM Information",
+        "description": "Liefert UCRM Information",
+        "operationId": "info",
+        "responses": {
+          "200": {
+            "description": "OK, UCRM Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/info"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basic": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "HTTP Basic auth, wird AUSSCHLIESSLICH für den /token-Endpunkt genutzt."
+      },
+      "oAuth2ClientCredentials": {
+        "type": "oauth2",
+        "description": "OAuth client credential flow, wird für alle Endpunkte mit Ausnahme des /token-Endpunkts genutzt.",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "/token",
+            "scopes": {}
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Envelope": {
+        "$ref": "#/components/schemas/envelope"
+      },
+      "SenderRequestP2P": {
+        "$ref": "#/components/schemas/senderRequestP2P"
+      },
+      "SenderResponse": {
+        "$ref": "#/components/schemas/senderResponse"
+      },
+      "MessageRef": {
+        "$ref": "#/components/schemas/messageRef"
+      },
+      "CommParticipant": {
+        "$ref": "#/components/schemas/commParticipant"
+      },
+      "Info": {
+        "$ref": "#/components/schemas/info"
+      },
+      "Error": {
+        "$ref": "#/components/schemas/error"
+      },
+      "JWTToken": {
+        "type": "string",
+        "contentMediaType": "application/jwt",
+        "contentSchema": {
+          "type": "array",
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "const": {
+                "typ": "JWT",
+                "alg": "HS256"
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "ait",
+                "exp"
+              ],
+              "properties": {
+                "iat": {
+                  "type": "integer"
+                },
+                "exp": {
+                  "type": "integer"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "error": {
+        "required": [
+          "code",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Anwendungsspezifische Fehler-Code"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Fehlerursache in für Menschen verständlicher Sprache"
+          },
+          "message": {
+            "type": "string",
+            "description": "Detailliertere Fehlerbeschreibung eventuell mit Angabe der Korrektivmaßnahmen in für Menschen verständlicher Sprache"
+          }
+        },
+        "description": "Fehlerbeschreibung, gewöhnlich für eine HTTP Error Response-Code (3xx, 4xx, 5xx)"
+      },
+      "payload": {
+        "required": [
+          "appId",
+          "appVersion",
+          "schemaId",
+          "contentType",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "Name der UCRI2-Applikation"
+          },
+          "appVersion": {
+            "type": "string",
+            "description": "Version der UCRI2-Applikation"
+          },
+          "schemaId": {
+            "type": "string",
+            "description": "Name des Schemas für diese Nachricht"
+          },
+          "contentType": {
+            "type": "string",
+            "enum": [
+              "application/json",
+              "application/jose"
+            ],
+            "description": "Inhalt der übergebenen Nachricht, application/json - unverschlüsselte Nachricht, application/jose - verschlüsselte Nachricht"
+          },
+          "data": {
+            "type": "string",
+            "format": "binary",
+            "description": "Applikationsspezifische Nachricht, Inhalt entsprechend dem 'contentType'"
+          }
+        },
+        "description": "Applikationsspezifische Nachricht mit Meta-Informationen",
+        "example": {
+          "appId": "incident_transfer",
+          "appVersion": "0.1",
+          "schemaId": "transfer",
+          "contentType": "application/json",
+          "data": "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
+        }
+      },
+      "envelope": {
+        "required": [
+          "source",
+          "payload"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Freitext-Beschreibung einer Meldung"
+          },
+          "messageId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Meldungs-ID - dient der formalen Verarbeitung und Zuordnung der Meldung. Falls nicht übergeben, wird die Meldungs-ID automatisch generiert. Bei der Weiterleitung einer Meldung zwischen CRM (Routing) muss die ursprüngliche Meldungs-ID weitergegeben werden."
+          },
+          "sentDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Sendedatum Falls nicht übergeben, wird das Sendedatum automatisch gesetzt. Bei der Weiterleitung einer Meldung zwischen CRM (Routing) soll das ursprüngliche Sendedatum weitergegeben werden."
+          },
+          "timeout": {
+            "type": "integer",
+            "description": "Anzahl der Sekunden, welche die Meldung auf der Vermittlungsebene verweilen darf, bevor die Zustellversuche abgebrochen und die Meldung - mit Fehlermeldung an den Sender - verworfen wird. Defaultwert falls nicht definiert. Bei der Weiterleitung einer Meldung zwischen CRM (Routing) soll das ursprüngliche Timeout weitergegeben werden.",
+            "default": 3600,
+            "minimum": 10,
+            "maximum": 86400
+          },
+          "ack": {
+            "type": "string",
+            "description": "Erwartete technische Bestätigung, NONE - keine Bestätigungen, NACK - nur negative Bestätigungen, ALL - alle Bestätigungen",
+            "enum": [
+              "NONE",
+              "NACK",
+              "ALL"
+            ],
+            "default": "NONE"
+          },
+          "source": {
+            "type": "string",
+            "pattern": "^([0-9]+\\.?)+$",
+            "description": "Sender-Adresse, OID"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Liste an Zeichenketten, die eine inhaltliche Zusammenführung von Nachrichten zu einem Thema erlauben."
+          },
+          "payload": {
+            "$ref": "#/components/schemas/payload"
+          },
+          "signature": {
+            "type": "string",
+            "description": "eine Signatur der Nachricht zur Überprüfung ihrer Authentizität und Unverfälschtheit, formatiert als JWS Compact Serialization, siehe https://datatracker.ietf.org/doc/html/rfc7517 . Falls keine Signierung gewünscht ist, muss im KT-Registrierungseintrag dieses Teilnehmers \"transmitsUnsignedMessages:true\" gesetzt sein, ansonsten ist dieses Feld obligat."
+          }
+        },
+        "description": "Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload"
+      },
+      "senderRequestP2P": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/envelope"
+          },
+          {
+            "type": "object",
+            "required": [
+              "messageId",
+              "sentDate",
+              "timeout",
+              "ack",
+              "destinations"
+            ],
+            "properties": {
+              "destinations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^([0-9]+\\.?)+$"
+                },
+                "minItems": 1,
+                "maxItems": 1,
+                "description": "Empfänger-Adressen, OID-Liste. In der UCRI 2.0 kann eine Nachricht nur an einen Empfänger gesendet werden. Diese Einschränkung kann in späteren UCRI-Versionen rückwärtskompatibel aufgehoben werden."
+              }
+            },
+            "example": {
+              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+              "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+              "timeout": 300,
+              "ack": "NACK",
+              "source": "1.2.3.4.5.6",
+              "destinations": [
+                "1.2.3.4.5.7"
+              ],
+              "payload": {
+                "appId": "incident_transfer",
+                "appVersion": "0.1",
+                "schemaId": "incident",
+                "contentType": "application/json",
+                "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInfo\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInfo\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInfo\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInfo\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
+              },
+              "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ODJmOGYxMGNkZGY3NGRiMWJlZTMxODRlNDNjM2I4ODE4OGJjYmRlNjIxZjA0MmE2MWEwOGY5ZGIzMGFlNmY0Mw.kOZqDl-Gj1jCITxHmcgeKl4P8Opr1IGQU1Bxe8ls_TX5CDG8bC7vYy3VdS8wKikf8qWgdd4uJgJ53d6ZwO0XE2cWOiyRKlmNP7o97GOaOFm5d9i0Ca9jR7HB32g1qGL_LYmdT3REoFbmfwsk2Pl0WVoKjr2I91kMt4dSTwWeeegj_fyJGNrSiPxu6yfkuP2wwCNXXFCjVYQzeHlv6Jv3cZqdF5UTMgZqgC_XuPP8uShL6oWJAKTfyKhd36AaoiS3gPKjMSttLiTyB-NIDf6WP4BOn0tfzzgTUwWbagtA_X99DJs-sjqC5tn5L9sK38Np-tJRpanF9rrc3MYZowpxFg"
+            }
+          }
+        ]
+      },
+      "senderResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/envelope"
+          },
+          {
+            "type": "object",
+            "required": [
+              "messageId",
+              "sentDate",
+              "timeout",
+              "ack",
+              "destinations"
+            ],
+            "properties": {
+              "destinations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^([0-9]+\\.?)+$"
+                },
+                "minItems": 1,
+                "maxItems": 1,
+                "description": "Empfänger-Adressen, OID-Liste. In der UCRI 2.0 kann eine Nachricht nur an einen Empfänger gesendet werden. Diese Einschränkung kann in späteren UCRI-Versionen rückwärtskompatibel aufgehoben werden."
+              }
+            },
+            "example": {
+              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+              "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+              "sentDate": "2023-11-13T20:20:39+00:00",
+              "timeout": 300,
+              "ack": "NACK",
+              "source": "1.2.3.4.5.6",
+              "destinations": [
+                "1.2.3.4.5.7"
+              ],
+              "payload": {
+                "appId": "incident_transfer",
+                "appVersion": "0.1",
+                "schemaId": "incident",
+                "contentType": "application/json",
+                "data": "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
+              },
+              "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ODJmOGYxMGNkZGY3NGRiMWJlZTMxODRlNDNjM2I4ODE4OGJjYmRlNjIxZjA0MmE2MWEwOGY5ZGIzMGFlNmY0Mw.kOZqDl-Gj1jCITxHmcgeKl4P8Opr1IGQU1Bxe8ls_TX5CDG8bC7vYy3VdS8wKikf8qWgdd4uJgJ53d6ZwO0XE2cWOiyRKlmNP7o97GOaOFm5d9i0Ca9jR7HB32g1qGL_LYmdT3REoFbmfwsk2Pl0WVoKjr2I91kMt4dSTwWeeegj_fyJGNrSiPxu6yfkuP2wwCNXXFCjVYQzeHlv6Jv3cZqdF5UTMgZqgC_XuPP8uShL6oWJAKTfyKhd36AaoiS3gPKjMSttLiTyB-NIDf6WP4BOn0tfzzgTUwWbagtA_X99DJs-sjqC5tn5L9sK38Np-tJRpanF9rrc3MYZowpxFg"
+            }
+          }
+        ]
+      },
+      "appRef": {
+        "required": [
+          "appId",
+          "appVersion"
+        ],
+        "type": "object",
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "Name der UCRI2-Applikation"
+          },
+          "appVersion": {
+            "type": "string",
+            "description": "Version der UCRI2-Applikation"
+          }
+        },
+        "description": "Referenz auf eine UCRI2-Applikation",
+        "example": {
+          "appId": "incident",
+          "appVersion": "0.1"
+        }
+      },
+      "techSupport": {
+        "required": [
+          "phone",
+          "e-mail"
+        ],
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "description": "Telefonnummer des technischen Supports"
+          },
+          "e-mail": {
+            "type": "string",
+            "description": "E-Mail des technischen Supports"
+          },
+          "address": {
+            "type": "string",
+            "description": "Postadresse des technischen Supports"
+          }
+        },
+        "description": "Kontakt zum technischen Support",
+        "example": {
+          "phone": "+49 69 123456",
+          "e-mail": "support@lst-essen.de",
+          "address": "Musterstraße 1, 45133 Essen"
+        }
+      },
+      "jwkRsaPub": {
+        "required": [
+          "kty",
+          "n",
+          "e"
+        ],
+        "type": "object",
+        "properties": {
+          "kty": {
+            "type": "string",
+            "enum": [
+              "RSA"
+            ],
+            "description": "Key Type Parameter"
+          },
+          "n": {
+            "type": "string",
+            "format": "base64url",
+            "description": "The \"n\" (modulus) parameter contains the modulus value for the RSA public key. It is represented as a Base64urlUInt-encoded value."
+          },
+          "e": {
+            "type": "string",
+            "format": "base64url",
+            "description": "The \"e\" (exponent) parameter contains the exponent value for the RSA public key. It is represented as a Base64urlUInt-encoded value."
+          }
+        },
+        "description": "RSA Public Key als JSON Web Key (JWK) nach https://datatracker.ietf.org/doc/html/rfc7517",
+        "example": {
+          "kty": "RSA",
+          "n": "ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx",
+          "e": "AQAB"
+        }
+      },
+      "commParticipant": {
+        "required": [
+          "id",
+          "systemName",
+          "operatorName",
+          "operatorShortName",
+          "supportedApps",
+          "techSupport"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^([0-9]+\\.?)+$",
+            "description": "KT-OID. Beim Anlegen eines KT-Kontos darf KT-OID auf Ebene 9 (CRM) beschränkt sein. In diesem Fall wird die OID um die fortlaufende KT-Nummer (Ebene 10) ergänzt."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "client",
+              "ucrm"
+            ],
+            "description": "Der Typ eines Teilnehmers, entweder \"ucrm\" für ein UCRM oder \"client\" für einen an ein UCRM angebundenen Teilnehmer."
+          },
+          "systemName": {
+            "type": "string",
+            "description": "Systemname"
+          },
+          "operatorName": {
+            "type": "string",
+            "description": "Betreibername"
+          },
+          "operatorShortName": {
+            "type": "string",
+            "description": "Betreibername-Kürzel"
+          },
+          "supportedApps": {
+            "type": "array",
+            "description": "Liste der unterstützten UCRI2-Applikation in spezifischen Versionen. Sobald ein KT eine Applikation unterstützt, müssen auch alle in der Applikation spezifizierten Nachrichten unterstützt werden.",
+            "items": {
+              "$ref": "#/components/schemas/appRef"
+            }
+          },
+          "techSupport": {
+            "$ref": "#/components/schemas/techSupport"
+          },
+          "key": {
+            "$ref": "#/components/schemas/jwkRsaPub"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "on",
+              "off",
+              "unknown"
+            ],
+            "description": "Verfügbarkeitsstatus des KT"
+          },
+          "transmitsUnsignedMessages": {
+            "type": "boolean",
+            "description": "Gibt an, ob dieser Teilnehmer auf die Signierung von Nachrichten verzichtet (true) oder ob alle Nachrichten dieses Teilnehmers signiert sind (false)."
+          }
+        },
+        "description": "Beschreibung eines Kommunikationsteilnehmers",
+        "example": {
+          "id": "1.2.3.1.276.5.1.58.28.2.1",
+          "systemName": "ELS Essen",
+          "operatorName": "Einsatzleitstelle Essen",
+          "operatorShortName": "ELS E",
+          "supportedApps": [
+            {
+              "appId": "incident",
+              "appVersion": "0.1"
+            },
+            {
+              "appId": "incident",
+              "appVersion": "0.2"
+            }
+          ],
+          "key": {
+            "kty": "RSA",
+            "n": "riPtU1ZKwnCjfwxcf9w5Le6imUaPueVkqeU4JbzVN5FcFuwbhhKLYa1jRJb64-xLM9PJHTfh74-6HhL0DBgDwhXheYYNJioyvmJ3ceWMjRAHLY-mkpnxE9hwJbfRvqL1wQUYrIFX71N9ujmILfGljijPv7dqSyyPQJjgN-gBTXmIXS8_Jo8cVlaEOpOcE8FYvEmy02lHCErxFI5aogNnwaH1w82XiUuntnDNe9xf0QcKETlV8vipzUQp2OXJhEzv7o3qQIElvCcF66F1VLKxFF7yuO9NDvo5_b4WK9dtB-Zb6r-8N5LrN1Y6BvBq-HzDY6J389DzUHlChFqhV9-V2Q",
+            "e": "AQAB"
+          },
+          "status": "off",
+          "techSupport": {
+            "phone": "001-555-1234",
+            "e-mail": "abc@lst-essen.de"
+          }
+        }
+      },
+      "info": {
+        "required": [
+          "apiVersion",
+          "ucrmProvider",
+          "ucrmProductName",
+          "ucrmVersion",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "apiVersion": {
+            "type": "string",
+            "description": "UCRM API Version"
+          },
+          "ucrmProvider": {
+            "type": "string",
+            "description": "Hersteller des UCRM Moduls"
+          },
+          "ucrmProductName": {
+            "type": "string",
+            "description": "Produktname des UCRM Moduls"
+          },
+          "ucrmVersion": {
+            "type": "string",
+            "description": "Softwareversion des UCRM Moduls"
+          },
+          "status": {
+            "type": "integer",
+            "description": "Aktueller Betriebszustand des UCRM (0=Normaler Betriebszustand,1=Teilnehmer-Discovery läuft (keine MessageSend-Operationen möglich),2=Fehlerhafter Betriebszustand)",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          }
+        },
+        "description": "CRM Information",
+        "example": {
+          "apiVersion": "0.1",
+          "ucrmProvider": "ACME AG",
+          "ucrmProductName": "ACME-LS",
+          "ucrmVersion": "1.6"
+        }
+      },
+      "messageRef": {
+        "required": [
+          "destination",
+          "sequenceId"
+        ],
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "pattern": "^([0-9]+\\.?)+$",
+            "description": "Adressat, diese Referenz zeigt auf eine Meldung, die genau an diese OID adressiert wurde, nicht an eine OID aus einem Unterbaum"
+          },
+          "sequenceId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "eine aufsteigende Meldung-Sequence-ID"
+          }
+        },
+        "description": "Meldungsreferenz",
+        "example": {
+          "destination": "1.2.3.4.5.6",
+          "sequenceId": 123456
+        }
+      }
+    }
+  }
+}
