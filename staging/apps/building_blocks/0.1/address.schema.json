@@ -42,6 +42,11 @@
       "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
       "type": "string",
       "pattern": "^[A-Z]{2}$"
+    },
+    "additionalInformation": {
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+      "type": "string"
     }
   },
   "unevaluatedProperties": false,

@@ -254,12 +254,14 @@ function collectInputSchemata(){
   for (const appName of appList){
     const versionList = fs.readdirSync(`${stagedAppsPath}/${appName}`);
     for (const versionName of versionList){
-      const schemaFileNames = fs.readdirSync(`${stagedAppsPath}/${appName}/${versionName}`).filter(s=>s.endsWith("schema.json"));
-      out[`${appName}/${versionName}`]={
-        files:schemaFileNames,
-        appName:appName,
-        appVersion:versionName
-      };
+      if (versionName!=="readme.md"){
+        const schemaFileNames = fs.readdirSync(`${stagedAppsPath}/${appName}/${versionName}`).filter(s=>s.endsWith("schema.json"));
+        out[`${appName}/${versionName}`]={
+          files:schemaFileNames,
+          appName:appName,
+          appVersion:versionName
+        };
+      }
     }
   }
   return out;
