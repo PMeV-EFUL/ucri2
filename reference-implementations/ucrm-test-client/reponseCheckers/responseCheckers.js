@@ -1,3 +1,5 @@
+import {getErrorName} from "../../shared-js/ucrmErrorCodes.js";
+
 export function resetResponseCheckers(){
   lastSequenceId=-1;
 }
@@ -35,7 +37,7 @@ export function createErrorResponseChecker(expectedUcriErrorCode){
       return "error reason must be a string";
     }
     if (expectedUcriErrorCode !== response.code){
-      return `ucrm error code mismatch, expected ${expectedUcriErrorCode}, got ${response.code}`;
+      return `ucrm error code mismatch, expected ${expectedUcriErrorCode} (${getErrorName(expectedUcriErrorCode)}), got ${response.code} (${getErrorName(response.code)})`;
     }
   }
 }

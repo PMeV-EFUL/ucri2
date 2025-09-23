@@ -18,3 +18,14 @@ export const ucrmErrors = {
   "RESPONSE_INVALID_PER_TRANSPORT_SPEC": 500
 }
 
+const errorNames={}
+
+for (const [name,code] of Object.entries(ucrmErrors)) {
+  errorNames[code] = name;
+}
+
+export function getErrorName(code) {
+  return errorNames[code] || `UNKNOWN_ERROR_${code}`
+}
+
+
