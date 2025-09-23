@@ -10,6 +10,7 @@ initCrypto(UcrmError,canonicalize,sha3,jose);
 // await generateSignedKTData("standalone");
 // await generateSignedKTData("a");
 // await generateSignedKTData("b");
+await performEnvelopeTests();
 
 async function performEnvelopeTests(){
 
@@ -19,7 +20,7 @@ async function performEnvelopeTests(){
     "ack": "NACK",
     "source": "1.2.3.4.5.6",
     "destinations": [
-      "1.2.3.4.5.8"
+      "1.2.3.4.5.7"
     ],
     "payload": {
       "appId": "incident_transfer",
