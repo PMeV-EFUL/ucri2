@@ -17,7 +17,7 @@
       "title": "Sender-interne Einsatz-ID",
       "description": "Sender-interne ID des Einsatzes"
     },
-    "additionalInfo": {
+    "additionalInformation": {
       "title": "Zusatzinformationen",
       "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
@@ -54,7 +54,7 @@
   "examples": [{
     "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
     "internalId": "f123456",
-    "additionalInfo": "Zusatzinformationen",
+    "additionalInformation": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "informers": [
       {

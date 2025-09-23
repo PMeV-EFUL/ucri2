@@ -28,7 +28,7 @@
     ],
     "issue": "Notfall",
     "flashingLights": true,
-    "additionalInfo": "Zusatzinformationen",
+    "additionalInformation": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "startTimestamp": "2024-01-01T09:55:15Z",
     "missionLocation": {
@@ -47,15 +47,15 @@
       },
       "object": {
         "name": "Abteilung IV, Haus 3",
-        "additionalInfo": "Campus West"
+        "additionalInformation": "Campus West"
       },
       "superiorObject": {
         "name": "Krankenhaus Musterstift",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
       },
       "floor": "3. OG",
       "room": "412",
-      "additionalInfo": "Weitere Informationen"
+      "additionalInformation": "Weitere Informationen"
     },
     "informers": [
       {

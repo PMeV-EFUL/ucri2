@@ -199,7 +199,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Beschreibung</th>
-      <td colspan="2">Status-Code: 200 - Zustellbestätigung; 504 - Timeout; 500 - Fehler bei Zustellung an entferntes UCRM</td>
+      <td colspan="2">Status-Code: 200 - Zustellbestätigung; 504 - Timeout; 502 - Fehler bei Zustellung an entferntes UCRM</td>
     </tr>
     <tr><th>Typ</th><td colspan="2">Integer</td></tr>
     <tr>
@@ -208,7 +208,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     </tr>
     <tr>
       <th>Enum</th>
-      <td colspan="2"><ul><li>200</li><li>500</li><li>504</li></ul></td>
+      <td colspan="2"><ul><li>200</li><li>502</li><li>504</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -382,11 +382,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "statusCode": {
             "title": "Annahme- oder Ablehnungsstatus",
-            "description": "Status-Code: 200 - Zustellbestätigung; 504 - Timeout; 500 - Fehler bei Zustellung an entferntes UCRM",
+            "description": "Status-Code: 200 - Zustellbestätigung; 504 - Timeout; 502 - Fehler bei Zustellung an entferntes UCRM",
             "type": "integer",
             "enum": [
                 200,
-                500,
+                502,
                 504
             ]
         },

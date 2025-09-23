@@ -22,7 +22,7 @@
       "title": "Sender-interne Einsatz-ID",
       "description": "Sender-interne ID des Einsatzes"
     },
-    "additionalInfo": {
+    "additionalInformation": {
       "title": "Zusatzinformationen",
       "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
       "type": "string"
@@ -79,7 +79,7 @@
       "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
       "internalId": "f123456",
       "issue": "consultation_needed",
-      "additionalInfo": "Zusatzinformationen",
+      "additionalInformation": "Zusatzinformationen",
       "sentByDispatcherAt": "2024-01-01T10:05:08Z",
       "protocolRemarks": [
         {
@@ -103,7 +103,7 @@
           "state": "Brandenburg",
           "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInformation": "weitere Informationen",
         "gender": "Male",
         "dateOfBirth": "19801230",
         "age": 55,
@@ -177,6 +177,11 @@
           "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
           "type": "string",
           "pattern": "^[A-Z]{2}$"
+        },
+        "additionalInformation": {
+          "title": "Zusatzinformationen",
+          "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+          "type": "string"
         }
       },
       "unevaluatedProperties": false,
@@ -225,7 +230,7 @@
           "title": "MeldeAdresse",
           "description": "Die Meldeadresse."
         },
-        "additionalInfo": {
+        "additionalInformation": {
           "title": "Zusatzinformationen",
           "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
@@ -246,7 +251,7 @@
             "state": "Brandenburg",
             "country": "DE"
           },
-          "additionalInfo": "weitere Informationen"
+          "additionalInformation": "weitere Informationen"
         }
       ],
       "unevaluatedProperties": false
@@ -405,7 +410,7 @@
           "title": "MeldeAdresse",
           "description": "Die Meldeadresse."
         },
-        "additionalInfo": {
+        "additionalInformation": {
           "title": "Zusatzinformationen",
           "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
           "type": "string"
@@ -473,7 +478,7 @@
             "state": "Brandenburg",
             "country": "DE"
           },
-          "additionalInfo": "weitere Informationen",
+          "additionalInformation": "weitere Informationen",
           "gender": "Male",
           "dateOfBirth": "19801230",
           "age": 55,

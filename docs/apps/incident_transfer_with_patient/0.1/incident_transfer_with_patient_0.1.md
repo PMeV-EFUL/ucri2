@@ -16,7 +16,7 @@
     + [Beispiel](#beispiel)
     + [sharedIncidentId](#sharedincidentid)
     + [internalId](#internalid)
-    + [additionalInfo](#additionalinfo)
+    + [additionalInformation](#additionalinformation)
     + [sentByDispatcherAt](#sentbydispatcherat)
     + [informers](#informers)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array)
@@ -32,7 +32,8 @@
       - [informers.address.cityDistrict](#informersaddresscitydistrict)
       - [informers.address.state](#informersaddressstate)
       - [informers.address.country](#informersaddresscountry)
-      - [informers.additionalInfo](#informersadditionalinfo)
+      - [informers.address.additionalInformation](#informersaddressadditionalinformation)
+      - [informers.additionalInformation](#informersadditionalinformation)
     + [protocolRemarks](#protocolremarks)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-1)
       - [protocolRemarks.timestamp](#protocolremarkstimestamp)
@@ -56,15 +57,16 @@
       - [missionLocation.address.cityDistrict](#missionlocationaddresscitydistrict)
       - [missionLocation.address.state](#missionlocationaddressstate)
       - [missionLocation.address.country](#missionlocationaddresscountry)
+      - [missionLocation.address.additionalInformation](#missionlocationaddressadditionalinformation)
       - [missionLocation.object](#missionlocationobject)
       - [missionLocation.object.name](#missionlocationobjectname)
-      - [missionLocation.object.additionalInfo](#missionlocationobjectadditionalinfo)
+      - [missionLocation.object.additionalInformation](#missionlocationobjectadditionalinformation)
       - [missionLocation.superiorObject](#missionlocationsuperiorobject)
       - [missionLocation.superiorObject.name](#missionlocationsuperiorobjectname)
-      - [missionLocation.superiorObject.additionalInfo](#missionlocationsuperiorobjectadditionalinfo)
+      - [missionLocation.superiorObject.additionalInformation](#missionlocationsuperiorobjectadditionalinformation)
       - [missionLocation.floor](#missionlocationfloor)
       - [missionLocation.room](#missionlocationroom)
-      - [missionLocation.additionalInfo](#missionlocationadditionalinfo)
+      - [missionLocation.additionalInformation](#missionlocationadditionalinformation)
     + [patients](#patients)
       - [Eigenschaften der Objekte im Array](#eigenschaften-der-objekte-im-array-2)
       - [patients.name](#patientsname)
@@ -79,7 +81,8 @@
       - [patients.address.cityDistrict](#patientsaddresscitydistrict)
       - [patients.address.state](#patientsaddressstate)
       - [patients.address.country](#patientsaddresscountry)
-      - [patients.additionalInfo](#patientsadditionalinfo)
+      - [patients.address.additionalInformation](#patientsaddressadditionalinformation)
+      - [patients.additionalInformation](#patientsadditionalinformation)
       - [patients.gender](#patientsgender)
       - [patients.dateOfBirth](#patientsdateofbirth)
       - [patients.age](#patientsage)
@@ -110,7 +113,7 @@
     + [sharedIncidentId](#sharedincidentid-2)
     + [completedAt](#completedat)
     + [status](#status-1)
-    + [additionalInformation](#additionalinformation)
+    + [additionalInformation](#additionalinformation-1)
     + [Schema](#schema-2)
 
 <!-- tocstop -->
@@ -170,7 +173,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 ### Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#starttimestamp">startTimestamp</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#sharedincidentid">sharedIncidentId</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#internalid">internalId</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#additionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#sentbydispatcherat">sentByDispatcherAt</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informers">informers</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#protocolremarks">protocolRemarks</a></td><td>Array (vom Typ Object)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#starttimestamp">startTimestamp</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#classifications">classifications</a></td><td>Array (vom Typ String)</td><td>Nein</td></tr><tr><td colspan="2"><a href="#issue">issue</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#flashinglights">flashingLights</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocation">missionLocation</a></td><td>Object</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patients">patients</a></td><td>Array (vom Typ Object)</td><td>Ja</td></tr></tbody></table>
 
 
 ### Beispiel
@@ -187,7 +190,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     ],
     "issue": "Notfall",
     "flashingLights": true,
-    "additionalInfo": "Zusatzinformationen",
+    "additionalInformation": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "startTimestamp": "2024-01-01T09:55:15Z",
     "missionLocation": {
@@ -206,15 +209,15 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         },
         "object": {
             "name": "Abteilung IV, Haus 3",
-            "additionalInfo": "Campus West"
+            "additionalInformation": "Campus West"
         },
         "superiorObject": {
             "name": "Krankenhaus Musterstift",
-            "additionalInfo": "Weitere Informationen"
+            "additionalInformation": "Weitere Informationen"
         },
         "floor": "3. OG",
         "room": "412",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
     },
     "patients": [
         {
@@ -231,7 +234,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 "state": "Brandenburg",
                 "country": "DE"
             },
-            "additionalInfo": "weitere Informationen",
+            "additionalInformation": "weitere Informationen",
             "gender": "Male",
             "dateOfBirth": "19801230",
             "age": 55,
@@ -320,7 +323,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-### additionalInfo
+### additionalInformation
 
 
 <table class="jssd-property-table">
@@ -399,7 +402,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#informersname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#informerssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#informersadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### informers.name
@@ -687,8 +690,33 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### informers.address.additionalInformation
 
-#### informers.additionalInfo
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+#### informers.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -956,7 +984,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#missionlocationcoordinate">coordinate</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationobject">object</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationsuperiorobject">superiorObject</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationfloor">floor</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationroom">room</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#missionlocationadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### missionLocation.coordinate
@@ -1251,6 +1279,31 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### missionLocation.address.additionalInformation
+
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
 
 #### missionLocation.object
 
@@ -1301,7 +1354,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-#### missionLocation.object.additionalInfo
+#### missionLocation.object.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1376,7 +1429,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-#### missionLocation.superiorObject.additionalInfo
+#### missionLocation.superiorObject.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1452,7 +1505,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
-#### missionLocation.additionalInfo
+#### missionLocation.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -1504,7 +1557,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 </table>
 
 #### Eigenschaften der Objekte im Array
-  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientsname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsadditionalinfo">additionalInfo</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientshealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientstransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
+  <table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#patientsname">name</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#patientssurname">surname</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsphone">phone</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsemail">email</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsaddress">address</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsadditionalinformation">additionalInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsgender">gender</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsdateofbirth">dateOfBirth</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsage">age</a></td><td>Number</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientshealthinsuranceinformation">healthInsuranceInformation</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinitialassessment">initialAssessment</a></td><td>Object</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectioninformation">infectionInformation</a></td><td>String</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientsinfectionstatus">infectionStatus</a></td><td>Boolean</td><td>Nein</td></tr><tr><td colspan="2"><a href="#patientstransportnumber">transportNumber</a></td><td>String</td><td>Nein</td></tr></tbody></table>
 
 
 #### patients.name
@@ -1792,8 +1845,33 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 
 
 
+#### patients.address.additionalInformation
 
-#### patients.additionalInfo
+
+<table class="jssd-property-table">
+  <tbody>
+    <tr>
+      <th>Titel</th>
+      <td colspan="2">Zusatzinformationen</td>
+    </tr>
+    <tr>
+      <th>Beschreibung</th>
+      <td colspan="2">Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.</td>
+    </tr>
+    <tr><th>Typ</th><td colspan="2">String</td></tr>
+    <tr>
+      <th>Obligat?</th>
+      <td colspan="2">Nein</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+
+#### patients.additionalInformation
 
 
 <table class="jssd-property-table">
@@ -2206,7 +2284,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "title": "Sender-interne Einsatz-ID",
             "description": "Sender-interne ID des Einsatzes"
         },
-        "additionalInfo": {
+        "additionalInformation": {
             "title": "Zusatzinformationen",
             "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
             "type": "string"
@@ -2293,7 +2371,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             ],
             "issue": "Notfall",
             "flashingLights": true,
-            "additionalInfo": "Zusatzinformationen",
+            "additionalInformation": "Zusatzinformationen",
             "sentByDispatcherAt": "2024-01-01T10:05:08Z",
             "startTimestamp": "2024-01-01T09:55:15Z",
             "missionLocation": {
@@ -2312,15 +2390,15 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 },
                 "object": {
                     "name": "Abteilung IV, Haus 3",
-                    "additionalInfo": "Campus West"
+                    "additionalInformation": "Campus West"
                 },
                 "superiorObject": {
                     "name": "Krankenhaus Musterstift",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 },
                 "floor": "3. OG",
                 "room": "412",
-                "additionalInfo": "Weitere Informationen"
+                "additionalInformation": "Weitere Informationen"
             },
             "patients": [
                 {
@@ -2337,7 +2415,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen",
+                    "additionalInformation": "weitere Informationen",
                     "gender": "Male",
                     "dateOfBirth": "19801230",
                     "age": 55,
@@ -2412,6 +2490,11 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Die Landesangabe in Form eines zweistelligen Ländercodes in Grossbuchstaben gemäß ISO 3166-1 alpha-2",
                     "type": "string",
                     "pattern": "^[A-Z]{2}$"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
@@ -2460,7 +2543,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -2481,7 +2564,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen"
+                    "additionalInformation": "weitere Informationen"
                 }
             ],
             "unevaluatedProperties": false
@@ -2572,7 +2655,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Der Name des Objekts.",
                     "type": "string"
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -2582,7 +2665,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "examples": [
                 {
                     "name": "Krankenhaus Musterstift",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -2633,7 +2716,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "description": "Die Zimmernummer.",
                     "type": "string"
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -2657,15 +2740,15 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     },
                     "object": {
                         "name": "Abteilung IV, Haus 3",
-                        "additionalInfo": "Campus West"
+                        "additionalInformation": "Campus West"
                     },
                     "superiorObject": {
                         "name": "Krankenhaus Musterstift",
-                        "additionalInfo": "Weitere Informationen"
+                        "additionalInformation": "Weitere Informationen"
                     },
                     "floor": "3. OG",
                     "room": "412",
-                    "additionalInfo": "Weitere Informationen"
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -2782,7 +2865,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "title": "MeldeAdresse",
                     "description": "Die Meldeadresse."
                 },
-                "additionalInfo": {
+                "additionalInformation": {
                     "title": "Zusatzinformationen",
                     "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
                     "type": "string"
@@ -2850,7 +2933,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                         "state": "Brandenburg",
                         "country": "DE"
                     },
-                    "additionalInfo": "weitere Informationen",
+                    "additionalInformation": "weitere Informationen",
                     "gender": "Male",
                     "dateOfBirth": "19801230",
                     "age": 55,

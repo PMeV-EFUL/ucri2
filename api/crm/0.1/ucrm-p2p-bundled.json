@@ -112,7 +112,7 @@
           "Messaging"
         ],
         "summary": "Meldung senden",
-        "description": "Meldung senden",
+        "description": "Meldung senden. Im Gegensatz zum Endpunkt in der Client-API sind die dort optionalen Felder messageId,sentDate,timeout und ack hier obligat.",
         "operationId": "sendMessage",
         "requestBody": {
           "description": "Zu versendende Meldung",
@@ -458,7 +458,7 @@
           },
           "signature": {
             "type": "string",
-            "description": "eine Signatur der Nachricht zur Überprüfung ihrer Authentizität und Unverfälschtheit, formatiert als JWS Compact Serialization, siehe https://datatracker.ietf.org/doc/html/rfc7517"
+            "description": "eine Signatur der Nachricht zur Überprüfung ihrer Authentizität und Unverfälschtheit, formatiert als JWS Compact Serialization, siehe https://datatracker.ietf.org/doc/html/rfc7517 . Falls keine Signierung gewünscht ist, muss im KT-Registrierungseintrag dieses Teilnehmers \"transmitsUnsignedMessages:true\" gesetzt sein, ansonsten ist dieses Feld obligat."
           }
         },
         "description": "Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload"
@@ -504,7 +504,8 @@
                 "schemaId": "incident",
                 "contentType": "application/json",
                 "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInfo\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInfo\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInfo\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInfo\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
-              }
+              },
+              "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ODJmOGYxMGNkZGY3NGRiMWJlZTMxODRlNDNjM2I4ODE4OGJjYmRlNjIxZjA0MmE2MWEwOGY5ZGIzMGFlNmY0Mw.kOZqDl-Gj1jCITxHmcgeKl4P8Opr1IGQU1Bxe8ls_TX5CDG8bC7vYy3VdS8wKikf8qWgdd4uJgJ53d6ZwO0XE2cWOiyRKlmNP7o97GOaOFm5d9i0Ca9jR7HB32g1qGL_LYmdT3REoFbmfwsk2Pl0WVoKjr2I91kMt4dSTwWeeegj_fyJGNrSiPxu6yfkuP2wwCNXXFCjVYQzeHlv6Jv3cZqdF5UTMgZqgC_XuPP8uShL6oWJAKTfyKhd36AaoiS3gPKjMSttLiTyB-NIDf6WP4BOn0tfzzgTUwWbagtA_X99DJs-sjqC5tn5L9sK38Np-tJRpanF9rrc3MYZowpxFg"
             }
           }
         ]
@@ -552,7 +553,7 @@
                 "contentType": "application/json",
                 "data": "{\"issue\":\"Brandeinsatz\",\"location\":{\"country\":\"NRW\",\"city\":\"Düsseldorf\",\"postalCode\":\"40210\",\"street\":\"Musterstrasse\",\"houseNumber\":\"42\"},\"id\":\"550e8400-e29b-41d4-a716-446655440000\",\"type\":\"Brandeinsatz\",\"keyword\":\"F 2\"}"
               },
-              "signatur": "eyJhbGciOiJSUzI1NiJ9 . eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ . cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7 AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4 BAynRFdiuB--f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K 0GarZRmB_eSN9383LcOLn6_dO--xi12jzDwusC-eOkHWEsqtFZESc6BfI7noOPqv hJ1phCnvWh6IeYI2w9QOYEUipUTI8np6LbgGY9Fs98rqVt5AXLIhWkWywlVmtVrB p0igcN_IoypGlUPQGe77Rw"
+              "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ODJmOGYxMGNkZGY3NGRiMWJlZTMxODRlNDNjM2I4ODE4OGJjYmRlNjIxZjA0MmE2MWEwOGY5ZGIzMGFlNmY0Mw.kOZqDl-Gj1jCITxHmcgeKl4P8Opr1IGQU1Bxe8ls_TX5CDG8bC7vYy3VdS8wKikf8qWgdd4uJgJ53d6ZwO0XE2cWOiyRKlmNP7o97GOaOFm5d9i0Ca9jR7HB32g1qGL_LYmdT3REoFbmfwsk2Pl0WVoKjr2I91kMt4dSTwWeeegj_fyJGNrSiPxu6yfkuP2wwCNXXFCjVYQzeHlv6Jv3cZqdF5UTMgZqgC_XuPP8uShL6oWJAKTfyKhd36AaoiS3gPKjMSttLiTyB-NIDf6WP4BOn0tfzzgTUwWbagtA_X99DJs-sjqC5tn5L9sK38Np-tJRpanF9rrc3MYZowpxFg"
             }
           }
         ]
@@ -655,6 +656,14 @@
             "pattern": "^([0-9]+\\.?)+$",
             "description": "KT-OID. Beim Anlegen eines KT-Kontos darf KT-OID auf Ebene 9 (CRM) beschränkt sein. In diesem Fall wird die OID um die fortlaufende KT-Nummer (Ebene 10) ergänzt."
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "client",
+              "ucrm"
+            ],
+            "description": "Der Typ eines Teilnehmers, entweder \"ucrm\" für ein UCRM oder \"client\" für einen an ein UCRM angebundenen Teilnehmer."
+          },
           "systemName": {
             "type": "string",
             "description": "Systemname"
@@ -688,6 +697,10 @@
               "unknown"
             ],
             "description": "Verfügbarkeitsstatus des KT"
+          },
+          "transmitsUnsignedMessages": {
+            "type": "boolean",
+            "description": "Gibt an, ob dieser Teilnehmer auf die Signierung von Nachrichten verzichtet (true) oder ob alle Nachrichten dieses Teilnehmers signiert sind (false)."
           }
         },
         "description": "Beschreibung eines Kommunikationsteilnehmers",
@@ -708,7 +721,7 @@
           ],
           "key": {
             "kty": "RSA",
-            "n": "ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx",
+            "n": "riPtU1ZKwnCjfwxcf9w5Le6imUaPueVkqeU4JbzVN5FcFuwbhhKLYa1jRJb64-xLM9PJHTfh74-6HhL0DBgDwhXheYYNJioyvmJ3ceWMjRAHLY-mkpnxE9hwJbfRvqL1wQUYrIFX71N9ujmILfGljijPv7dqSyyPQJjgN-gBTXmIXS8_Jo8cVlaEOpOcE8FYvEmy02lHCErxFI5aogNnwaH1w82XiUuntnDNe9xf0QcKETlV8vipzUQp2OXJhEzv7o3qQIElvCcF66F1VLKxFF7yuO9NDvo5_b4WK9dtB-Zb6r-8N5LrN1Y6BvBq-HzDY6J389DzUHlChFqhV9-V2Q",
             "e": "AQAB"
           },
           "status": "off",
@@ -721,18 +734,28 @@
       "info": {
         "required": [
           "apiVersion",
-          "crmProvider",
+          "ucrmProvider",
+          "ucrmProductName",
+          "ucrmVersion",
           "status"
         ],
         "type": "object",
         "properties": {
           "apiVersion": {
             "type": "string",
-            "description": "CRM API Version"
+            "description": "UCRM API Version"
           },
-          "crmProvider": {
+          "ucrmProvider": {
             "type": "string",
-            "description": "Hersteller des CRM Moduls"
+            "description": "Hersteller des UCRM Moduls"
+          },
+          "ucrmProductName": {
+            "type": "string",
+            "description": "Produktname des UCRM Moduls"
+          },
+          "ucrmVersion": {
+            "type": "string",
+            "description": "Softwareversion des UCRM Moduls"
           },
           "status": {
             "type": "integer",
@@ -747,7 +770,9 @@
         "description": "CRM Information",
         "example": {
           "apiVersion": "0.1",
-          "crmProvider": "iSE"
+          "ucrmProvider": "ACME AG",
+          "ucrmProductName": "ACME-LS",
+          "ucrmVersion": "1.6"
         }
       },
       "messageRef": {

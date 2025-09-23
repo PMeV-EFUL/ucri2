@@ -39,7 +39,7 @@
     ],
     "startTimestamp": "2024-01-01T09:55:15Z",
     "issue": "Notfall",
-    "additionalInfo": "Zusatzinformationen",
+    "additionalInformation": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "protocolRemarks":[{
       "timestamp": "2024-01-01T10:06:09Z",

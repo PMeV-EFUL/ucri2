@@ -54,7 +54,7 @@
     ],
     "issue": "Notfall",
     "flashingLights": true,
-    "additionalInfo": "Zusatzinformationen",
+    "additionalInformation": "Zusatzinformationen",
     "sentByDispatcherAt": "2024-01-01T10:05:08Z",
     "startTimestamp": "2024-01-01T09:55:15Z",
     "protocolRemarks":[{
@@ -79,15 +79,15 @@
       },
       "object": {
         "name": "Abteilung IV, Haus 3",
-        "additionalInfo": "Campus West"
+        "additionalInformation": "Campus West"
       },
       "superiorObject": {
         "name": "Krankenhaus Musterstift",
-        "additionalInfo": "Weitere Informationen"
+        "additionalInformation": "Weitere Informationen"
       },
       "floor": "3. OG",
       "room": "412",
-      "additionalInfo": "Weitere Informationen"
+      "additionalInformation": "Weitere Informationen"
     },
     "accusedPersons": [
       {
@@ -104,7 +104,7 @@
           "state": "Brandenburg",
           "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInformation": "weitere Informationen",
         "dateOfBirth": "1980-05-15",
         "nationality": "DE"
       }
@@ -124,7 +124,7 @@
           "state": "Berlin",
           "country": "DE"
         },
-        "additionalInfo": "weitere Informationen",
+        "additionalInformation": "weitere Informationen",
         "dateOfBirth": "1990-07-20",
         "nationality": "DE"
       }
