@@ -56,7 +56,7 @@ Das asymmetrische kryptographische RSA-Verfahren RSASSA-PKCS1-v1_5 ([RFC 3447:  
 
 Das Verfahren verwendet ein für jeden KT generiertes Schlüsselpaar, bestehend aus einem privaten Schlüssel und einem öffentlichen Schlüssel. Der private Schlüssel wird im Keystore des KT-Systems gespeichert.
 
-Die öffentlichen Schlüssel werden über KT-Register als Teil der verfügbaren KT-Daten in Form von JSON Web Key (JWK, [RFC 7517: JSON Web Key (JWK)](https://datatracker.ietf.org/doc/html/rfc7517)) ausgetauscht.
+Die öffentlichen Schlüssel werden über das KT-Register als Teil der verfügbaren KT-Daten in Form von JSON Web Key (JWK, [RFC 7517: JSON Web Key (JWK)](https://datatracker.ietf.org/doc/html/rfc7517)) ausgetauscht.
 
 ### Verschlüsselung
 
@@ -74,14 +74,12 @@ Nachrichtensignaturen stellen sicher, dass eine Nachricht während der Übertrag
 Diese Schritte werden in den folgenden Unterkapiteln genauer dargestellt.
 
 #### Hashing der Nachrichten
-Vor der Anwendung des JCS erstellt das signierende System eine Kopie der Nachricht, in der die folgenden Felder entfernt werden:
-- "signature"
-- "messageId"
-- "sentDate"
-- "timeout"
-- "ack"
+Vor der Anwendung des JCS erstellt das signierende System eine Kopie der Nachricht, in der nur die folgenden Felder enthalten sind:
+- "source"
+- "destinations"
+- "payload"
 
-Somit werden diese Felder nicht beim Hashing berücksichtigt. Dies ist notwendig, da diese Felder vom UCRM gesetzt werden, falls sie nicht vom Client gesetzt wurden (mit Ausnahme des "signature"-Feldes).
+Somit werden alle anderen Felder nicht beim Hashing berücksichtigt. Dies ist notwendig, da andere Felder freiwillig sind oder vom UCRM gesetzt werden, falls sie nicht vom Client gesetzt wurden.
 Als Hashing-Algorithmus kommt SHA3-256 zum Einsatz ([Use of the SHA3 One-way Hash Functions in the Cryptographic Message Syntax (CMS)](https://datatracker.ietf.org/doc/html/draft-housley-lamps-cms-sha3-hash-00)).
 
 #### Signierung der Nachrichten
