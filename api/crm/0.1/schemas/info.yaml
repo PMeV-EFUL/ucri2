@@ -20,7 +20,7 @@ properties:
     description: Softwareversion des UCRM Moduls
   status:
     type: integer
-    description: Aktueller Betriebszustand des UCRM (0=Normaler Betriebszustand,1=Teilnehmer-Discovery läuft (keine MessageSend-Operationen möglich),2=Fehlerhafter Betriebszustand)
+    description: Aktueller Betriebszustand des UCRM (0=Normaler Betriebszustand,1=UCRM durchläuft aktuell den Startprozess,2=Fehlerhafter Betriebszustand)
     enum:
       - 0
       - 1
@@ -31,3 +31,4 @@ example:
   ucrmProvider: "ACME AG"
   ucrmProductName: "ACME-LS"
   ucrmVersion: "1.6"
+  status: 1
