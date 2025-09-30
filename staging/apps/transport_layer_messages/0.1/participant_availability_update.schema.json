@@ -1,0 +1,30 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/transport_layer_messages/0.1/participant_availability_update.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht participant_availability_update - Update des Verfügbarkeitsstatus für einen Teilnehmer",
+  "description": "Diese Nachricht wird von einem UCRM an andere UCRM versendet, um die Veränderung des Verfügbarkeitsstatus eines Teilnehmers zu kommunizieren. Diese Nachricht wird NICHT an angebundene Teilnehmer weitergeleitet.",
+  "required": [
+    "participantOid",
+    "status"
+  ],
+  "type": "object",
+  "properties": {
+    "participantOid": {
+      "type": "string",
+      "title": "Teilnehmer-OID",
+      "description": "Die OID des referenzierten Teilnehmers"
+    },
+    "status":{
+      "type": "string",
+      "enum":["online","offline","unknown"],
+      "description": "Verfügbarkeitsstatus dieses Teilnehmers. Für an UCRM angebundene TN wird dieser Status durch das UCRM verwaltet. Für UCRMs selbst wird der Status durch diese verwaltet."
+    }
+  },
+  "examples": [
+    {
+      "participantOid": "1.2.3.4.5.6.7",
+      "status": "online"
+    }
+  ]
+}

@@ -63,7 +63,7 @@ export function getCommParticipant(id, httpErrorNumber) {
 export function getAllCommParticipants(type) {
   let out=[];
   if (type === "p2p") {
-    console.log("type is p2p, filtering results to own participants...");
+    //console.log("type is p2p, filtering results to own participants...");
     //filter results to only include own ones
     for (const [participantId, ucrmId] of Object.entries(ucrmIdsByParticipantIds)) {
       if (ucrmId === "self") {
@@ -75,6 +75,13 @@ export function getAllCommParticipants(type) {
   }
   // console.log(`COMMPARTICIPANTS ARE: ${JSON.stringify(out, null, 2)}`);
   return {commParticipants:out};
+}
+
+export function updateCommParticipantStatus(id, status) {
+  if (!commParticipants[id]) {
+     console.error(`CommParticipant with id '${id}' is unknown.`);
+  }
+  commParticipants[id].status = status;
 }
 
 export async function fetchParticipantsFromRemoteUcrms() {

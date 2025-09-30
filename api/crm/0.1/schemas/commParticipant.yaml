@@ -40,10 +40,10 @@ properties:
   status:
     type: string
     enum:
-      - "on"
-      - "off"
+      - "online"
+      - "offline"
       - "unknown"
-    description: Verfügbarkeitsstatus des KT
+    description: Verfügbarkeitsstatus dieses Teilnehmers. Für an UCRM angebundene TN wird dieser Status durch das UCRM verwaltet. Für UCRMs selbst wird der Status durch diese verwaltet.
   transmitsUnsignedMessages:
     type: boolean
     description: Gibt an, ob dieser Teilnehmer auf die Signierung von Nachrichten verzichtet (true) oder ob alle Nachrichten dieses Teilnehmers signiert sind (false).

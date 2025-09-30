@@ -113,11 +113,6 @@ export async function generateSteps(){
         http: 200
       }
     },
-    await genStepMessagingSend({
-      desc: "post messaging send while discovery is active (leads to try again later error)",
-      body: genBodySendRequest(senderOID, receiverOID),
-      expect: genExpectedError(500,ucrmErrors.REQUEST_TRY_LATER_UCRM_IS_IN_DISCOVERY_MODE)
-    },"sender"),
 
     //start second ucrm and wait for discovey to complete on both
     {

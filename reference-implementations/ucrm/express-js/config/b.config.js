@@ -48,6 +48,7 @@ export const config={
       baseUrl:"http://localhost:3002/ucrm/p2p/v0",
       username:"crmB",
       password:"test",
+      oid:"1.2.3.4.5.0"
     }
   },
   privateSigningKey:{
@@ -84,7 +85,7 @@ export const config={
         "n": "riPtU1ZKwnCjfwxcf9w5Le6imUaPueVkqeU4JbzVN5FcFuwbhhKLYa1jRJb64-xLM9PJHTfh74-6HhL0DBgDwhXheYYNJioyvmJ3ceWMjRAHLY-mkpnxE9hwJbfRvqL1wQUYrIFX71N9ujmILfGljijPv7dqSyyPQJjgN-gBTXmIXS8_Jo8cVlaEOpOcE8FYvEmy02lHCErxFI5aogNnwaH1w82XiUuntnDNe9xf0QcKETlV8vipzUQp2OXJhEzv7o3qQIElvCcF66F1VLKxFF7yuO9NDvo5_b4WK9dtB-Zb6r-8N5LrN1Y6BvBq-HzDY6J389DzUHlChFqhV9-V2Q",
         "e": "AQAB"
       },
-      "status": "on",
+      "status": "online",
       "techSupport": {
         "phone": "001-555-1234",
         "e-mail": "ucrm@lst-trinken.de"
@@ -113,7 +114,7 @@ export const config={
         "n": "riPtU1ZKwnCjfwxcf9w5Le6imUaPueVkqeU4JbzVN5FcFuwbhhKLYa1jRJb64-xLM9PJHTfh74-6HhL0DBgDwhXheYYNJioyvmJ3ceWMjRAHLY-mkpnxE9hwJbfRvqL1wQUYrIFX71N9ujmILfGljijPv7dqSyyPQJjgN-gBTXmIXS8_Jo8cVlaEOpOcE8FYvEmy02lHCErxFI5aogNnwaH1w82XiUuntnDNe9xf0QcKETlV8vipzUQp2OXJhEzv7o3qQIElvCcF66F1VLKxFF7yuO9NDvo5_b4WK9dtB-Zb6r-8N5LrN1Y6BvBq-HzDY6J389DzUHlChFqhV9-V2Q",
         "e": "AQAB"
       },
-      "status": "off",
+      "status": "online",
       "techSupport": {
         "phone": "001-555-1234",
         "e-mail": "abc@lst-trinken.de"

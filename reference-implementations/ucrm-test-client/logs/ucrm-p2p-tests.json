@@ -59,34 +59,6 @@
     }
   },
   {
-    "type": "fetch",
-    "expect": {
-      "http": 500
-    },
-    "ucrmId": "ucrmA",
-    "username": "userA1",
-    "desc": "post messaging send while discovery is active (leads to try again later error)",
-    "body": {
-      "description": "Einsatzübergabe am 13.11.2023 um 20:20",
-      "timeout": 20,
-      "ack": "ALL",
-      "source": "1.2.3.4.5.6",
-      "destinations": [
-        "1.2.3.4.5.7"
-      ],
-      "payload": {
-        "appId": "incident_transfer",
-        "appVersion": "0.1",
-        "schemaId": "incident",
-        "contentType": "application/json",
-        "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInformation\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInformation\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInformation\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInformation\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
-      },
-      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTRiMjZiN2RkY2UxNWUwNmM5YTBjN2I4NDgyYmM4YWMyNmFlY2VhYWVlMWExN2YyM2RjMzJiODhiZDIwOWVmMg.ElOJVBoRbiHHahocGtgSiNQSBstWGeu63Hhe1-XqTvVBDsK1qJI_tiJaIG6Mx40kzEWJWMVUIQAPfJGxJSf_xM-oOdrDwS3Wpl3KWx9ELKmN-XCllJ0txdnJYnzYkVCGJxFWEikskM-5Ze3uRUnU-IqJEp5z3OJuXEcL3Qre3uEtd8-I0ezbcJmvi59Jvk89fkfigl9SpJs_MeEFX_tnkwsWcKJZa-4Jd2ovW7h3FQOU7ItytjC3cpzxAp0lljKOky4LRzxtLLeNMPYo2O5MUziW1bW9JOTaQys4rKO6N8lIyXCnPuRg4fX4tMgeO5DkuprpUR1CN0Q2a1iqNMxpCA"
-    },
-    "endpoint": "messaging/send",
-    "method": "POST"
-  },
-  {
     "type": "startUcrm",
     "desc": "start UCRM B",
     "ucrmId": "ucrmB",
