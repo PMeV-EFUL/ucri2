@@ -53,24 +53,25 @@ if (await initConfiguration()){
   await start();
 }
 
-async function signKTRecords(){
-  console.log(`signing KT records...`);
-  for (const record of Object.values(config.commParticipants)){
-    const oid = record.id;
-    const domain = record.domain;
-    if (!domain){
-      console.error(`Participant with oid '${oid}' has no domain!`);
-      return false;
-    }
-    let domainPrivateKey = config.domainPrivateKeys[domain];
-    if (!domainPrivateKey){
-      console.error(`Participant with oid '${oid}' has unknown domain '${domain}'!`);
-      return false;
-    }
-    record.signature=await getKTRecordSignature(record,domainPrivateKey);
-  }
-  return true;
-}
+//KT Signing is (no longer) part of Transport Layer 2.0, so everything pertaining to it has been disabled (for now)
+// async function signKTRecords(){
+//   console.log(`signing KT records...`);
+//   for (const record of Object.values(config.commParticipants)){
+//     const oid = record.id;
+//     const domain = record.domain;
+//     if (!domain){
+//       console.error(`Participant with oid '${oid}' has no domain!`);
+//       return false;
+//     }
+//     let domainPrivateKey = config.domainPrivateKeys[domain];
+//     if (!domainPrivateKey){
+//       console.error(`Participant with oid '${oid}' has unknown domain '${domain}'!`);
+//       return false;
+//     }
+//     record.signature=await getKTRecordSignature(record,domainPrivateKey);
+//   }
+//   return true;
+// }
 
 
 async function initConfiguration(){
@@ -102,12 +103,13 @@ async function initConfiguration(){
     setConfiguration(config);
     setConfigurationOnRegistry(config);
     setConfigurationOnMessageBus(config);
-    if (config.useKTSignatures) {
-      //self-sign commParticipants - NEVER to be done in a production UCRM, instead the domain owner should provide signatures!
-      if (!await signKTRecords()) {
-        return false;
-      }
-    }
+    //KT Signing is (no longer) part of Transport Layer 2.0, so everything pertaining to it has been disabled (for now)
+    // if (config.useKTSignatures) {
+    //   //self-sign commParticipants - NEVER to be done in a production UCRM, instead the domain owner should provide signatures!
+    //   if (!await signKTRecords()) {
+    //     return false;
+    //   }
+    // }
     if (!await addCommParticipants(config.commParticipants,"self")){
       return false;
     }

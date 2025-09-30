@@ -12,7 +12,6 @@ import {
 } from "./commParticipantRegistry.js"
 import {checkIfClientMayUseOID, getRemoteUcrmToken} from "./authManager.js";
 import fetch from "node-fetch";
-import {base64Decode} from "../shared-js/util.js";
 
 export function setAppSchemata(appSchemataToUse) {
   appSchemata = appSchemataToUse;
@@ -76,6 +75,12 @@ async function handleIncomingP2PMessage(senderRequest) {
   await validateSenderRequest(senderRequest);
 
   const destinationId = senderRequest.destinations[0];
+
+  //as signature validation is now only performed for messages directed at this UCRM itself, the signature validation only happens in this case!
+  if (destinationId===config.ownOid){
+    await validateSignature(senderRequest);
+  }
+
   if (destinationId===config.ownOid && senderRequest.payload.appId===TRANSPORT_LAYER_APPID && senderRequest.payload.schemaId===PARTICIPANT_UPDATE_MESSAGE_SCHEMAID){
     console.log("detected participant status update message for self, updating local KT registry...");
     const decodedPayloadData=JSON.parse(senderRequest.payload.data);
@@ -176,7 +181,8 @@ async function validateSenderRequest(senderRequest) {
   const schemaId = senderRequest.payload.schemaId;
 
   //validate signature
-  await validateSignature(senderRequest);
+  //signature validation is no longer performed by UCRM in TS version 2.0!
+  // await validateSignature(senderRequest);
 
   //validate payload
   if (!appSchemata[appId]) {
