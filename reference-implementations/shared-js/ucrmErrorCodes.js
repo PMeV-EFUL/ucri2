@@ -1,5 +1,5 @@
 export const ucrmErrors = {
-  "REQUEST_INVALID_PER_TRANSPORT_SPEC": 460,
+  "REQUEST_INVALID_PER_CLIENT_TRANSPORT_SPEC": 460,
   "REQUEST_PAYLOAD_UNKNOWN_APPID": 461,
   "REQUEST_PAYLOAD_UNKNOWN_APPVERSION": 462,
   "REQUEST_PAYLOAD_UNKNOWN_SCHEMAID": 463,
@@ -13,9 +13,8 @@ export const ucrmErrors = {
   "REQUEST_UNAUTHORIZED": 475,
   "REQUEST_OID_FORBIDDEN": 478,
   "REQUEST_WRONG_SIGNATURE": 479,
-  "REQUEST_INVALID_PER_P2P_SPEC": 480,
+  "REQUEST_INVALID_PER_P2P_TRANSPORT_SPEC": 480,
   "REQUEST_INTERNAL_ERROR": 491,
-  "RESPONSE_INVALID_PER_TRANSPORT_SPEC": 500
 }
 
 const errorNames={}
@@ -28,4 +27,11 @@ export function getErrorName(code) {
   return errorNames[code] || `UNKNOWN_ERROR_${code}`
 }
 
+function printErrorList(){
+  console.log("- "+Object.values(ucrmErrors).join('\n- '));
+  for (const errorEntry of Object.entries(ucrmErrors)) {
+    console.log(`## Fehlercode ${errorEntry[1]} (${errorEntry[0]})`);
+  }
+}
 
+printErrorList();

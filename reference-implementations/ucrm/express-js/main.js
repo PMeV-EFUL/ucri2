@@ -188,11 +188,13 @@ async function start(){
   const specs=[
     {
       specPath:`${TRANSPORT_LAYER_SPEC_DIR}/ucrm-client.yaml`,
-      type:"client"
+      type:"client",
+      specViolationError:ucrmErrors.REQUEST_INVALID_PER_CLIENT_TRANSPORT_SPEC
     },
     {
       specPath:`${TRANSPORT_LAYER_SPEC_DIR}/ucrm-p2p.yaml`,
-      type:"p2p"
+      type:"p2p",
+      specViolationError:ucrmErrors.REQUEST_INVALID_PER_P2P_TRANSPORT_SPEC
     },
   ]
   for (const spec of specs){
@@ -279,11 +281,11 @@ async function start(){
       //decide whether request or response validation failed
       if (err.stack.includes("ResponseValidator")){
         errorHttpCode = 500;
-        errorUcriCode = ucrmErrors.RESPONSE_INVALID_PER_TRANSPORT_SPEC;
+        errorUcriCode = ucrmErrors.REQUEST_INTERNAL_ERROR;
         errorDescription = `HTTP error ${errorHttpCode}: Response validation failed. See message field for details.`
       }else if (err.stack.includes("RequestValidator")){
         errorHttpCode = 400;
-        errorUcriCode = ucrmErrors.REQUEST_INVALID_PER_TRANSPORT_SPEC;
+        errorUcriCode = spec.specViolationError;
         errorDescription = `HTTP error ${errorHttpCode}: Request validation failed. See message field for details.`
       }
     }
