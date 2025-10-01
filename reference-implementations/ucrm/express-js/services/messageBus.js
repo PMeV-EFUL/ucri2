@@ -195,10 +195,17 @@ async function validateSenderRequest(senderRequest) {
     throw new UcrmError(400, `Unknown message name '${schemaId}' for UCRI2 App '${appId}' version '${appVersion}' `, ucrmErrors.REQUEST_PAYLOAD_UNKNOWN_SCHEMAID);
   }
 
+
   //check if target OID is known and get supported Apps
   const commParticipant = getCommParticipant(destinationId, 400);
-  if (commParticipant.supportedApps.filter((app) => app.appId === appId && app.appVersion === appVersion).length === 0) {
+  const matchingApps = commParticipant.supportedApps.filter((app) => app.appId === appId && app.appVersion === appVersion);
+  if (matchingApps.length === 0) {
     throw new UcrmError(400, `Unsupported version '${appVersion}' for UCRI2 App '${appId}' for destination '${destinationId}'`, ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_APPID_OR_APPVERSION);
+  }
+  //there should never be duplicate entries for the same appId and version and thus we just check the first app...
+  const unsupportedMessages=matchingApps[0].unsupportedMessages;
+  if (unsupportedMessages && unsupportedMessages.filter((messageName) => messageName === schemaId).length > 0) {
+    throw new UcrmError(400, `Unsupported app message with schema name '${schemaId}' for UCRI2 App '${appId}' for destination '${destinationId}'`, ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_MESSAGE);
   }
 
   let payloadObject;

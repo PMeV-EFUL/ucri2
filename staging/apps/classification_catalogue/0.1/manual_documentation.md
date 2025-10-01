@@ -37,6 +37,13 @@ damit der Disponent z. B. ein passendes vorhandenes Stichwort auswählt
 oder die Klärung einleitet. Einsätze dürfen auf keinen Fall wegen
 unbekannter Stichworte unberücksichtigt bleiben.
 
+
+# Partielle Umsetzung
+Ein Teilnehmer, der ausschliesslich Abfragen durchführen will, muss die Antwortnachricht (response) nicht unterstützen.
+
+Ein Teilnehmer, der ausschliesslich Abfragen beantworten will, muss die Anfragenachricht (request) nicht unterstützen.
+
+
 # App-Nachrichten
 <!-- include ../../general_schema_documentation.md -->
 <!-- include request.schema.md -->

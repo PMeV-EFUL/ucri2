@@ -3,6 +3,7 @@
 <!-- toc -->
 
 - [Überblick](#uberblick)
+- [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -59,7 +60,13 @@ System mit dem Hinweis zur Anzeige gebracht werden, dass ein
 unbekannter Einsatzmitteltyp angefordert wird, damit der Disponent nach
 Klärung den richtigen Einsatzmitteltyp zuordnen kann. Einsätze dürfen auf
 keinen Fall wegen unbekanntem Einsatzmitteltyp unberücksichtigt bleiben.
- 
+
+# Partielle Umsetzung
+Ein Teilnehmer, der ausschliesslich Abfragen durchführen will, muss die Antwortnachricht (response) nicht unterstützen.
+
+Ein Teilnehmer, der ausschliesslich Abfragen beantworten will, muss die Anfragenachricht (request) nicht unterstützen.
+
+
 # App-Nachrichten
 ### Verwendete Datentypen
 In diesem Kapitel werden die in den Nachrichten-Schemata verwendeten Datentypen beschrieben. Die beschriebenen Datentypen kommen nicht alle auch notwendigerweise in den Schemata vor.

@@ -73,7 +73,7 @@
     },
     "ucrmId": "standalone",
     "username": "userA1",
-    "desc": "get registry entries (should be 3)",
+    "desc": "get registry entries (should be 4)",
     "endpoint": "registry",
     "method": "GET"
   },
@@ -317,6 +317,34 @@
         "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInformation\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInformation\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInformation\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInformation\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
       },
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.N2I5ZDgxODliYjFiYThiZmVlM2FiOWRmYjQwZDg1MWQ5MzE2ZTEwZDEzY2QwODY5NGMyNWI1ZWU3ZjRhMDJkZA.Lah58Kr2Iz6SEqktGVHFPE-yqzC-N521eXIk7m7OMvl7gpp2pIL33UvlDIzGhNrlvLXvhMBZ1AI2WJblaTC35JZWbXRJeScp-Mu7gEDXWnOmotYMSSP3DaXCjxmmjZxNMHJFozPbKIIjUiHu4FyQ_xPyfAAg6uZprNyVPk7rXJK5upgUZ3YNrkR37SYuSrPQ5_UvouZyPYLKjVTYOcyFG_IXMTw6hUsYZw5yW_FzoxKzDLA_1cF6uh5lNWJN9AtkXyOWhtiLiSSRr1ne0rlSBWbsjAF2FrKw1CLu7FBCRXJbQOCOd2X2JFOI1cA5ngjKY4AiEXjxWPXklgSU0c7Z6w"
+    },
+    "endpoint": "messaging/send",
+    "method": "POST"
+  },
+  {
+    "type": "fetch",
+    "expect": {
+      "http": 400
+    },
+    "ucrmId": "standalone",
+    "username": "userA1",
+    "desc": "post messaging send (schemaId in unsupportedMessages of receiver)",
+    "body": {
+      "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+      "timeout": 20,
+      "ack": "ALL",
+      "source": "1.2.3.4.5.6",
+      "destinations": [
+        "1.2.3.4.5.9"
+      ],
+      "payload": {
+        "appId": "incident_transfer",
+        "appVersion": "0.1",
+        "schemaId": "incident",
+        "contentType": "application/json",
+        "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInformation\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInformation\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInformation\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInformation\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
+      },
+      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.NGQ5YWZkM2NkY2Q3M2U2MjI2MTNiZGIzZjMwODA4Mzk0OWNkNDM2ZjczZGUxOTdmMmUzOTc4ZDVkYWQ3MjYzYQ.NnVKcicKdTpg0032K2s-6QxenzZVIlKqxDdh7NJi926Cd-EkCsV5yWISCUSFJb563LjNHhKaYkzuOeoned0uSA25zLRm2v0bDFnJqt6AqRUTnuha261f2HtkNBNCWvAary3lvHs42gpV7lkl5aFOf5NGrHTUMwBL-IwcwZHB8y1JTp54Nv6cx4E2dYOhmGV1_bKAqTxY3WUUSrDmJk88-gBplaK1F8TvdUMmOACgFygY53Z42bGf4rQ1b4bEsPd2vcv6LiBTZBAmZi2xqhPc9Z0flqG3kk3Yhdo5FlnPyOC4MdT27jyPVGiYVGzi3LrY2FY8k7n9WiRPSo-d6BhgCw"
     },
     "endpoint": "messaging/send",
     "method": "POST"

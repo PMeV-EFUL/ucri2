@@ -13,6 +13,9 @@ Nachrichten, die bereits existierende App-Nachrichten nachbilden (z.b. Einsatzan
 
 <!-- include ../../general_incident_app_notes.md -->
 
+# Partielle Umsetzung
+Für diese App ist keine partielle Umsetzung möglich. Teilnehmer, die Nachrichten versenden wollen, müssen auch den Empfang von Nachrichten unterstützten.
+
 # App-Nachrichten
 <!-- include ../../general_schema_documentation.md -->
 <!-- include notification.schema.md -->

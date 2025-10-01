@@ -4,6 +4,7 @@
 
 - [Überblick](#uberblick)
 - [Ablaufbeschreibung](#ablaufbeschreibung)
+- [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -145,14 +146,25 @@
 # Überblick
 Die Einsatzübergabe von polizeilichen Einsätzen wurde explizit als eigener Use Case mit aufgenommen, da bei der Bearbeitung von polizeilichen Einsätzen in der Regel beteiligte Personen mit den Rollen “Beschuldigter” und “Geschädigter” eine wichtige Rolle spielen. Systeme die diesen Use Case untertützen müssen daher auch explizit und strukturiert mit diesen Personendaten umgehen können. Beispiele für die Nutzung dieses Use Cases sind die Weitergabe von Einsätzen zwischen Polizeileitstellen, aber auch die Weitergabe von Einsatzinformationen an polizeiliche Vorgangsbearbeitungssysteme.
 
+Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
+Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+
+Diese App sieht zwei Rollen vor, die der abgebenden Stelle (A) und der annehmenden Stelle (B).
+
 # Ablaufbeschreibung
 
 1. A->B: Einsatz übergeben
 2. B->A: Einsatz annehmen oder ablehnen
 3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
-Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
-Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+# Partielle Umsetzung
+Für beide Rollen (abgebende und annehmende Stelle) ist die Unterstützung der Einsatzendemeldung (completion) optional.
+
+Ein Teilnehmer, der ausschliesslich Einsätze abgeben will, muss außerdem die Bestätigungsnachricht (acknowledgement) nicht unterstützen.
+
+Ein Teilnehmer, der ausschliesslich Einsätze annehmen will, muss außerdem die Übergabenachricht (incident) nicht unterstützen.
+
+
 
 # App-Nachrichten
 ### Verwendete Datentypen

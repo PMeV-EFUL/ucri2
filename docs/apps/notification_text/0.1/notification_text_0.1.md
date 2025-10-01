@@ -4,6 +4,7 @@
 
 - [Überblick](#uberblick)
 - [Ablaufbeschreibung](#ablaufbeschreibung)
+- [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -35,6 +36,9 @@ Nachrichten, die bereits existierende App-Nachrichten nachbilden (z.b. Einsatzan
 
 Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
 Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+
+# Partielle Umsetzung
+Für diese App ist keine partielle Umsetzung möglich. Teilnehmer, die Nachrichten versenden wollen, müssen auch den Empfang von Nachrichten unterstützten.
 
 # App-Nachrichten
 ### Verwendete Datentypen

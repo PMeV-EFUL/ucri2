@@ -9,7 +9,16 @@ properties:
   appVersion:
     type: string
     description: Version der UCRI2-Applikation
+  unsupportedMessages:
+    type: array
+    description: Liste der nicht unterstützen Nachrichten dieser App (mit Ihren Namen). Es dürfen nur Nachrichten aufgeführt werden, deren Unterstützung laut der Spezifikation der jeweiligen App nicht zwingend ist (ggf. unter der Berücksichtigung einer gewählten Rolle, z.B. abgebende oder annehmende Stelle).
+    minItems: 1
+    items:
+      type: string
+      description: Name einer nicht unterstützten App-Nachricht
 description: Referenz auf eine UCRI2-Applikation
 example:
-  appId: incident
+  appId: incident_transfer_with_patient
   appVersion: '0.1'
+  unsupportedMessages:
+    - incident

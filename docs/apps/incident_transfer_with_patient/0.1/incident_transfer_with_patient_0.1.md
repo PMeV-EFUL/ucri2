@@ -4,6 +4,7 @@
 
 - [Überblick](#uberblick)
 - [Ablaufbeschreibung](#ablaufbeschreibung)
+- [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -121,14 +122,25 @@
 # Überblick
 Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mit Patientendaten explizit dafür gedacht Einsätze zwischen Systemen übertragen zu können, die explizit mit Patientendaten arbeiten und mit den dafür spezifischen Zusatzinformationen von Patienten sinnvoll umgehen können. Typische Einsatzzwecke sind Einsatzübergaben an Rettungsdienstleitstellen.
 
+Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
+Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+
+Diese App sieht zwei Rollen vor, die der abgebenden Stelle (A) und der annehmenden Stelle (B).
+
 # Ablaufbeschreibung
 
 1. A->B: Einsatz übergeben
 2. B->A: Einsatz annehmen oder ablehnen
 3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
-Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
-Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+# Partielle Umsetzung
+Für beide Rollen (abgebende und annehmende Stelle) ist die Unterstützung der Einsatzendemeldung (completion) optional.
+
+Ein Teilnehmer, der ausschliesslich Einsätze abgeben will, muss außerdem die Bestätigungsnachricht (acknowledgement) nicht unterstützen.
+
+Ein Teilnehmer, der ausschliesslich Einsätze annehmen will, muss außerdem die Übergabenachricht (incident) nicht unterstützen.
+
+
 
 # App-Nachrichten
 ### Verwendete Datentypen

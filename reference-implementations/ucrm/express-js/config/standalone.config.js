@@ -143,6 +143,35 @@ export const config = {
         "phone": "001-555-1234",
         "e-mail": "abc@lst-essen.de"
       }
+    },
+    "1.2.3.4.5.9": {
+      "id": "1.2.3.4.5.9",
+      "type": "client",
+      // "domain": "testDomain",
+      "systemName": "ELS Essen 3",
+      "operatorName": "Einsatzleitstelle Essen 3",
+      "operatorShortName": "ELS A3",
+      "supportedApps": [
+        {
+          "appId": "incident_transfer",
+          "appVersion": "0.1",
+          "unsupportedMessages": ["incident"]
+        },
+        {
+          "appId": "transport_layer_messages",
+          "appVersion": "0.1"
+        }
+      ],
+      "key": {
+        "kty": "RSA",
+        "n": "ofgWCuLjybRlzo0tZWJjNiuSfb4p4fAkd_wWJcyQoTbji9k0l8W26mPddx",
+        "e": "AQAB"
+      },
+      "status": "online",
+      "techSupport": {
+        "phone": "001-555-1234",
+        "e-mail": "abc@lst-essen.de"
+      }
     }
   }
 }

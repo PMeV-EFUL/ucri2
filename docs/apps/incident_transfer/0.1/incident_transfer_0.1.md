@@ -4,6 +4,7 @@
 
 - [Überblick](#uberblick)
 - [Ablaufbeschreibung](#ablaufbeschreibung)
+- [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -93,6 +94,10 @@ Die Einsatzübergabe via UCRI verfolgt das Ziel einer gesicherten Übergabe der 
 Dementsprechend wird die Übergabe durch einen Disponenten der empfangenen Leitstelle (B) bestätigt (oder abgelehnt) und ist als Transaktion erst mit Empfang dieser Quittung in der Leitstelle (A) für diese abgeschlossen.
 UCRI regelt nicht, wie der Einsatz in der abgebenden Leitstelle (A) behandelt wird. Technisch und fachlich kann es durchaus möglich sein, dass der Einsatz dann auch in Leitstelle (A) noch für Nachdokumentationen offen bleibt.
 
+Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
+Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+
+Diese App sieht zwei Rollen vor, die der abgebenden Stelle (A) und der annehmenden Stelle (B).
 
 # Ablaufbeschreibung
 
@@ -100,8 +105,14 @@ UCRI regelt nicht, wie der Einsatz in der abgebenden Leitstelle (A) behandelt wi
 2. B->A: Einsatz annehmen oder ablehnen
 3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
-Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
-Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+# Partielle Umsetzung
+Für beide Rollen (abgebende und annehmende Stelle) ist die Unterstützung der Einsatzendemeldung (completion) optional.
+
+Ein Teilnehmer, der ausschliesslich Einsätze abgeben will, muss außerdem die Bestätigungsnachricht (acknowledgement) nicht unterstützen.
+
+Ein Teilnehmer, der ausschliesslich Einsätze annehmen will, muss außerdem die Übergabenachricht (incident) nicht unterstützen.
+
+
 
 # App-Nachrichten
 ### Verwendete Datentypen

@@ -63,6 +63,10 @@
 <table class="jssd-property-table">
   <tbody>
     <tr>
+      <th>Titel</th>
+      <td colspan="2">Teilnehmer-status</td>
+    </tr>
+    <tr>
       <th>Beschreibung</th>
       <td colspan="2">Verfügbarkeitsstatus dieses Teilnehmers. Für an UCRM angebundene TN wird dieser Status durch das UCRM verwaltet. Für UCRMs selbst wird der Status durch diese verwaltet.</td>
     </tr>
@@ -114,6 +118,7 @@
                 "offline",
                 "unknown"
             ],
+            "title": "Teilnehmer-status",
             "description": "Verfügbarkeitsstatus dieses Teilnehmers. Für an UCRM angebundene TN wird dieser Status durch das UCRM verwaltet. Für UCRMs selbst wird der Status durch diese verwaltet."
         }
     },

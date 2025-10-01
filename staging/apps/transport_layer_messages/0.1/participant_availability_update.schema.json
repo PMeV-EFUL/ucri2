@@ -18,6 +18,7 @@
     "status":{
       "type": "string",
       "enum":["online","offline","unknown"],
+      "title": "Teilnehmer-status",
       "description": "Verfügbarkeitsstatus dieses Teilnehmers. Für an UCRM angebundene TN wird dieser Status durch das UCRM verwaltet. Für UCRMs selbst wird der Status durch diese verwaltet."
     }
   },

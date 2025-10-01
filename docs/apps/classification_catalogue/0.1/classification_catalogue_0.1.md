@@ -3,6 +3,7 @@
 <!-- toc -->
 
 - [Überblick](#uberblick)
+- [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -62,6 +63,13 @@ Anzeige gebracht werden, dass das Stichwort dem System unbekannt ist,
 damit der Disponent z. B. ein passendes vorhandenes Stichwort auswählt
 oder die Klärung einleitet. Einsätze dürfen auf keinen Fall wegen
 unbekannter Stichworte unberücksichtigt bleiben.
+
+
+# Partielle Umsetzung
+Ein Teilnehmer, der ausschliesslich Abfragen durchführen will, muss die Antwortnachricht (response) nicht unterstützen.
+
+Ein Teilnehmer, der ausschliesslich Abfragen beantworten will, muss die Anfragenachricht (request) nicht unterstützen.
+
 
 # App-Nachrichten
 ### Verwendete Datentypen

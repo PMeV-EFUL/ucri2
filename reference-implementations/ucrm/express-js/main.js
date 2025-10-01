@@ -35,7 +35,7 @@ import fs from "fs";
 const REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS=60*1000;
 const TRANSPORT_LAYER_APPID="transport_layer_messages";
 const TRANSPORT_LAYER_APP_VERSION="0.1";
-const TRANSPORT_LAYER_SPEC_DIR = "transport-layer-spec";
+const TRANSPORT_LAYER_SPEC_DIR = "transport-spec";
 
 initCrypto(UcrmError,canonicalize,sha3,jose);
 

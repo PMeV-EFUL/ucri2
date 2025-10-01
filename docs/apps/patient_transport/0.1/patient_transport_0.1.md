@@ -4,6 +4,7 @@
 
 - [Überblick](#uberblick)
   * [Schema-Beschreibung](#schema-beschreibung)
+- [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
       - [Wahrheitswerte - type: boolean](#wahrheitswerte---type-boolean)
@@ -143,6 +144,11 @@ Es ist entweder eine Abholzeit oder eine gewünschte Ankunftszeit zu setzen. Sin
 Nach Bestätigung der Übergabe kann mit einer zusätzlichen Meldung (Acknowledgement) der tatsächliche Zieltermin des Patiententransports an die anfordernde Leitstelle gemeldet werden.
 Wird die Transportanforderung abgelehnt, so kann ein Alternativ-Vorschlag (alternativeProposal) unterbreitet werden. In einem solchen Fall wäre ein erneuter Request (neue Übergabe des Einsatzes) vom anfordernden System zu erstellen.
 
+Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
+Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+
+Diese App sieht zwei Rollen vor, die der terminsuchenden Stelle (A) und der terminvergebenden Stelle (B).
+
 ## Schema-Beschreibung
 
 1.  A->B: Einsatz mit Patient und Zieltermin übergeben
@@ -150,8 +156,11 @@ Wird die Transportanforderung abgelehnt, so kann ein Alternativ-Vorschlag (alter
 3.  B-> A: Zieltermin übermitteln (optional)
 4.  B->A: Übergabe ablehnen
 
-Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
-Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
+# Partielle Umsetzung
+Ein Teilnehmer, der ausschliesslich Terminanfrage senden will, muss die Bestätigungsnachricht (acknowledgement) nicht unterstützen.
+
+Ein Teilnehmer, der ausschliesslich Terminanfragen empfangen will, muss die Anfragenachricht (incident) nicht unterstützen.
+
 
 # App-Nachrichten
 ### Verwendete Datentypen

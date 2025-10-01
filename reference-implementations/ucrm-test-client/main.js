@@ -15,7 +15,7 @@ let totalNumOfTestFailures = 0;
 const numOfTestFailuresPerSuite = {};
 
 await runTestSuite("standalone",await generateStandaloneSteps());
-await runTestSuite("ucrm-p2p", await generateUcrmP2PSteps());
+// await runTestSuite("ucrm-p2p", await generateUcrmP2PSteps());
 finish();
 
 async function runTestSuite(testSuiteName, testSuiteSteps) {

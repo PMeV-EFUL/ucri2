@@ -9,6 +9,9 @@ Die Einsatzübergabe via UCRI verfolgt das Ziel einer gesicherten Übergabe der 
 Dementsprechend wird die Übergabe durch einen Disponenten der empfangenen Leitstelle (B) bestätigt (oder abgelehnt) und ist als Transaktion erst mit Empfang dieser Quittung in der Leitstelle (A) für diese abgeschlossen.
 UCRI regelt nicht, wie der Einsatz in der abgebenden Leitstelle (A) behandelt wird. Technisch und fachlich kann es durchaus möglich sein, dass der Einsatz dann auch in Leitstelle (A) noch für Nachdokumentationen offen bleibt.
 
+<!-- include ../../general_incident_app_notes.md -->
+
+Diese App sieht zwei Rollen vor, die der abgebenden Stelle (A) und der annehmenden Stelle (B).
 
 # Ablaufbeschreibung
 
@@ -16,7 +19,8 @@ UCRI regelt nicht, wie der Einsatz in der abgebenden Leitstelle (A) behandelt wi
 2. B->A: Einsatz annehmen oder ablehnen
 3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
-<!-- include ../../general_incident_app_notes.md -->
+# Partielle Umsetzung
+<!-- include ../../general_incident_partial_implementation_notes.md -->
 
 # App-Nachrichten
 <!-- include ../../general_schema_documentation.md -->
