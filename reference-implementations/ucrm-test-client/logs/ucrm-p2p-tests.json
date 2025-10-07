@@ -13,7 +13,8 @@
     "readyLogString": "Listening on port",
     "logStdOut": false,
     "logStdErr": false,
-    "ready": true
+    "ready": true,
+    "durationMs": 956
   },
   {
     "type": "authorize",
@@ -23,7 +24,8 @@
     "password": "test",
     "expect": {
       "http": 200
-    }
+    },
+    "durationMs": 174
   },
   {
     "type": "fetch",
@@ -34,7 +36,8 @@
     "username": "userA1",
     "desc": "get info while p2p discovery is active (status must be 1)",
     "endpoint": "info",
-    "method": "GET"
+    "method": "GET",
+    "durationMs": 13
   },
   {
     "type": "fetch",
@@ -45,7 +48,8 @@
     "username": "userA1",
     "desc": "get registry entries while p2p discovery is active (should be 3)",
     "endpoint": "registry",
-    "method": "GET"
+    "method": "GET",
+    "durationMs": 9
   },
   {
     "type": "authorize",
@@ -56,7 +60,8 @@
     "password": "test",
     "expect": {
       "http": 200
-    }
+    },
+    "durationMs": 16
   },
   {
     "type": "startUcrm",
@@ -72,7 +77,8 @@
     "readyLogString": "Listening on port",
     "logStdOut": false,
     "logStdErr": false,
-    "ready": true
+    "ready": true,
+    "durationMs": 936
   },
   {
     "type": "authorize",
@@ -82,17 +88,20 @@
     "password": "test",
     "expect": {
       "http": 200
-    }
+    },
+    "durationMs": 187
   },
   {
     "type": "awaitDiscoveryComplete",
     "ucrmId": "ucrmA",
-    "username": "userA1"
+    "username": "userA1",
+    "durationMs": 2062
   },
   {
     "type": "awaitDiscoveryComplete",
     "ucrmId": "ucrmB",
-    "username": "userB"
+    "username": "userB",
+    "durationMs": 516
   },
   {
     "type": "fetch",
@@ -103,7 +112,8 @@
     "username": "userA1",
     "desc": "get registry entries after p2p discovery is complete (should be 5)",
     "endpoint": "registry",
-    "method": "GET"
+    "method": "GET",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -115,7 +125,8 @@
     "baseUrlOverride": "http://localhost:3002/ucrm/p2p/v0",
     "desc": "get local registry entries after p2p discovery is complete (should be 3)",
     "endpoint": "registry",
-    "method": "GET"
+    "method": "GET",
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -143,11 +154,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTRiMjZiN2RkY2UxNWUwNmM5YTBjN2I4NDgyYmM4YWMyNmFlY2VhYWVlMWExN2YyM2RjMzJiODhiZDIwOWVmMg.ElOJVBoRbiHHahocGtgSiNQSBstWGeu63Hhe1-XqTvVBDsK1qJI_tiJaIG6Mx40kzEWJWMVUIQAPfJGxJSf_xM-oOdrDwS3Wpl3KWx9ELKmN-XCllJ0txdnJYnzYkVCGJxFWEikskM-5Ze3uRUnU-IqJEp5z3OJuXEcL3Qre3uEtd8-I0ezbcJmvi59Jvk89fkfigl9SpJs_MeEFX_tnkwsWcKJZa-4Jd2ovW7h3FQOU7ItytjC3cpzxAp0lljKOky4LRzxtLLeNMPYo2O5MUziW1bW9JOTaQys4rKO6N8lIyXCnPuRg4fX4tMgeO5DkuprpUR1CN0Q2a1iqNMxpCA"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
-  },
-  {
-    "type": "sleep",
-    "durationMs": 2000
+    "method": "POST",
+    "durationMs": 15
   },
   {
     "type": "fetch",
@@ -161,10 +169,12 @@
       "destinations": [
         "1.2.3.4.5.7"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 10
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 51
   },
   {
     "type": "fetch",
@@ -192,11 +202,12 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTRiMjZiN2RkY2UxNWUwNmM5YTBjN2I4NDgyYmM4YWMyNmFlY2VhYWVlMWExN2YyM2RjMzJiODhiZDIwOWVmMg.ElOJVBoRbiHHahocGtgSiNQSBstWGeu63Hhe1-XqTvVBDsK1qJI_tiJaIG6Mx40kzEWJWMVUIQAPfJGxJSf_xM-oOdrDwS3Wpl3KWx9ELKmN-XCllJ0txdnJYnzYkVCGJxFWEikskM-5Ze3uRUnU-IqJEp5z3OJuXEcL3Qre3uEtd8-I0ezbcJmvi59Jvk89fkfigl9SpJs_MeEFX_tnkwsWcKJZa-4Jd2ovW7h3FQOU7ItytjC3cpzxAp0lljKOky4LRzxtLLeNMPYo2O5MUziW1bW9JOTaQys4rKO6N8lIyXCnPuRg4fX4tMgeO5DkuprpUR1CN0Q2a1iqNMxpCA"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 4
   },
   {
     "type": "sleep",
-    "durationMs": 2000
+    "durationMs": 2017
   },
   {
     "type": "fetch",
@@ -210,10 +221,12 @@
       "destinations": [
         "1.2.3.4.5.7"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -227,10 +240,12 @@
       "destinations": [
         "1.2.3.4.5.7"
       ],
-      "maxMessages": 1
+      "maxMessages": 1,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -245,7 +260,8 @@
       "sequenceId": 1
     },
     "endpoint": "messaging/commit",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 7
   },
   {
     "type": "fetch",
@@ -259,10 +275,12 @@
       "destinations": [
         "1.2.3.4.5.7"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -277,7 +295,8 @@
       "sequenceId": 2
     },
     "endpoint": "messaging/commit",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 3
   },
   {
     "type": "fetch",
@@ -291,14 +310,16 @@
       "destinations": [
         "1.2.3.4.5.7"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 2
   },
   {
     "type": "sleep",
-    "durationMs": 2000
+    "durationMs": 2015
   },
   {
     "type": "fetch",
@@ -312,10 +333,12 @@
       "destinations": [
         "1.2.3.4.5.6"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 16
   },
   {
     "type": "fetch",
@@ -330,7 +353,8 @@
       "sequenceId": 2
     },
     "endpoint": "messaging/commit",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 7
   },
   {
     "type": "fetch",
@@ -358,11 +382,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTRiMjZiN2RkY2UxNWUwNmM5YTBjN2I4NDgyYmM4YWMyNmFlY2VhYWVlMWExN2YyM2RjMzJiODhiZDIwOWVmMg.ElOJVBoRbiHHahocGtgSiNQSBstWGeu63Hhe1-XqTvVBDsK1qJI_tiJaIG6Mx40kzEWJWMVUIQAPfJGxJSf_xM-oOdrDwS3Wpl3KWx9ELKmN-XCllJ0txdnJYnzYkVCGJxFWEikskM-5Ze3uRUnU-IqJEp5z3OJuXEcL3Qre3uEtd8-I0ezbcJmvi59Jvk89fkfigl9SpJs_MeEFX_tnkwsWcKJZa-4Jd2ovW7h3FQOU7ItytjC3cpzxAp0lljKOky4LRzxtLLeNMPYo2O5MUziW1bW9JOTaQys4rKO6N8lIyXCnPuRg4fX4tMgeO5DkuprpUR1CN0Q2a1iqNMxpCA"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
-  },
-  {
-    "type": "sleep",
-    "durationMs": 12500
+    "method": "POST",
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -376,10 +397,12 @@
       "destinations": [
         "1.2.3.4.5.6"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 13
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 11008
   },
   {
     "type": "fetch",
@@ -394,6 +417,7 @@
       "sequenceId": 3
     },
     "endpoint": "messaging/commit",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   }
 ]

@@ -169,13 +169,15 @@ export async function generateSteps(){
         http: 200
       }
     },"sender"),
-    {
-      type:"sleep",
-      durationMs: DURATION_FOR_MESSAGE_DELIVERY_MS
-    },
+    //sleep is no longer needed as the following receive uses long polling
+    // {
+    //   type:"sleep",
+    //   durationMs: DURATION_FOR_MESSAGE_DELIVERY_MS
+    // },
+
     genStepMessagingReceive({
       desc: "post messaging receive first message",
-      body: genBodyReceiveRequest(receiverOID),
+      body: genBodyReceiveRequest(receiverOID,5,10),
       expect: {
         http: 200,
         responseChecker:curry(checkReceiveResponse)(1)
@@ -188,6 +190,7 @@ export async function generateSteps(){
         http: 200
       }
     },"sender"),
+    //here we actually need the sleep as even with long polling the request would return immediately (as there is one unconfirmed message)
     {
       type:"sleep",
       durationMs:DURATION_FOR_MESSAGE_DELIVERY_MS
@@ -271,16 +274,11 @@ export async function generateSteps(){
       }
     },"sender"),
 
-    //sleep to generate a timeout
-    {
-      type:"sleep",
-      durationMs:12500,
-    },
-
+    //we use a long polling maxDelay of 13 seconds, so the receive should wait until the timeout message is actually delivered
     genStepMessagingReceive({
       //TODO check that messages is an actual delivery timeout messages
       desc: "post messaging receive one delivery timeout message",
-      body: genBodyReceiveRequest(senderOID),
+      body: genBodyReceiveRequest(senderOID,5,13),
       expect: {
         http: 200,
         responseChecker:curry(checkReceiveResponse)(1)

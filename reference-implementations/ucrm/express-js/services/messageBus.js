@@ -330,7 +330,6 @@ async function processUnsentMessages() {
 }
 
 let pendingMessageReceives=[]
-const newUnreceivedMessagesByDestination={}
 
 function checkPendingMessageReceives(){
   const newPendingMessageReceives=[];
@@ -341,9 +340,8 @@ function checkPendingMessageReceives(){
       sendResponse=true;
     }else{
       for (const destinationId of pendingReceive.destinations){
-        if (newUnreceivedMessagesByDestination[destinationId]){
-          newUnreceivedMessagesByDestination[destinationId] = false;
-          sendResponse=true;
+        if (getPendingMessagesForDestination(destinationId).length!==0){
+            sendResponse=true;
         }
       }
     }
@@ -479,7 +477,6 @@ export async function confirmMessages(messageRef,username) {
 
 function addPendingMessageForDestination(destinationId,envelope){
   getPendingMessagesForDestination(destinationId).push(envelope);
-  newUnreceivedMessagesByDestination[destinationId]=true;
 }
 
 function getPendingMessagesForDestination(destinationId) {

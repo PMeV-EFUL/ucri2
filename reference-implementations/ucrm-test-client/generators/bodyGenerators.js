@@ -1,11 +1,12 @@
 import deepMerge from '@75lb/deep-merge';
 
-export function genBodyReceiveRequest(destination, maxMessages=5){
+export function genBodyReceiveRequest(destination, maxMessages=5,maxDelay=0){
   return {
     "destinations": [
       destination
     ],
-    maxMessages
+    maxMessages,
+    maxDelay
   }
 }
 

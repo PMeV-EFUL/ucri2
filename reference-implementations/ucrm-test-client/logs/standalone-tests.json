@@ -13,7 +13,8 @@
     "readyLogString": "Listening on port",
     "logStdOut": false,
     "logStdErr": false,
-    "ready": true
+    "ready": true,
+    "durationMs": 1046
   },
   {
     "type": "authorize",
@@ -23,7 +24,8 @@
     "password": "wrongPassword",
     "expect": {
       "http": 401
-    }
+    },
+    "durationMs": 156
   },
   {
     "type": "authorize",
@@ -33,7 +35,8 @@
     "password": "test",
     "expect": {
       "http": 401
-    }
+    },
+    "durationMs": 6
   },
   {
     "type": "authorize",
@@ -43,7 +46,8 @@
     "password": "test",
     "expect": {
       "http": 200
-    }
+    },
+    "durationMs": 26
   },
   {
     "type": "authorize",
@@ -53,7 +57,8 @@
     "password": "test",
     "expect": {
       "http": 200
-    }
+    },
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -64,7 +69,8 @@
     "username": "userA1",
     "desc": "get info",
     "endpoint": "info",
-    "method": "GET"
+    "method": "GET",
+    "durationMs": 13
   },
   {
     "type": "fetch",
@@ -75,7 +81,8 @@
     "username": "userA1",
     "desc": "get registry entries (should be 4)",
     "endpoint": "registry",
-    "method": "GET"
+    "method": "GET",
+    "durationMs": 16
   },
   {
     "type": "fetch",
@@ -86,7 +93,8 @@
     "username": "userA1",
     "endpoint": "registry/1.2.3.4.5.8",
     "method": "GET",
-    "desc": "get individual registry entry (existing)"
+    "desc": "get individual registry entry (existing)",
+    "durationMs": 14
   },
   {
     "type": "fetch",
@@ -100,10 +108,12 @@
       "destinations": [
         "1.2.3.4.5.6"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 17
   },
   {
     "type": "fetch",
@@ -117,10 +127,12 @@
       "destinations": [
         "1.666"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 13
   },
   {
     "type": "fetch",
@@ -134,10 +146,12 @@
       "destinations": [
         "1.2.3.4.5.8"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -152,7 +166,8 @@
       "sequenceId": 1234
     },
     "endpoint": "messaging/commit",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 9
   },
   {
     "type": "fetch",
@@ -179,7 +194,8 @@
       }
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 16
   },
   {
     "type": "fetch",
@@ -207,7 +223,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.MjBlNWZmNGIwMTY3NzVmYTI4ZTM5MjEzNmM3ZmE3ZmYwOGFjNWMxNmIwZGVkNWQ5NjE4ODYyNzZiNjBkY2Q2Nw.b2iOziUcXbetFIfDSz-e6xDLXAwFP47kidvDBQjbnv-cS4lrk4o5jJoUTsn22RFQ1knpf2F5REtLkRDFIdVLrzwdg3tpohFsFpc2wRrSCeXq4SVgKq5bLmMkDOEQVDf5Mpe7RQ6xe895ISFXQZ9zLUtrV_afHrk-Uwefg2CyCutyU8fiGg3IHLto1MglRG0_PQyySaf5nssaY9b2y8yskVSoYB5dqs29m71GqSJ43FX65isPKmAjwidc5EyneO3ebw9_xXa4TXT5ploJjMvvSrZUh4cOoc2LEaZIcSUt5hNMACepieEatLqVqocIf5aME8D05eVI4Lvi1hiaEbWzbA"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -235,7 +252,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.NTIzMTc2ODgzZDZmM2ZhYWY3MWQyY2FkMzdiZTQ4OGVhZmNmNzUyNjRjMjQwOGQyZGVhZDMwMmRmNmEyMGI1Ng.FT4JstY1-rpBqYBfBZWscXEgSrh6kOgCf0-K7QjqIBm7C7Ql8iCAVgtxeVbebgeRbkyGyVOJXChL7zhT8OeE59rQmfwSofyW_vxvYxNRVivQSqqxB5i1ugcMXIYCTIHhOY0EoE296fIJ5YdDKpHUgcYu1-mAVo3oYRwSigpaB5c4zKAqm8OaNolOxSJ4chjJUkTY7QGJ8ThaSMGj-OvyZ9F7vkgzBqqHRIHcnVdURSr03-X-6k16YwvuGaBw8Q9PlP3UqZ7p4Xv04oAeXA2OuL4gReS-cC0rzdLwPtb3M22iPAwsP5TbfQNrAVtbijQBOOdQqB0FP0h9vtyeNGwqcw"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -263,7 +281,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTYyNzU3N2E0MWI2YmE2OTUzMGY1YTc1MzBhYTgzY2RiYjcyOWQ4YmY4MTlhYzQ3MjYxYzZlZTc4ZmI2YTUzZA.Ggt7w81W7IVykdJ8oIxt7tWwWgw0qE8syFa_2VXruQTJcI9WmJWyznNzgHsIUluj02nCfegrx1audSMMJxWqQlVWvpy_8OlP6vBJUlEZqqCjZGk8b2hQotpcOc9lVoh-IrvmHQ9W8CftCJXadoxQQcQvmKmoTV8a-sTM1rCN8Doh0LXz4PDsRp-34TlmSRDOb3kKvt4Uasg5fFVajnTX3ExHeDaJLKaP9k1yTRhTk08027hC6GB1l97UT0JF1YVaAt_OBST3rDLY1J0TB-srxRjh9ZuhO6q7uCLiN2bWxkxgA5nnsXYpXCpWOy2lfNZajXxTdggmAcS_uParSzPPNw"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -291,7 +310,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.NGE5ZmVkMmRjZmRlZDJhNjdkNGQ0NDYzNzVlY2Y0NTZjMzM3OGM3N2E1MzlhNGY1NGZlNWQ4YmUzODBiZTIzOQ.CIxemiHoro1FWlmnZkhX0l0Y5USx79zkRu9_CoqYM0U0wW3qDwIigKyDUiTFYOZAri6yzDfvGpTpYzteJOgmtYS-l6Yw6jsGKfxS5hk7F-o-MP9fTSFZopv9RmefYpfOitpByWd8Q6cRnFWNBobI5P0Y8ykwGEtdlr5tKJeAacuSCmP6F6x4BDCuykMRSN9vH2eXRq3LJ5jzu0O0f0je7PY4YNKqs8SFcKdXrmbb8qDtQmEY0h_E0m0QN_m_SqQ1V4azGN-wYMN7es4RmXssUn3u7-KL-z7apnifhM_Zb8b9ig3gEBj4v8NZHBYIdhbWmLRsqIff4g_6n7AnlSjVHA"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -319,7 +339,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.N2I5ZDgxODliYjFiYThiZmVlM2FiOWRmYjQwZDg1MWQ5MzE2ZTEwZDEzY2QwODY5NGMyNWI1ZWU3ZjRhMDJkZA.Lah58Kr2Iz6SEqktGVHFPE-yqzC-N521eXIk7m7OMvl7gpp2pIL33UvlDIzGhNrlvLXvhMBZ1AI2WJblaTC35JZWbXRJeScp-Mu7gEDXWnOmotYMSSP3DaXCjxmmjZxNMHJFozPbKIIjUiHu4FyQ_xPyfAAg6uZprNyVPk7rXJK5upgUZ3YNrkR37SYuSrPQ5_UvouZyPYLKjVTYOcyFG_IXMTw6hUsYZw5yW_FzoxKzDLA_1cF6uh5lNWJN9AtkXyOWhtiLiSSRr1ne0rlSBWbsjAF2FrKw1CLu7FBCRXJbQOCOd2X2JFOI1cA5ngjKY4AiEXjxWPXklgSU0c7Z6w"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -347,7 +368,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.NGQ5YWZkM2NkY2Q3M2U2MjI2MTNiZGIzZjMwODA4Mzk0OWNkNDM2ZjczZGUxOTdmMmUzOTc4ZDVkYWQ3MjYzYQ.NnVKcicKdTpg0032K2s-6QxenzZVIlKqxDdh7NJi926Cd-EkCsV5yWISCUSFJb563LjNHhKaYkzuOeoned0uSA25zLRm2v0bDFnJqt6AqRUTnuha261f2HtkNBNCWvAary3lvHs42gpV7lkl5aFOf5NGrHTUMwBL-IwcwZHB8y1JTp54Nv6cx4E2dYOhmGV1_bKAqTxY3WUUSrDmJk88-gBplaK1F8TvdUMmOACgFygY53Z42bGf4rQ1b4bEsPd2vcv6LiBTZBAmZi2xqhPc9Z0flqG3kk3Yhdo5FlnPyOC4MdT27jyPVGiYVGzi3LrY2FY8k7n9WiRPSo-d6BhgCw"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -375,7 +397,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.MzA3MDJmNDU5MjdhMWY1YWI4NDBkMGEyNDdhNjcxYzNjMTE4MDE4ZGZmNWQ1ODM4ZWM2MGU3YjMxYTU3NDRjNw.SzC1cTr6cJyIQeGbq3lZoIZ4yKD-DTlVEcteCoezg3xHAtK1eVO-UgW25iUXOhJ-FxCQ5uFGm71Rx_6qZLp5vDBp3YvUyvfkS2lTSBWZCjavybSbCcH254Ecq_pol_emvXW4j3-m6P6O11D2QWgyYv_U0Ynpv0hXXA9krzOZ_BGY4ojkcHrVI7EEa9LDTPqG65Dfd_kQqoxQ8SAe__S44apeLEVHIivujVIlbREa1rmJAjvEdHDT5DJOXA6Z2X29kGIoFvbC-DIyQ06zY5lIqyHjgkvZJQhjWhF6Kife3Xe-glvr1yQmKFKIrJAa5l69lbBpdE2D-1P00WJiUihlvg"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 3
   },
   {
     "type": "fetch",
@@ -403,7 +426,8 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZWQxZmYzZjYyMzlkOTI4NTRiNDBiZmM4OTc0YmY4ZDU4NzgzZGM2M2I0ODU3NjY4OGJkNDdiMzA2NTgyZTJjNg.Z83b2hII2DGlHtLuT179mm_vFw1H6ds848YxQmv4VQg_Z2KQmdYbIYvvj5u9sbpB3g9WSmfv-6qmTfhQVTrKtnKecY4QpQwoU7M-vCMeuLc4IfQgK_M8sWjmfIW95WlTp86ItQlER0RJa5JX7FbmDsFozsqSC825dhFH2UZeiOSI5vVns7Irpsq0K6gD_baIu8SJqT4GMPgTR15DcfOzMieyTVpw4m7eiBX3UAVxS68HwX6ZQrs9btaTqoTWeSAfVCl_veemqTsZOUcdIE2_0J7F7EE7ITXJTON0VGvvpUNzxjJ7KdtsCAxc-EqP9BiAf3LU3OSsRBRn-S3fidXLVA"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -431,11 +455,12 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.M2Y0YjIyMzM2YzlkYzhlZmM0YjE2Y2I0YWZkM2E5NWRkNDA2ZTQ0YjFkMTVmZmNkMGQyOGM0YWU5MzdlMjc1Mw.q_YGjvAyFvWGFoGjoYIJO7V7AwOOF2FMBRUHIncGb26p7y2ZmIcf1Ea4n2SBzVv-4d9HSnZvDd57boIocb-Z_3emnlz4uWoyNkbo5WqC8iBHmppgPOQofK4AMbjgFmIs7JqfH6zVUqNTnAoTp4eHfMQ9lavsnNLe_H5vLtSQlJCZhmRdkM4-84prD_fwVWFQQuf4MQAVqcomz17mVUg1O19GM09Uia0nxfl4OcILszvSEfrwWmrq9j6v_7cZbyRLPe4KeMn0uhSpzNtUNoCV2jdYCkCbXN_j89gSDNgneK1IGMCvlNWruPx73HeGMSmzWlsXaNSB9ViJGM0L7afIDg"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 6
   },
   {
     "type": "sleep",
-    "durationMs": 500
+    "durationMs": 510
   },
   {
     "type": "fetch",
@@ -449,10 +474,12 @@
       "destinations": [
         "1.2.3.4.5.8"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -480,11 +507,12 @@
       "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.M2Y0YjIyMzM2YzlkYzhlZmM0YjE2Y2I0YWZkM2E5NWRkNDA2ZTQ0YjFkMTVmZmNkMGQyOGM0YWU5MzdlMjc1Mw.q_YGjvAyFvWGFoGjoYIJO7V7AwOOF2FMBRUHIncGb26p7y2ZmIcf1Ea4n2SBzVv-4d9HSnZvDd57boIocb-Z_3emnlz4uWoyNkbo5WqC8iBHmppgPOQofK4AMbjgFmIs7JqfH6zVUqNTnAoTp4eHfMQ9lavsnNLe_H5vLtSQlJCZhmRdkM4-84prD_fwVWFQQuf4MQAVqcomz17mVUg1O19GM09Uia0nxfl4OcILszvSEfrwWmrq9j6v_7cZbyRLPe4KeMn0uhSpzNtUNoCV2jdYCkCbXN_j89gSDNgneK1IGMCvlNWruPx73HeGMSmzWlsXaNSB9ViJGM0L7afIDg"
     },
     "endpoint": "messaging/send",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 4
   },
   {
     "type": "sleep",
-    "durationMs": 500
+    "durationMs": 506
   },
   {
     "type": "fetch",
@@ -498,10 +526,12 @@
       "destinations": [
         "1.2.3.4.5.8"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -515,10 +545,12 @@
       "destinations": [
         "1.2.3.4.5.8"
       ],
-      "maxMessages": 1
+      "maxMessages": 1,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 3
   },
   {
     "type": "fetch",
@@ -533,7 +565,8 @@
       "sequenceId": 1
     },
     "endpoint": "messaging/commit",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 8
   },
   {
     "type": "fetch",
@@ -547,10 +580,12 @@
       "destinations": [
         "1.2.3.4.5.8"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 3
   },
   {
     "type": "fetch",
@@ -565,7 +600,8 @@
       "sequenceId": 2
     },
     "endpoint": "messaging/commit",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -579,10 +615,12 @@
       "destinations": [
         "1.2.3.4.5.8"
       ],
-      "maxMessages": 5
+      "maxMessages": 5,
+      "maxDelay": 0
     },
     "endpoint": "messaging/receive",
-    "method": "POST"
+    "method": "POST",
+    "durationMs": 3
   },
   {
     "type": "fetch",
@@ -593,6 +631,7 @@
     "username": "userA1",
     "endpoint": "registry/1.2.3.4.5.1",
     "method": "GET",
-    "desc": "get individual registry entry (unknown)"
+    "desc": "get individual registry entry (unknown)",
+    "durationMs": 3
   }
 ]
