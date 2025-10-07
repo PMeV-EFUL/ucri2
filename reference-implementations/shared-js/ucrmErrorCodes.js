@@ -34,4 +34,4 @@ function printErrorList(){
   }
 }
 
-printErrorList();
+// printErrorList();

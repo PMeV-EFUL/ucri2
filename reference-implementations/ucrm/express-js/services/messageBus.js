@@ -31,7 +31,9 @@ const TRANSPORT_LAYER_APPID="transport_layer_messages";
 const STATUS_MESSAGE_SCHEMAID="message_delivery_status";
 const PARTICIPANT_UPDATE_MESSAGE_SCHEMAID="participant_availability_update";
 const TIMEOUT_TRACKING_INVERVAL_MS=1000;
-const PARTICIPANT_POLL_TIMEOUT_MS=30*1000;
+const PENDING_RECEIVE_CHECK_INTERVAL_MS=100;
+const PARTICIPANT_POLL_TIMEOUT_MS=60*1000;
+const MAX_LONG_POLL_DELAY=30*1000;
 
 
 let appSchemata;
@@ -47,6 +49,7 @@ export function start(){
   console.log("starting messageBus...");
   console.log("Starting message timeout tracking...");
   setInterval(checkForTimeouts,TIMEOUT_TRACKING_INVERVAL_MS);
+  setInterval(checkPendingMessageReceives,PENDING_RECEIVE_CHECK_INTERVAL_MS)
 }
 
 export async function sendMessage(senderRequest, username,type) {
@@ -90,7 +93,7 @@ async function handleIncomingP2PMessage(senderRequest) {
     updateCommParticipantStatus(participantId,status);
   }else if (checkAndHandlePotentialStatusMessage(senderRequest)) {
     //checkAndHandlePotentialStatusMessage will indicate with its return value if this message should be suppressed (returns false in this case)
-    getPendingMessagesForDestination(destinationId).push(senderRequest);
+    addPendingMessageForDestination(destinationId,senderRequest);
   }
   return senderRequest;
 }
@@ -250,7 +253,7 @@ async function notifyMessageSendingErrorToSender(senderRequest,errorMessageText,
     errorMessage.cause = cause;
   }
   const errorEnvelope=await createMessageDeliveryStatusEnvelope(originalDestination,originalSource,errorMessage);
-  getPendingMessagesForDestination(originalSource).push(errorEnvelope);
+  addPendingMessageForDestination(originalSource,errorEnvelope);
   delete trackedOutgoingMessagesPerMessageId[messageId];
 }
 
@@ -326,7 +329,64 @@ async function processUnsentMessages() {
   messageSendingInProgress=false;
 }
 
-export function receiveMessages(receiverRequest,username) {
+let pendingMessageReceives=[]
+const newUnreceivedMessagesByDestination={}
+
+function checkPendingMessageReceives(){
+  const newPendingMessageReceives=[];
+  for (const pendingReceive of pendingMessageReceives) {
+    let sendResponse=false;
+    const now=Date.now();
+    if (now-pendingReceive.timestamp >= pendingReceive.maxDelayMs){
+      sendResponse=true;
+    }else{
+      for (const destinationId of pendingReceive.destinations){
+        if (newUnreceivedMessagesByDestination[destinationId]){
+          newUnreceivedMessagesByDestination[destinationId] = false;
+          sendResponse=true;
+        }
+      }
+    }
+    if (sendResponse){
+      //send response now
+      sendReceiveResponse(pendingReceive.destinations,pendingReceive.maxMessageCount,pendingReceive.response);
+    }else{
+      //keep the pending receive
+      newPendingMessageReceives.push(pendingReceive);
+    }
+  }
+  pendingMessageReceives=newPendingMessageReceives;
+}
+
+function sendReceiveResponse(destinations,maxMessageCount,response){
+  //first build the response
+  let messagesToReturn = [];
+  for (const destinationId of destinations) {
+    //lastPollTimestampsForLocalParticipants[destinationId]=now;
+    const pendingMessagesForDestination = getPendingMessagesForDestination(destinationId);
+    if (pendingMessagesForDestination) {
+      let filteredMessagesForDestination = pendingMessagesForDestination.slice(0, maxMessageCount);
+      for (const message of filteredMessagesForDestination) {
+        //set message sequence numbers if not set already
+        if (!message.sequenceId) {
+          message.sequenceId = getNextSequenceIdForDestination(destinationId);
+        }
+        //this works because each message only has a single destination for now...
+        message.destination = destinationId;
+      }
+      messagesToReturn = messagesToReturn.concat(filteredMessagesForDestination);
+    }
+  }
+  const responseObject= {messages: messagesToReturn, maxMessages: maxMessageCount};
+  if (responseObject.messages.length === 0){
+    response.status(204).send();
+  }else{
+    response.status(200).json(responseObject);
+  }
+}
+
+
+export function receiveMessages(receiverRequest,username,receiverResponse) {
   for (const destination of receiverRequest.destinations) {
     if (getUcrmIdFromParticipantId(destination)!=="self"){
       throw new UcrmError(400, `destination OID '${destination}' is not registered here.`,ucrmErrors.REQUEST_UNKNOWN_DESTINATION_ID);
@@ -336,23 +396,43 @@ export function receiveMessages(receiverRequest,username) {
   const now=Date.now();
   const destinations = receiverRequest.destinations;
   const maxMessageCount = receiverRequest.maxMessages || 1;
-  let messagesToReturn = [];
+  const maxDelayMs = (receiverRequest.maxDelay || MAX_LONG_POLL_DELAY)*1000;
+  //update last poll timestamps
   for (const destinationId of destinations) {
-    lastPollTimestampsForLocalParticipants[destinationId]=now;
-    if (pendingMessagesPerDestination[destinationId]) {
-      let messagesForDestination = pendingMessagesPerDestination[destinationId].slice(0, maxMessageCount);
-      for (const message of messagesForDestination) {
-        //set message sequence numbers if not set already
-        if (!message.sequenceId) {
-          message.sequenceId = getNextSequenceIdForDestination(destinationId);
-        }
-        //this works because each message only has a single destination for now...
-        message.destination = destinationId;
-      }
-      messagesToReturn = messagesToReturn.concat(messagesForDestination);
-    }
+    lastPollTimestampsForLocalParticipants[destinationId] = now;
   }
-  return {messages: messagesToReturn, maxMessages: maxMessageCount};
+
+  //if no long polling is desired we directly send the response
+  if (receiverRequest.maxDelay===0){
+    sendReceiveResponse(destinations,maxMessageCount,receiverResponse);
+  }else{
+    //else create a pending message receive
+    const pendingMessageReceive={
+      destinations,
+      maxMessageCount,
+      timestamp:now,
+      maxDelayMs,
+      response:receiverResponse
+    }
+    pendingMessageReceives.push(pendingMessageReceive);
+  }
+  // let messagesToReturn = [];
+  // for (const destinationId of destinations) {
+  //   lastPollTimestampsForLocalParticipants[destinationId]=now;
+  //   if (pendingMessagesPerDestination[destinationId]) {
+  //     let messagesForDestination = pendingMessagesPerDestination[destinationId].slice(0, maxMessageCount);
+  //     for (const message of messagesForDestination) {
+  //       //set message sequence numbers if not set already
+  //       if (!message.sequenceId) {
+  //         message.sequenceId = getNextSequenceIdForDestination(destinationId);
+  //       }
+  //       //this works because each message only has a single destination for now...
+  //       message.destination = destinationId;
+  //     }
+  //     messagesToReturn = messagesToReturn.concat(messagesForDestination);
+  //   }
+  // }
+  // return {messages: messagesToReturn, maxMessages: maxMessageCount};
 }
 
 export async function confirmMessages(messageRef,username) {
@@ -360,7 +440,7 @@ export async function confirmMessages(messageRef,username) {
   checkIfClientMayUseOID(username,destinationId,"destination");
 
   const sequenceId = messageRef.sequenceId;
-  let pendingMessagesForDestination = pendingMessagesPerDestination[destinationId];
+  let pendingMessagesForDestination = getPendingMessagesForDestination(destinationId);
   if (!pendingMessagesForDestination) {
     throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
@@ -395,6 +475,11 @@ export async function confirmMessages(messageRef,username) {
     throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
 
+}
+
+function addPendingMessageForDestination(destinationId,envelope){
+  getPendingMessagesForDestination(destinationId).push(envelope);
+  newUnreceivedMessagesByDestination[destinationId]=true;
 }
 
 function getPendingMessagesForDestination(destinationId) {
@@ -455,7 +540,7 @@ async function checkForTimeouts(){
       }
       const timeoutEnvelope=await createMessageDeliveryStatusEnvelope(trackingData.destination,trackingData.source,timeoutMessage)
 
-      getPendingMessagesForDestination(trackingData.source).push(timeoutEnvelope);
+      addPendingMessageForDestination(trackingData.source,timeoutEnvelope);
       delete trackedOutgoingMessagesPerMessageId[messageId];
     }
   }
