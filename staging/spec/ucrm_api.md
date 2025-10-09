@@ -19,9 +19,9 @@ Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch
 
 ### Protokoll
 
-Wegen der Anforderung zur sicheren Nachrichtenzustellung muss eine technische Nachrichtenempfangsbestätigung in der UCRM API vereinbart werden.
+Wegen der Anforderung zur sicheren Nachrichtenzustellung wird eine technische Nachrichtenempfangsbestätigung in der UCRM API vereinbart.
 
-Das Prinzip der sicheren Nachrichtenzustellung ist ein E2E-Prinzip, das auch die Empfangslogik bis zum Persistieren der Nachrichtendaten auf der Seite des KT-Systems einschließt. Um die Ausfälle in dieser Empfangslogik zu kompensieren wird ein zweistufiges Protokoll für Meldungsempfang vereinbart:
+Das Prinzip der sicheren Nachrichtenzustellung ist ein E2E-Prinzip, das auch die Verarbeitungslogik bis zum Persistieren der Nachrichtendaten auf der Seite des KT-Systems einschließt. Um die Ausfälle in dieser Empfangs- und Verarbeitungslogik zu kompensieren wird ein zweistufiges Protokoll für Meldungsempfang vereinbart:
 
 1. Meldungen abfragen - idempotent, kann mehrmals wiederholt werden mit dem gleichen Ergebnis.
 2. Meldungsempfang bestätigen - idempotent, kann mehrmals wiederholt werden mit dem gleichen Ergebnis. Bestätigte Meldungen werden aus der Vermittlungsebene verworfen und stehen beim erneuter Meldungsabfrage nicht mehr zur Verfügung.
