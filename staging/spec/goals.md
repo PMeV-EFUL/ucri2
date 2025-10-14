@@ -2,9 +2,9 @@
 [Zu der Hauptseite](index.md)
 <!-- skip-end -->
 
-# UCRI2 Ziele
+## Ziele für UCRI2
 
-Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x:
+Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x sind:
 
 - Einfache, schnell zu implementierende API, schnelles PoC möglich
   - standardisierte maschinenlesbare Spezifikation

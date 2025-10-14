@@ -22,21 +22,88 @@ pdf_options:
       </div>
     </section>
 ---
-# Universal Control Room Interface Version 2 (UCRI2)
+<style>
+body {
+counter-reset: h1
+}
 
-UCRI steht für Universal Control Room Interface - ein Protokoll für die Kommunikation zwischen zwei oder
-mehreren Einsatzleitsystemen.
+h1 {
+counter-reset: h2
+}
 
-Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden viele Erfahrungen gesammelt und Anforderungen identifiziert, die Weiterentwicklung des UCRI Protokolls auf einer neuen architektonischen Basis erforderten. UCRI2 ist eine komplett überarbeitete Version des Protokolls, die alle Anwendungsfälle der Vorgängerversionen (die letzte UCRI Version 1.1) unterstützt und Grundlage für flexible Weiterentwicklung des Protokolls darstellt.
+h2 {
+counter-reset: h3
+}
+
+h3 {
+counter-reset: h4
+}
+
+h1:not(.header-title)::before {
+counter-increment: h1;
+content: counter(h1) ". "
+}
+
+h2:before {
+counter-increment: h2;
+content: counter(h1) "." counter(h2) ". "
+}
+
+h3:before {
+counter-increment: h3;
+content: counter(h1) "." counter(h2) "." counter(h3) ". "
+}
+
+h4:before {
+counter-increment: h4;
+content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "
+}
+
+ul {
+counter-reset: section;
+list-style-type: none;
+}
+
+ul li {
+position: relative;
+}
+
+ul li::before {
+counter-increment: section;
+content: counters(section, ".") ". ";
+}
+
+ul ul li::before {
+content: counters(section, ".") ". ";
+}
+
+ul ul {
+counter-reset: section;
+}
+</style>
+
+<div style="font-size:20px;">
+<b> Spezifikation Universal Control Room Interface (UCRI2)<br/>Version 2.0.0 </b>
+</div>
+
+<div class="page-break"></div>
+
+# Inhaltsverzeichnis
 
 <!-- toc -->
 
-- [UCRI2 Ziele](#ucri2-ziele)
+- [Einleitung](#einleitung)
+  * [Ziele für UCRI2](#ziele-fur-ucri2)
 - [UCRI2 Systemarchitektur](#ucri2-systemarchitektur)
   * [Messaging](#messaging)
   * [Vermittlungsebene](#vermittlungsebene)
+  * [Rollen der beteiligten Komponenten](#rollen-der-beteiligten-komponenten)
   * [Anwendungsebene](#anwendungsebene)
   * [UCRI Gateway](#ucri-gateway)
+- [Versionierung](#versionierung)
+  * [Transportschicht-Versionierung](#transportschicht-versionierung)
+    + [Vorgabe der transport_layer_messages-App-Version](#vorgabe-der-transport_layer_messages-app-version)
+  * [App-Versionierung](#app-versionierung)
 - [UCRI2 Vermittlungsebene](#ucri2-vermittlungsebene)
 - [UCRI2 Adressierungskonzept](#ucri2-adressierungskonzept)
   * [OID-Hierarchie](#oid-hierarchie)
@@ -68,9 +135,22 @@ Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden 
 
 <!-- tocstop -->
 
-# UCRI2 Ziele
+<div class="page-break"></div>
 
-Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x:
+# Einleitung
+
+UCRI steht für Universal Control Room Interface - ein Protokoll für die Kommunikation zwischen zwei oder
+mehreren Einsatzleitsystemen.
+
+Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden viele Erfahrungen gesammelt und Anforderungen identifiziert, die Weiterentwicklung des UCRI Protokolls auf einer neuen architektonischen Basis erforderten. UCRI2 ist eine komplett überarbeitete Version des Protokolls, die alle Anwendungsfälle der Vorgängerversionen (die letzte UCRI Version 1.1) unterstützt und Grundlage für flexible Weiterentwicklung des Protokolls darstellt.
+
+
+
+
+
+## Ziele für UCRI2
+
+Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x sind:
 
 - Einfache, schnell zu implementierende API, schnelles PoC möglich
   - standardisierte maschinenlesbare Spezifikation
@@ -87,6 +167,7 @@ Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x:
 
 
 # UCRI2 Systemarchitektur
+Im Gegensatz zu UCRI Version 1 ist UCRI 2 grundlegend für die n:m-Kommunikation verschiedener Teilnehmer entwickelt worden. 
 
 ## Messaging
 
@@ -120,14 +201,25 @@ Einzelne Aufgaben der Vermittlungsebene, die bei der P2P-Topologie durch die Kom
 
 Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert optional die Ende-zu-Ende-Verschlüsselung der Daten.
 
-## Anwendungsebene
+## Rollen der beteiligten Komponenten
+In UCRI2 existieren demnach zwei unterschiedlichen Rollen:
+- Ein teilnehmendes System nimmt hierbei die **Client-Rolle** ein und konsumiert die UCRI2 Client API, die vom UCRM angeboten wird.
+- Ein UCRM nimmt dagegen die **UCRM-Rolle** ein und bietet für Clients die UCRI2 Client API an. Zur Verbindung mit anderen UCRMs wird je nach Kommunikationstopologie eine andere API genutzt. Falls eine Verbindung zwischen UCRMs verschiedener Hersteller erfolgen soll, muss dies die UCRI2 Peer-to-Peer-API (P2P-API) sein.
 
-Eine UCRI2-Anwendung wird durch folgende Artefakte definiert:
+Folglich ist für eine UCRI2-konforme Umsetzung relevant, welche Rolle umgesetzt werden soll:
+- Ein KT, der sich per UCRI2 mit anderen KT verbinden will, muss ausschliesslich die UCRI2 Client API aus der Consumer-Perspektive umsetzen.
+- Ein UCRM muss die UCRI2 Client API aus der Provider-Perspektive umsetzen und kann die UCRI2 P2P-API umsetzen, falls eine herstellerübergreifende Koppelung mit anderen UCRMs gewünscht wird.
+
+## Anwendungsebene
+Um die fachlichen Aspekte von den technischen Aspekten zu trennen, erfolgt in UCRI 2 eine Trennung zwischen Übertragungs- und Anwendungsebene.
+Hierbei erfolgt sowohl eine Trennung der UCRI2-Anwendungen untereinander und auch deren Unabhängigkeit von der Vermittlungsebene. Das erlaubt eine freie Weiterentwicklung jeder einzelnen Anwendung.
+
+Eine UCRI2-Anwendung (im Folgenden UCRI2-App) wird durch folgende Artefakte definiert:
 - Ein Satz von standardisierten Nachrichten-Schemata (JSON, kanonisches Datenmodell)
 - Ablaufmodell (definierte Abfolge von Nachrichten)
 - Prozessdefinitionen (Festlegungen bezüglich Anwendungslogik, die bei der Implementierung in technischen KT-Systemen berücksichtigt werden müssen)
 
-Wichtig ist das Prinzip der Trennung der UCRI2-Anwendungen untereinander und deren Unabhängigkeit von der Vermittlungsebene. Das erlaubt eine freie Weiterentwicklung jeder einzelnen Anwendung.
+
 
 ## UCRI Gateway
 
@@ -136,6 +228,40 @@ Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wi
 ![UCRI Komponenten](ucri-components.drawio.svg)
 
 
+# Versionierung
+Die Versionierung für die Transportschicht und die UCRI2-Apps erfolgen voneinander getrennt.
+
+Diese Spezifikation beschreibt die Version 2.0.0 der UCRI2-Transportschicht.
+
+## Transportschicht-Versionierung
+Die Transportschicht-Versionierung umfasst dieses Dokument sowie die OpenAPI-Spezifikationen für die Client- und die P2P-Schnittstellen. 
+
+Die Versionsnummer besteht aus drei numerischen Teilen:
+
+GEN.MAJOR.MINOR
+
+Für die drei Versionsbestandteile gelten folgende Festlegungen:
+- GEN: Für UCRI2 auf 2 festgelegt
+- MAJOR: Hauptversion der Transportschicht innerhalb der UCRI2-Versionierung. Eine Änderung dieser Version erfolgt, wenn Änderungen an den Endpunktdefinitionen erfolgen, die entweder bestehende Endpunkte bezüglich obligater Felder verändern oder neue obligate Felder hinzufügen.
+- MINOR: Unterversion der Transportschicht. Eine Änderung dieser Version erfolgt, wenn neue optionale Felder zu bestehenden Endpunkte hinzugefügt oder neue optionale Endpunkte hinzugefügt werden.
+
+Somit sind Änderungen an der MINOR-Version aufwärtskompatibel, sodass Systeme mit übereinstimmenden GEN.MAJOR-Versionen untereinander kommunizieren können, auch wenn sie unterschiedliche MINOR-Versionen aufweisen.
+
+### Vorgabe der transport_layer_messages-App-Version
+Da die transport_layer_messages-App Nachrichten beschreibt, die auf der Transportschicht erstellt und von verbundenen UCRM sowie Clients konsumiert werden, MUSS eine spezifischen Version dieser App durch alle Clients sowie UCRM, welche die Version 2.0.0 der Transportschicht implementieren, ZWINGEND unterstützt werden.
+
+Die hierfür zu unterstützende Version der transport_layer_messages-App ist 1.0.
+
+## App-Versionierung
+Die App-Versionierung erfolgt für jede App individuell. Die Versionsnummer einer App besteht aus zwei numerischen Teilen:
+
+MAJOR.MINOR
+
+Für die drei Versionsbestandteile gelten folgende Festlegungen:
+- MAJOR: Hauptversion der App. Eine Änderung dieser Version erfolgt, wenn neue obligate Nachrichten hinzugefügt werden oder in bestehenden Nachrichten obligate Felder hinzugefügt oder verändert werden.
+- MINOR: Unterversion der App. Eine Änderung dieser Version erfolgt, wenn neue optionale Nachrichten hinzugefügt werden oder in bestehenden Nachrichten optionale Felder hinzugefügt werden.
+
+Obwohl so Änderungen an der MINOR-Version aufwärtskompatibel sind, müssen auch MINOR-Veränderungen in den supportedApps eines Teilnehmers explizit als unterstützt gekennzeichnet werden.
 
 
 # UCRI2 Vermittlungsebene
