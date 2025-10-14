@@ -77,7 +77,7 @@ export const config={
       "supportedApps": [
         {
           "appId": "transport_layer_messages",
-          "appVersion": "0.1"
+          "appVersion": "1.0"
         }
       ],
       "key": {
@@ -102,11 +102,11 @@ export const config={
       "supportedApps": [
         {
           "appId": "incident_transfer",
-          "appVersion": "0.1"
+          "appVersion": "1.0"
         },
         {
           "appId": "transport_layer_messages",
-          "appVersion": "0.1"
+          "appVersion": "1.0"
         }
       ],
       "key": {

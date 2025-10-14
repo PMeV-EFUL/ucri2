@@ -572,7 +572,7 @@ async function createParticipantUpdateEnvelope(participantId,destinationId,statu
     ],
     "payload": {
       "appId": "transport_layer_messages",
-      "appVersion": "0.1",
+      "appVersion": "1.0",
       "schemaId": "participant_availability_update",
       "contentType": "application/json",
       "data": JSON.stringify(message)
@@ -598,7 +598,7 @@ async function createMessageDeliveryStatusEnvelope(sourceId,destinationId,messag
     ],
     "payload": {
       "appId": "transport_layer_messages",
-      "appVersion": "0.1",
+      "appVersion": "1.0",
       "schemaId": "message_delivery_status",
       "contentType": "application/json",
       "data": JSON.stringify(message)

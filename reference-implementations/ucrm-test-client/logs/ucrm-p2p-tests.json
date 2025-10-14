@@ -14,7 +14,7 @@
     "logStdOut": false,
     "logStdErr": false,
     "ready": true,
-    "durationMs": 956
+    "durationMs": 1001
   },
   {
     "type": "authorize",
@@ -25,7 +25,7 @@
     "expect": {
       "http": 200
     },
-    "durationMs": 174
+    "durationMs": 224
   },
   {
     "type": "fetch",
@@ -37,7 +37,7 @@
     "desc": "get info while p2p discovery is active (status must be 1)",
     "endpoint": "info",
     "method": "GET",
-    "durationMs": 13
+    "durationMs": 11
   },
   {
     "type": "fetch",
@@ -49,7 +49,7 @@
     "desc": "get registry entries while p2p discovery is active (should be 3)",
     "endpoint": "registry",
     "method": "GET",
-    "durationMs": 9
+    "durationMs": 10
   },
   {
     "type": "authorize",
@@ -61,7 +61,7 @@
     "expect": {
       "http": 200
     },
-    "durationMs": 16
+    "durationMs": 13
   },
   {
     "type": "startUcrm",
@@ -78,7 +78,7 @@
     "logStdOut": false,
     "logStdErr": false,
     "ready": true,
-    "durationMs": 936
+    "durationMs": 1087
   },
   {
     "type": "authorize",
@@ -89,19 +89,19 @@
     "expect": {
       "http": 200
     },
-    "durationMs": 187
+    "durationMs": 178
   },
   {
     "type": "awaitDiscoveryComplete",
     "ucrmId": "ucrmA",
     "username": "userA1",
-    "durationMs": 2062
+    "durationMs": 2058
   },
   {
     "type": "awaitDiscoveryComplete",
     "ucrmId": "ucrmB",
     "username": "userB",
-    "durationMs": 516
+    "durationMs": 520
   },
   {
     "type": "fetch",
@@ -113,7 +113,7 @@
     "desc": "get registry entries after p2p discovery is complete (should be 5)",
     "endpoint": "registry",
     "method": "GET",
-    "durationMs": 5
+    "durationMs": 7
   },
   {
     "type": "fetch",
@@ -146,16 +146,16 @@
       ],
       "payload": {
         "appId": "incident_transfer",
-        "appVersion": "0.1",
+        "appVersion": "1.0",
         "schemaId": "incident",
         "contentType": "application/json",
         "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInformation\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInformation\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInformation\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInformation\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
       },
-      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTRiMjZiN2RkY2UxNWUwNmM5YTBjN2I4NDgyYmM4YWMyNmFlY2VhYWVlMWExN2YyM2RjMzJiODhiZDIwOWVmMg.ElOJVBoRbiHHahocGtgSiNQSBstWGeu63Hhe1-XqTvVBDsK1qJI_tiJaIG6Mx40kzEWJWMVUIQAPfJGxJSf_xM-oOdrDwS3Wpl3KWx9ELKmN-XCllJ0txdnJYnzYkVCGJxFWEikskM-5Ze3uRUnU-IqJEp5z3OJuXEcL3Qre3uEtd8-I0ezbcJmvi59Jvk89fkfigl9SpJs_MeEFX_tnkwsWcKJZa-4Jd2ovW7h3FQOU7ItytjC3cpzxAp0lljKOky4LRzxtLLeNMPYo2O5MUziW1bW9JOTaQys4rKO6N8lIyXCnPuRg4fX4tMgeO5DkuprpUR1CN0Q2a1iqNMxpCA"
+      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.NTRkNWJmZTk5ZDRiY2IzODVjYzMyYjIyMmQ0OTFmMzQyN2E2N2YxYzUxODBmZjlmMzU3ODRhMDUyM2ZmZjM3MQ.GvurAKvK7yowIcucDGZsYrQmGxl2oQqvXVQExNhBCvjddojIjvdJblkCLNtczVoD7ihoyIBQjyj0hzUw9pCf6Mov2bkdnfCByZL0rUy3A-jj3QAOcLHZM2XZozcCMD-pxmTzGysXKPcZX6BD5rxTKwHAZ7d5CkwVNvlcntWAj8vQzvflRX690ZtDN3Hpi_B3AnBwxx1nojW9RflOKBVCZ3zgK5LFItEZD6TTYCuxMmw5KO48lw0TWHwPfWKClBeyx9EirLwhkvMVmsefbTy5p5K5HWt1W3Y9kBDYZ2d6t6v45KN3Ep_cpkzleoXlYiMMwqTP1pGTW213eHQAFxpgDQ"
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 15
+    "durationMs": 16
   },
   {
     "type": "fetch",
@@ -174,7 +174,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 51
+    "durationMs": 76
   },
   {
     "type": "fetch",
@@ -194,12 +194,12 @@
       ],
       "payload": {
         "appId": "incident_transfer",
-        "appVersion": "0.1",
+        "appVersion": "1.0",
         "schemaId": "incident",
         "contentType": "application/json",
         "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInformation\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInformation\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInformation\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInformation\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
       },
-      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTRiMjZiN2RkY2UxNWUwNmM5YTBjN2I4NDgyYmM4YWMyNmFlY2VhYWVlMWExN2YyM2RjMzJiODhiZDIwOWVmMg.ElOJVBoRbiHHahocGtgSiNQSBstWGeu63Hhe1-XqTvVBDsK1qJI_tiJaIG6Mx40kzEWJWMVUIQAPfJGxJSf_xM-oOdrDwS3Wpl3KWx9ELKmN-XCllJ0txdnJYnzYkVCGJxFWEikskM-5Ze3uRUnU-IqJEp5z3OJuXEcL3Qre3uEtd8-I0ezbcJmvi59Jvk89fkfigl9SpJs_MeEFX_tnkwsWcKJZa-4Jd2ovW7h3FQOU7ItytjC3cpzxAp0lljKOky4LRzxtLLeNMPYo2O5MUziW1bW9JOTaQys4rKO6N8lIyXCnPuRg4fX4tMgeO5DkuprpUR1CN0Q2a1iqNMxpCA"
+      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.NTRkNWJmZTk5ZDRiY2IzODVjYzMyYjIyMmQ0OTFmMzQyN2E2N2YxYzUxODBmZjlmMzU3ODRhMDUyM2ZmZjM3MQ.GvurAKvK7yowIcucDGZsYrQmGxl2oQqvXVQExNhBCvjddojIjvdJblkCLNtczVoD7ihoyIBQjyj0hzUw9pCf6Mov2bkdnfCByZL0rUy3A-jj3QAOcLHZM2XZozcCMD-pxmTzGysXKPcZX6BD5rxTKwHAZ7d5CkwVNvlcntWAj8vQzvflRX690ZtDN3Hpi_B3AnBwxx1nojW9RflOKBVCZ3zgK5LFItEZD6TTYCuxMmw5KO48lw0TWHwPfWKClBeyx9EirLwhkvMVmsefbTy5p5K5HWt1W3Y9kBDYZ2d6t6v45KN3Ep_cpkzleoXlYiMMwqTP1pGTW213eHQAFxpgDQ"
     },
     "endpoint": "messaging/send",
     "method": "POST",
@@ -207,7 +207,7 @@
   },
   {
     "type": "sleep",
-    "durationMs": 2017
+    "durationMs": 2009
   },
   {
     "type": "fetch",
@@ -226,7 +226,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 6
+    "durationMs": 7
   },
   {
     "type": "fetch",
@@ -245,7 +245,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 5
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -261,7 +261,7 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 8
   },
   {
     "type": "fetch",
@@ -280,7 +280,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 4
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -296,7 +296,7 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 3
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -315,7 +315,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 2
+    "durationMs": 4
   },
   {
     "type": "sleep",
@@ -354,7 +354,7 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -374,12 +374,12 @@
       ],
       "payload": {
         "appId": "incident_transfer",
-        "appVersion": "0.1",
+        "appVersion": "1.0",
         "schemaId": "incident",
         "contentType": "application/json",
         "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInformation\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInformation\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInformation\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInformation\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
       },
-      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ZTRiMjZiN2RkY2UxNWUwNmM5YTBjN2I4NDgyYmM4YWMyNmFlY2VhYWVlMWExN2YyM2RjMzJiODhiZDIwOWVmMg.ElOJVBoRbiHHahocGtgSiNQSBstWGeu63Hhe1-XqTvVBDsK1qJI_tiJaIG6Mx40kzEWJWMVUIQAPfJGxJSf_xM-oOdrDwS3Wpl3KWx9ELKmN-XCllJ0txdnJYnzYkVCGJxFWEikskM-5Ze3uRUnU-IqJEp5z3OJuXEcL3Qre3uEtd8-I0ezbcJmvi59Jvk89fkfigl9SpJs_MeEFX_tnkwsWcKJZa-4Jd2ovW7h3FQOU7ItytjC3cpzxAp0lljKOky4LRzxtLLeNMPYo2O5MUziW1bW9JOTaQys4rKO6N8lIyXCnPuRg4fX4tMgeO5DkuprpUR1CN0Q2a1iqNMxpCA"
+      "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.NTRkNWJmZTk5ZDRiY2IzODVjYzMyYjIyMmQ0OTFmMzQyN2E2N2YxYzUxODBmZjlmMzU3ODRhMDUyM2ZmZjM3MQ.GvurAKvK7yowIcucDGZsYrQmGxl2oQqvXVQExNhBCvjddojIjvdJblkCLNtczVoD7ihoyIBQjyj0hzUw9pCf6Mov2bkdnfCByZL0rUy3A-jj3QAOcLHZM2XZozcCMD-pxmTzGysXKPcZX6BD5rxTKwHAZ7d5CkwVNvlcntWAj8vQzvflRX690ZtDN3Hpi_B3AnBwxx1nojW9RflOKBVCZ3zgK5LFItEZD6TTYCuxMmw5KO48lw0TWHwPfWKClBeyx9EirLwhkvMVmsefbTy5p5K5HWt1W3Y9kBDYZ2d6t6v45KN3Ep_cpkzleoXlYiMMwqTP1pGTW213eHQAFxpgDQ"
     },
     "endpoint": "messaging/send",
     "method": "POST",
@@ -402,7 +402,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 11008
+    "durationMs": 10961
   },
   {
     "type": "fetch",
@@ -418,6 +418,6 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 5
+    "durationMs": 4
   }
 ]
