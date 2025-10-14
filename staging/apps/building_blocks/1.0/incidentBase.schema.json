@@ -1,0 +1,74 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/incidentBase.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Basis eines Einsatzobjektes",
+  "description": "Die Basis eines Einsatzobjekts mit Eigenschaften, die in jedem Einsatz vorkommen müssen.",
+  "required": ["sharedIncidentId","sentByDispatcherAt"],
+  "type": "object",
+  "properties": {
+    "sharedIncidentId": {
+      "type": "string",
+      "format": "uuid",
+      "title": "globale Einsatz-UUID",
+      "description": "global eindeutige UUID des Einsatzes"
+    },
+    "internalId": {
+      "type": "string",
+      "title": "Sender-interne Einsatz-ID",
+      "description": "Sender-interne ID des Einsatzes"
+    },
+    "additionalInformation": {
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+      "type": "string"
+    },
+    "sentByDispatcherAt": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dispatcher-Übergabe-Zeitstempel",
+      "description": "Zeitpunkt an dem die Übergabe vom Disponenten angestoßen wurde"
+    },
+    "informers": {
+      "title": "Meldende",
+      "description": "Liste der Meldenden Personen",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Meldende Person",
+        "description": "Meldende Person",
+        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/person.schema.json"
+      }
+    },
+    "protocolRemarks": {
+      "title": "Protokollvermerke",
+      "description": "Protokollvermerke, die mit dem Einsatz übertragen werden.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/notification.schema.json",
+        "title": "Protokollvermerk",
+        "description": "Ein Protokollvermerk."
+      }
+    }
+  },
+  "examples": [{
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "internalId": "f123456",
+    "additionalInformation": "Zusatzinformationen",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "informers": [
+      {
+        "name": "Musterfrau",
+        "surname": "Heike",
+        "phone": "+49 30 234567",
+        "email": "heike.musterfrau@example.com"
+      }
+    ],
+    "protocolRemarks":[{
+      "timestamp": "2024-01-01T10:06:09Z",
+      "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
+      "category": "information",
+      "silent": true
+    }]
+  }]
+}

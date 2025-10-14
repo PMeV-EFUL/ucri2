@@ -1,0 +1,56 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/personBase.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Person",
+  "description": "Eine Person. Obligat ist der Nachname.",
+  "required": [ "name" ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "Nachname",
+      "description": "Der Nachname.",
+      "type": "string"
+    },
+	"surname": {
+      "title": "Vorname",
+      "description": "Der Vorname.",
+      "type": "string"
+    },
+	"phone": {
+      "title": "Telefonnummer",
+      "description": "Die Telefonnummer.",
+      "type": "string"
+    },
+	"email": {
+      "title": "Email-Adresse",
+      "description": "Die Email-Adresse.",
+      "type": "string"
+    },
+	"address": {
+      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/address.schema.json",
+      "title": "MeldeAdresse",
+      "description": "Die Meldeadresse."
+    },
+    "additionalInformation": {
+      "title": "Zusatzinformationen",
+      "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+      "type": "string"
+    }
+  },
+  "examples": [{
+    "name": "Mustermann",
+    "surname": "Hans",
+    "phone": "+49 30 123456",
+    "email": "hans.mustermann@example.com",
+    "address": {
+      "street": "Musterstrasse",
+      "houseNumber": "15b",
+      "postalCode" : "12345",
+      "city": "Musterhausen",
+      "cityDistrict": "Musterberg",
+      "state": "Brandenburg",
+      "country": "DE"
+    },
+    "additionalInformation": "weitere Informationen"
+  }]
+}

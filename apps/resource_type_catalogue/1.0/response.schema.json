@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_type_catalogue/1.0/response.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht response - Eine Antwort auf eine Einsatzmitteltyp-Katalog-Anfrage",
+  "description": "Eine Antwort auf eine Einsatzmitteltyp-Katalog-Anfrage",
+  "required": [
+    "requestId",
+    "catalogueVersion",
+    "catalogue"
+  ],
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Anfrage-UUID",
+      "description": "global eindeutige UUID der Anfrage"
+    },
+    "catalogueVersion": {
+      "type": "string",
+      "title": "Katalogversion",
+      "description": "die Versionskennung des Katalogs."
+    },
+    "catalogue": {
+      "type": "array",
+      "title": "Einsatzmitteltyp-Katalogeinträge",
+      "description": "Liste der Einsatzmitteltyp-Katalogeinträge",
+      "minItems": 1,
+      "items": {
+        "title": "Einsatzmitteltyp-Katalogeintrag",
+        "description": "Einsatzmitteltyp-Katalogeintrag",
+        "type": "object",
+        "required": [
+          "abbreviation",
+          "description"
+        ],
+        "properties": {
+          "abbreviation": {
+            "type": "string",
+            "title": "Einsatzmitteltyp-Kürzel",
+            "description": "Das Einsatzmitteltypkürzel"
+          },
+          "description": {
+            "type": "string",
+            "title": "Beschreibung",
+            "description": "Beschreibung des Einsatzmitteltyps"
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "requestId": "440e8400-e29b-41d4-a716-446655440000",
+      "catalogueVersion": "1.0-20250101",
+      "catalogue": [
+        {
+          "abbreviation": "TLF",
+          "description": "Tanklöschfahrzeug"
+        },
+        {
+          "abbreviation": "KTW",
+          "description": "Krankentransportwagen"
+        }
+      ]
+    }
+  ],
+  "$defs": {}
+}

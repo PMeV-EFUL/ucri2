@@ -34,7 +34,7 @@ import fs from "fs";
 
 const REMOTE_PARTICIPANT_UPDATE_INTERVAL_MS=60*1000;
 const TRANSPORT_LAYER_APPID="transport_layer_messages";
-const TRANSPORT_LAYER_APP_VERSION="0.1";
+const TRANSPORT_LAYER_APP_VERSION="1.0";
 const TRANSPORT_LAYER_SPEC_DIR = "transport-layer-spec";
 
 initCrypto(UcrmError,canonicalize,sha3,jose);
@@ -53,24 +53,25 @@ if (await initConfiguration()){
   await start();
 }
 
-async function signKTRecords(){
-  console.log(`signing KT records...`);
-  for (const record of Object.values(config.commParticipants)){
-    const oid = record.id;
-    const domain = record.domain;
-    if (!domain){
-      console.error(`Participant with oid '${oid}' has no domain!`);
-      return false;
-    }
-    let domainPrivateKey = config.domainPrivateKeys[domain];
-    if (!domainPrivateKey){
-      console.error(`Participant with oid '${oid}' has unknown domain '${domain}'!`);
-      return false;
-    }
-    record.signature=await getKTRecordSignature(record,domainPrivateKey);
-  }
-  return true;
-}
+//KT Signing is (no longer) part of Transport Layer 2.0, so everything pertaining to it has been disabled (for now)
+// async function signKTRecords(){
+//   console.log(`signing KT records...`);
+//   for (const record of Object.values(config.commParticipants)){
+//     const oid = record.id;
+//     const domain = record.domain;
+//     if (!domain){
+//       console.error(`Participant with oid '${oid}' has no domain!`);
+//       return false;
+//     }
+//     let domainPrivateKey = config.domainPrivateKeys[domain];
+//     if (!domainPrivateKey){
+//       console.error(`Participant with oid '${oid}' has unknown domain '${domain}'!`);
+//       return false;
+//     }
+//     record.signature=await getKTRecordSignature(record,domainPrivateKey);
+//   }
+//   return true;
+// }
 
 
 async function initConfiguration(){
@@ -102,12 +103,13 @@ async function initConfiguration(){
     setConfiguration(config);
     setConfigurationOnRegistry(config);
     setConfigurationOnMessageBus(config);
-    if (config.useKTSignatures) {
-      //self-sign commParticipants - NEVER to be done in a production UCRM, instead the domain owner should provide signatures!
-      if (!await signKTRecords()) {
-        return false;
-      }
-    }
+    //KT Signing is (no longer) part of Transport Layer 2.0, so everything pertaining to it has been disabled (for now)
+    // if (config.useKTSignatures) {
+    //   //self-sign commParticipants - NEVER to be done in a production UCRM, instead the domain owner should provide signatures!
+    //   if (!await signKTRecords()) {
+    //     return false;
+    //   }
+    // }
     if (!await addCommParticipants(config.commParticipants,"self")){
       return false;
     }
@@ -122,7 +124,7 @@ async function initConfiguration(){
 
 async function prepareSpec(){
   //as we need to adapt the TS-API spec , we copy over the spec
-  await fsPromises.cp('../../../api/crm/0.1',`./${TRANSPORT_LAYER_SPEC_DIR}`,{recursive:true,
+  await fsPromises.cp('../../../api/crm/2.0.0',`./${TRANSPORT_LAYER_SPEC_DIR}`,{recursive:true,
   filter: (src,dst)=>!src.includes("spectral.yaml")});
   //replace server url variables
   await replaceInFiles({
@@ -186,11 +188,13 @@ async function start(){
   const specs=[
     {
       specPath:`${TRANSPORT_LAYER_SPEC_DIR}/ucrm-client.yaml`,
-      type:"client"
+      type:"client",
+      specViolationError:ucrmErrors.REQUEST_INVALID_PER_CLIENT_TRANSPORT_SPEC
     },
     {
       specPath:`${TRANSPORT_LAYER_SPEC_DIR}/ucrm-p2p.yaml`,
-      type:"p2p"
+      type:"p2p",
+      specViolationError:ucrmErrors.REQUEST_INVALID_PER_P2P_TRANSPORT_SPEC
     },
   ]
   for (const spec of specs){
@@ -277,11 +281,11 @@ async function start(){
       //decide whether request or response validation failed
       if (err.stack.includes("ResponseValidator")){
         errorHttpCode = 500;
-        errorUcriCode = ucrmErrors.RESPONSE_INVALID_PER_TRANSPORT_SPEC;
+        errorUcriCode = ucrmErrors.REQUEST_INTERNAL_ERROR;
         errorDescription = `HTTP error ${errorHttpCode}: Response validation failed. See message field for details.`
       }else if (err.stack.includes("RequestValidator")){
         errorHttpCode = 400;
-        errorUcriCode = ucrmErrors.REQUEST_INVALID_PER_TRANSPORT_SPEC;
+        errorUcriCode = spec.specViolationError;
         errorDescription = `HTTP error ${errorHttpCode}: Request validation failed. See message field for details.`
       }
     }

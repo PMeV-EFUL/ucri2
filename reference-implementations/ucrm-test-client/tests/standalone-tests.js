@@ -44,6 +44,7 @@ export async function generateSteps () {
 
   const senderOID = "1.2.3.4.5.6";
   const receiverOID = "1.2.3.4.5.8";
+  const receiverWithUnsupportedMessageOID = "1.2.3.4.5.9";
   const unknownOID = "1.2.3.4.5.1";
 
 
@@ -128,10 +129,10 @@ export async function generateSteps () {
 
     //now to check the registry
     genStepRegistry({
-      desc: "get registry entries (should be 3)",
+      desc: "get registry entries (should be 4)",
       expect: {
         http: 200,
-        responseChecker: curry(checkArrayResponse)("commParticipants", 3, false)
+        responseChecker: curry(checkArrayResponse)("commParticipants", 4, false)
 
       }
     }, "sender"),
@@ -161,11 +162,12 @@ export async function generateSteps () {
       expect: genExpectedError400(ucrmErrors.REQUEST_OID_FORBIDDEN)
     }, "sender"),
 
-    genStepMessagingCommit({
-      desc: "post messaging commit (invalid as nothing to commit)",
-      body: genBodyCommitRequest(senderOID, 1234),
-      expect: genExpectedError400(ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT)
-    }, "sender"),
+    //this is no longer part of the spec, so this test is no longer needed
+    // genStepMessagingCommit({
+    //   desc: "post messaging commit (invalid as nothing to commit)",
+    //   body: genBodyCommitRequest(senderOID, 1234),
+    //   expect: genExpectedError400(ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT)
+    // }, "sender"),
 
     await genStepMessagingSend({
       desc: "post messaging send (disallowed source)",
@@ -212,6 +214,15 @@ export async function generateSteps () {
         }
       }),
       expect: genExpectedError400(ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_APPID_OR_APPVERSION)
+    }, "sender"),
+    await genStepMessagingSend({
+      desc: "post messaging send (schemaId in unsupportedMessages of receiver)",
+      body: genBodySendRequest(senderOID, receiverWithUnsupportedMessageOID, {
+        payload: {
+          schemaId: "incident"
+        }
+      }),
+      expect: genExpectedError400(ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_MESSAGE)
     }, "sender"),
     //TODO to use this test we need an app spec which has at least two different versions!
     // generateStepMessagingSendPostFetch({

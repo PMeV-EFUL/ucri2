@@ -4,8 +4,14 @@ import {v4 as uuidv4} from "uuid";
 import {UcrmError} from "../util/ucrmError.js"
 import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js"
 import {verifyEnvelope,getEnvelopeSignature} from "../../../shared-js/crypto.js"
-import {getCommParticipant, getUcrmIdFromParticipantId} from "./commParticipantRegistry.js"
+import {
+  getCommParticipant,
+  getUcrmIdFromParticipantId,
+  getAllCommParticipants,
+  addCommParticipants, updateCommParticipantStatus
+} from "./commParticipantRegistry.js"
 import {checkIfClientMayUseOID, getRemoteUcrmToken} from "./authManager.js";
+import fetch from "node-fetch";
 
 export function setAppSchemata(appSchemataToUse) {
   appSchemata = appSchemataToUse;
@@ -17,11 +23,17 @@ export function setConfiguration(conf){
 
 export function notifyDiscoveryFinished(){
   discoveryFinished=true;
+  console.log("discover is finished, starting local participant polling status checks...");
+  setInterval(checkLocalParticipantPollingStatus,TIMEOUT_TRACKING_INVERVAL_MS);
 }
 
 const TRANSPORT_LAYER_APPID="transport_layer_messages";
 const STATUS_MESSAGE_SCHEMAID="message_delivery_status";
+const PARTICIPANT_UPDATE_MESSAGE_SCHEMAID="participant_availability_update";
 const TIMEOUT_TRACKING_INVERVAL_MS=1000;
+const PENDING_RECEIVE_CHECK_INTERVAL_MS=100;
+const PARTICIPANT_POLL_TIMEOUT_MS=60*1000;
+const MAX_LONG_POLL_DELAY=30*1000;
 
 
 let appSchemata;
@@ -31,18 +43,16 @@ const unsentOutgoingMessages = []
 const pendingMessagesPerDestination = {}
 const messageSeqNumbersPerDestination = {}
 const trackedOutgoingMessagesPerMessageId = {};
+const lastPollTimestampsForLocalParticipants = {};
 
 export function start(){
   console.log("starting messageBus...");
   console.log("Starting message timeout tracking...");
   setInterval(checkForTimeouts,TIMEOUT_TRACKING_INVERVAL_MS);
+  setInterval(checkPendingMessageReceives,PENDING_RECEIVE_CHECK_INTERVAL_MS)
 }
 
 export async function sendMessage(senderRequest, username,type) {
-  //first check if discovery is finished for send requests
-  if (!discoveryFinished){
-    throw new UcrmError(500, `Remote UCRM participant discovery is in process, please try again later!`, ucrmErrors.REQUEST_TRY_LATER_UCRM_IS_IN_DISCOVERY_MODE);
-  }
   //the client access checks should only be performed on this level as the handleXXX() methods will be called from within the messageBus too!
   //also, they should only be performed for type==="client"
   if (type==="client"){
@@ -68,9 +78,22 @@ async function handleIncomingP2PMessage(senderRequest) {
   await validateSenderRequest(senderRequest);
 
   const destinationId = senderRequest.destinations[0];
-  //checkAndHandlePotentialStatusMessage will indicate with its return value if this message should be suppressed (returns false in this case)
-  if (checkAndHandlePotentialStatusMessage(senderRequest)) {
-    getPendingMessagesForDestination(destinationId).push(senderRequest);
+
+  //as signature validation is now only performed for messages directed at this UCRM itself, the signature validation only happens in this case!
+  if (destinationId===config.ownOid){
+    await validateSignature(senderRequest);
+  }
+
+  if (destinationId===config.ownOid && senderRequest.payload.appId===TRANSPORT_LAYER_APPID && senderRequest.payload.schemaId===PARTICIPANT_UPDATE_MESSAGE_SCHEMAID){
+    console.log("detected participant status update message for self, updating local KT registry...");
+    const decodedPayloadData=JSON.parse(senderRequest.payload.data);
+    const participantId=decodedPayloadData.id;
+    const status=decodedPayloadData.status;
+    console.log(`updating local KT status for ${participantId} to ${status}`);
+    updateCommParticipantStatus(participantId,status);
+  }else if (checkAndHandlePotentialStatusMessage(senderRequest)) {
+    //checkAndHandlePotentialStatusMessage will indicate with its return value if this message should be suppressed (returns false in this case)
+    addPendingMessageForDestination(destinationId,senderRequest);
   }
   return senderRequest;
 }
@@ -161,7 +184,8 @@ async function validateSenderRequest(senderRequest) {
   const schemaId = senderRequest.payload.schemaId;
 
   //validate signature
-  await validateSignature(senderRequest);
+  //signature validation is no longer performed by UCRM in TS version 2.0!
+  // await validateSignature(senderRequest);
 
   //validate payload
   if (!appSchemata[appId]) {
@@ -174,10 +198,17 @@ async function validateSenderRequest(senderRequest) {
     throw new UcrmError(400, `Unknown message name '${schemaId}' for UCRI2 App '${appId}' version '${appVersion}' `, ucrmErrors.REQUEST_PAYLOAD_UNKNOWN_SCHEMAID);
   }
 
+
   //check if target OID is known and get supported Apps
   const commParticipant = getCommParticipant(destinationId, 400);
-  if (commParticipant.supportedApps.filter((app) => app.appId === appId && app.appVersion === appVersion).length === 0) {
+  const matchingApps = commParticipant.supportedApps.filter((app) => app.appId === appId && app.appVersion === appVersion);
+  if (matchingApps.length === 0) {
     throw new UcrmError(400, `Unsupported version '${appVersion}' for UCRI2 App '${appId}' for destination '${destinationId}'`, ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_APPID_OR_APPVERSION);
+  }
+  //there should never be duplicate entries for the same appId and version and thus we just check the first app...
+  const unsupportedMessages=matchingApps[0].unsupportedMessages;
+  if (unsupportedMessages && unsupportedMessages.filter((messageName) => messageName === schemaId).length > 0) {
+    throw new UcrmError(400, `Unsupported app message with schema name '${schemaId}' for UCRI2 App '${appId}' for destination '${destinationId}'`, ucrmErrors.REQUEST_PAYLOAD_UNSUPPORTED_MESSAGE);
   }
 
   let payloadObject;
@@ -222,7 +253,7 @@ async function notifyMessageSendingErrorToSender(senderRequest,errorMessageText,
     errorMessage.cause = cause;
   }
   const errorEnvelope=await createMessageDeliveryStatusEnvelope(originalDestination,originalSource,errorMessage);
-  getPendingMessagesForDestination(originalSource).push(errorEnvelope);
+  addPendingMessageForDestination(originalSource,errorEnvelope);
   delete trackedOutgoingMessagesPerMessageId[messageId];
 }
 
@@ -298,20 +329,42 @@ async function processUnsentMessages() {
   messageSendingInProgress=false;
 }
 
-export function receiveMessages(receiverRequest,username) {
-  for (const destination of receiverRequest.destinations) {
-    if (getUcrmIdFromParticipantId(destination)!=="self"){
-      throw new UcrmError(400, `destination OID '${destination}' is not registered here.`,ucrmErrors.REQUEST_UNKNOWN_DESTINATION_ID);
+let pendingMessageReceives=[]
+
+function checkPendingMessageReceives(){
+  const newPendingMessageReceives=[];
+  for (const pendingReceive of pendingMessageReceives) {
+    let sendResponse=false;
+    const now=Date.now();
+    if (now-pendingReceive.timestamp >= pendingReceive.maxDelayMs){
+      sendResponse=true;
+    }else{
+      for (const destinationId of pendingReceive.destinations){
+        if (getPendingMessagesForDestination(destinationId).length!==0){
+            sendResponse=true;
+        }
+      }
     }
-    checkIfClientMayUseOID(username,destination,"destinations");
+    if (sendResponse){
+      //send response now
+      sendReceiveResponse(pendingReceive.destinations,pendingReceive.maxMessageCount,pendingReceive.response);
+    }else{
+      //keep the pending receive
+      newPendingMessageReceives.push(pendingReceive);
+    }
   }
-  const destinations = receiverRequest.destinations;
-  const maxMessageCount = receiverRequest.maxMessages || 1;
+  pendingMessageReceives=newPendingMessageReceives;
+}
+
+function sendReceiveResponse(destinations,maxMessageCount,response){
+  //first build the response
   let messagesToReturn = [];
   for (const destinationId of destinations) {
-    if (pendingMessagesPerDestination[destinationId]) {
-      let messagesForDestination = pendingMessagesPerDestination[destinationId].slice(0, maxMessageCount);
-      for (const message of messagesForDestination) {
+    //lastPollTimestampsForLocalParticipants[destinationId]=now;
+    const pendingMessagesForDestination = getPendingMessagesForDestination(destinationId);
+    if (pendingMessagesForDestination) {
+      let filteredMessagesForDestination = pendingMessagesForDestination.slice(0, maxMessageCount);
+      for (const message of filteredMessagesForDestination) {
         //set message sequence numbers if not set already
         if (!message.sequenceId) {
           message.sequenceId = getNextSequenceIdForDestination(destinationId);
@@ -319,10 +372,65 @@ export function receiveMessages(receiverRequest,username) {
         //this works because each message only has a single destination for now...
         message.destination = destinationId;
       }
-      messagesToReturn = messagesToReturn.concat(messagesForDestination);
+      messagesToReturn = messagesToReturn.concat(filteredMessagesForDestination);
     }
   }
-  return {messages: messagesToReturn, maxMessages: maxMessageCount};
+  const responseObject= {messages: messagesToReturn, maxMessages: maxMessageCount};
+  if (responseObject.messages.length === 0){
+    response.status(204).send();
+  }else{
+    response.status(200).json(responseObject);
+  }
+}
+
+
+export function receiveMessages(receiverRequest,username,receiverResponse) {
+  for (const destination of receiverRequest.destinations) {
+    if (getUcrmIdFromParticipantId(destination)!=="self"){
+      throw new UcrmError(400, `destination OID '${destination}' is not registered here.`,ucrmErrors.REQUEST_UNKNOWN_DESTINATION_ID);
+    }
+    checkIfClientMayUseOID(username,destination,"destinations");
+  }
+  const now=Date.now();
+  const destinations = receiverRequest.destinations;
+  const maxMessageCount = receiverRequest.maxMessages || 1;
+  const maxDelayMs = (receiverRequest.maxDelay || MAX_LONG_POLL_DELAY)*1000;
+  //update last poll timestamps
+  for (const destinationId of destinations) {
+    lastPollTimestampsForLocalParticipants[destinationId] = now;
+  }
+
+  //if no long polling is desired we directly send the response
+  if (receiverRequest.maxDelay===0){
+    sendReceiveResponse(destinations,maxMessageCount,receiverResponse);
+  }else{
+    //else create a pending message receive
+    const pendingMessageReceive={
+      destinations,
+      maxMessageCount,
+      timestamp:now,
+      maxDelayMs,
+      response:receiverResponse
+    }
+    pendingMessageReceives.push(pendingMessageReceive);
+  }
+  // let messagesToReturn = [];
+  // for (const destinationId of destinations) {
+  //   lastPollTimestampsForLocalParticipants[destinationId]=now;
+  //   if (pendingMessagesPerDestination[destinationId]) {
+  //     let messagesForDestination = pendingMessagesPerDestination[destinationId].slice(0, maxMessageCount);
+  //     for (const message of messagesForDestination) {
+  //       //set message sequence numbers if not set already
+  //       if (!message.sequenceId) {
+  //         message.sequenceId = getNextSequenceIdForDestination(destinationId);
+  //       }
+  //       //this works because each message only has a single destination for now...
+  //       message.destination = destinationId;
+  //     }
+  //     messagesToReturn = messagesToReturn.concat(messagesForDestination);
+  //   }
+  // }
+  // return {messages: messagesToReturn, maxMessages: maxMessageCount};
 }
 
 export async function confirmMessages(messageRef,username) {
@@ -330,9 +438,11 @@ export async function confirmMessages(messageRef,username) {
   checkIfClientMayUseOID(username,destinationId,"destination");
 
   const sequenceId = messageRef.sequenceId;
-  let pendingMessagesForDestination = pendingMessagesPerDestination[destinationId];
+  let pendingMessagesForDestination = getPendingMessagesForDestination(destinationId);
   if (!pendingMessagesForDestination) {
-    throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
+    console.log(`No messages to commit for destination '${destinationId}'.`);
+    return;
+    //throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
   let confirmedMessageCount = 0;
   let newPendingMessagesForDestination = [];
@@ -362,9 +472,14 @@ export async function confirmMessages(messageRef,username) {
   }
   pendingMessagesPerDestination[destinationId]=newPendingMessagesForDestination;
   if (confirmedMessageCount === 0) {
-    throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
+    console.log(`No messages were commited for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`);
+    //throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
 
+}
+
+function addPendingMessageForDestination(destinationId,envelope){
+  getPendingMessagesForDestination(destinationId).push(envelope);
 }
 
 function getPendingMessagesForDestination(destinationId) {
@@ -382,6 +497,34 @@ function getNextSequenceIdForDestination(destinationId) {
   return messageSeqNumbersPerDestination[destinationId];
 }
 
+async function checkLocalParticipantPollingStatus(){
+  //get local comm participants
+  const localCommParticipants = getAllCommParticipants("p2p");
+  let stateChanged=false;
+  for (const commParticipant of localCommParticipants.commParticipants) {
+    if (commParticipant.type === "client"){
+      const now=Date.now();
+      let newState="online";
+      const lastPollTs = lastPollTimestampsForLocalParticipants[commParticipant.id];
+      if (!lastPollTs){
+        newState="offline";
+      }else if ( (now-lastPollTs)>PARTICIPANT_POLL_TIMEOUT_MS){
+        newState="offline";
+      }
+      const oldState=commParticipant.status;
+      if (oldState!==newState){
+        console.log(`state for local commParticipant ${commParticipant.id} changed from ${oldState} to ${newState}, recording change and notifying remote UCRMS...`);
+        commParticipant.status = newState;
+        await enqueueParticipantStatusChangeToRemoteUcrms(commParticipant.id,newState);
+        stateChanged=true;
+      }
+    }
+  }
+  if (stateChanged){
+    setImmediate(processUnsentMessages);
+  }
+}
+
 async function checkForTimeouts(){
   //as we are executed quite often we do not want to spam the log
   // console.log("Checking for Message timeouts...");
@@ -397,11 +540,50 @@ async function checkForTimeouts(){
       }
       const timeoutEnvelope=await createMessageDeliveryStatusEnvelope(trackingData.destination,trackingData.source,timeoutMessage)
 
-      getPendingMessagesForDestination(trackingData.source).push(timeoutEnvelope);
+      addPendingMessageForDestination(trackingData.source,timeoutEnvelope);
       delete trackedOutgoingMessagesPerMessageId[messageId];
     }
   }
 }
+
+async function enqueueParticipantStatusChangeToRemoteUcrms(participantId, status) {
+  console.log(`Enqueuing local comm participant status update for ${participantId} to status '${status}' to all remote UCRMs...`);
+  for (const [ucrmId, remoteConfig] of Object.entries(config.remoteUcrms)) {
+    const remoteOid = remoteConfig.oid;
+    console.log(`Enqueuing status update to remote UCRM with id '${ucrmId}' with oid ${remoteOid}'....`);
+    const updateRequest = await createParticipantUpdateEnvelope(participantId, remoteOid, status);
+    unsentOutgoingMessages.push(updateRequest);
+  }
+}
+
+async function createParticipantUpdateEnvelope(participantId,destinationId,status){
+  const message={
+    "id": participantId,
+    "status": status
+  }
+  const envelope = {
+    "messageId":uuidv4(),
+    "sentDate": new Date().toISOString(),
+    "timeout" : 10,
+    "ack": "NONE",
+    "source": config.ownOid,
+    "destinations": [
+      destinationId
+    ],
+    "payload": {
+      "appId": "transport_layer_messages",
+      "appVersion": "1.0",
+      "schemaId": "participant_availability_update",
+      "contentType": "application/json",
+      "data": JSON.stringify(message)
+    }
+  };
+  //sign message with private signing key
+  envelope.signature = await getEnvelopeSignature(envelope,config.privateSigningKey);
+  console.log(`Signature verification - generated Signature is ${envelope.signature}`);
+  return envelope;
+}
+
 
 async function createMessageDeliveryStatusEnvelope(sourceId,destinationId,message){
   const envelope = {
@@ -416,7 +598,7 @@ async function createMessageDeliveryStatusEnvelope(sourceId,destinationId,messag
     ],
     "payload": {
       "appId": "transport_layer_messages",
-      "appVersion": "0.1",
+      "appVersion": "1.0",
       "schemaId": "message_delivery_status",
       "contentType": "application/json",
       "data": JSON.stringify(message)

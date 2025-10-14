@@ -1,0 +1,50 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/1.0/resource_deployed.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resource Deployed",
+  "description": "Indicates which specific resource, originally requested, has been deployed (moved out) and at what time.",
+  "type": "object",
+  "properties": {
+    "resourceRequestId": {
+      "title": "Resource Request ID",
+      "description": "Die eindeutige Kennung der ursprünglichen Ressourcenanforderung.",
+      "type": "string"
+    },
+    "resourceId": {
+      "title": "Resource ID",
+      "description": "Eindeutige Kennung der disponierten Ressource.",
+      "type": "string"
+    },
+    "resourceName": {
+      "title": "Ressourcenname",
+      "description": "Name der disponierten Ressource.",
+      "type": "string"
+    },
+    "resourceType": {
+      "title": "Ressourcentyp",
+      "description": "Typ der disponierten Ressource (laut Ressourcentypkatalog).",
+      "type": "string"
+    },
+    "deployedAt": {
+      "title": "Ausrückzeitpunkt",
+      "description": "Zeitpunkt, zu dem die Ressource ausgerückt ist.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "comment": {
+      "title": "Kommentar",
+      "description": "Optionaler Kommentar oder zusätzliche Informationen.",
+      "type": "string"
+    }
+  },
+  "required": ["resourceRequestId", "resourceId", "resourceName", "resourceType", "deployedAt"],
+  "examples": [
+    {
+      "resourceRequestId": "10002003",
+      "resourceId": "1234",
+      "resourceName": "KTW-1",
+      "resourceType": "KTW",
+      "deployedAt": "2025-06-11T10:30:00Z"
+    }
+  ]
+}

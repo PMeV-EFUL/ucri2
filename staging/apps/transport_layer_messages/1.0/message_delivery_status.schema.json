@@ -1,0 +1,93 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/transport_layer_messages/1.0/message_delivery_status.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht message_delivery_status - Zustellungsstatus für eine andere App-Nachricht",
+  "description": "Diese Nachricht wird von einem UCRM versendet, um den Zustellungsstatus einer App-Nachricht zu kommunizieren",
+  "required": [
+    "refMessageId",
+    "destination",
+    "statusCode"
+  ],
+  "type": "object",
+  "properties": {
+    "refMessageId": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Referenz-UUID",
+      "description": "Systemweit eindeutige ID der referenzierten Nachricht"
+    },
+    "destination": {
+      "type": "string",
+      "pattern": "^([0-9]+\\.?)+$",
+      "title": "Empfänger-OID",
+      "description": "Empfänger-OID"
+    },
+    "statusCode": {
+      "title": "Annahme- oder Ablehnungsstatus",
+      "description": "Status-Code: 200 - Zustellbestätigung; 504 - Timeout; 502 - Fehler bei Zustellung an entferntes UCRM",
+      "type": "integer",
+      "enum": [
+        200,
+        502,
+        504
+      ]
+    },
+    "cause": {
+      "required": [
+        "code",
+        "reason"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "title": "UCRI-Fehlercode",
+          "type": "integer",
+          "description": "Anwendungsspezifische Fehler-Code"
+        },
+        "reason": {
+          "title": "Fehlerursache",
+          "type": "string",
+          "description": "Fehlerursache in für Menschen verständlicher Sprache"
+        },
+        "message": {
+          "title": "Fehlerbeschreibung",
+          "type": "string",
+          "description": "Detailliertere Fehlerbeschreibung eventuell mit Angabe der Korrektivmaßnahmen in für Menschen verständlicher Sprache"
+        }
+      },
+      "title": "Zugrundeliegender UCRI-Fehler",
+      "description": "Zugrundeliegender vom sendenden oder entfernten UCRM gemeldeter Fehler, sollte bei statusCode 500 übermittelt werden."
+    },
+    "statusMessage": {
+      "title": "Fehlertext",
+      "description": "Text mit weiteren Einzelheiten und Abhilfemaßnahmen in Bezug auf den Fehler. Dies kann einem Client-Benutzer angezeigt werden.",
+      "type": "string",
+      "maxLength": 100
+    }
+  },
+  "examples": [
+    {
+      "refMessageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+      "destination": "1.2.3.4.5.6.7",
+      "statusCode": 504,
+      "statusMessage": "Meldung konnte innerhalb von 30 Sekunden nicht zugestellt werden und wurde verworfen"
+    },
+    {
+      "refMessageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+      "destination": "1.2.3.4.5.6.7",
+      "statusCode": 500,
+      "statusMessage": "Das empfangende UCRM hat einen Fehler gemeldet",
+      "cause": {
+        "code": 468,
+        "reason": "HTTP error 401: invalid signature",
+        "message": "invalid signature"
+      }
+    },
+    {
+      "refMessageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+      "destination": "1.2.3.4.5.6.7",
+      "statusCode": 200
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/1.0/incident.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/incidentBase.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten",
+  "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
+  "required": [ "sharedIncidentId","sentByDispatcherAt","patient"],
+  "type": "object",
+  "properties": {
+    "issue": {
+      "title": "Übergabegrund",
+      "type": "string",
+      "enum": ["consultation_needed"],
+      "description": "Übergabegrund"
+    },
+    "patient": {
+      "title": "Patient",
+      "description": "Der/die Patient(in).",
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/patient.schema.json",
+      "type": "object",
+      "required": [ "name","phone" ]
+    }
+  },
+  "examples": [{
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "internalId": "f123456",
+    "issue": "consultation_needed",
+    "additionalInformation": "Zusatzinformationen",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "protocolRemarks":[{
+      "timestamp": "2024-01-01T10:06:09Z",
+      "message": "Die Hausnummer des Patienten ist 15c, nicht 15b",
+      "category": "information",
+      "silent": false
+    }],
+    "patient": {
+        "name": "Mustermann",
+        "surname": "Hans",
+        "phone": "+49 30 123456",
+        "email": "hans.mustermann@example.com",
+        "address": {
+          "street": "Musterstrasse",
+          "houseNumber": "15b",
+          "postalCode" : "12345",
+          "city": "Musterhausen",
+          "cityDistrict": "Musterberg",
+          "state": "Brandenburg",
+          "country": "DE"
+        },
+        "additionalInformation": "weitere Informationen",
+        "gender": "Male",
+        "dateOfBirth": "19801230",
+        "age": 55,
+        "healthInsuranceInformation": {
+          "healthInsuranceCompany":"Musterkasse",
+          "healthInsuranceCompanyNumber": "101234567",
+          "insuranceNumber": "S123456789"
+        },
+        "initialAssessment": {
+          "rmi": "360",
+          "rmc": "360543215",
+          "pzc": "360401",
+          "additionalInformation": "unspezifischer Notfall"
+        },
+        "infectionInformation": "potentiell ansteckend",
+        "infectionStatus": true,
+        "transportNumber": "123456"
+      }
+    ,
+    "informers": [
+      {
+        "name": "Musterfrau",
+        "surname": "Heike",
+        "phone": "+49 30 234567",
+        "email": "heike.musterfrau@example.com"
+      }
+    ]
+  }]
+}

@@ -7,11 +7,11 @@ Mit dem Typ boolean werden JSON-Wahrheitswerte beschrieben, die möglichen Auspr
 ### Zahlen - type: number und type:integer
 Im JSON-Schema werden Ganzzahlen (type:integer) und Kommazahlen (type:number) separat beschrieben, wobei als Dezimalseparator ein Punkt zum Einsatz kommt.
 Da in JSON selbst aber nur ein gemeinsamer Zahlentyp für Ganz- und Kommazahlen existiert, können Ganzzahlen auch mit einem Dezimalseparator angegeben werden, für den Nachkommateil gilt dann aber, dass dieser 0 sein muss (z.B. sind sowohl **1.0** als auch **1** gültige Ausprägungen für eine Ganzzahl).
-Für beide Typen kann der gültige Zahlenbereich mit den Attributen "minimum","exlusiveMinimum","maximum" und "exclusiveMaximum" eingeschränkt werden).
+Für beide Typen kann der gültige Zahlenbereich mit den Attributen "minimum","exclusiveMinimum","maximum" und "exclusiveMaximum" eingeschränkt werden).
 
 ### Zeichenketten - type: string
 Zeichenketten werden über den type: string abgebildet und immer im Unicode-Format dargestellt. Für Zeichenketten werden verschiedene Untertypen genutzt, die über die Attribute "format" und "enum" (im Falle von Enumerationen) festgelegt und im Folgenden beschrieben werden:
-- **Längenbeschränkte Zeichenketten**: Über die Attribute "minLength" und "maxLength" kann die Länge der Zeichenkette beschränkt werden.
+- **Längenbeschränkte Zeichenketten**: Über die Attribute "minLength" und "maxLength" kann die Länge der Zeichenkette beschränkt werden. Diese Attribute werden jedoch kaum verwendet, da davon ausgegangen wird, dass die an UCRI angeschlossenen Applikationen gebrauchstaugliche Feldlängen für Strings vorsehen. Vor allem aber für Zeichenketten, die als Freitext genutzt werden, sollte darauf geachtet werden, dass eine Zeichenlänge von 2000 Zeichen nicht überschritten wird, da davon auszugehen ist, dass die Zielsysteme zu lange Zeichenketten abschneiden.
 - **Enumerationen**: Mit dem Attribut "enum" kann eine Liste von gültigen Ausprägungen festgelegt werden.
 - **Datumsangaben**: Mit dem Attribut "format:date" werden ISO8601-konforme tagesgenaue Datumsangaben dargestellt (z.B. "2025-12-01" für den 1.Dezember 2025). Mit dem Attribut "format:date-time" werden ISO8601-konforme Zeitstempel (z.B. "2018-11-13T20:20:39") dargestellt. Als Zeitzone ist hierbei UTC festgelegt.
 - **UUIDs**: Mit dem Attribut "format:uuid" werden UUIDs dargestellt, z.B. ("550e8400-e29b-41d4-a716-446655440000").

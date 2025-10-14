@@ -1,0 +1,34 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/healthInsuranceInformation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Informationen zum Versicherungsverhältnis",
+  "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
+  "required": [],
+  "type": "object",
+  "properties": {
+    "healthInsuranceCompany": {
+      "title": "Name der Krankenversicherung",
+      "description": "Der Name der Krankenversicherung.",
+      "type": "string"
+    },
+	"healthInsuranceCompanyNumber": {
+      "title": "IK der Krankenversicherung",
+      "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
+      "type": "string",
+      "pattern": "^[0-9]*$",
+      "minLength": 9,
+      "maxLength": 9
+    },
+	"insuranceNumber": {
+      "title": "Versichertennummer (Alphanumerisch)",
+      "description": "Die Versichertennummer",
+      "type": "string"
+    }
+  },
+  "unevaluatedProperties": false,
+  "examples": [{
+    "healthInsuranceCompany":"Musterkasse",
+    "healthInsuranceCompanyNumber": "101234567",
+    "insuranceNumber": "S123456789"
+  }]
+}

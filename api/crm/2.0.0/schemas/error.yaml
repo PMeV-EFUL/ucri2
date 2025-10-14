@@ -1,0 +1,32 @@
+required:
+  - code
+  - reason
+type: object
+properties:
+  code:
+    type: integer
+    description: Fehler-Code. Eine detaillierte Erklärung der genutzten Fehlercodes und deren Vorkommen findet sich im Spezifikationsdokument der Transportschicht.
+    enum:
+      - 460
+      - 461
+      - 462
+      - 463
+      - 464
+      - 465
+      - 466
+      - 468
+      - 467
+      - 470
+      - 475
+      - 478
+      - 479
+      - 480
+      - 491
+  reason:
+    type: string
+    description: Fehlerursache in für Menschen verständlicher Sprache
+  message:
+    type: string
+    description: Detailliertere Fehlerbeschreibung eventuell mit Angabe der Korrektivmaßnahmen
+      in für Menschen verständlicher Sprache
+description: Fehlerbeschreibung mit UCRI2-spezifischem Fehlercode

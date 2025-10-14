@@ -1,0 +1,19 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/catalogueMessageBase.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Basis einer Katalog-App-Nachricht",
+  "description": "Basis einer Katalog-App-Nachricht.",
+  "required": ["requestId"],
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Anfrage-UUID",
+      "description": "global eindeutige UUID der Anfrage"
+    }
+  },
+  "examples": [{
+    "requestId": "440e8400-e29b-41d4-a716-446655440000"
+  }]
+}

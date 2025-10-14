@@ -1,0 +1,39 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/personPoliceRelevant.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/personBase.schema.json",
+  "title": "Polizeilich relevante Person",
+  "description": "Eine polizeilich relevante Person.",
+  "unevaluatedProperties": false,
+  "properties": {
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date",
+      "title": "Geburtsdatum",
+      "description": "Das Geburtsdatum der Person."
+    },
+    "nationality": {
+      "type": "string",
+      "title": "Nationalität",
+      "description": "die Nationalität der Person."
+    }
+  },
+  "examples": [{
+    "name": "Mustermann",
+    "surname": "Hans",
+    "phone": "+49 30 123456",
+    "email": "hans.mustermann@example.com",
+    "address": {
+      "street": "Musterstrasse",
+      "houseNumber": "15b",
+      "postalCode": "12345",
+      "city": "Musterhausen",
+      "cityDistrict": "Musterberg",
+      "state": "Brandenburg",
+      "country": "DE"
+    },
+    "additionalInformation": "weitere Informationen",
+    "dateOfBirth": "1980-05-15",
+    "nationality": "DE"
+  }]
+}

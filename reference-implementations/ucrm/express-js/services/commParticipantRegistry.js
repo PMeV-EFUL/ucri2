@@ -2,37 +2,35 @@ import {UcrmError} from "../util/ucrmError.js";
 import {ucrmErrors} from "../../../shared-js/ucrmErrorCodes.js";
 import fetch from 'node-fetch';
 import {getRemoteUcrmToken} from "./authManager.js";
-import {base64Encode} from "../../../shared-js/util.js"
-import {verifyKTRecord} from "../../../shared-js/crypto.js"
-import {co} from "replace-in-files/lib/helpers.js";
 
 export async function addCommParticipants(participants, ucrmId) {
   const validParticipants = {};
   let errorOccured = false;
   for (const [oid,participant] of Object.entries(participants)) {
-    if (config.useKTSignatures){
-      if (!participant.domain){
-        console.error(`Participant with oid '${oid}' has no domain!`);
-        errorOccured = true;
-        continue;
-      }
-      let domainPublicKey = config.domainPublicKeys[participant.domain];
-      if (!domainPublicKey){
-        console.error(`Participant with oid '${oid}' has unknown domain '${participant.domain}'!`);
-        errorOccured = true;
-        continue;
-      }
-      try{
-        await verifyKTRecord(participant,domainPublicKey);
-        validParticipants[oid]=participant;
-      }catch(err){
-        console.error(`KT signature verification fail for oid '${oid}', reason: ${err.message}`);
-        errorOccured = true;
-        continue;
-      }
-    }else{
+    //KT Signing is (no longer) part of Transport Layer 2.0, so everything pertaining to it has been disabled (for now)
+    // if (config.useKTSignatures){
+    //   if (!participant.domain){
+    //     console.error(`Participant with oid '${oid}' has no domain!`);
+    //     errorOccured = true;
+    //     continue;
+    //   }
+    //   let domainPublicKey = config.domainPublicKeys[participant.domain];
+    //   if (!domainPublicKey){
+    //     console.error(`Participant with oid '${oid}' has unknown domain '${participant.domain}'!`);
+    //     errorOccured = true;
+    //     continue;
+    //   }
+    //   try{
+    //     await verifyKTRecord(participant,domainPublicKey);
+    //     validParticipants[oid]=participant;
+    //   }catch(err){
+    //     console.error(`KT signature verification fail for oid '${oid}', reason: ${err.message}`);
+    //     errorOccured = true;
+    //     continue;
+    //   }
+    // }else{
       validParticipants[oid]=participant;
-    }
+    // }
   }
   Object.assign(commParticipants, validParticipants);
   for (let id of Object.keys(validParticipants)) {
@@ -63,7 +61,7 @@ export function getCommParticipant(id, httpErrorNumber) {
 export function getAllCommParticipants(type) {
   let out=[];
   if (type === "p2p") {
-    console.log("type is p2p, filtering results to own participants...");
+    //console.log("type is p2p, filtering results to own participants...");
     //filter results to only include own ones
     for (const [participantId, ucrmId] of Object.entries(ucrmIdsByParticipantIds)) {
       if (ucrmId === "self") {
@@ -75,6 +73,13 @@ export function getAllCommParticipants(type) {
   }
   // console.log(`COMMPARTICIPANTS ARE: ${JSON.stringify(out, null, 2)}`);
   return {commParticipants:out};
+}
+
+export function updateCommParticipantStatus(id, status) {
+  if (!commParticipants[id]) {
+     console.error(`CommParticipant with id '${id}' is unknown.`);
+  }
+  commParticipants[id].status = status;
 }
 
 export async function fetchParticipantsFromRemoteUcrms() {

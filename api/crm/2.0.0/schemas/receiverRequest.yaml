@@ -1,0 +1,25 @@
+required:
+  - destinations
+type: object
+properties:
+  destinations:
+    type: array
+    items:
+      type: string
+      pattern: "^([0-9]+\\.?)+$"
+    minItems: 1
+    description: Adressaten-OID-Liste, Meldungen an alle Adressen aus dieser Liste werden abgefragt.
+  maxMessages:
+    type: integer
+    minimum: 1
+    description: maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert
+  maxDelay:
+    type: integer
+    minimum: 0
+    maximum: 30
+    default: 30
+    description: maximales Long-Polling-Delay in Sekunden. Um Long-Polling zu deaktivieren, kann ein Wert von 0 übergeben werden. Als Maximum und Defaultwert sind 30 Sekunden definiert.
+description: Meldungsabfrage
+example:
+  destinations: [1.2.3.4.5.7]
+  maxMessages: 5

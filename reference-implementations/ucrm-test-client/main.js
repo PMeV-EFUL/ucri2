@@ -30,6 +30,7 @@ async function runTestSteps(steps) {
   let testNumber = 1;
   for (const testStep of steps) {
     console.log(`executing step ${testNumber}: ${JSON.stringify(testStep, null, 2)}`);
+    const startTs=Date.now();
     switch (testStep.type) {
       case "startUcrm":
         await performStartUcrm(testStep);
@@ -52,6 +53,9 @@ async function runTestSteps(steps) {
         console.error("unsupported step type: " + testStep.type);
         return;
     }
+    const durationMs=Date.now() - startTs;
+    testStep.durationMs=durationMs;
+    console.log(`step #${testNumber} execution took ${durationMs}ms`);
     testNumber++;
   }
 }

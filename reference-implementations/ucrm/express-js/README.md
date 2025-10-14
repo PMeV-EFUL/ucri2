@@ -31,5 +31,5 @@ note that the ./config/a.config.js carries comments explaining the different con
 # Testing the UCRM
 Automated tests can be performed using the ucrm-test-client in this repo at /reference-implementations/ucrm-test-client. It provides out-of-the-box tests for both standalone and p2p mode. See the README.md of the ucrm-test-client for more details...
 
-Manual tests can be performed by the tools of your choice. If you want to use POSTMan, note that a bundled version of the TL spec can be found at /api/crm/0.1/schemas/ucrm-bundled.json (as PostMan does not support external $refs).
+Manual tests can be performed by the tools of your choice. If you want to use POSTMan, note that a bundled version of the TL spec can be found at /api/crm/1.0/schemas/ucrm-bundled.json (as PostMan does not support external $refs).
 To recreate the bundled json, you can run bundle-yaml.js in /staging/bin.

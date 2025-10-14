@@ -1,0 +1,143 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transport/1.0/incident.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/incidentExtendedBase.schema.json",
+  "unevaluatedProperties": false,
+  "title": "App-Nachricht transfer - Patiententransportanfrage",
+  "description": "Eine Patiententransportanfrage",
+  "required": [ "sharedIncidentId","sentByDispatcherAt","patient","pickupLocation","destinationLocation","pickupTime","arrivalTime" ],
+  "type": "object",
+  "properties": {
+    "pickupLocation": {
+      "title": "Startort",
+      "description": "Der Ort, an dem der Transport beginnen soll",
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/location.schema.json"
+    },
+    "destinationLocation": {
+      "title": "Zielort",
+      "description": "Der Ort, zu dem der Transport durchgeführt werden soll",
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/location.schema.json"
+    },
+    "pickupTime": {
+      "title": "Abholzeit",
+      "description": "Der Zeitpunkt, an dem der Transport beginnen soll",
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrivalTime": {
+      "title": "Ankunftszeit",
+      "description": "Der Zeitpunkt, an dem der Transport ankommen soll",
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrivalTimeFixed": {
+      "title": "Fixtermin",
+      "description": "Angabe, ob die Ankunftszeit genau eingehalten werden muss",
+      "type": "boolean"
+    },
+    "patient": {
+      "title": "Patientendaten",
+      "description": "Angaben zum zu transportierenden Patienten",
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/patient.schema.json"
+    }
+  },
+  "examples": [{
+    "sharedIncidentId": "550e8400-e29b-41d4-a716-446655440000",
+    "internalId": "f123456",
+    "classifications": [
+      "A1"
+    ],
+    "issue": "Verlegung",
+    "additionalInformation": "Zusatzinformationen",
+    "startTimestamp": "2024-01-01T09:55:15Z",
+    "sentByDispatcherAt": "2024-01-01T10:05:08Z",
+    "pickupLocation": {
+      "address": {
+        "street": "Musterstrasse",
+        "houseNumber": "15b",
+        "postalCode" : "12345",
+        "city": "Musterhausen",
+        "cityDistrict": "Musterberg",
+        "state": "Brandenburg",
+        "country": "DE"
+      },
+      "object": {
+        "name": "Abteilung IV, Haus 3",
+        "additionalInformation": "Campus West"
+      },
+      "superiorObject": {
+        "name": "Krankenhaus Musterstift",
+        "additionalInformation": "Weitere Informationen"
+      },
+      "floor": "3. OG",
+      "room": "412",
+      "additionalInformation": "Weitere Informationen"
+    },
+    "destinationLocation": {
+      "address": {
+        "street": "Mustergasse",
+        "houseNumber": "13",
+        "postalCode" : "12346",
+        "city": "Musterhausen",
+        "cityDistrict": "Musterberg",
+        "state": "Brandenburg",
+        "country": "DE"
+      },
+      "object": {
+        "name": "Abteilung I, Haus 1"
+      },
+      "superiorObject": {
+        "name": "Krankenhaus Musteringen",
+        "additionalInformation": "Weitere Informationen"
+      },
+      "floor": "2. OG",
+      "room": "201",
+      "additionalInformation": "Weitere Informationen"
+    },
+    "pickupTime": "2024-01-01T11:00:00Z",
+    "arrivalTime": "2024-01-01T11:30:00Z",
+    "arrivalTimeFixed": false,
+    "patient":
+    {
+      "name": "Mustermann",
+      "surname": "Hans",
+      "phone": "+49 30 123456",
+      "email": "hans.mustermann@example.com",
+      "address": {
+        "street": "Musterstrasse",
+        "houseNumber": "15b",
+        "postalCode" : "12345",
+        "city": "Musterhausen",
+        "cityDistrict": "Musterberg",
+        "state": "Brandenburg",
+        "country": "DE"
+      },
+      "additionalInformation": "weitere Informationen",
+      "gender": "Male",
+      "dateOfBirth": "19801230",
+      "age": 55,
+      "healthInsuranceInformation": {
+        "healthInsuranceCompany":"Musterkasse",
+        "healthInsuranceCompanyNumber": "101234567",
+        "insuranceNumber": "S123456789"
+      },
+      "initialAssessment": {
+        "rmi": "360",
+        "rmc": "360543215",
+        "pzc": "360401",
+        "additionalInformation": "unspezifischer Notfall"
+      },
+      "infectionInformation": "potentiell ansteckend",
+      "infectionStatus": true,
+      "transportNumber": "123456"
+    },
+    "informers": [
+      {
+        "name": "Musterfrau",
+        "surname": "Heike",
+        "phone": "+49 30 234567",
+        "email": "heike.musterfrau@example.com"
+      }
+    ]
+  }]
+}
