@@ -1,7 +1,7 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/0.1/incident.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/patient_transfer_new/1.0/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentBase.schema.json",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/incidentBase.schema.json",
   "unevaluatedProperties": false,
   "title": "App-Nachricht incident - Eine Übergabe-Anfrage für einen Patienten",
   "description": "Eine Übergabe-Anfrage für einen Patienten, der telefonisch erreichbar ist",
@@ -17,7 +17,7 @@
     "patient": {
       "title": "Patient",
       "description": "Der/die Patient(in).",
-      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/patient.schema.json",
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/patient.schema.json",
       "type": "object",
       "required": [ "name","phone" ]
     }

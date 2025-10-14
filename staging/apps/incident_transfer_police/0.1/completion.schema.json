@@ -1,7 +1,7 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/0.1/completion.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/1.0/completion.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentCompletionBase.schema.json",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/incidentCompletionBase.schema.json",
   "unevaluatedProperties": false,
   "title": "App-Nachricht completion - Einsatzendemeldung",
   "description": "Einsatzendemeldung",

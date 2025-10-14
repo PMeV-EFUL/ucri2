@@ -1,7 +1,7 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/0.1/incident.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/incident_transfer_police/1.0/incident.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentExtendedBase.schema.json",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/incidentExtendedBase.schema.json",
   "unevaluatedProperties": false,
   "title": "App-Nachricht incident - Polizeilicher Einsatz",
   "description": "Ein polizeilicher Einsatz mit eigenen Datenobjekten für die speziellen Personenrollen Beschuldigter und Geschädigter",
@@ -16,7 +16,7 @@
     "missionLocation": {
       "title": "Einsatzort",
       "description": "Einsatzort",
-      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/location.schema.json"
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/location.schema.json"
     },
 
     "accusedPersons": {
@@ -26,7 +26,7 @@
       "items": {
         "title": "Beschuldigte(r)",
         "description": "Am Einsatz beteiligten beschuldigte Person.",
-        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personPoliceRelevant.schema.json"
+        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/personPoliceRelevant.schema.json"
       }
     },
     "victimPersons": {
@@ -36,13 +36,13 @@
       "items": {
         "title": "Betroffene(r)",
         "description": "Am Einsatz beteiligten betroffene Person.",
-        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/personPoliceRelevant.schema.json"
+        "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/personPoliceRelevant.schema.json"
       }
     },
     "eCallData": {
       "title": "eCall-Daten",
       "description": "eCall-Datensatz des Einsatzes.",
-      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/eCallData.schema.json"
+      "$ref": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/eCallData.schema.json"
     }
   },
   "examples": [{

@@ -1,7 +1,7 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/classification_catalogue/0.1/response.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/classification_catalogue/1.0/response.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/catalogueMessageBase.schema.json",
+  "$ref":"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/catalogueMessageBase.schema.json",
   "unevaluatedProperties": false,
   "title": "App-Nachricht response - Eine Antwort auf eine den Stichwort-Katalog-Anfrage",
   "description": "Eine Antwort auf eine den Stichwort-Katalog-Anfrage",

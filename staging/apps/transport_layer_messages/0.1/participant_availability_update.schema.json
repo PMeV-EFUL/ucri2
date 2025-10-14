@@ -1,5 +1,5 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/transport_layer_messages/0.1/participant_availability_update.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/transport_layer_messages/1.0/participant_availability_update.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "unevaluatedProperties": false,
   "title": "App-Nachricht participant_availability_update - Update des Verfügbarkeitsstatus für einen Teilnehmer",

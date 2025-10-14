@@ -1,5 +1,5 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/eCallData.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/eCallData.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "eCall-Daten",
   "description": "eCall-Daten gemäß der eCall-Spezifikation. Obligat ist der Zeitstempel (timestamp).",
@@ -39,7 +39,7 @@
       "format": "date-time"
     },
     "vehiclePosition": {
-      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json",
+      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/coordinate.schema.json",
       "title": "Fahrzeugposition",
       "description": "Fahrzeugposition"
     },
@@ -49,12 +49,12 @@
       "type": "integer"
     },
     "positionN1": {
-      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json",
+      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/coordinate.schema.json",
       "title": "Position N1",
       "description": "Position N1"
     },
     "positionN2": {
-      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/coordinate.schema.json",
+      "$ref":	"https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/coordinate.schema.json",
       "title": "Position N2",
       "description": "Position N2"
     },

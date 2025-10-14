@@ -1,5 +1,5 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/0.1/resource_acknowledgement.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/resource_request/1.0/resource_acknowledgement.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Resource Acknowledgement",
   "description": "Acknowledgement specifying which specific resources are provided in response to a resource request.",

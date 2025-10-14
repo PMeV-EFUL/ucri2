@@ -1,5 +1,5 @@
 {
-  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/incidentCompletionBase.schema.json",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/1.0/incidentCompletionBase.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Basis einer Einsatzendenachricht",
   "description": "Basis einer Einsatzendenachricht",
