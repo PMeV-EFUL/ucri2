@@ -147,6 +147,7 @@ async function process(){
       //console.log(JSON.stringify(output,null,2));
       fs.mkdirSync(outputPath,{recursive:true});
       let jsonSchemaStaticDocs = new JsonSchemaStaticDocs({
+        createIndex:false,
         inputPath:inputPath,
         inputFileGlob: "*.json",
         outputPath: outputPath,
