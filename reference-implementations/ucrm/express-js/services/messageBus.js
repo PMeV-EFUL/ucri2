@@ -440,7 +440,9 @@ export async function confirmMessages(messageRef,username) {
   const sequenceId = messageRef.sequenceId;
   let pendingMessagesForDestination = getPendingMessagesForDestination(destinationId);
   if (!pendingMessagesForDestination) {
-    throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
+    console.log(`No messages to commit for destination '${destinationId}'.`);
+    return;
+    //throw new UcrmError(400, `No messages to commit for destination '${destinationId}'.`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
   let confirmedMessageCount = 0;
   let newPendingMessagesForDestination = [];
@@ -470,7 +472,8 @@ export async function confirmMessages(messageRef,username) {
   }
   pendingMessagesPerDestination[destinationId]=newPendingMessagesForDestination;
   if (confirmedMessageCount === 0) {
-    throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
+    console.log(`No messages were commited for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`);
+    //throw new UcrmError(400, `No messages to commit for destination '${destinationId}' as no message has sequenceId <= ${sequenceId}`,ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT);
   }
 
 }

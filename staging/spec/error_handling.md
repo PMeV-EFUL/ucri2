@@ -31,8 +31,6 @@ Dieser Fehlercode wird zurückgegeben, falls die appId und appVersion dem UCRM b
 Dieser Fehlercode wird NUR von der Client-Schnittstelle zurückgegeben, falls die gesendete Nachricht zur transport_layer_messages-App gehört (Nachrichten dieser App dürfen nur durch UCRMs versendet werden).
 ### Fehlercode 470 (REQUEST_UNKNOWN_DESTINATION_ID)
 Dieser Fehlercode wird zurückgegeben, wenn die angegebene destination dem UCRM nicht bekannt ist.
-### Fehlercode 471 (REQUEST_NO_MESSAGES_TO_COMMIT)
-Dieser Fehlercode wird zurückgegeben, wenn ein commit gesendet wurde, aber keine Nachrichten durch diesen tatsächlich bestätigt wurden.
 ### Fehlercode 478 (REQUEST_OID_FORBIDDEN)
 Dieser Fehlercode wird zurückgegeben, falls der durch das übergebene OAuth-Token identifizierte Benutzer keinen Zugriff auf die angegebene OID hat. Bei der angegebene OID handelt es sich um die OID:
 - im sender-Feld (für den /messaging/sent-Endpunkt)

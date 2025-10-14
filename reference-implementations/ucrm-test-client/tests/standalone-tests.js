@@ -162,11 +162,12 @@ export async function generateSteps () {
       expect: genExpectedError400(ucrmErrors.REQUEST_OID_FORBIDDEN)
     }, "sender"),
 
-    genStepMessagingCommit({
-      desc: "post messaging commit (invalid as nothing to commit)",
-      body: genBodyCommitRequest(senderOID, 1234),
-      expect: genExpectedError400(ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT)
-    }, "sender"),
+    //this is no longer part of the spec, so this test is no longer needed
+    // genStepMessagingCommit({
+    //   desc: "post messaging commit (invalid as nothing to commit)",
+    //   body: genBodyCommitRequest(senderOID, 1234),
+    //   expect: genExpectedError400(ucrmErrors.REQUEST_NO_MESSAGES_TO_COMMIT)
+    // }, "sender"),
 
     await genStepMessagingSend({
       desc: "post messaging send (disallowed source)",
