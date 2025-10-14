@@ -1,3 +1,28 @@
+---
+pdf_options:
+  format: a4
+  margin: 30mm 20mm
+  printBackground: true
+  headerTemplate: |-
+    <style>
+      section {
+        margin: 0 auto;
+        font-family: system-ui;
+        font-size: 11px;
+      }
+    </style>
+    <section>
+      Spezifikation UCRI2-App Einsatzübergabe ohne Patientendaten (incident_transfer) Version 1.0
+    </section>
+  footerTemplate: |-
+    <section>
+      <div>
+        Seite <span class="pageNumber"></span>
+        von <span class="totalPages"></span>
+      </div>
+    </section>
+---
+
 # UCRI2-App Einsatzübergabe ohne Patientendaten
 
 <!-- toc -->

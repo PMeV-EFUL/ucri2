@@ -1,3 +1,27 @@
+---
+pdf_options:
+  format: a4
+  margin: 30mm 20mm
+  printBackground: true
+  headerTemplate: |-
+    <style>
+      section {
+        margin: 0 auto;
+        font-family: system-ui;
+        font-size: 11px;
+      }
+    </style>
+    <section>
+      Spezifikation UCRI2 Version 2.0.0
+    </section>
+  footerTemplate: |-
+    <section>
+      <div>
+        Seite <span class="pageNumber"></span>
+        von <span class="totalPages"></span>
+      </div>
+    </section>
+---
 # Universal Control Room Interface Version 2 (UCRI2)
 
 UCRI steht für Universal Control Room Interface - ein Protokoll für die Kommunikation zwischen zwei oder
@@ -448,3 +472,4 @@ Meldungen werden in UCRM m.H.v. Meldungs-Schemata validiert. Die Validierung erf
 # UCRI2 Anwendungen
 
 Detaillierte Beschreibung der UCRI2 Anwendungen befindet sich in dem Verzeichnis [docs/apps](../apps). Hierbei gibt das Dokument "UCRI2 App im Überblick" einen Überblick über die verschiedenen Apps und die PDF-Dateien in den Unterordnern beinhalten die detaillierte Dokumentation für verschiedenen Apps.
+
