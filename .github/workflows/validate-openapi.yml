@@ -11,10 +11,10 @@ jobs:
     - name: Validate OpenAPI transport layer client API definition
       uses: stoplightio/spectral-action@v0.8.11
       with:
-        file_glob: api/crm/0.1/crm-client.yaml
-        spectral_ruleset: api/crm/0.1/.spectral.yaml
+        file_glob: api/crm/2.0.0/crm-client.yaml
+        spectral_ruleset: api/crm/2.0.0/.spectral.yaml
     - name: Validate OpenAPI transport layer p2p API definition
       uses: stoplightio/spectral-action@v0.8.11
       with:
-        file_glob: api/crm/0.1/crm-p2p.yaml
-        spectral_ruleset: api/crm/0.1/.spectral.yaml
+        file_glob: api/crm/2.0.0/crm-p2p.yaml
+        spectral_ruleset: api/crm/2.0.0/.spectral.yaml
