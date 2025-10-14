@@ -1,4 +1,7 @@
+<!-- skip-start -->
 [Zu der Hauptseite](index.md)
+<!-- skip-end -->
+
 # UCRI2 Ziele
 
 Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x:
