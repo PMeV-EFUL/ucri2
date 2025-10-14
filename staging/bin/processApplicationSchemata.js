@@ -56,17 +56,7 @@ async function process(){
 
   const schemaDirs=collectInputSchemata();
   console.log(`Processing the following app/version directories with schema files:\n ${JSON.stringify(schemaDirs,null,2)}`);
-  //   {
-  //   "building_blocks/0.1":[
-  //     "address","coordinate","healthInsuranceInformation","initialAssessment","location","missionObject","personBase","person","patient"
-  //   ],
-  //   "incident_transfer_with_patient/0.1":[
-  //     "incident","acknowledgement"
-  //   ],
-  //   "patient_transfer/0.1":[
-  //     "incident","acknowledgement"
-  //   ]
-  // };
+
   let errorsOccured=false;
 
   let schemas={};
@@ -278,17 +268,18 @@ function replaceRefs(obj) {
       replaceRefs(obj[key])
     }
     //business logic
-    let prefix = "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks/0.1/";
+    let prefix = "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/building_blocks";///0.1/";
     if (key.indexOf(prefix)===0){
       //this is a $defs entry, change the key to only contain the actual name
       //also delete the $id which will no longer match the ref
       delete obj[key].$id;
-      let newId = key.substring(prefix.length);
+      //const splitKey=key.split("/");
+      let newId = key.substring(key.lastIndexOf("/")+1,key.length);//key.substring(prefix.length);
       obj[newId]=obj[key];
       delete obj[key];
     }else if (key==="$ref" && obj[key].indexOf(prefix)===0){
       //this is a (bundled) ref that we make into a local one
-      const newRef=obj[key].substring(prefix.length);
+      const newRef=obj[key].substring(obj[key].lastIndexOf("/")+1,obj[key].length);//prefix.length);
       obj[key]=`#/$defs/${newRef}`;
     }
   }
