@@ -14,7 +14,7 @@
     "logStdOut": false,
     "logStdErr": false,
     "ready": true,
-    "durationMs": 1210
+    "durationMs": 1193
   },
   {
     "type": "authorize",
@@ -25,7 +25,7 @@
     "expect": {
       "http": 401
     },
-    "durationMs": 91
+    "durationMs": 166
   },
   {
     "type": "authorize",
@@ -36,7 +36,7 @@
     "expect": {
       "http": 401
     },
-    "durationMs": 6
+    "durationMs": 5
   },
   {
     "type": "authorize",
@@ -47,7 +47,7 @@
     "expect": {
       "http": 200
     },
-    "durationMs": 26
+    "durationMs": 24
   },
   {
     "type": "authorize",
@@ -70,7 +70,7 @@
     "desc": "get info",
     "endpoint": "info",
     "method": "GET",
-    "durationMs": 12
+    "durationMs": 13
   },
   {
     "type": "fetch",
@@ -82,7 +82,7 @@
     "desc": "get registry entries (should be 4)",
     "endpoint": "registry",
     "method": "GET",
-    "durationMs": 16
+    "durationMs": 14
   },
   {
     "type": "fetch",
@@ -94,7 +94,7 @@
     "endpoint": "registry/1.2.3.4.5.8",
     "method": "GET",
     "desc": "get individual registry entry (existing)",
-    "durationMs": 16
+    "durationMs": 13
   },
   {
     "type": "fetch",
@@ -113,7 +113,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 43
+    "durationMs": 18
   },
   {
     "type": "fetch",
@@ -132,7 +132,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 17
+    "durationMs": 10
   },
   {
     "type": "fetch",
@@ -151,7 +151,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -179,7 +179,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 21
+    "durationMs": 18
   },
   {
     "type": "fetch",
@@ -208,7 +208,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -266,7 +266,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 5
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -295,7 +295,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -353,7 +353,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -382,7 +382,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 6
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -411,7 +411,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -440,11 +440,11 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 8
+    "durationMs": 5
   },
   {
     "type": "sleep",
-    "durationMs": 508
+    "durationMs": 503
   },
   {
     "type": "fetch",
@@ -496,7 +496,7 @@
   },
   {
     "type": "sleep",
-    "durationMs": 502
+    "durationMs": 512
   },
   {
     "type": "fetch",
@@ -569,7 +569,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 4
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -585,7 +585,7 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 5
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -604,7 +604,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 4
+    "durationMs": 3
   },
   {
     "type": "fetch",
@@ -616,6 +616,6 @@
     "endpoint": "registry/1.2.3.4.5.1",
     "method": "GET",
     "desc": "get individual registry entry (unknown)",
-    "durationMs": 4
+    "durationMs": 3
   }
 ]

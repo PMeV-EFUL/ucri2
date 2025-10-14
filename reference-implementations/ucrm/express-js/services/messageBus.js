@@ -87,7 +87,7 @@ async function handleIncomingP2PMessage(senderRequest) {
   if (destinationId===config.ownOid && senderRequest.payload.appId===TRANSPORT_LAYER_APPID && senderRequest.payload.schemaId===PARTICIPANT_UPDATE_MESSAGE_SCHEMAID){
     console.log("detected participant status update message for self, updating local KT registry...");
     const decodedPayloadData=JSON.parse(senderRequest.payload.data);
-    const participantId=decodedPayloadData.participantOid;
+    const participantId=decodedPayloadData.id;
     const status=decodedPayloadData.status;
     console.log(`updating local KT status for ${participantId} to ${status}`);
     updateCommParticipantStatus(participantId,status);
@@ -558,7 +558,7 @@ async function enqueueParticipantStatusChangeToRemoteUcrms(participantId, status
 
 async function createParticipantUpdateEnvelope(participantId,destinationId,status){
   const message={
-    "participantOid": participantId,
+    "id": participantId,
     "status": status
   }
   const envelope = {
