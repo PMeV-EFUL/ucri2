@@ -1,4 +1,6 @@
+<!-- skip-start -->
 [Zu der Hauptseite](index.md)
+<!-- skip-end -->
 
 # UCRI2 Vermittlungsebene
 
@@ -12,5 +14,7 @@ Im Weiteren werden einzelne Aspekte der Nachrichtenübermittlung detailliert bes
 - [UCRI Leitstellenmodul](ucrm_api.md)
 - [Kommunikationsprotokoll](p2p_protocol.md)
 
+<!-- skip-start -->
 ---
 [Zu der Hauptseite](index.md)
+<!-- skip-end -->

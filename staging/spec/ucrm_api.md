@@ -1,4 +1,6 @@
+<!-- skip-start -->
 [Vermittlungsebene](messaging.md)
+<!-- skip-end -->
 
 # UCRI Leitstellenmodul
 
@@ -84,4 +86,6 @@ Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsie
 
 Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben. 
 
+<!-- skip-start -->
 [Vermittlungsebene](messaging.md)
+<!-- skip-end -->

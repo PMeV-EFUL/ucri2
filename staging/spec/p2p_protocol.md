@@ -1,4 +1,6 @@
+<!-- skip-start -->
 [Vermittlungsebene](messaging.md)
+<!-- skip-end -->
 
 # UCRI2 Kommunikationsprotokoll
 
@@ -161,5 +163,7 @@ Für die Zustellung von Nachrichten können unterschieldiche Routing-Algorithmen
 
 Meldungen werden in UCRM m.H.v. Meldungs-Schemata validiert. Die Validierung erfolgt synchron beim Senden. KT-Register liefert Auskunft über die durch KT unterstützten Schemata.
 
+<!-- skip-start -->
 ---
 [Vermittlungsebene](messaging.md)
+<!-- skip-end -->

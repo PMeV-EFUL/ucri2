@@ -34,10 +34,9 @@ Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden 
 - [UCRI2 Ziele](#ucri2-ziele)
 - [UCRI2 Systemarchitektur](#ucri2-systemarchitektur)
   * [Messaging](#messaging)
-  * [Adapter-Komponente](#adapter-komponente)
   * [Vermittlungsebene](#vermittlungsebene)
-  * [UCRI Gateway](#ucri-gateway)
   * [Anwendungsebene](#anwendungsebene)
+  * [UCRI Gateway](#ucri-gateway)
 - [UCRI2 Vermittlungsebene](#ucri2-vermittlungsebene)
 - [UCRI2 Adressierungskonzept](#ucri2-adressierungskonzept)
   * [OID-Hierarchie](#oid-hierarchie)
@@ -99,31 +98,24 @@ Messaging-Systeme ermöglichen es den Komponenten, entkoppelt zu bleiben und sic
 
 ![Messaging](ucri-arch-overview.drawio.svg)
 
-## Adapter-Komponente
+## Vermittlungsebene
 
-Das andere wichtige Architekturmuster, das bei der Strukturierung der UCRI2-Schnittstelle Verwendung findet ist das Adapter-Muster. Bei diesem Muster erfolgt die Kommunikation zwischen dem technischen System der KT (Anwendungsebene) und der Vermittlungsebene mittels einer Adapter-Komponente (UCRI Control Room Module - UCRM). Der Adapter ermöglicht bidirektionale Kommunikation zwischen den Ebenen in einer standardisierten Form und ermöglicht die Komplexitätsreduzierung der angebundenen Schnittstellen.
+Das andere wichtige Architekturmuster, das bei der Strukturierung der UCRI2-Schnittstelle Verwendung findet, ist das Adapter-Muster. Bei diesem Muster erfolgt die Kommunikation zwischen dem technischen System der KT (Anwendungsebene) und der Vermittlungsebene mittels einer Adapter-Komponente Leitstellenmodul (UCRI Control Room Module - UCRM). Der Adapter ermöglicht bidirektionale Kommunikation zwischen den Ebenen in einer standardisierten Form und ermöglicht die Komplexitätsreduzierung der angebundenen Schnittstellen.
+
+Das UCRM stellt die UCRM Client API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme ([vgl. UCRI Gateway](#UCRI-Gateway)).
 
 Der Adapter kann auch zusätzliche Aufgaben übernehmen, wie z. B. Datentransformation oder Sicherheitsaufgaben wie Ende-zu-Ende-Verschlüsselung von übermittelten Nachrichten.
 
-Die Adapter an der Seite von technischen Systemen der KT und optional der Broker (bei einer zentralen Broker-Architektur) kümmern sich somit um die technischen Aspekte der Kommunikation - also die Vermittlungsebene, während die fachlichen Systemkomponenten Clients und Server sich auf die eigentliche Anwendungslogik fokussieren - also die Anwendungsebene.
+Die untereinander kommunizierenden UCRM - Adapter an der Seite von technischen Systemen der KT und optional der Broker (bei einer zentralen Broker-Architektur) bilden die Vermittlungsebene und kümmern sich somit um die technischen Aspekte der Kommunikation - also die Vermittlungsebene, während die fachlichen Systemkomponenten Clients und Server sich auf die eigentliche Anwendungslogik fokussieren - also die Anwendungsebene.
 
-## Vermittlungsebene
+Zentrale Aufgabe der Vermittlungsebene ist die Zustellung von Meldungen zwischen Sender und Empfänger. Außerdem werden auf der Vermittlungsebene unterschiedliche querschnittliche Aufgaben übernommen. Hier sind nur einige Beispiele: KT-Authentifizierung und Autorisierung, Meldungsvalidierung, eventuell E2E-Verschlüsselung. Bei der P2P-Topologie kommunizieren die UCRM der zwei KT dabei direkt miteinander, bei einer zentralen Architektur - über einen Messagebroker.
 
-Zentrale Aufgabe der Vermittlungsebene ist die Zustellung von Meldungen zwischen Sender und Empfänger. Außerdem müssen auf der Vermittlungsebene unterschiedliche querschnittliche Aufgaben übernommen werden. Hier sind nur einige Beispiele: KT-Authentifizierung und Autorisierung, Meldungsvalidierung, eventuell E2E-Verschlüsselung. Bei der P2P-Topologie kommunizieren die UCRM der zwei KT dabei direkt miteinander.
 
-## UCRI Gateway
-
-Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu Gruppen von KT eingesetzt, die auf der Vermittlungsebene nicht direkt erreichbar sind und über eine proprietäres Leitstellenprotokoll angebunden werden können (Leitstellenverbunde). Das Gateway stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und UCRI-internen KT-Adressen.
-
-![UCRI Komponenten](ucri-components.drawio.svg)
-
-Das Leitstellenmodul (UCRM) stellt die UCRM API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme.
-
-Einzelne Aufgaben der Vermittlungsebene, die bei der P2P-Topologie durch die Kommunikation zwischen einzelnen UCRMs umgesetzt werden müssen, sind:
-- Verwaltung der Kommunikationstopologie inkl. Adressierungskonzept und KT-Register
+Einzelne Aufgaben der Vermittlungsebene, die bei der P2P-Topologie durch die Kommunikation zwischen einzelnen UCRMs umgesetzt werden, sind:
+- Verwaltung der Kommunikationstopologie inkl. Adressierungskonzept, KT-Status-Monitoring und KT-Register
 - Konzept Authentisierung, Autorisierung, Accounting
-- E2E-Verschlüsselung
-- Übermittlung von Nachrichten unter der Verwendung eines UCRI-Adressierungskonzepts inkl. Routing-Funktion
+- Optional E2E-Verschlüsselung
+- Übermittlung von Nachrichten unter der Verwendung des UCRI-Adressierungskonzepts inkl. Routing-Funktion
 - Validierung von Anwendungsmeldungen
 
 Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert optional die Ende-zu-Ende-Verschlüsselung der Daten.
@@ -137,7 +129,11 @@ Eine UCRI2-Anwendung wird durch folgende Artefakte definiert:
 
 Wichtig ist das Prinzip der Trennung der UCRI2-Anwendungen untereinander und deren Unabhängigkeit von der Vermittlungsebene. Das erlaubt eine freie Weiterentwicklung jeder einzelnen Anwendung.
 
----
+## UCRI Gateway
+
+Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wird am Übergang zu Gruppen von KT eingesetzt, die auf der Vermittlungsebene nicht direkt erreichbar sind und über eine proprietäres Leitstellenprotokoll angebunden werden können (Leitstellenverbunde). Das Gateway stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und UCRI-internen KT-Adressen.
+
+![UCRI Komponenten](ucri-components.drawio.svg)
 
 
 
@@ -154,13 +150,16 @@ Im Weiteren werden einzelne Aspekte der Nachrichtenübermittlung detailliert bes
 - [UCRI Leitstellenmodul](ucrm_api.md)
 - [Kommunikationsprotokoll](p2p_protocol.md)
 
----
 
-[Vermittlungsebene](messaging.md)
+
 
 # UCRI2 Adressierungskonzept
 
 Für die Adressierung der einzelnen Kommunikationsteilnehmer (KT) auf der Vermittlungsebene werden eindeutige Kennungen in Form von Object Identifier (OID Spezifikationen ISO/IEC 9834, DIN 66334) verwendet.
+
+**Das vorliegende Konzept stellt lediglich ein Beispiel für mögliche Strukturierung des OID-Raums dar.
+Wichtig ist, dass der UCRI-OID-Raum sich mit anderen weltweit existierenden standardisierten OID-Räumen nicht überschneidet.
+Die Verwaltung des UCRI-OID-Raumes inklusive Sicherstellung von eindeutigen OID-Adressen obliegt dem Expertenforum UCRI und ist nicht im Scope der UCRI-Spezifikation.**
 
 ## OID-Hierarchie
 
@@ -168,54 +167,50 @@ Adressierung von einzelnen KT ist hierarchisch organisiert und spiegelt die hier
 
 ![OID-Hierarchie](ucri-oid-hierarchy.drawio.svg)
 
-Diese Struktur ermöglicht Implementierung einer einfachen und einheitlichen Routing-Funktion, die in jeder Systemkomponente (Leitstellenmodul - UCRM, Vermittlungsplattform, Gateway) die Weiterleitung von übermittelten Nachrichten unterstützt (TODO Routing-Konzept).
-
-Auch wenn die Bildung einer eigenen Adressierungsebene für Leitstellenmodule (CRM-Ebene im Bild) nicht zwingend notwendig ist, unterstützt diese Ebene das Implementieren einer uniformen Routing-Funktion. Zusätzlich bringt direkte OID-Adressierung der Leitstellenmodule folgende Vorteile:
-
-- es ermöglicht Umsetzung nützlicher technischer Funktionen, z.B. Kommunikationsdurchstich Modul zu Modul unter Verwendung von einheitlichen Adressierungs- und Routing-Funktionen.
-- es unterstützt Vereinheitlichung von Identity-Management für UCRI-Systemkomponenten.
+Diese Struktur ermöglicht Implementierung einer einfachen und einheitlichen Routing-Funktion, die in jeder Systemkomponente (Leitstellenmodul - UCRM, evtl. Messagebroker, UCRI-Gateway) die Weiterleitung von übermittelten Nachrichten unterstützt (TODO Routing-Konzept).
 
 Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu externen Systemen eingesetzt und stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und internen OID. Ein externes System bekommt dabei einen entsprechend reservierten OID-Bereich (Unterbaum) und das Gateway bekommt die Wurzel-OID-Adresse dieses Unterbaums.
 
 ## OID-Nomenklatur
 
-OID-Nomenklatur soll Adressierung von KT über die staatliche Grenzen hinaus ermöglichen. Dabei steht jedem Land frei, ein eigenes Adressierungsschema unterhalb des Landes-OID-Unterbaums zu definieren. Wurzel-Adresse eines Landes-OID-Unterbaums ist wie folgt definiert:
+Alle Kommunikationsteilnehmer in einem UCRI-System bekommen eine in diesem System eindeutige OID zugewiesen, die sich in einem OID-Adressraum befindet. Dieser OID-Adressraum wird durch eine Wurzeladresse (im weiteren Verlauf als <Root-OID> bezeichnet) festgelegt.
+Die Strukturierung des UCRI-OID-Adressierungsraums (UCRI-OID-Nomenklatur) ermöglicht Adressierung von KT über die staatlichen Grenzen hinaus. 
 
-- <Root-OID>.1.<Kennzahl des Landes> (Beispiel: 1.2.3.1.276 für Deutschland)
+Dabei steht jedem Land frei, ein eigenes Adressierungsschema unterhalb des Landes-OID-Unterbaums zu definieren. Wurzeladresse eines Landes-OID-Unterbaums ist wie folgt definiert:
+
+- \<Root-OID>.1.\<Kennzahl des Landes> (Beispiel: <Root-OID>.1.276 für Deutschland)
 
 Auch jedes Bundesland in Deutschland ist frei, ein eigenes Adressierungsschema unterhalb des Bundesland-OID-Unterbaums zu definieren. Wurzel-Adresse eines Bundesland-OID-Unterbaums ist wie folgt definiert:
 
-- <Root-OID>.1.276.<Kennzahl des Bundeslandes> (Beispiel: 1.2.3.1.276.5 für NRW)
+- \<Root-OID>.1.276.\<Kennzahl des Bundeslandes> (Beispiel: <Root-OID>.1.276.5 für NRW)
 
 Unterschiedliche Organisationen können auch unterschiedliche Adressierungsschemata verwenden. Wurzel-Adresse eines nPOLGA-OID-Unterbaums ist wie folgt definiert:
 
-- <Root-OID>.1.276.5.<Kennzahl von POL/nPOLGA, etc.> (Beispiel: 1.2.3.1.276.5.1 für nPOLGA in NRW)
+- \<Root-OID>.1.276.5.\<Kennzahl von POL/nPOLGA, etc.> (Beispiel: <Root-OID>.1.276.5.1 für nPOLGA in NRW)
 
 Die OID-Adresse der einzelnen Kommunikationsteilnehmer (KT) wird nach dem [amtlichen Gemeindeschlüssel (AGS)](https://de.wikipedia.org/wiki/Amtlicher_Gemeindeschl%C3%BCssel) gebildet:
 
-| #                                                  | Ebene | Beispiel                                              |
-|----------------------------------------------------|--|-------------------------------------------------------|
-| 1                                                  | Root-OID | 1.2.3 - Festlegung in einem geschlossenen UCRI-System |
-| 2                                                  | Satzart | 1 - Einzeladresse, 2 - Gruppe                         |
-| 3                                                  | Kennzahl des Landes | 276 - Deutschland nach ISO 3166                       |
-| 4                                                  | Kennzahl des Bundeslandes | 5 - für NRW nach AGS |
+| #                                                  | Ebene | Beispiel                                                                                                                         |
+|----------------------------------------------------|--|----------------------------------------------------------------------------------------------------------------------------------|
+| 1                                                  | Root-OID | 1.2.3 - Festlegung in einem geschlossenen UCRI-System                                                                            |
+| 2                                                  | Satzart | 1 - Einzeladresse, 2 - Gruppe (aktuell werden in UCRI keine Gruppenadressen unterstützt)                                         |
+| 3                                                  | Kennzahl des Landes | 276 - Deutschland nach ISO 3166                                                                                                  |
+| 4                                                  | Kennzahl des Bundeslandes | 5 - für NRW nach AGS                                                                                                             |
 | 5                                                  | Kennzeichnung von POL/nPOL Gefahrenabwehr (KRITIS, etc.) | Polizeidienststellen, Gesundheitsämter, Veterinärämter, etc. Definition folgt. Annahme für Beispiel: 1 - nPOLGA, 99 - Test/Pilot |
-| 6                                                  | Kennzahl des Regierungsbezirks | 1 - Regierungsbezirk Düsseldorf nach AGS |
-| 7                                                  | Kennzahl des Landkreises oder der kreisfreien Stadt ("0" bei zentralen Einrichtungen auf der Regierungsbezirksebene) | 58 - Landkreis Mettmann nach AGS |
-| 8                                                  | Gemeinde ("0" bei kreisfreien Städten) | 28 - Stadt Ratingen, Stadtbezirk Ratingen nach AGS |
-| 9 | Leitstellenmodul | 1 - erstes Leitstellenmodul, fortlaufende Nummerierung von Leitstellenmodulen |
-| 10 | Kommunikationsteilnehmer | 1 - z.B. ELS, fortlaufende Nummerierung von KT |
+| 6                                                  | Kennzahl des Regierungsbezirks | 1 - Regierungsbezirk Düsseldorf nach AGS                                                                                         |
+| 7                                                  | Kennzahl des Landkreises oder der kreisfreien Stadt ("0" bei zentralen Einrichtungen auf der Regierungsbezirksebene) | 58 - Landkreis Mettmann nach AGS                                                                                                 |
+| 8                                                  | Gemeinde ("0" bei kreisfreien Städten) | 28 - Stadt Ratingen, Stadtbezirk Ratingen nach AGS                                                                               |
+| 9 | Leitstellenmodul | 1 - erstes Leitstellenmodul, fortlaufende Nummerierung von Leitstellenmodulen                                                    |
+| 10 | Kommunikationsteilnehmer | 1 - z.B. ELS, fortlaufende Nummerierung von KT                                                                                   |
 
-Beispiel OID Feuerwehr ELS in Ratingen: 1.2.3.1.276.5.1.1.58.28.1.1
+Beispiel OID Feuerwehr ELS in Ratingen: <Root-OID>.1.276.5.1.1.58.28.1.1
 
 Folgende OID wird zur Identifizierung der UCRI-Infrastruktur als Sender von technischen Quittungen (siehe UCRI2-App Technische Quittungen) festgelegt:
 
-UCRI-Infrastruktur: 1.2.3.1.276.5.0.0.0.0.1.1
+UCRI-Infrastruktur: <Root-OID>.1.276.5.0.0.0.0.1.1
 
----
 
-[Vermittlungsebene](messaging.md)
-[Vermittlungsebene](messaging.md)
+
 
 # UCRI Leitstellenmodul
 
@@ -236,9 +231,9 @@ Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch
 
 ### Protokoll
 
-Wegen der Anforderung zur sicheren Nachrichtenzustellung muss eine technische Nachrichtenempfangsbestätigung in der UCRM API vereinbart werden.
+Wegen der Anforderung zur sicheren Nachrichtenzustellung wird eine technische Nachrichtenempfangsbestätigung in der UCRM API vereinbart.
 
-Das Prinzip der sicheren Nachrichtenzustellung ist ein E2E-Prinzip, das auch die Empfangslogik bis zum Persistieren der Nachrichtendaten auf der Seite des KT-Systems einschließt. Um die Ausfälle in dieser Empfangslogik zu kompensieren wird ein zweistufiges Protokoll für Meldungsempfang vereinbart:
+Das Prinzip der sicheren Nachrichtenzustellung ist ein E2E-Prinzip, das auch die Verarbeitungslogik bis zum Persistieren der Nachrichtendaten auf der Seite des KT-Systems einschließt. Um die Ausfälle in dieser Empfangs- und Verarbeitungslogik zu kompensieren wird ein zweistufiges Protokoll für Meldungsempfang vereinbart:
 
 1. Meldungen abfragen - idempotent, kann mehrmals wiederholt werden mit dem gleichen Ergebnis.
 2. Meldungsempfang bestätigen - idempotent, kann mehrmals wiederholt werden mit dem gleichen Ergebnis. Bestätigte Meldungen werden aus der Vermittlungsebene verworfen und stehen beim erneuter Meldungsabfrage nicht mehr zur Verfügung.
@@ -301,8 +296,8 @@ Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsie
 
 Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben. 
 
-[Vermittlungsebene](messaging.md)
-[Vermittlungsebene](messaging.md)
+
+
 
 # UCRI2 Kommunikationsprotokoll
 
@@ -465,8 +460,7 @@ Für die Zustellung von Nachrichten können unterschieldiche Routing-Algorithmen
 
 Meldungen werden in UCRM m.H.v. Meldungs-Schemata validiert. Die Validierung erfolgt synchron beim Senden. KT-Register liefert Auskunft über die durch KT unterstützten Schemata.
 
----
-[Vermittlungsebene](messaging.md)
+
 
 
 # UCRI2 Anwendungen

@@ -209,6 +209,10 @@ async function process(){
   }
 }
 
+function removeSkipsFromMarkdown(markdown){
+  return markdown.replaceAll(/(<!-- skip-start -->)([^<]*)(<!-- skip-end -->)/gms, "");
+}
+
 async function generateSpecDocs(){
   let completeMarkdown=fs.readFileSync(`${specDocsPath}/index_pdf.md`, 'utf8');
   //include per-message docs as indicated by comments
@@ -224,8 +228,11 @@ async function generateSpecDocs(){
     completeMarkdown=completeMarkdown.replaceAll(`<!-- include ${includedFilename} -->`,includedMarkdown);
   }
 
-  //remove backlinks
-  completeMarkdown=completeMarkdown.replaceAll("[Zu der Hauptseite](index.md)","");
+  //remove all markdown enclosed in skip-start and skip-end
+  completeMarkdown=removeSkipsFromMarkdown(completeMarkdown);
+
+  // //remove backlinks
+  // completeMarkdown=completeMarkdown.replaceAll("[Zu der Hauptseite](index.md)","");
   //insert table of contents (needs <!-- toc --><!-- tocstop --> in manual_documentation.md)
   completeMarkdown=toc.insert(completeMarkdown);
   //write completed markdown

@@ -1,4 +1,6 @@
+<!-- skip-start -->
 [Zu der Hauptseite](index.md)
+<!-- skip-end -->
 
 # UCRI2 Systemarchitektur
 
@@ -49,6 +51,7 @@ Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wi
 
 ![UCRI Komponenten](ucri-components.drawio.svg)
 
-
+<!-- skip-start -->
 ---
 [Zu der Hauptseite](index.md)
+<!-- skip-end -->

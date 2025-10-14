@@ -1,4 +1,6 @@
+<!-- skip-start -->
 [Vermittlungsebene](messaging.md)
+<!-- skip-end -->
 
 # UCRI2 Adressierungskonzept
 
@@ -56,6 +58,7 @@ Folgende OID wird zur Identifizierung der UCRI-Infrastruktur als Sender von tech
 
 UCRI-Infrastruktur: <Root-OID>.1.276.5.0.0.0.0.1.1
 
+<!-- skip-start -->
 ---
-
 [Vermittlungsebene](messaging.md)
+<!-- skip-end -->
