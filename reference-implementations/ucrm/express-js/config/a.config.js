@@ -90,7 +90,7 @@ export const config = {
     }
   },
   //the LOCAL commParticipants. Make sure that each user has at least one of the OIDs mentioned here defined in their oids: key
-  //also, ALL commParticipants MUST support transport_layer_messages:0.1, this will be checked during startup!
+  //also, ALL commParticipants MUST support transport_layer_messages:1.0, this will be checked during startup!
   //note that payload signature checking is NOT implemented at this time!
   commParticipants: {
     "1.2.3.4.5.0": {

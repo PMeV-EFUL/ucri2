@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "UCRI Control Room Module (UCRM) P2P API",
-    "description": "UCRI Control Room Module P2P API ist die Kommunikationsschnittstelle für verbundene externe UCRMs. Die Anbindung lokaler Kommunikationsteilnehmer wie Leitsystemen ist NICHT Teil dieser API (vgl. ucrm-client.yaml).\n",
+    "title": "UCRI Control Room Module (UCRM) Client API",
+    "description": "UCRI Control Room Module Client API ist die Kommunikationsschnittstelle für verbundene UCRI Kommunikationsteilnehmer\nwie zum Beispiel Leitstellensysteme. Die Anbindung entfernter UCRMs via UCRI P2P Protokoll ist NICHT Teil dieser API (vgl. ucrm-p2p.yaml).\n",
     "version": "0.1"
   },
   "servers": [
@@ -17,7 +17,7 @@
           ]
         },
         "basePath": {
-          "default": "ucrm/p2p/v0",
+          "default": "ucrm/client/v0",
           "description": "API base path"
         }
       }
@@ -29,10 +29,16 @@
       "description": "Der Messaging Service beinhaltet Funktionen zum Versenden und Empfangen von Nachrichten, die im Rahmen der UCRI Spezifikation spezifiziert sind."
     },
     {
-      "name": "Registry"
+      "name": "Registry",
+      "description": "Das KT-Register (Registry Service) beinhaltet Funktionen zum Abfragen von KT-Informationen."
     },
     {
-      "name": "Info"
+      "name": "Info",
+      "description": "Liefert Informationen zu der UCRM-Implementierung."
+    },
+    {
+      "name": "Authorization",
+      "description": "OAuth 2.0 Endpunkt zum Abholen eines Zugriffstokens anhand OAuth Client Credentials Grant Type."
     }
   ],
   "security": [
@@ -112,14 +118,14 @@
           "Messaging"
         ],
         "summary": "Meldung senden",
-        "description": "Meldung senden. Im Gegensatz zum Endpunkt in der Client-API sind die dort optionalen Felder messageId,sentDate,timeout und ack hier obligat.",
+        "description": "Meldung senden",
         "operationId": "sendMessage",
         "requestBody": {
           "description": "Zu versendende Meldung",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/senderRequestP2P"
+                "$ref": "#/components/schemas/senderRequest"
               }
             }
           },
@@ -169,13 +175,135 @@
         }
       }
     },
+    "/messaging/receive": {
+      "post": {
+        "tags": [
+          "Messaging"
+        ],
+        "summary": "Meldungen empfangen",
+        "description": "Meldungen im Empfangspuffer abfragen. Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut. Es werden die ältesten X Meldungen aus der Adressaten-Queue geliefert.",
+        "operationId": "receiveMessages",
+        "requestBody": {
+          "description": "Meldungsabfrage",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/receiverRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK \\\nMindestens eine und bis zu 'maxMessages' ältesten Meldungen werden geliefert.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/receiverResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content \\\nEs liegen aktuell keine Nachrichten in der Adressaten-Queue vor.\n"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/commit": {
+      "post": {
+        "tags": [
+          "Messaging"
+        ],
+        "summary": "Meldungsempfang bestätigen",
+        "description": "Empfang von Meldungen bis einschliesslich angegebene Meldung (Sequence-ID) bestätigen. Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt.",
+        "operationId": "commitMessage",
+        "requestBody": {
+          "description": "Meldungsreferenz",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/messageRef"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/registry": {
       "get": {
         "tags": [
           "Registry"
         ],
         "summary": "KT-Register abfragen",
-        "description": "Liefert eine Liste aller über dieses UCRM angebundenen Kommunikationsteilnehmer. In KEINEM Falle dürfen hier die Kommunikationsteilnehmer übertragen werden, welche durch andere entfernte UCRMs via P2P angebunden sind!",
+        "description": "Liefert eine Liste aller Kommunikationsteilnehmer, die diesem UCRM bekannt sind (inklusive Kommunikationsteilnehmern, die durch entfernte UCRMs via P2P angebunden sind.",
         "operationId": "listCommParticipant",
         "responses": {
           "200": {
@@ -201,6 +329,69 @@
           },
           "401": {
             "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registry/{id}": {
+      "get": {
+        "tags": [
+          "Registry"
+        ],
+        "summary": "Informationen zu einem KT abfragen",
+        "description": "Informationen zu einem KT abfragen",
+        "operationId": "readCommParticipant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "KT-OID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Informationen zu einem KT",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commParticipant"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -287,11 +478,17 @@
       "Envelope": {
         "$ref": "#/components/schemas/envelope"
       },
-      "SenderRequestP2P": {
-        "$ref": "#/components/schemas/senderRequestP2P"
+      "SenderRequest": {
+        "$ref": "#/components/schemas/senderRequest"
       },
       "SenderResponse": {
         "$ref": "#/components/schemas/senderResponse"
+      },
+      "ReceiverRequest": {
+        "$ref": "#/components/schemas/receiverRequest"
+      },
+      "ReceiverResponse": {
+        "$ref": "#/components/schemas/receiverResponse"
       },
       "MessageRef": {
         "$ref": "#/components/schemas/messageRef"
@@ -345,7 +542,24 @@
         "properties": {
           "code": {
             "type": "integer",
-            "description": "Anwendungsspezifische Fehler-Code"
+            "description": "Fehler-Code. Eine detaillierte Erklärung der genutzten Fehlercodes und deren Vorkommen findet sich im Spezifikationsdokument der Transportschicht.",
+            "enum": [
+              460,
+              461,
+              462,
+              463,
+              464,
+              465,
+              466,
+              468,
+              467,
+              470,
+              475,
+              478,
+              479,
+              480,
+              491
+            ]
           },
           "reason": {
             "type": "string",
@@ -356,7 +570,7 @@
             "description": "Detailliertere Fehlerbeschreibung eventuell mit Angabe der Korrektivmaßnahmen in für Menschen verständlicher Sprache"
           }
         },
-        "description": "Fehlerbeschreibung, gewöhnlich für eine HTTP Error Response-Code (3xx, 4xx, 5xx)"
+        "description": "Fehlerbeschreibung mit UCRI2-spezifischem Fehlercode"
       },
       "payload": {
         "required": [
@@ -463,7 +677,7 @@
         },
         "description": "Nachrichtenumschlag, enthält Metainformationen zu einer Meldung und die eigentliche Meldung als Payload"
       },
-      "senderRequestP2P": {
+      "senderRequest": {
         "allOf": [
           {
             "$ref": "#/components/schemas/envelope"
@@ -471,10 +685,6 @@
           {
             "type": "object",
             "required": [
-              "messageId",
-              "sentDate",
-              "timeout",
-              "ack",
               "destinations"
             ],
             "properties": {
@@ -490,7 +700,6 @@
               }
             },
             "example": {
-              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
               "description": "Einsatzübergabe am 13.11.2023 um 20:20",
               "timeout": 300,
               "ack": "NACK",
@@ -558,6 +767,139 @@
           }
         ]
       },
+      "receiverRequest": {
+        "required": [
+          "destinations"
+        ],
+        "type": "object",
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^([0-9]+\\.?)+$"
+            },
+            "minItems": 1,
+            "description": "Adressaten-OID-Liste, Meldungen an alle Adressen aus dieser Liste werden abgefragt."
+          },
+          "maxMessages": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "maximale Anzahl von Meldungen im Ergebnis, Defaultwert wenn nicht definiert"
+          },
+          "maxDelay": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 30,
+            "default": 30,
+            "description": "maximales Long-Polling-Delay in Sekunden. Um Long-Polling zu deaktivieren, kann ein Wert von 0 übergeben werden. Als Maximum und Defaultwert sind 30 Sekunden definiert."
+          }
+        },
+        "description": "Meldungsabfrage",
+        "example": {
+          "destinations": [
+            "1.2.3.4.5.7"
+          ],
+          "maxMessages": 5
+        }
+      },
+      "receiverResponseItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/envelope"
+          },
+          {
+            "type": "object",
+            "required": [
+              "messageId",
+              "destination",
+              "sequenceId",
+              "sentDate",
+              "timeout"
+            ],
+            "properties": {
+              "destination": {
+                "type": "string",
+                "pattern": "^([0-9]+\\.?)+$"
+              },
+              "sequenceId": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Meldungs-Sequence-ID Empfangspuffer ist als eine FIFO-Queue pro Adressat-OID aufgebaut. Sequence-ID wird verwendet um die erfolgreiche Verarbeitung einer Meldung durch Commit-Operation zu signalisieren. Nach dem Commiten einer Sequence-ID werden alle Meldungen mit kleinerer oder gleicher Sequence-ID aus der Queue entfernt."
+              }
+            }
+          }
+        ]
+      },
+      "receiverResponse": {
+        "required": [
+          "messages",
+          "maxMessages"
+        ],
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/receiverResponseItem"
+            },
+            "minItems": 1
+          },
+          "maxMessages": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "maximale Anzahl von Meldungen im Ergebnis"
+          }
+        },
+        "description": "Die bis zu 'maxMessages' ältesten X Meldungen entsprechend der Meldungsabfrage",
+        "example": {
+          "messages": [
+            {
+              "messageId": "f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454",
+              "description": "Einsatzübergabe am 13.11.2023 um 20:20",
+              "sentDate": "2023-11-13T20:20:39+00:00",
+              "timeout": 300,
+              "ack": "NACK",
+              "source": "1.2.3.4.5.6",
+              "destination": "1.2.3.4.5.7",
+              "sequenceId": 123456,
+              "payload": {
+                "appId": "incident_transfer",
+                "appVersion": "0.1",
+                "schemaId": "incident",
+                "contentType": "application/json",
+                "data": "{\"sharedIncidentId\":\"550e8400-e29b-41d4-a716-446655440000\",\"internalId\":\"f123456\",\"classifications\":[\"A1\",\"F2\"],\"issue\":\"Notfall\",\"flashingLights\":true,\"additionalInfo\":\"Zusatzinformationen\",\"sentByDispatcherAt\":\"2024-01-01T10:05:08Z\",\"startTimestamp\":\"2024-01-01T09:55:15Z\",\"missionLocation\":{\"coordinate\":{\"lat\":65.453323,\"lon\":14.542343},\"address\":{\"street\":\"Musterstrasse\",\"houseNumber\":\"15b\",\"postalCode\":\"12345\",\"city\":\"Musterhausen\",\"cityDistrict\":\"Musterberg\",\"state\":\"Brandenburg\",\"country\":\"DE\"},\"object\":{\"name\":\"Abteilung IV, Haus 3\",\"additionalInfo\":\"Campus West\"},\"superiorObject\":{\"name\":\"Krankenhaus Musterstift\",\"additionalInfo\":\"Weitere Informationen\"},\"floor\":\"3. OG\",\"room\":\"412\",\"additionalInfo\":\"Weitere Informationen\"},\"informers\":[{\"name\":\"Musterfrau\",\"surname\":\"Heike\",\"phone\":\"+49 30 234567\",\"email\":\"heike.musterfrau@example.com\"}]}"
+              },
+              "signature": "eyJ0eXAiOiJVQ1JJX1BMQUlOIiwiYWxnIjoiUlMyNTYifQ.ODJmOGYxMGNkZGY3NGRiMWJlZTMxODRlNDNjM2I4ODE4OGJjYmRlNjIxZjA0MmE2MWEwOGY5ZGIzMGFlNmY0Mw.kOZqDl-Gj1jCITxHmcgeKl4P8Opr1IGQU1Bxe8ls_TX5CDG8bC7vYy3VdS8wKikf8qWgdd4uJgJ53d6ZwO0XE2cWOiyRKlmNP7o97GOaOFm5d9i0Ca9jR7HB32g1qGL_LYmdT3REoFbmfwsk2Pl0WVoKjr2I91kMt4dSTwWeeegj_fyJGNrSiPxu6yfkuP2wwCNXXFCjVYQzeHlv6Jv3cZqdF5UTMgZqgC_XuPP8uShL6oWJAKTfyKhd36AaoiS3gPKjMSttLiTyB-NIDf6WP4BOn0tfzzgTUwWbagtA_X99DJs-sjqC5tn5L9sK38Np-tJRpanF9rrc3MYZowpxFg"
+            }
+          ],
+          "maxMessages": 5
+        }
+      },
+      "messageRef": {
+        "required": [
+          "destination",
+          "sequenceId"
+        ],
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "pattern": "^([0-9]+\\.?)+$",
+            "description": "Adressat, diese Referenz zeigt auf eine Meldung, die genau an diese OID adressiert wurde, nicht an eine OID aus einem Unterbaum"
+          },
+          "sequenceId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "eine aufsteigende Meldung-Sequence-ID"
+          }
+        },
+        "description": "Meldungsreferenz",
+        "example": {
+          "destination": "1.2.3.4.5.6",
+          "sequenceId": 123456
+        }
+      },
       "appRef": {
         "required": [
           "appId",
@@ -572,12 +914,24 @@
           "appVersion": {
             "type": "string",
             "description": "Version der UCRI2-Applikation"
+          },
+          "unsupportedMessages": {
+            "type": "array",
+            "description": "Liste der nicht unterstützen Nachrichten dieser App (mit Ihren Namen). Es dürfen nur Nachrichten aufgeführt werden, deren Unterstützung laut der Spezifikation der jeweiligen App nicht zwingend ist (ggf. unter der Berücksichtigung einer gewählten Rolle, z.B. abgebende oder annehmende Stelle).",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "description": "Name einer nicht unterstützten App-Nachricht"
+            }
           }
         },
         "description": "Referenz auf eine UCRI2-Applikation",
         "example": {
-          "appId": "incident",
-          "appVersion": "0.1"
+          "appId": "incident_transfer_with_patient",
+          "appVersion": "0.1",
+          "unsupportedMessages": [
+            "incident"
+          ]
         }
       },
       "techSupport": {
@@ -692,11 +1046,11 @@
           "status": {
             "type": "string",
             "enum": [
-              "on",
-              "off",
+              "online",
+              "offline",
               "unknown"
             ],
-            "description": "Verfügbarkeitsstatus des KT"
+            "description": "Verfügbarkeitsstatus dieses Teilnehmers. Für an UCRM angebundene TN wird dieser Status durch das UCRM verwaltet. Für UCRMs selbst wird der Status durch diese verwaltet."
           },
           "transmitsUnsignedMessages": {
             "type": "boolean",
@@ -759,7 +1113,7 @@
           },
           "status": {
             "type": "integer",
-            "description": "Aktueller Betriebszustand des UCRM (0=Normaler Betriebszustand,1=Teilnehmer-Discovery läuft (keine MessageSend-Operationen möglich),2=Fehlerhafter Betriebszustand)",
+            "description": "Aktueller Betriebszustand des UCRM (0=Normaler Betriebszustand,1=UCRM durchläuft aktuell den Startprozess,2=Fehlerhafter Betriebszustand)",
             "enum": [
               0,
               1,
@@ -772,31 +1126,8 @@
           "apiVersion": "0.1",
           "ucrmProvider": "ACME AG",
           "ucrmProductName": "ACME-LS",
-          "ucrmVersion": "1.6"
-        }
-      },
-      "messageRef": {
-        "required": [
-          "destination",
-          "sequenceId"
-        ],
-        "type": "object",
-        "properties": {
-          "destination": {
-            "type": "string",
-            "pattern": "^([0-9]+\\.?)+$",
-            "description": "Adressat, diese Referenz zeigt auf eine Meldung, die genau an diese OID adressiert wurde, nicht an eine OID aus einem Unterbaum"
-          },
-          "sequenceId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "eine aufsteigende Meldung-Sequence-ID"
-          }
-        },
-        "description": "Meldungsreferenz",
-        "example": {
-          "destination": "1.2.3.4.5.6",
-          "sequenceId": 123456
+          "ucrmVersion": "1.6",
+          "status": 1
         }
       }
     }

@@ -14,7 +14,7 @@
     "logStdOut": false,
     "logStdErr": false,
     "ready": true,
-    "durationMs": 979
+    "durationMs": 1105
   },
   {
     "type": "authorize",
@@ -25,7 +25,7 @@
     "expect": {
       "http": 200
     },
-    "durationMs": 265
+    "durationMs": 132
   },
   {
     "type": "fetch",
@@ -37,7 +37,7 @@
     "desc": "get info while p2p discovery is active (status must be 1)",
     "endpoint": "info",
     "method": "GET",
-    "durationMs": 12
+    "durationMs": 10
   },
   {
     "type": "fetch",
@@ -49,7 +49,7 @@
     "desc": "get registry entries while p2p discovery is active (should be 3)",
     "endpoint": "registry",
     "method": "GET",
-    "durationMs": 9
+    "durationMs": 10
   },
   {
     "type": "authorize",
@@ -78,7 +78,7 @@
     "logStdOut": false,
     "logStdErr": false,
     "ready": true,
-    "durationMs": 1090
+    "durationMs": 1099
   },
   {
     "type": "authorize",
@@ -89,19 +89,19 @@
     "expect": {
       "http": 200
     },
-    "durationMs": 182
+    "durationMs": 203
   },
   {
     "type": "awaitDiscoveryComplete",
     "ucrmId": "ucrmA",
     "username": "userA1",
-    "durationMs": 2068
+    "durationMs": 2064
   },
   {
     "type": "awaitDiscoveryComplete",
     "ucrmId": "ucrmB",
     "username": "userB",
-    "durationMs": 513
+    "durationMs": 523
   },
   {
     "type": "fetch",
@@ -113,7 +113,7 @@
     "desc": "get registry entries after p2p discovery is complete (should be 5)",
     "endpoint": "registry",
     "method": "GET",
-    "durationMs": 6
+    "durationMs": 7
   },
   {
     "type": "fetch",
@@ -126,7 +126,7 @@
     "desc": "get local registry entries after p2p discovery is complete (should be 3)",
     "endpoint": "registry",
     "method": "GET",
-    "durationMs": 7
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -155,7 +155,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 17
+    "durationMs": 15
   },
   {
     "type": "fetch",
@@ -174,7 +174,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 122
+    "durationMs": 95
   },
   {
     "type": "fetch",
@@ -203,11 +203,11 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 3
+    "durationMs": 6
   },
   {
     "type": "sleep",
-    "durationMs": 2000
+    "durationMs": 2003
   },
   {
     "type": "fetch",
@@ -226,7 +226,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 9
+    "durationMs": 8
   },
   {
     "type": "fetch",
@@ -245,7 +245,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 9
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -261,7 +261,7 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 7
+    "durationMs": 6
   },
   {
     "type": "fetch",
@@ -296,7 +296,7 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 4
+    "durationMs": 3
   },
   {
     "type": "fetch",
@@ -315,11 +315,11 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 3
+    "durationMs": 2
   },
   {
     "type": "sleep",
-    "durationMs": 2015
+    "durationMs": 2002
   },
   {
     "type": "fetch",
@@ -338,7 +338,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 13
+    "durationMs": 16
   },
   {
     "type": "fetch",
@@ -354,7 +354,7 @@
     },
     "endpoint": "messaging/commit",
     "method": "POST",
-    "durationMs": 9
+    "durationMs": 5
   },
   {
     "type": "fetch",
@@ -383,7 +383,7 @@
     },
     "endpoint": "messaging/send",
     "method": "POST",
-    "durationMs": 5
+    "durationMs": 4
   },
   {
     "type": "fetch",
@@ -402,7 +402,7 @@
     },
     "endpoint": "messaging/receive",
     "method": "POST",
-    "durationMs": 10758
+    "durationMs": 10874
   },
   {
     "type": "fetch",

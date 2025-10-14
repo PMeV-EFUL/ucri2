@@ -124,7 +124,7 @@ async function initConfiguration(){
 
 async function prepareSpec(){
   //as we need to adapt the TS-API spec , we copy over the spec
-  await fsPromises.cp('../../../api/crm/0.1',`./${TRANSPORT_LAYER_SPEC_DIR}`,{recursive:true,
+  await fsPromises.cp('../../../api/crm/2.0.0',`./${TRANSPORT_LAYER_SPEC_DIR}`,{recursive:true,
   filter: (src,dst)=>!src.includes("spectral.yaml")});
   //replace server url variables
   await replaceInFiles({
