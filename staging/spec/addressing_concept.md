@@ -2,17 +2,20 @@
 [Vermittlungsebene](messaging.md)
 <!-- skip-end -->
 
-# UCRI2 Adressierungskonzept
+## Adressierungskonzept
 
 Für die Adressierung der einzelnen Kommunikationsteilnehmer (KT) auf der Vermittlungsebene werden eindeutige Kennungen in Form von Object Identifier (OID Spezifikationen ISO/IEC 9834, DIN 66334) verwendet.
+Für die Festlegung von OIDs gelten folgende Vorgaben:
+1. Falls möglich, sollten offiziell zugeteilte OIDs zum Einsatz kommen. Diese können z.B. für das deutsche Gesundheitswesen beim Bundesinstitut für Arzneimittel und Medizinprodukte beantragt werden.
+2. Falls keine offiziell vergebenen OIDs zum Einsatz kommen, dürfen selbst vergebene OIDs NIEMALS in einem Adressraum liegen, in dem auch offiziell zugeteilte OIDs vergeben werden, um Überschneidungen mit offiziell zugeteilten OIDs zu vermeiden.
 
-**Das vorliegende Konzept stellt lediglich ein Beispiel für mögliche Strukturierung des OID-Raums dar.
-Wichtig ist, dass der UCRI-OID-Raum sich mit anderen weltweit existierenden standardisierten OID-Räumen nicht überschneidet.
-Die Verwaltung des UCRI-OID-Raumes inklusive Sicherstellung von eindeutigen OID-Adressen obliegt dem Expertenforum UCRI und ist nicht im Scope der UCRI-Spezifikation.**
+Zusätzlich wird empfohlen, die genutzten OIDs dem Expertenforum UCRI zu melden, damit Adresskonflikte direkt bei der Vergabe vermieden werden können.
 
-## OID-Hierarchie
+Die in den folgenden Unterkapiteln vorgestellten beispielhaften OID-Hierarchien und OID-Nomenklatur stellen nur eine Empfehlung dar. Falls von offiziellen Stellen vergebene OIDs zum Einsatz kommen, entsteht nicht zwangsläufig auch eine Hierarchie, wie sie in den Folgenden Unterkapiteln dargestellt wird.
 
-Adressierung von einzelnen KT ist hierarchisch organisiert und spiegelt die hierarchische Kommunikationsstruktur wider:
+### Beispielhafte OID-Hierarchie
+
+Die Adressierung von einzelnen KT kann hierarchisch organisiert werden und spiegelt dann die hierarchische Kommunikationsstruktur wider:
 
 ![OID-Hierarchie](ucri-oid-hierarchy.drawio.svg)
 
@@ -20,7 +23,7 @@ Diese Struktur ermöglicht Implementierung einer einfachen und einheitlichen Rou
 
 Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu externen Systemen eingesetzt und stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und internen OID. Ein externes System bekommt dabei einen entsprechend reservierten OID-Bereich (Unterbaum) und das Gateway bekommt die Wurzel-OID-Adresse dieses Unterbaums.
 
-## OID-Nomenklatur
+### Beispielhafte OID-Nomenklatur
 
 Alle Kommunikationsteilnehmer in einem UCRI-System bekommen eine in diesem System eindeutige OID zugewiesen, die sich in einem OID-Adressraum befindet. Dieser OID-Adressraum wird durch eine Wurzeladresse (im weiteren Verlauf als <Root-OID> bezeichnet) festgelegt.
 Die Strukturierung des UCRI-OID-Adressierungsraums (UCRI-OID-Nomenklatur) ermöglicht Adressierung von KT über die staatlichen Grenzen hinaus. 
@@ -54,9 +57,6 @@ Die OID-Adresse der einzelnen Kommunikationsteilnehmer (KT) wird nach dem [amtli
 
 Beispiel OID Feuerwehr ELS in Ratingen: <Root-OID>.1.276.5.1.1.58.28.1.1
 
-Folgende OID wird zur Identifizierung der UCRI-Infrastruktur als Sender von technischen Quittungen (siehe UCRI2-App Technische Quittungen) festgelegt:
-
-UCRI-Infrastruktur: <Root-OID>.1.276.5.0.0.0.0.1.1
 
 <!-- skip-start -->
 ---

@@ -105,9 +105,10 @@ Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden 
 
 <!-- include goals.md -->
 <!-- include architecture.md -->
+<!-- include addressing_concept.md -->
 <!-- include versioning.md -->
 <!-- include messaging.md -->
-<!-- include addressing_concept.md -->
+
 <!-- include ucrm_api.md -->
 <!-- include p2p_protocol.md -->
 <!-- include applications.md -->

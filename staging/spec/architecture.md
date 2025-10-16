@@ -37,15 +37,6 @@ Einzelne Aufgaben der Vermittlungsebene, die bei der P2P-Topologie durch die Kom
 
 Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert optional die Ende-zu-Ende-Verschlüsselung der Daten.
 
-## Rollen der beteiligten Komponenten
-In UCRI2 existieren demnach zwei unterschiedlichen Rollen:
-- Ein teilnehmendes System nimmt hierbei die **Client-Rolle** ein und konsumiert die UCRI2 Client API, die vom UCRM angeboten wird.
-- Ein UCRM nimmt dagegen die **UCRM-Rolle** ein und bietet für Clients die UCRI2 Client API an. Zur Verbindung mit anderen UCRMs wird je nach Kommunikationstopologie eine andere API genutzt. Falls eine Verbindung zwischen UCRMs verschiedener Hersteller erfolgen soll, muss dies die UCRI2 Peer-to-Peer-API (P2P-API) sein.
-
-Folglich ist für eine UCRI2-konforme Umsetzung relevant, welche Rolle umgesetzt werden soll:
-- Ein KT, der sich per UCRI2 mit anderen KT verbinden will, muss ausschliesslich die UCRI2 Client API aus der Consumer-Perspektive umsetzen.
-- Ein UCRM muss die UCRI2 Client API aus der Provider-Perspektive umsetzen und kann die UCRI2 P2P-API umsetzen, falls eine herstellerübergreifende Koppelung mit anderen UCRMs gewünscht wird.
-
 ## Anwendungsebene
 Um die fachlichen Aspekte von den technischen Aspekten zu trennen, erfolgt in UCRI 2 eine Trennung zwischen Übertragungs- und Anwendungsebene.
 Hierbei erfolgt sowohl eine Trennung der UCRI2-Anwendungen untereinander und auch deren Unabhängigkeit von der Vermittlungsebene. Das erlaubt eine freie Weiterentwicklung jeder einzelnen Anwendung.
@@ -55,6 +46,14 @@ Eine UCRI2-Anwendung (im Folgenden UCRI2-App) wird durch folgende Artefakte defi
 - Ablaufmodell (definierte Abfolge von Nachrichten)
 - Prozessdefinitionen (Festlegungen bezüglich Anwendungslogik, die bei der Implementierung in technischen KT-Systemen berücksichtigt werden müssen)
 
+## Rollen der beteiligten Komponenten
+In UCRI2 existieren demnach zwei unterschiedlichen Rollen:
+- Ein teilnehmendes System nimmt hierbei die **Client-Rolle** ein und konsumiert die UCRI2 Client API, die vom UCRM angeboten wird.
+- Ein UCRM nimmt dagegen die **UCRM-Rolle** ein und bietet für Clients die UCRI2 Client API an. Zur Verbindung mit anderen UCRMs wird je nach Kommunikationstopologie eine andere API genutzt. Falls eine Verbindung zwischen UCRMs verschiedener Hersteller erfolgen soll, muss dies die UCRI2 Peer-to-Peer-API (P2P-API) sein.
+
+Folglich ist für eine UCRI2-konforme Umsetzung relevant, welche Rolle umgesetzt werden soll:
+- Ein KT, der sich per UCRI2 mit anderen KT verbinden will, muss ausschliesslich die UCRI2 Client API aus der Consumer-Perspektive umsetzen.
+- Ein UCRM muss die UCRI2 Client API aus der Provider-Perspektive umsetzen und kann die UCRI2 P2P-API umsetzen, falls eine herstellerübergreifende Koppelung mit anderen UCRMs gewünscht wird.
 
 
 ## UCRI Gateway
@@ -62,6 +61,8 @@ Eine UCRI2-Anwendung (im Folgenden UCRI2-App) wird durch folgende Artefakte defi
 Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wird am Übergang zu Gruppen von KT eingesetzt, die auf der Vermittlungsebene nicht direkt erreichbar sind und über eine proprietäres Leitstellenprotokoll angebunden werden können (Leitstellenverbunde). Das Gateway stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und UCRI-internen KT-Adressen.
 
 ![UCRI Komponenten](ucri-components.drawio.svg)
+
+
 
 <!-- skip-start -->
 ---

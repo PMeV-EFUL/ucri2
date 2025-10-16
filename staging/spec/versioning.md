@@ -1,9 +1,9 @@
-# Versionierung
+## Versionierung
 Die Versionierung für die Transportschicht und die UCRI2-Apps erfolgen voneinander getrennt.
 
 Diese Spezifikation beschreibt die Version 2.0.0 der UCRI2-Transportschicht.
 
-## Transportschicht-Versionierung
+### Transportschicht-Versionierung
 Die Transportschicht-Versionierung umfasst dieses Dokument sowie die OpenAPI-Spezifikationen für die Client- und die P2P-Schnittstellen. 
 
 Die Versionsnummer besteht aus drei numerischen Teilen:
@@ -17,12 +17,12 @@ Für die drei Versionsbestandteile gelten folgende Festlegungen:
 
 Somit sind Änderungen an der MINOR-Version aufwärtskompatibel, sodass Systeme mit übereinstimmenden GEN.MAJOR-Versionen untereinander kommunizieren können, auch wenn sie unterschiedliche MINOR-Versionen aufweisen.
 
-### Vorgabe der transport_layer_messages-App-Version
+#### Vorgabe der transport_layer_messages-App-Version
 Da die transport_layer_messages-App Nachrichten beschreibt, die auf der Transportschicht erstellt und von verbundenen UCRM sowie Clients konsumiert werden, MUSS eine spezifischen Version dieser App durch alle Clients sowie UCRM, welche die Version 2.0.0 der Transportschicht implementieren, ZWINGEND unterstützt werden.
 
 Die hierfür zu unterstützende Version der transport_layer_messages-App ist 1.0.
 
-## App-Versionierung
+### App-Versionierung
 Die App-Versionierung erfolgt für jede App individuell. Die Versionsnummer einer App besteht aus zwei numerischen Teilen:
 
 MAJOR.MINOR

@@ -97,17 +97,17 @@ counter-reset: section;
 - [UCRI2 Systemarchitektur](#ucri2-systemarchitektur)
   * [Messaging](#messaging)
   * [Vermittlungsebene](#vermittlungsebene)
-  * [Rollen der beteiligten Komponenten](#rollen-der-beteiligten-komponenten)
   * [Anwendungsebene](#anwendungsebene)
+  * [Rollen der beteiligten Komponenten](#rollen-der-beteiligten-komponenten)
   * [UCRI Gateway](#ucri-gateway)
-- [Versionierung](#versionierung)
-  * [Transportschicht-Versionierung](#transportschicht-versionierung)
-    + [Vorgabe der transport_layer_messages-App-Version](#vorgabe-der-transport_layer_messages-app-version)
-  * [App-Versionierung](#app-versionierung)
+  * [Adressierungskonzept](#adressierungskonzept)
+    + [Beispielhafte OID-Hierarchie](#beispielhafte-oid-hierarchie)
+    + [Beispielhafte OID-Nomenklatur](#beispielhafte-oid-nomenklatur)
+  * [Versionierung](#versionierung)
+    + [Transportschicht-Versionierung](#transportschicht-versionierung)
+      - [Vorgabe der transport_layer_messages-App-Version](#vorgabe-der-transport_layer_messages-app-version)
+    + [App-Versionierung](#app-versionierung)
 - [UCRI2 Vermittlungsebene](#ucri2-vermittlungsebene)
-- [UCRI2 Adressierungskonzept](#ucri2-adressierungskonzept)
-  * [OID-Hierarchie](#oid-hierarchie)
-  * [OID-Nomenklatur](#oid-nomenklatur)
 - [UCRI Leitstellenmodul](#ucri-leitstellenmodul)
   * [Überblick](#uberblick)
   * [UCRM API Technologie](#ucrm-api-technologie)
@@ -201,15 +201,6 @@ Einzelne Aufgaben der Vermittlungsebene, die bei der P2P-Topologie durch die Kom
 
 Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert optional die Ende-zu-Ende-Verschlüsselung der Daten.
 
-## Rollen der beteiligten Komponenten
-In UCRI2 existieren demnach zwei unterschiedlichen Rollen:
-- Ein teilnehmendes System nimmt hierbei die **Client-Rolle** ein und konsumiert die UCRI2 Client API, die vom UCRM angeboten wird.
-- Ein UCRM nimmt dagegen die **UCRM-Rolle** ein und bietet für Clients die UCRI2 Client API an. Zur Verbindung mit anderen UCRMs wird je nach Kommunikationstopologie eine andere API genutzt. Falls eine Verbindung zwischen UCRMs verschiedener Hersteller erfolgen soll, muss dies die UCRI2 Peer-to-Peer-API (P2P-API) sein.
-
-Folglich ist für eine UCRI2-konforme Umsetzung relevant, welche Rolle umgesetzt werden soll:
-- Ein KT, der sich per UCRI2 mit anderen KT verbinden will, muss ausschliesslich die UCRI2 Client API aus der Consumer-Perspektive umsetzen.
-- Ein UCRM muss die UCRI2 Client API aus der Provider-Perspektive umsetzen und kann die UCRI2 P2P-API umsetzen, falls eine herstellerübergreifende Koppelung mit anderen UCRMs gewünscht wird.
-
 ## Anwendungsebene
 Um die fachlichen Aspekte von den technischen Aspekten zu trennen, erfolgt in UCRI 2 eine Trennung zwischen Übertragungs- und Anwendungsebene.
 Hierbei erfolgt sowohl eine Trennung der UCRI2-Anwendungen untereinander und auch deren Unabhängigkeit von der Vermittlungsebene. Das erlaubt eine freie Weiterentwicklung jeder einzelnen Anwendung.
@@ -219,6 +210,14 @@ Eine UCRI2-Anwendung (im Folgenden UCRI2-App) wird durch folgende Artefakte defi
 - Ablaufmodell (definierte Abfolge von Nachrichten)
 - Prozessdefinitionen (Festlegungen bezüglich Anwendungslogik, die bei der Implementierung in technischen KT-Systemen berücksichtigt werden müssen)
 
+## Rollen der beteiligten Komponenten
+In UCRI2 existieren demnach zwei unterschiedlichen Rollen:
+- Ein teilnehmendes System nimmt hierbei die **Client-Rolle** ein und konsumiert die UCRI2 Client API, die vom UCRM angeboten wird.
+- Ein UCRM nimmt dagegen die **UCRM-Rolle** ein und bietet für Clients die UCRI2 Client API an. Zur Verbindung mit anderen UCRMs wird je nach Kommunikationstopologie eine andere API genutzt. Falls eine Verbindung zwischen UCRMs verschiedener Hersteller erfolgen soll, muss dies die UCRI2 Peer-to-Peer-API (P2P-API) sein.
+
+Folglich ist für eine UCRI2-konforme Umsetzung relevant, welche Rolle umgesetzt werden soll:
+- Ein KT, der sich per UCRI2 mit anderen KT verbinden will, muss ausschliesslich die UCRI2 Client API aus der Consumer-Perspektive umsetzen.
+- Ein UCRM muss die UCRI2 Client API aus der Provider-Perspektive umsetzen und kann die UCRI2 P2P-API umsetzen, falls eine herstellerübergreifende Koppelung mit anderen UCRMs gewünscht wird.
 
 
 ## UCRI Gateway
@@ -228,68 +227,24 @@ Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wi
 ![UCRI Komponenten](ucri-components.drawio.svg)
 
 
-# Versionierung
-Die Versionierung für die Transportschicht und die UCRI2-Apps erfolgen voneinander getrennt.
-
-Diese Spezifikation beschreibt die Version 2.0.0 der UCRI2-Transportschicht.
-
-## Transportschicht-Versionierung
-Die Transportschicht-Versionierung umfasst dieses Dokument sowie die OpenAPI-Spezifikationen für die Client- und die P2P-Schnittstellen. 
-
-Die Versionsnummer besteht aus drei numerischen Teilen:
-
-GEN.MAJOR.MINOR
-
-Für die drei Versionsbestandteile gelten folgende Festlegungen:
-- GEN: Für UCRI2 auf 2 festgelegt
-- MAJOR: Hauptversion der Transportschicht innerhalb der UCRI2-Versionierung. Eine Änderung dieser Version erfolgt, wenn Änderungen an den Endpunktdefinitionen erfolgen, die entweder bestehende Endpunkte bezüglich obligater Felder verändern oder neue obligate Felder hinzufügen.
-- MINOR: Unterversion der Transportschicht. Eine Änderung dieser Version erfolgt, wenn neue optionale Felder zu bestehenden Endpunkte hinzugefügt oder neue optionale Endpunkte hinzugefügt werden.
-
-Somit sind Änderungen an der MINOR-Version aufwärtskompatibel, sodass Systeme mit übereinstimmenden GEN.MAJOR-Versionen untereinander kommunizieren können, auch wenn sie unterschiedliche MINOR-Versionen aufweisen.
-
-### Vorgabe der transport_layer_messages-App-Version
-Da die transport_layer_messages-App Nachrichten beschreibt, die auf der Transportschicht erstellt und von verbundenen UCRM sowie Clients konsumiert werden, MUSS eine spezifischen Version dieser App durch alle Clients sowie UCRM, welche die Version 2.0.0 der Transportschicht implementieren, ZWINGEND unterstützt werden.
-
-Die hierfür zu unterstützende Version der transport_layer_messages-App ist 1.0.
-
-## App-Versionierung
-Die App-Versionierung erfolgt für jede App individuell. Die Versionsnummer einer App besteht aus zwei numerischen Teilen:
-
-MAJOR.MINOR
-
-Für die drei Versionsbestandteile gelten folgende Festlegungen:
-- MAJOR: Hauptversion der App. Eine Änderung dieser Version erfolgt, wenn neue obligate Nachrichten hinzugefügt werden oder in bestehenden Nachrichten obligate Felder hinzugefügt oder verändert werden.
-- MINOR: Unterversion der App. Eine Änderung dieser Version erfolgt, wenn neue optionale Nachrichten hinzugefügt werden oder in bestehenden Nachrichten optionale Felder hinzugefügt werden.
-
-Obwohl so Änderungen an der MINOR-Version aufwärtskompatibel sind, müssen auch MINOR-Veränderungen in den supportedApps eines Teilnehmers explizit als unterstützt gekennzeichnet werden.
-
-
-# UCRI2 Vermittlungsebene
-
-Die Vermittlungsebene umfasst technische Aspekte der Nachrichtenübermittlung zwischen technischen Systemen der KT. Dabei können unterschiedliche Kommunikationstopologien unterstützt werden, von dezentralen Peer-To-Peer (P2P) Protokollen bis zu zentralisierten Broker-Architekturen.
-
-Die aktuelle UCRI2 Version spezifiziert nur ein P2P-Protokoll für die Kommunikation zwischen den UCRM-Modulen.
-
-Im Weiteren werden einzelne Aspekte der Nachrichtenübermittlung detailliert beschrieben:
-
-- [Adressierungskonzept](addressing_concept.md)
-- [UCRI Leitstellenmodul](ucrm_api.md)
-- [Kommunikationsprotokoll](p2p_protocol.md)
 
 
 
 
-# UCRI2 Adressierungskonzept
+## Adressierungskonzept
 
 Für die Adressierung der einzelnen Kommunikationsteilnehmer (KT) auf der Vermittlungsebene werden eindeutige Kennungen in Form von Object Identifier (OID Spezifikationen ISO/IEC 9834, DIN 66334) verwendet.
+Für die Festlegung von OIDs gelten folgende Vorgaben:
+1. Falls möglich, sollten offiziell zugeteilte OIDs zum Einsatz kommen. Diese können z.B. für das deutsche Gesundheitswesen beim Bundesinstitut für Arzneimittel und Medizinprodukte beantragt werden.
+2. Falls keine offiziell vergebenen OIDs zum Einsatz kommen, dürfen selbst vergebene OIDs NIEMALS in einem Adressraum liegen, in dem auch offiziell zugeteilte OIDs vergeben werden, um Überschneidungen mit offiziell zugeteilten OIDs zu vermeiden.
 
-**Das vorliegende Konzept stellt lediglich ein Beispiel für mögliche Strukturierung des OID-Raums dar.
-Wichtig ist, dass der UCRI-OID-Raum sich mit anderen weltweit existierenden standardisierten OID-Räumen nicht überschneidet.
-Die Verwaltung des UCRI-OID-Raumes inklusive Sicherstellung von eindeutigen OID-Adressen obliegt dem Expertenforum UCRI und ist nicht im Scope der UCRI-Spezifikation.**
+Zusätzlich wird empfohlen, die genutzten OIDs dem Expertenforum UCRI zu melden, damit Adresskonflikte direkt bei der Vergabe vermieden werden können.
 
-## OID-Hierarchie
+Die in den folgenden Unterkapiteln vorgestellten beispielhaften OID-Hierarchien und OID-Nomenklatur stellen nur eine Empfehlung dar. Falls von offiziellen Stellen vergebene OIDs zum Einsatz kommen, entsteht nicht zwangsläufig auch eine Hierarchie, wie sie in den Folgenden Unterkapiteln dargestellt wird.
 
-Adressierung von einzelnen KT ist hierarchisch organisiert und spiegelt die hierarchische Kommunikationsstruktur wider:
+### Beispielhafte OID-Hierarchie
+
+Die Adressierung von einzelnen KT kann hierarchisch organisiert werden und spiegelt dann die hierarchische Kommunikationsstruktur wider:
 
 ![OID-Hierarchie](ucri-oid-hierarchy.drawio.svg)
 
@@ -297,7 +252,7 @@ Diese Struktur ermöglicht Implementierung einer einfachen und einheitlichen Rou
 
 Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu externen Systemen eingesetzt und stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und internen OID. Ein externes System bekommt dabei einen entsprechend reservierten OID-Bereich (Unterbaum) und das Gateway bekommt die Wurzel-OID-Adresse dieses Unterbaums.
 
-## OID-Nomenklatur
+### Beispielhafte OID-Nomenklatur
 
 Alle Kommunikationsteilnehmer in einem UCRI-System bekommen eine in diesem System eindeutige OID zugewiesen, die sich in einem OID-Adressraum befindet. Dieser OID-Adressraum wird durch eine Wurzeladresse (im weiteren Verlauf als <Root-OID> bezeichnet) festgelegt.
 Die Strukturierung des UCRI-OID-Adressierungsraums (UCRI-OID-Nomenklatur) ermöglicht Adressierung von KT über die staatlichen Grenzen hinaus. 
@@ -334,6 +289,56 @@ Beispiel OID Feuerwehr ELS in Ratingen: <Root-OID>.1.276.5.1.1.58.28.1.1
 Folgende OID wird zur Identifizierung der UCRI-Infrastruktur als Sender von technischen Quittungen (siehe UCRI2-App Technische Quittungen) festgelegt:
 
 UCRI-Infrastruktur: <Root-OID>.1.276.5.0.0.0.0.1.1
+
+
+## Versionierung
+Die Versionierung für die Transportschicht und die UCRI2-Apps erfolgen voneinander getrennt.
+
+Diese Spezifikation beschreibt die Version 2.0.0 der UCRI2-Transportschicht.
+
+### Transportschicht-Versionierung
+Die Transportschicht-Versionierung umfasst dieses Dokument sowie die OpenAPI-Spezifikationen für die Client- und die P2P-Schnittstellen. 
+
+Die Versionsnummer besteht aus drei numerischen Teilen:
+
+GEN.MAJOR.MINOR
+
+Für die drei Versionsbestandteile gelten folgende Festlegungen:
+- GEN: Für UCRI2 auf 2 festgelegt
+- MAJOR: Hauptversion der Transportschicht innerhalb der UCRI2-Versionierung. Eine Änderung dieser Version erfolgt, wenn Änderungen an den Endpunktdefinitionen erfolgen, die entweder bestehende Endpunkte bezüglich obligater Felder verändern oder neue obligate Felder hinzufügen.
+- MINOR: Unterversion der Transportschicht. Eine Änderung dieser Version erfolgt, wenn neue optionale Felder zu bestehenden Endpunkte hinzugefügt oder neue optionale Endpunkte hinzugefügt werden.
+
+Somit sind Änderungen an der MINOR-Version aufwärtskompatibel, sodass Systeme mit übereinstimmenden GEN.MAJOR-Versionen untereinander kommunizieren können, auch wenn sie unterschiedliche MINOR-Versionen aufweisen.
+
+#### Vorgabe der transport_layer_messages-App-Version
+Da die transport_layer_messages-App Nachrichten beschreibt, die auf der Transportschicht erstellt und von verbundenen UCRM sowie Clients konsumiert werden, MUSS eine spezifischen Version dieser App durch alle Clients sowie UCRM, welche die Version 2.0.0 der Transportschicht implementieren, ZWINGEND unterstützt werden.
+
+Die hierfür zu unterstützende Version der transport_layer_messages-App ist 1.0.
+
+### App-Versionierung
+Die App-Versionierung erfolgt für jede App individuell. Die Versionsnummer einer App besteht aus zwei numerischen Teilen:
+
+MAJOR.MINOR
+
+Für die drei Versionsbestandteile gelten folgende Festlegungen:
+- MAJOR: Hauptversion der App. Eine Änderung dieser Version erfolgt, wenn neue obligate Nachrichten hinzugefügt werden oder in bestehenden Nachrichten obligate Felder hinzugefügt oder verändert werden.
+- MINOR: Unterversion der App. Eine Änderung dieser Version erfolgt, wenn neue optionale Nachrichten hinzugefügt werden oder in bestehenden Nachrichten optionale Felder hinzugefügt werden.
+
+Obwohl so Änderungen an der MINOR-Version aufwärtskompatibel sind, müssen auch MINOR-Veränderungen in den supportedApps eines Teilnehmers explizit als unterstützt gekennzeichnet werden.
+
+
+# UCRI2 Vermittlungsebene
+
+Die Vermittlungsebene umfasst technische Aspekte der Nachrichtenübermittlung zwischen technischen Systemen der KT. Dabei können unterschiedliche Kommunikationstopologien unterstützt werden, von dezentralen Peer-To-Peer (P2P) Protokollen bis zu zentralisierten Broker-Architekturen.
+
+Die aktuelle UCRI2 Version spezifiziert nur ein P2P-Protokoll für die Kommunikation zwischen den UCRM-Modulen.
+
+Im Weiteren werden einzelne Aspekte der Nachrichtenübermittlung detailliert beschrieben:
+
+- [Adressierungskonzept](addressing_concept.md)
+- [UCRI Leitstellenmodul](ucrm_api.md)
+- [Kommunikationsprotokoll](p2p_protocol.md)
+
 
 
 
