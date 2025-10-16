@@ -111,4 +111,11 @@ Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden 
 
 <!-- include ucrm_api.md -->
 <!-- include p2p_protocol.md -->
+
+<!-- include apis.md -->
+<!-- include client_api.md -->
+<!-- include p2p_api.md -->
+<!-- include error_handling.md -->
+<!-- include message_signing.md -->
+
 <!-- include applications.md -->

@@ -2,7 +2,7 @@
 [Zu der Hauptseite](index.md)
 <!-- skip-end -->
 
-# UCRI2 Vermittlungsebene
+# !!! TODO: In Systemarchitektur-Kapitel Verschieben!!! UCRI2 Vermittlungsebene
 
 Die Vermittlungsebene umfasst technische Aspekte der Nachrichtenübermittlung zwischen technischen Systemen der KT. Dabei können unterschiedliche Kommunikationstopologien unterstützt werden, von dezentralen Peer-To-Peer (P2P) Protokollen bis zu zentralisierten Broker-Architekturen.
 

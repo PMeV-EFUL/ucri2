@@ -2,7 +2,7 @@
 [Vermittlungsebene](messaging.md)
 <!-- skip-end -->
 
-# UCRI Leitstellenmodul
+# !!! TODO Aufteilen und Verschieben nach Systemarchitektur und API-Kapitel!!! UCRI Leitstellenmodul
 
 ## Überblick
 
@@ -20,6 +20,7 @@ Das Ziel des UCRI-Systems ist eine Digitalisierung der menschlichen Kommunikatio
 Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch (die maximale Zeit zwischen den Meldungssende- und Meldungsempfangszeitpunkten) zu minimieren, kann bei Meldungsaustausch ein [Long Polling](https://de.wikipedia.org/wiki/Long_Polling) vorgesehen werden.
 
 ### Protokoll
+!!!TODO Details sind bereits in der Client-API beschrieben!!!
 
 Wegen der Anforderung zur sicheren Nachrichtenzustellung wird eine technische Nachrichtenempfangsbestätigung in der UCRM API vereinbart.
 
@@ -37,11 +38,15 @@ Ein Nachrichtensender bekommt folgende Quittungen:
 
 Die technischen Quittungen sind in Form eines JSON-Schemas auf der untergeordneten Seite beschrieben.
 
+!!!TODO Details sind bereits in der Client-API beschrieben ENDE!!!
+
 ### Empfehlungen zur technischen Umsetzung
+!!!TODO Inhalte wurden in client-api.md übernommen!!!
 
 Der Client muss die Schnittstelle periodisch abfragen, um Nachrichten zu empfangen. Das klassische Polling-Intervall ist dabei ein Maß zwischen Systemreaktionszeit (die maximale Zeit zwischen den Sende- und Empfangszeitpunkten) und Systemauslastung. Ein Polling-Intervall in Sekundenbereich (3 - 5 Sekunden) scheint optimal zu sein. Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch zu minimieren, wird Verwendung eines Long Polling empfohlen.
 
 #### Polling bei Nachrichtenabfragen
+
 
 Folgende Schleife ist bei Nachrichtenabfragen bei Polling zu empfehlen:
 
@@ -63,7 +68,10 @@ Folgende Schleife ist bei Nachrichtenabfragen bei Long Polling zu empfehlen:
 
 Wichtig: bei Programmausfällen zwischen Schritten 2 und 3 kann es zum wiederholten Empfang von gleichen Nachrichten kommen. Die Client-Logik muss somit mit Nachrichtenduplikaten umgehen können, z.B. unter Berücksichtigung von eindeutigen Nachrichten-ID.
 
+!!!TODO Inhalte wurden in client-api.md übernommen ENDE!!!
+
 ## UCRM REST API
+!!!TODO Inhalte wurden in apis.md übernommen!!!
 
 UCRM API Design verwendet REST API Design Richtlinien erarbeitet bei [TM Forum](https://www.tmforum.org/).
 
@@ -71,9 +79,14 @@ UCRM API Spezifikation verwendet Standards erarbeitet bei der [OpenAPI Initiativ
 
 UCRM API ist in folgende fachliche Bereiche aufgeteilt:
 
+!!!TODO Inhalte wurden in apis.md übernommen ENDE!!!
+
+
 - KT-Registry - Abfragen von Eigenschaften der registrierten Kommunikationsteilnehmer
 - Messaging - Versenden und Empfangen von Nachrichten
 - Info - Die Info API liefert Informationen über die Version und den Betreiber der Schnittstelle
+- 
+
 
 ### Berechtigungskonzept
 
