@@ -29,7 +29,7 @@ pdf_options:
 <!-- tocstop -->
 
 # Überblick
-Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mit Patientendaten explizit dafür gedacht Einsätze zwischen Systemen übertragen zu können, die explizit mit Patientendaten arbeiten und mit den dafür spezifischen Zusatzinformationen von Patienten sinnvoll umgehen können. Typische Einsatzzwecke sind Einsatzübergaben an Rettungsdienstleitstellen.
+Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mit Patientendaten explizit dafür gedacht Einsätze zwischen Systemen übertragen zu können, die explizit mit Patientendaten arbeiten und mit den dafür spezifischen Zusatzinformationen von Patienten sinnvoll umgehen können. Typische Einsatzzwecke sind Einsatzübergaben Rettungsdienstleitstellen – sowohl von Rettungsleitstellen, als auch von 116117-Leitstellen aus.
 
 <!-- include ../../general_incident_app_notes.md -->
 
@@ -38,7 +38,7 @@ Diese App sieht zwei Rollen vor, die der abgebenden Stelle (A) und der annehmend
 # Ablaufbeschreibung
 
 1. A->B: Einsatz übergeben
-2. B->A: Einsatz annehmen oder ablehnen
+2. B->A: Fachliche Bestätigung durch den Disponenten: Einsatz annehmen oder ablehnen
 3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
 # Partielle Umsetzung
