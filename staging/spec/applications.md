@@ -1,4 +1,6 @@
+<!-- skip-start -->
 [Zu der Hauptseite](index.md)
+<!-- skip-end -->
 
 # UCRI2 Anwendungen
 

@@ -13,7 +13,7 @@
 
 ## Eigenschaften
 
-<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#participantoid">participantOid</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#status">status</a></td><td>String</td><td>Ja</td></tr></tbody></table>
+<table class="jssd-properties-table"><thead><tr><th colspan="2">Name</th><th>Typ</th><th>Obligat?</th></tr></thead><tbody><tr><td colspan="2"><a href="#id">id</a></td><td>String</td><td>Ja</td></tr><tr><td colspan="2"><a href="#status">status</a></td><td>String</td><td>Ja</td></tr></tbody></table>
 
 
 ## Beispiel
@@ -22,7 +22,7 @@
 
 ```
 {
-    "participantOid": "1.2.3.4.5.6.7",
+    "id": "1.2.3.4.5.6.7",
     "status": "online"
 }
 ```
@@ -32,7 +32,7 @@
 <hr />
 
 
-## participantOid
+## id
 
 
 <table class="jssd-property-table">
@@ -50,7 +50,10 @@
       <th>Obligat?</th>
       <td colspan="2">Ja</td>
     </tr>
-    
+    <tr>
+      <th>Pattern</th>
+      <td colspan="2">^([0-9]+\.?)+$</td>
+    </tr>
   </tbody>
 </table>
 
@@ -101,15 +104,16 @@
     "title": "App-Nachricht participant_availability_update - Update des Verfügbarkeitsstatus für einen Teilnehmer",
     "description": "Diese Nachricht wird von einem UCRM an andere UCRM versendet, um die Veränderung des Verfügbarkeitsstatus eines Teilnehmers zu kommunizieren. Diese Nachricht wird NICHT an angebundene Teilnehmer weitergeleitet.",
     "required": [
-        "participantOid",
+        "id",
         "status"
     ],
     "type": "object",
     "properties": {
-        "participantOid": {
+        "id": {
             "type": "string",
             "title": "Teilnehmer-OID",
-            "description": "Die OID des referenzierten Teilnehmers"
+            "description": "Die OID des referenzierten Teilnehmers",
+            "pattern": "^([0-9]+\\.?)+$"
         },
         "status": {
             "type": "string",
@@ -124,7 +128,7 @@
     },
     "examples": [
         {
-            "participantOid": "1.2.3.4.5.6.7",
+            "id": "1.2.3.4.5.6.7",
             "status": "online"
         }
     ]
