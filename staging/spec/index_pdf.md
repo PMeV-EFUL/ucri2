@@ -88,7 +88,11 @@ counter-reset: section;
 
 <div class="page-break"></div>
 
-# Inhaltsverzeichnis
+<div style="font-size:20px;">
+<b> Inhaltsverzeichnis
+</b>
+</div>
+
 <!-- toc -->
 <!-- tocstop -->
 
