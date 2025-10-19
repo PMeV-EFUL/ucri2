@@ -5,15 +5,16 @@
   "title": "App-Nachricht participant_availability_update - Update des Verfügbarkeitsstatus für einen Teilnehmer",
   "description": "Diese Nachricht wird von einem UCRM an andere UCRM versendet, um die Veränderung des Verfügbarkeitsstatus eines Teilnehmers zu kommunizieren. Diese Nachricht wird NICHT an angebundene Teilnehmer weitergeleitet.",
   "required": [
-    "participantOid",
+    "id",
     "status"
   ],
   "type": "object",
   "properties": {
-    "participantOid": {
+    "id": {
       "type": "string",
       "title": "Teilnehmer-OID",
-      "description": "Die OID des referenzierten Teilnehmers"
+      "description": "Die OID des referenzierten Teilnehmers",
+      "pattern": "^([0-9]+\\.?)+$"
     },
     "status": {
       "type": "string",
@@ -28,7 +29,7 @@
   },
   "examples": [
     {
-      "participantOid": "1.2.3.4.5.6.7",
+      "id": "1.2.3.4.5.6.7",
       "status": "online"
     }
   ]
