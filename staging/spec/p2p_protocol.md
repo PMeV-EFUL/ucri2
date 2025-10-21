@@ -1,6 +1,3 @@
-<!-- skip-start -->
-[Vermittlungsebene](messaging.md)
-<!-- skip-end -->
 
 # !!!TODO Aufteilen und Verschieben nach Systemarchitektur und API-Kapitel!!! UCRI2 Kommunikationsprotokoll
 
@@ -50,6 +47,7 @@ Die Umsetzung des UCRM API-Endpunktes /registry unterscheidet sich in beiden UCR
 
 Da die Umgebung dynamisch ist, d.h. neue KT können dazukommen, existierende KT können abgebaut werden, sollen KT-Register-Abfragen sowohl KT-seitig als auch in der Inter-UCRM-Kommunikation regelmäßig durchgeführt werden. Empfehlung: mindestens 1 Mal pro Stunde, maximal alle 5 Minuten.
 
+
 ## E2E Verschlüsselung und Datenintegrität
 
 Als Richtlinie für die Auswahl kryptographischer Verfahren für die Verschlüsselung und Signieren von Nachrichten dient die BSI Technische Richtlinie (https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR02102/BSI-TR-02102.pdf?__blob=publicationFile&v=9).
@@ -81,7 +79,13 @@ Für die Zustellung von Nachrichten können unterschieldiche Routing-Algorithmen
 
 Meldungen werden in UCRM m.H.v. Meldungs-Schemata validiert. Die Validierung erfolgt synchron beim Senden. KT-Register liefert Auskunft über die durch KT unterstützten Schemata.
 
-<!-- skip-start -->
----
-[Vermittlungsebene](messaging.md)
-<!-- skip-end -->
+### Berechtigungskonzept
+
+Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.
+
+Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsieht:
+
+- KT - für die Kommunikation von KT-Systemen zu UCRM
+- UCRM - für Inter-CRM-Kommunikation
+
+Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben.

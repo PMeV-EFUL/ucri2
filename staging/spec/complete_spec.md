@@ -110,16 +110,6 @@ counter-reset: section;
     + [Transportschicht-Versionierung](#transportschicht-versionierung)
       - [Vorgabe der transport_layer_messages-App-Version](#vorgabe-der-transport_layer_messages-app-version)
     + [App-Versionierung](#app-versionierung)
-- [!!! TODO: In Systemarchitektur-Kapitel Verschieben!!! UCRI2 Vermittlungsebene](#-todo-in-systemarchitektur-kapitel-verschieben-ucri2-vermittlungsebene)
-- [!!! TODO Aufteilen und Verschieben nach Systemarchitektur und API-Kapitel!!! UCRI Leitstellenmodul](#-todo-aufteilen-und-verschieben-nach-systemarchitektur-und-api-kapitel-ucri-leitstellenmodul)
-  * [Überblick](#uberblick)
-  * [UCRM API Technologie](#ucrm-api-technologie)
-    + [Protokoll](#protokoll)
-    + [Empfehlungen zur technischen Umsetzung](#empfehlungen-zur-technischen-umsetzung)
-      - [Polling bei Nachrichtenabfragen](#polling-bei-nachrichtenabfragen)
-      - [Long Polling bei Nachrichtenabfragen](#long-polling-bei-nachrichtenabfragen)
-  * [UCRM REST API](#ucrm-rest-api)
-    + [Berechtigungskonzept](#berechtigungskonzept)
 - [!!!TODO Aufteilen und Verschieben nach Systemarchitektur und API-Kapitel!!! UCRI2 Kommunikationsprotokoll](#todo-aufteilen-und-verschieben-nach-systemarchitektur-und-api-kapitel-ucri2-kommunikationsprotokoll)
   * [Trust Konzept](#trust-konzept)
   * [Nachrichtenübermittlung](#nachrichtenubermittlung)
@@ -128,7 +118,13 @@ counter-reset: section;
     + [Verschlüsselung](#verschlusselung)
   * [Zustellung von Nachrichten](#zustellung-von-nachrichten)
   * [Validierung von Meldungen](#validierung-von-meldungen)
+    + [Berechtigungskonzept](#berechtigungskonzept)
 - [UCRI2 APIs](#ucri2-apis)
+  * [Festlegungen](#festlegungen)
+  * [Überblick](#uberblick)
+    + [Beteiligte Komponenten](#beteiligte-komponenten)
+    + [Long Polling](#long-polling)
+    + [Berechtigungskonzept](#berechtigungskonzept-1)
   * [Client-API](#client-api)
     + [Endpunkt /token - HTTP GET](#endpunkt-token---http-get)
     + [Endpunkt /info - HTTP GET](#endpunkt-info---http-get)
@@ -180,7 +176,7 @@ counter-reset: section;
 UCRI steht für Universal Control Room Interface - ein Protokoll für die Kommunikation zwischen zwei oder
 mehreren Einsatzleitsystemen.
 
-Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden viele Erfahrungen gesammelt und Anforderungen identifiziert, die Weiterentwicklung des UCRI Protokolls auf einer neuen architektonischen Basis erforderten. UCRI2 ist eine komplett überarbeitete Version des Protokolls, die alle Anwendungsfälle der Vorgängerversionen (die letzte UCRI Version 1.1) unterstützt und Grundlage für flexible Weiterentwicklung des Protokolls darstellt.
+Nach der erfolgreichen Einführung und eingehenden Erprobung in der Praxis wurden Erfahrungen gesammelt und neue Anforderungen identifiziert. Diese machten eine Weiterentwicklung des UCRI-Protokolls auf einer neuen Architekturbasis erforderlich. UCRI2 ist eine vollständig überarbeitete Version, die alle Anwendungsfälle der Vorgängerversion (UCRI 1.1) unterstützt und die Grundlage für zukünftige, flexible Erweiterungen bildet.
 
 
 
@@ -193,6 +189,7 @@ Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x sind:
 - Einfache, schnell zu implementierende API, schnelles PoC möglich
   - standardisierte maschinenlesbare Spezifikation
   - sichere Zustellung und Verarbeitung von Meldungen
+- einfach zu in verschiedenen Programmierumgebungen zu konsumieren
 - Trennung technischer und fachlicher Aspekte
   - Einfache Erweiterbarkeit
   - Technische Komponenten müssen bei fachlichen Erweiterungen nicht angepasst werden
@@ -205,7 +202,7 @@ Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x sind:
 
 
 # UCRI2 Systemarchitektur
-Im Gegensatz zu UCRI Version 1 ist UCRI 2 grundlegend für die n:m-Kommunikation verschiedener Teilnehmer entwickelt worden. 
+Im Gegensatz zu UCRI Version 1 ist UCRI 2 grundlegend für die n:m-Kommunikation verschiedener Teilnehmer entwickelt worden.
 
 ## Messaging
 
@@ -223,48 +220,46 @@ Das andere wichtige Architekturmuster, das bei der Strukturierung der UCRI2-Schn
 
 Das UCRM stellt die UCRM Client API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme ([vgl. UCRI Gateway](#UCRI-Gateway)).
 
-Der Adapter kann auch zusätzliche Aufgaben übernehmen, wie z. B. Datentransformation oder Sicherheitsaufgaben wie Ende-zu-Ende-Verschlüsselung von übermittelten Nachrichten.
+Die untereinander kommunizierenden UCRM-Adapter bilden die Vermittlungsebene und kümmern sich somit um die technischen Aspekte der Kommunikation. Während sich die KTs auf die eigentliche Anwendungslogik fokussieren - also die Anwendungsebene.
 
-Die untereinander kommunizierenden UCRM - Adapter an der Seite von technischen Systemen der KT und optional der Broker (bei einer zentralen Broker-Architektur) bilden die Vermittlungsebene und kümmern sich somit um die technischen Aspekte der Kommunikation - also die Vermittlungsebene, während die fachlichen Systemkomponenten Clients und Server sich auf die eigentliche Anwendungslogik fokussieren - also die Anwendungsebene.
+Zentrale Aufgabe der Vermittlungsebene ist die Zustellung von Meldungen zwischen Sender und Empfänger. Außerdem werden auf der Vermittlungsebene unterschiedliche querschnittliche Aufgaben übernommen.
 
-Zentrale Aufgabe der Vermittlungsebene ist die Zustellung von Meldungen zwischen Sender und Empfänger. Außerdem werden auf der Vermittlungsebene unterschiedliche querschnittliche Aufgaben übernommen. Hier sind nur einige Beispiele: KT-Authentifizierung und Autorisierung, Meldungsvalidierung, eventuell E2E-Verschlüsselung. Bei der P2P-Topologie kommunizieren die UCRM der zwei KT dabei direkt miteinander, bei einer zentralen Architektur - über einen Messagebroker.
+Verschiedene UCRMs kommunizieren mittels P2P-Protokoll miteinander.
 
-
-Einzelne Aufgaben der Vermittlungsebene, die bei der P2P-Topologie durch die Kommunikation zwischen einzelnen UCRMs umgesetzt werden, sind:
+Einzelne Aufgaben der Vermittlungsebene sind:
 - Verwaltung der Kommunikationstopologie inkl. Adressierungskonzept, KT-Status-Monitoring und KT-Register
 - Konzept Authentisierung, Autorisierung, Accounting
-- Optional E2E-Verschlüsselung
 - Übermittlung von Nachrichten unter der Verwendung des UCRI-Adressierungskonzepts inkl. Routing-Funktion
 - Validierung von Anwendungsmeldungen
 
-Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert optional die Ende-zu-Ende-Verschlüsselung der Daten.
+Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert die Integrität der Daten.
 
 ## Anwendungsebene
-Um die fachlichen Aspekte von den technischen Aspekten zu trennen, erfolgt in UCRI 2 eine Trennung zwischen Übertragungs- und Anwendungsebene.
-Hierbei erfolgt sowohl eine Trennung der UCRI2-Anwendungen untereinander und auch deren Unabhängigkeit von der Vermittlungsebene. Das erlaubt eine freie Weiterentwicklung jeder einzelnen Anwendung.
+Die UCRI2-Anwendungsebene ist komplett getrennt von der Vermittlungsebene.
+Die Anwendungsebene ist dabei in mehrere unabhängige Bereiche, sogenannte UCRI2-Apps, aufgeteilt.
+Das erlaubt die freie Weiterentwicklung jeder einzelnen App.
 
-Eine UCRI2-Anwendung (im Folgenden UCRI2-App) wird durch folgende Artefakte definiert:
+Eine UCRI2-App wird durch folgende Artefakte definiert:
 - Ein Satz von standardisierten Nachrichten-Schemata (JSON, kanonisches Datenmodell)
 - Ablaufmodell (definierte Abfolge von Nachrichten)
+!!!TODO
 - Prozessdefinitionen (Festlegungen bezüglich Anwendungslogik, die bei der Implementierung in technischen KT-Systemen berücksichtigt werden müssen)
+!!!
 
 ## Rollen der beteiligten Komponenten
 In UCRI2 existieren demnach zwei unterschiedlichen Rollen:
 - Ein teilnehmendes System nimmt hierbei die **Client-Rolle** ein und konsumiert die UCRI2 Client API, die vom UCRM angeboten wird.
-- Ein UCRM nimmt dagegen die **UCRM-Rolle** ein und bietet für Clients die UCRI2 Client API an. Zur Verbindung mit anderen UCRMs wird je nach Kommunikationstopologie eine andere API genutzt. Falls eine Verbindung zwischen UCRMs verschiedener Hersteller erfolgen soll, muss dies die UCRI2 Peer-to-Peer-API (P2P-API) sein.
+- Ein UCRM nimmt dagegen die **UCRM-Rolle** ein und bietet für Clients die UCRI2 Client API an. Zur Verbindung mit anderen UCRMs wird eine andere API genutzt: die UCRI2 Peer-to-Peer-API (P2P-API).
 
 Folglich ist für eine UCRI2-konforme Umsetzung relevant, welche Rolle umgesetzt werden soll:
 - Ein KT, der sich per UCRI2 mit anderen KT verbinden will, muss ausschliesslich die UCRI2 Client API aus der Consumer-Perspektive umsetzen.
-- Ein UCRM muss die UCRI2 Client API aus der Provider-Perspektive umsetzen und kann die UCRI2 P2P-API umsetzen, falls eine herstellerübergreifende Koppelung mit anderen UCRMs gewünscht wird.
-
+- Ein UCRM muss die UCRI2 Client API aus der Provider-Perspektive umsetzen und kann die UCRI2 P2P-API umsetzen, falls eine Koppelung mit anderen UCRMs gewünscht wird.
 
 ## UCRI Gateway
 
 Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wird am Übergang zu Gruppen von KT eingesetzt, die auf der Vermittlungsebene nicht direkt erreichbar sind und über eine proprietäres Leitstellenprotokoll angebunden werden können (Leitstellenverbunde). Das Gateway stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und UCRI-internen KT-Adressen.
 
 ![UCRI Komponenten](ucri-components.drawio.svg)
-
-
 
 
 
@@ -286,14 +281,15 @@ Die Adressierung von einzelnen KT kann hierarchisch organisiert werden und spieg
 
 ![OID-Hierarchie](ucri-oid-hierarchy.drawio.svg)
 
-Diese Struktur ermöglicht Implementierung einer einfachen und einheitlichen Routing-Funktion, die in jeder Systemkomponente (Leitstellenmodul - UCRM, evtl. Messagebroker, UCRI-Gateway) die Weiterleitung von übermittelten Nachrichten unterstützt (TODO Routing-Konzept).
+Diese Struktur ermöglicht Implementierung einer einfachen und einheitlichen Routing-Funktion, die in jeder Systemkomponente (Leitstellenmodul - UCRM, evtl. Messagebroker, UCRI-Gateway) die Weiterleitung von übermittelten Nachrichten unterstützt.
 
-Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu externen Systemen eingesetzt und stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und internen OID. Ein externes System bekommt dabei einen entsprechend reservierten OID-Bereich (Unterbaum) und das Gateway bekommt die Wurzel-OID-Adresse dieses Unterbaums.
+Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu externen Systemen eingesetzt und stellt eine Funktion zum Mapping zwischen externe Quell- bzw. Zieladressen und internen OID bereit. Ein externes System bekommt dabei einen entsprechend reservierten OID-Bereich (Unterbaum) und das Gateway bekommt die Wurzel-OID-Adresse dieses Unterbaums.
 
 ### Beispielhafte OID-Nomenklatur
 
-Alle Kommunikationsteilnehmer in einem UCRI-System bekommen eine in diesem System eindeutige OID zugewiesen, die sich in einem OID-Adressraum befindet. Dieser OID-Adressraum wird durch eine Wurzeladresse (im weiteren Verlauf als <Root-OID> bezeichnet) festgelegt.
-Die Strukturierung des UCRI-OID-Adressierungsraums (UCRI-OID-Nomenklatur) ermöglicht Adressierung von KT über die staatlichen Grenzen hinaus. 
+Alle Kommunikationsteilnehmer in einem UCRI-System bekommen eine in diesem System eindeutige OID zugewiesen.
+Dieser OID-Adressraum wird durch eine Wurzeladresse (im weiteren Verlauf als <Root-OID> bezeichnet) festgelegt.
+Die Strukturierung des UCRI-OID-Adressierungsraums (UCRI-OID-Nomenklatur) ermöglicht Adressierung von KT über die staatlichen Grenzen hinaus.
 
 Dabei steht jedem Land frei, ein eigenes Adressierungsschema unterhalb des Landes-OID-Unterbaums zu definieren. Wurzeladresse eines Landes-OID-Unterbaums ist wie folgt definiert:
 
@@ -324,15 +320,13 @@ Die OID-Adresse der einzelnen Kommunikationsteilnehmer (KT) wird nach dem [amtli
 
 Beispiel OID Feuerwehr ELS in Ratingen: <Root-OID>.1.276.5.1.1.58.28.1.1
 
-
-
 ## Versionierung
 Die Versionierung für die Transportschicht und die UCRI2-Apps erfolgen voneinander getrennt.
 
 Diese Spezifikation beschreibt die Version 2.0.0 der UCRI2-Transportschicht.
 
 ### Transportschicht-Versionierung
-Die Transportschicht-Versionierung umfasst dieses Dokument sowie die OpenAPI-Spezifikationen für die Client- und die P2P-Schnittstellen. 
+Die Transportschicht-Versionierung umfasst dieses Dokument sowie die OpenAPI-Spezifikationen für die Client- und die P2P-Schnittstellen.
 
 Die Versionsnummer besteht aus drei numerischen Teilen:
 
@@ -343,7 +337,7 @@ Für die drei Versionsbestandteile gelten folgende Festlegungen:
 - MAJOR: Hauptversion der Transportschicht innerhalb der UCRI2-Versionierung. Eine Änderung dieser Version erfolgt, wenn Änderungen an den Endpunktdefinitionen erfolgen, die entweder bestehende Endpunkte bezüglich obligater Felder verändern oder neue obligate Felder hinzufügen.
 - MINOR: Unterversion der Transportschicht. Eine Änderung dieser Version erfolgt, wenn neue optionale Felder zu bestehenden Endpunkte hinzugefügt oder neue optionale Endpunkte hinzugefügt werden.
 
-Somit sind Änderungen an der MINOR-Version aufwärtskompatibel, sodass Systeme mit übereinstimmenden GEN.MAJOR-Versionen untereinander kommunizieren können, auch wenn sie unterschiedliche MINOR-Versionen aufweisen.
+Somit sind Änderungen an der MINOR-Version stets kompatibel, so dass Systeme mit übereinstimmenden GEN.MAJOR-Versionen untereinander kommunizieren können, auch wenn sie unterschiedliche MINOR-Versionen aufweisen.
 
 #### Vorgabe der transport_layer_messages-App-Version
 Da die transport_layer_messages-App Nachrichten beschreibt, die auf der Transportschicht erstellt und von verbundenen UCRM sowie Clients konsumiert werden, MUSS eine spezifischen Version dieser App durch alle Clients sowie UCRM, welche die Version 2.0.0 der Transportschicht implementieren, ZWINGEND unterstützt werden.
@@ -359,123 +353,7 @@ Für die drei Versionsbestandteile gelten folgende Festlegungen:
 - MAJOR: Hauptversion der App. Eine Änderung dieser Version erfolgt, wenn neue obligate Nachrichten hinzugefügt werden oder in bestehenden Nachrichten obligate Felder hinzugefügt oder verändert werden.
 - MINOR: Unterversion der App. Eine Änderung dieser Version erfolgt, wenn neue optionale Nachrichten hinzugefügt werden oder in bestehenden Nachrichten optionale Felder hinzugefügt werden.
 
-Obwohl so Änderungen an der MINOR-Version aufwärtskompatibel sind, müssen auch MINOR-Veränderungen in den supportedApps eines Teilnehmers explizit als unterstützt gekennzeichnet werden.
-
-
-# !!! TODO: In Systemarchitektur-Kapitel Verschieben!!! UCRI2 Vermittlungsebene
-
-Die Vermittlungsebene umfasst technische Aspekte der Nachrichtenübermittlung zwischen technischen Systemen der KT. Dabei können unterschiedliche Kommunikationstopologien unterstützt werden, von dezentralen Peer-To-Peer (P2P) Protokollen bis zu zentralisierten Broker-Architekturen.
-
-Die aktuelle UCRI2 Version spezifiziert nur ein P2P-Protokoll für die Kommunikation zwischen den UCRM-Modulen.
-
-Im Weiteren werden einzelne Aspekte der Nachrichtenübermittlung detailliert beschrieben:
-
-- [Adressierungskonzept](addressing_concept.md)
-- [UCRI Leitstellenmodul](ucrm_api.md)
-- [Kommunikationsprotokoll](p2p_protocol.md)
-
-
-
-
-
-# !!! TODO Aufteilen und Verschieben nach Systemarchitektur und API-Kapitel!!! UCRI Leitstellenmodul
-
-## Überblick
-
-Das UCRI Leitstellenmodul (UCRI Control Room Module, UCRM) stellt die API bereit - die einzige Kommunikationsschnittstelle für verbundene Kommunikationsteilnehmer wie zum Beispiel Einsatzleitstellensysteme, proprietäre Vermittlungsinstanzen (PVI), sowie andere technische Systeme:
-
-![UCRI Leitstellenmodul](ucrm.drawio.svg)
-
-## UCRM API Technologie
-
-Das Ziel des UCRI-Systems ist eine Digitalisierung der menschlichen Kommunikation und impliziert (im Gegensatz zu etwa Steuerungsprozessen in M2M-Kommunikation) keine harten Echtzeit-Anforderungen. Aus diesem Grund wird für die Umsetzung der Kommunikationsschnittstelle UCRM API die technologische Variante REST API mit Polling festgelegt. REST API mit Polling von Nachrichten hat folgende Vorteile:
-
-- einfach zu implementieren
-- einfach zu konsumieren
-
-Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch (die maximale Zeit zwischen den Meldungssende- und Meldungsempfangszeitpunkten) zu minimieren, kann bei Meldungsaustausch ein [Long Polling](https://de.wikipedia.org/wiki/Long_Polling) vorgesehen werden.
-
-### Protokoll
-!!!TODO Details sind bereits in der Client-API beschrieben!!!
-
-Wegen der Anforderung zur sicheren Nachrichtenzustellung wird eine technische Nachrichtenempfangsbestätigung in der UCRM API vereinbart.
-
-Das Prinzip der sicheren Nachrichtenzustellung ist ein E2E-Prinzip, das auch die Verarbeitungslogik bis zum Persistieren der Nachrichtendaten auf der Seite des KT-Systems einschließt. Um die Ausfälle in dieser Empfangs- und Verarbeitungslogik zu kompensieren wird ein zweistufiges Protokoll für Meldungsempfang vereinbart:
-
-1. Meldungen abfragen - idempotent, kann mehrmals wiederholt werden mit dem gleichen Ergebnis.
-2. Meldungsempfang bestätigen - idempotent, kann mehrmals wiederholt werden mit dem gleichen Ergebnis. Bestätigte Meldungen werden aus der Vermittlungsebene verworfen und stehen beim erneuter Meldungsabfrage nicht mehr zur Verfügung.
-
-Zum Signalisieren der Nachrichtenzustellung werden technische Quittungen für eine gesendete Nachricht implementiert (positive sowie negative Zustellbestätigungen).
-
-Ein Nachrichtensender bekommt folgende Quittungen:
-
-1. Zustellbestätigung: nachdem der Empfänger die Entgegennahme einer Nachricht bestätigt hat
-2. Benachrichtigung über fehlgeschlagene Zustellung: nachdem ein für die Nachrichtenzustellung vordefiniertes Timeout verstrichen ist, ohne dass der Empfänger die Entgegennahme einer Nachricht bestätigt hat
-
-Die technischen Quittungen sind in Form eines JSON-Schemas auf der untergeordneten Seite beschrieben.
-
-!!!TODO Details sind bereits in der Client-API beschrieben ENDE!!!
-
-### Empfehlungen zur technischen Umsetzung
-!!!TODO Inhalte wurden in client-api.md übernommen!!!
-
-Der Client muss die Schnittstelle periodisch abfragen, um Nachrichten zu empfangen. Das klassische Polling-Intervall ist dabei ein Maß zwischen Systemreaktionszeit (die maximale Zeit zwischen den Sende- und Empfangszeitpunkten) und Systemauslastung. Ein Polling-Intervall in Sekundenbereich (3 - 5 Sekunden) scheint optimal zu sein. Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch zu minimieren, wird Verwendung eines Long Polling empfohlen.
-
-#### Polling bei Nachrichtenabfragen
-
-
-Folgende Schleife ist bei Nachrichtenabfragen bei Polling zu empfehlen:
-
-1. Nachrichten abfragen mit Angabe maximaler Nachrichtenzahl Nmax
-2. Nachrichten verarbeiten
-3. Nachrichtenempfang bestätigen
-4. Ist die Anzahl von empfangenen Nachrichten gleich Nmax - sofort zum Schritt 1 übergehen
-5. Konfigurierte Pause einlegen
-
-Wichtig: bei Programmausfällen zwischen Schritten 2 und 3 kann es zum wiederholten Empfang von gleichen Nachrichten kommen. Die Client-Logik muss somit mit Nachrichtenduplikaten umgehen können, z.B. unter Berücksichtigung von eindeutigen Nachrichten-ID.
-
-#### Long Polling bei Nachrichtenabfragen
-
-Folgende Schleife ist bei Nachrichtenabfragen bei Long Polling zu empfehlen:
-
-1. Nachrichten abfragen mit Angabe maximaler Nachrichtenzahl Nmax und maximaler Wartezeit Tmax
-2. Nachrichten verarbeiten
-3. Nachrichtenempfang bestätigen
-
-Wichtig: bei Programmausfällen zwischen Schritten 2 und 3 kann es zum wiederholten Empfang von gleichen Nachrichten kommen. Die Client-Logik muss somit mit Nachrichtenduplikaten umgehen können, z.B. unter Berücksichtigung von eindeutigen Nachrichten-ID.
-
-!!!TODO Inhalte wurden in client-api.md übernommen ENDE!!!
-
-## UCRM REST API
-!!!TODO Inhalte wurden in apis.md übernommen!!!
-
-UCRM API Design verwendet REST API Design Richtlinien erarbeitet bei [TM Forum](https://www.tmforum.org/).
-
-UCRM API Spezifikation verwendet Standards erarbeitet bei der [OpenAPI Initiative](https://www.openapis.org/).
-
-UCRM API ist in folgende fachliche Bereiche aufgeteilt:
-
-!!!TODO Inhalte wurden in apis.md übernommen ENDE!!!
-
-
-- KT-Registry - Abfragen von Eigenschaften der registrierten Kommunikationsteilnehmer
-- Messaging - Versenden und Empfangen von Nachrichten
-- Info - Die Info API liefert Informationen über die Version und den Betreiber der Schnittstelle
-- 
-
-
-### Berechtigungskonzept
-
-Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.
-
-Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsieht:
-
-- KT - für die Kommunikation von KT-Systemen zu UCRM
-- UCRM - für Inter-CRM-Kommunikation
-
-Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben. 
-
-
+Obwohl so Änderungen an der MINOR-Version stets kompatibel sind, müssen auch MINOR-Veränderungen in den supportedApps eines Teilnehmers explizit als unterstützt gekennzeichnet werden.
 
 
 # !!!TODO Aufteilen und Verschieben nach Systemarchitektur und API-Kapitel!!! UCRI2 Kommunikationsprotokoll
@@ -526,6 +404,7 @@ Die Umsetzung des UCRM API-Endpunktes /registry unterscheidet sich in beiden UCR
 
 Da die Umgebung dynamisch ist, d.h. neue KT können dazukommen, existierende KT können abgebaut werden, sollen KT-Register-Abfragen sowohl KT-seitig als auch in der Inter-UCRM-Kommunikation regelmäßig durchgeführt werden. Empfehlung: mindestens 1 Mal pro Stunde, maximal alle 5 Minuten.
 
+
 ## E2E Verschlüsselung und Datenintegrität
 
 Als Richtlinie für die Auswahl kryptographischer Verfahren für die Verschlüsselung und Signieren von Nachrichten dient die BSI Technische Richtlinie (https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR02102/BSI-TR-02102.pdf?__blob=publicationFile&v=9).
@@ -557,9 +436,22 @@ Für die Zustellung von Nachrichten können unterschieldiche Routing-Algorithmen
 
 Meldungen werden in UCRM m.H.v. Meldungs-Schemata validiert. Die Validierung erfolgt synchron beim Senden. KT-Register liefert Auskunft über die durch KT unterstützten Schemata.
 
+### Berechtigungskonzept
+
+Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.
+
+Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsieht:
+
+- KT - für die Kommunikation von KT-Systemen zu UCRM
+- UCRM - für Inter-CRM-Kommunikation
+
+Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben.
 
 
 # UCRI2 APIs
+
+
+## Festlegungen
 In diesem Kapitel wird die konkrete Umsetzung der UCRI2-APIs beschrieben. Gemäß dem Rollenkonzept werden zwei APIs unterschieden:
 - Die **Client-API** wird vom **UCRM** angeboten und von **Clients** (Kommunikationsteilnehmern) konsumiert.
 - Die **P2P-API** wird von **UCRMs** angeboten, welche eine Verbindung mit anderen **UCRMs** herstellen wollen, falls dies durch die Kommunikationstopologie so vorgesehen ist.
@@ -568,18 +460,37 @@ Für beide APIs gelten folgende allgemeinen Festlegungen, welche in den jeweilig
 1. Das grundlegende API-Design verwendet REST API Design Richtlinien erarbeitet bei [TM Forum](https://www.tmforum.org/).
 2. Die konkrete Ausgestaltung der APIs inklusive der zu verwendenden Endpunkte und Datenformate wird in den zu der Spezifikation gehörenden OPENAPI-Spezifikationen in Version 3.1.0 (festgelegt in [OpenAPI Initiative](https://www.openapis.org/)) festgelegt (ucrm-client.yaml sowie ucrm-p2p.yaml). Die Spezifikationen verweisen jeweils auf die im Unterverzeichnis "schemas" vorhandenen yaml-Dateien mit den zu übertragenden Datenobjekten. Zusätzlich existieren noch inhaltsgleiche, gebündelte OPENAPI-Spezifikationen im JSON Format (ucrm-client-bundled.json sowie ucrm-p2p-bundled.json).
 3. Beide APIs sind in folgende Funktionsbereiche aufgeteilt:
-    1. Authentifizierung per OAUTH Client Credential Grant type. 
+    1. Authentifizierung per OAUTH Client Credential Grant type.
     2. KT-Registry - Abfragen von Eigenschaften der registrierten Kommunikationsteilnehmer.
     3. Messaging - Versenden und Empfangen von Nachrichten.
     4. Info - Informationen über die Version und den Betreiber der Schnittstelle.
 4. Die Datenübertragung erfolgt ausschliesslich per Transportverschlüsselung (TLS).
 5. Die zur Übertragung von Fehlerzuständen genutzten Error-Objekte (vgl. error.yaml) werden im Unterkapitel "Fehlerbehandlung" für beide APIs gemeinsam dargestellt, da ein Großteil der genutzten Fehlercodes in beiden APIs vorkommt.
-6. Die Generierung von Nachrichtensignaturen wird im Unterkapitel "Signierung von Nachrichten" beschrieben. 
+6. Die Generierung von Nachrichtensignaturen wird im Unterkapitel "Signierung von Nachrichten" beschrieben.
 7. Falls ein Request nicht der OPENAPI-Spezifikation entspricht, MUSS dieser vom UCRM zurückgewiesen werden (vgl. Kapitel "Fehlerbehandlung").
 8. Ein UCRM MUSS die **Client-API** vollständig unterstützen.
 9. Ein UCRM, welches die **P2P-API** implementiert, MUSS diese vollständig unterstützen.
 
+## Überblick
 
+### Beteiligte Komponenten
+
+![UCRI Leitstellenmodul](ucrm.drawio.svg)
+
+### Long Polling
+
+Um die Auswirkung des Pollings auf die Systemreaktionszeit bei Meldungsaustausch (die maximale Zeit zwischen den Meldungssende- und Meldungsempfangszeitpunkten) zu minimieren, wird beim Meldungsaustausch ein [Long Polling](https://de.wikipedia.org/wiki/Long_Polling) verwendet.
+
+### Berechtigungskonzept
+
+Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.
+
+Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsieht:
+
+- KT - für die Kommunikation von KT-Systemen zu UCRM
+- UCRM - für Inter-CRM-Kommunikation
+
+Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben.
 ## Client-API
 Die Client-API dient der Anbindung von KT (clients) an die Transportschicht (UCRM).
 Im Folgenden werden die verschiedenen Endpunkte vorgestellt:
@@ -623,7 +534,7 @@ Um den wiederholten Empfang einer Nachricht zu verhindern, MUSS der KT vor dem n
 Das UCRM MUSS prüfen, ob der Client zum Abruf der übergebenen OIDs berechtigt ist (durch Abgleich mit dem übergebenen OAuth-Token).
 
 Das UCRM MUSS für jede empfangene Nachricht eine monoton steigende Sequenznummer im Feld **sequenceId** zurückgeben, die sich für eine individuelle Nachricht bei eventuellen mehrfachen Abrufen NICHT verändert.
-#### Long-Polling 
+#### Long-Polling
 Da der Messaging-Receive-Endpunkt periodisch abgerufen werden muss, ist für einen schonenden Umgang mit Netzwerkresourcen und zur Sicherstellung möglichst geringer Zustellungsverzögerungen für diesen Endpunkt ein sog. Long-Polling vorgesehen. Dieses MUSS vom UCRM unterstützt werden.
 Folgende Schleife ist bei Nachrichtenabfragen mittels Long Polling zu verwenden:
 
@@ -635,11 +546,11 @@ Wichtig: bei Programmausfällen zwischen Schritten 2 und 3 kann es zum wiederhol
 
 Durch die Verwendung von Long Polling kann direkt ohne Pause von Schritt 3 zu Schritt 1 übergegangen werden. Für das Long Polling gelten folgende Festlegungen:
 1. Die maximale Verzögerung (dMax) der Antwort beträgt 30 Sekunden.
-2. Falls für mindestens eines der angefragten Ziele (Feld **destinations**) mindestens eine unbestätigte Nachricht vorliegt, wird die Anfrage sofort beantwortet.  
+2. Falls für mindestens eines der angefragten Ziele (Feld **destinations**) mindestens eine unbestätigte Nachricht vorliegt, wird die Anfrage sofort beantwortet.
 3. Ansonsten wird die Beantwortung der Client-Anfrage solange verzögert, bis eine der folgenden Bedingungen vorliegt (die Bedingungen sind in der genannen Reihenfolge zu prüfen), dann wird die Anfrage ohne weitere Verzögerung beantwortet:
    1. Für mindestens eines der angefragten Ziele (Feld **destinations**) liegt mindestens eine unbestätigte Nachricht vor.
    2. Die maximale Verzögerung (dMax) der Antwort wurde erreicht.
-4. Falls beim Long Polling Probleme auftreten, die sich nicht auf anderem Wege lösen lassen (z.B. durch die clientseitige Verlängerung von TCP-Timeouts), kann der Client mittels des Feldes **maxDelay** ein verkürztes dMax angeben, welches dann vom UCRM anstelle des in 1. genannten dMax zu verwenden ist. 
+4. Falls beim Long Polling Probleme auftreten, die sich nicht auf anderem Wege lösen lassen (z.B. durch die clientseitige Verlängerung von TCP-Timeouts), kann der Client mittels des Feldes **maxDelay** ein verkürztes dMax angeben, welches dann vom UCRM anstelle des in 1. genannten dMax zu verwenden ist.
 
 #### Verfügbarkeitsstatus
 Der periodische Abruf des Messaging-Receive-Endpunkts dient dem UCRM zusätzlich als Indikator über die aktuelle Erreichbarkeit des Client. Falls ein Client den Messaging-Send-Endpunkt für 60 Sekunden (Verfügbarkeits-Timeout) nicht abruft, MUSS das UCRM den KT-Registrierungs-Verfügbarkeitsstatus (Feld **status**) auf "offline" setzen. Sobald wieder eine Anfrage eingeht, MUSS das UCRM den Verfügbarkeitsstatus auf "online" setzen.
@@ -648,7 +559,7 @@ Um aus Sicht der Vermittlungsebene als verfügbar zu erscheinen, MUSS ein Client
 
 ### Endpunkt /messaging/commit - HTTP POST
 Über den Messaging-Commit-Endpunkt kann der erfolgreiche Empfang von Nachrichten für eine einzelne destination bestätigt werden. Hierzu wird eine Referenz-SequenzNummer angegeben (Feld **sequenceId**).
-Das UCRM entfernt dann alle Nachrichten mit Nachrichten-Sequenznummer <= Referenz-Sequenznummer aus der Liste unbestätigter Nachrichten und löst je nach Konfiguration des **ack**-Feldes die Übersendung einer Zustellbestätigung (**message-delivery-status**) aus. 
+Das UCRM entfernt dann alle Nachrichten mit Nachrichten-Sequenznummer <= Referenz-Sequenznummer aus der Liste unbestätigter Nachrichten und löst je nach Konfiguration des **ack**-Feldes die Übersendung einer Zustellbestätigung (**message-delivery-status**) aus.
 Falls ein Client Nachrichten für verschiedene OIDs abruft, MUSS für jede Nachricht ein separater Aufruf des Messaging-Commit-Endpunktes durchgeführt werden.
 
 Diese Operation ist idempotent, kann also mehrmals mit dem gleichen Ergebnis wiederholt werden.

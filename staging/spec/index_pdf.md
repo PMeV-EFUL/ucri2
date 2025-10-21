@@ -103,7 +103,7 @@ counter-reset: section;
 UCRI steht für Universal Control Room Interface - ein Protokoll für die Kommunikation zwischen zwei oder
 mehreren Einsatzleitsystemen.
 
-Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden viele Erfahrungen gesammelt und Anforderungen identifiziert, die Weiterentwicklung des UCRI Protokolls auf einer neuen architektonischen Basis erforderten. UCRI2 ist eine komplett überarbeitete Version des Protokolls, die alle Anwendungsfälle der Vorgängerversionen (die letzte UCRI Version 1.1) unterstützt und Grundlage für flexible Weiterentwicklung des Protokolls darstellt.
+Nach der erfolgreichen Einführung und eingehenden Erprobung in der Praxis wurden Erfahrungen gesammelt und neue Anforderungen identifiziert. Diese machten eine Weiterentwicklung des UCRI-Protokolls auf einer neuen Architekturbasis erforderlich. UCRI2 ist eine vollständig überarbeitete Version, die alle Anwendungsfälle der Vorgängerversion (UCRI 1.1) unterstützt und die Grundlage für zukünftige, flexible Erweiterungen bildet.
 
 
 
@@ -111,9 +111,7 @@ Nach einer erfolgreichen Einführung und eingehender Approbation im Feld wurden 
 <!-- include architecture.md -->
 <!-- include addressing_concept.md -->
 <!-- include versioning.md -->
-<!-- include messaging.md -->
 
-<!-- include ucrm_api.md -->
 <!-- include p2p_protocol.md -->
 
 <!-- include apis.md -->
