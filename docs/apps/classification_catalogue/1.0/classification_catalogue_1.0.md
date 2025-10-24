@@ -503,3 +503,8 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
 }
 ```
 
+
+
+
+
+

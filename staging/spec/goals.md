@@ -9,6 +9,7 @@ Ziele für die Entwicklung von UCRI2 und die Unterschiede zu UCRI 1.x sind:
 - Einfache, schnell zu implementierende API, schnelles PoC möglich
   - standardisierte maschinenlesbare Spezifikation
   - sichere Zustellung und Verarbeitung von Meldungen
+- einfach zu in verschiedenen Programmierumgebungen zu konsumieren
 - Trennung technischer und fachlicher Aspekte
   - Einfache Erweiterbarkeit
   - Technische Komponenten müssen bei fachlichen Erweiterungen nicht angepasst werden
