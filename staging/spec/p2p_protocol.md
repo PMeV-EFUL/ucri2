@@ -1,10 +1,10 @@
 
 # Kommunikationsprotokoll
 
-Aus der Sicht einer Leitstelle (KT-System) ist UCRI2 eine Client/Server Kommunikation. Ein KT-System (Client) baut 
-eine Verbindung zum UCRM (Server) und konsumiert die sogenannte **UCRI2 Client-API**. Die UCRI Client-API ist somit 
-die einzige Schnitstelle, gegen die eine Leitstellensoftware integriert werden muss, um mit anderen Leitstellen über 
-UCRI2 kommunizieren zu können.
+Aus der Sicht einer Leitstelle (KT-System) ist UCRI2 eine Client/Server Kommunikation gegen UCRI2-Systemkomponente 
+Leitstellenmodul (UCRM). Ein KT-System (Client) baut eine Verbindung zum UCRM (Server) und konsumiert 
+die sogenannte **UCRI2 Client-API**. Die UCRI2 Client-API ist somit die einzige Schnitstelle, gegen die eine 
+Leitstellensoftware integriert werden muss, um mit anderen Leitstellen über UCRI2 kommunizieren zu können.
 
 Je nach Organisation der Verbindung und des Datenflusses zwischen den einzelnen UCRM auf der Vermittlungsebene werden 
 zwei Kommunikationstopologien unterschieden:
@@ -27,7 +27,7 @@ die beteiligten Systemkomponenten:
   Im Falle einer Broker-Architekur muss CRM entsprechendes Broker-Kommunikationsprotokoll implementieren 
   (nicht in Scope dieser Spezifikation).
 
-Im folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols unter Berücksichtigung der P2P-Topologie betrachtet.
+Im Folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols im Hinblick auf P2P-Topologie betrachtet.
 Hersteller von UCRM-Modulen für Broker-basierte Architekturen müssen die Inter-UCRM-Kommunikation unter Berücksichtigung 
 von spezifischem Broker-Protokoll entsprechend anders umsetzen.
 
@@ -35,7 +35,7 @@ Die REST APIs Client-API und P2P-API werden [im Kapitel API](./apis.md) detailli
 
 ## Übermittlung von Nachrichten
 
-Die ausgehenden Nachrichten übergibt das KT-System an das UCRM-Modul m.H.v. Client-API-Endpunkt /send. Die Nachrichten werden dann durch lokales UCRM mittels P2P-API-Endpunkt /send gegen Empfänger-UCRM gepuscht. Für das Handling von Nichtverfügbarkeit der Partner-UCRMs wird in dem lokalen UCRM ein Ausgangspuffer implementiert.
+Ein KT-System übergibt die ausgehenden Nachrichten an das UCRM-Modul m.H.v. Client-API-Endpunkt /send. Die Nachrichten werden dann durch lokales UCRM mittels P2P-API-Endpunkt /send gegen Empfänger-UCRM gepuscht. Für das Handling von Nichtverfügbarkeit der Partner-UCRMs wird in dem lokalen UCRM ein Ausgangspuffer implementiert.
 
 ![UCRI2 Zustellung von Nachrichten](ucri-send-receive.drawio.svg)
 
@@ -43,9 +43,9 @@ Die ausgehenden Nachrichten übergibt das KT-System an das UCRM-Modul m.H.v. Cli
 ~~- Routing durch Adressierungshierarchie~~
 ~~- Routing-Tabellen~~
 
-## Validierung von Meldungen
+## Validierung von Nachrichten
 
-Meldungen werden in UCRM m.H.v. Meldungs-Schemata validiert. Die Validierung erfolgt synchron beim Senden. KT-Register liefert Auskunft über die durch KT unterstützten Applikationsschemata.
+Nachrichten werden in UCRM m.H.v. Nachrichtenschemata validiert. Die Validierung erfolgt synchron beim Senden. KT-Register liefert Auskunft über die durch KT unterstützten Applikationsschemata.
 
 ~~### Berechtigungskonzept~~
 
@@ -92,7 +92,8 @@ Nachrichtensignaturen stellen sicher, dass eine Nachricht während der Übertrag
   
 ~~Diese Schritte werden in den folgenden Unterkapiteln genauer dargestellt.~~
 
-#### Hashing der Nachrichten
+**Hashing der Nachrichten**
+
 Vor der Anwendung des JCS erstellt das signierende System eine Kopie der Nachricht, in der nur die folgenden Felder enthalten sind:
 - "source"
 - "destinations"
@@ -101,7 +102,8 @@ Vor der Anwendung des JCS erstellt das signierende System eine Kopie der Nachric
 Somit werden alle anderen Felder nicht beim Hashing berücksichtigt. Dies ist notwendig, da andere Felder freiwillig sind oder vom UCRM gesetzt werden, falls sie nicht vom Client gesetzt wurden.
 Als Hashing-Algorithmus kommt SHA3-256 zum Einsatz ([Use of the SHA3 One-way Hash Functions in the Cryptographic Message Syntax (CMS)](https://datatracker.ietf.org/doc/html/draft-housley-lamps-cms-sha3-hash-00)).
 
-#### Signierung der Nachrichten
+**Signierung der Nachrichten**
+
 Als JWS-Header kommt ein Header mit Angabe des RSA-256-Algorithmus zum Einsatz:
 
 ```
@@ -118,7 +120,8 @@ mit dem privaten Schlüssel des Nachrichtensenders signiert. Das Ergebnis (digit
 BASE64(Header) || ‘.' || BASE64(Hash) || '.’ || BASE64(Signatur)
 ```
 
-#### Prüfung der Signaturen
+**Prüfung der Signaturen**
+
 Um die übermittelte JWS zu prüfen, MUSS das empfangende System wiederum
 - den Hashwert der empfangenen Nachricht berechnen
 - die übermittelte Signatur auf Gültigkeit prüfen
