@@ -20,13 +20,11 @@ Messaging-Systeme ermöglichen es den Komponenten, entkoppelt zu bleiben und sic
 
 Das andere wichtige Architekturmuster, das bei der Strukturierung der UCRI2-Schnittstelle Verwendung findet, ist das Adapter-Muster. Bei diesem Muster erfolgt die Kommunikation zwischen dem technischen System der KT (Anwendungsebene) und der Vermittlungsebene mittels einer Adapter-Komponente Leitstellenmodul (UCRI Control Room Module - UCRM). Der Adapter ermöglicht bidirektionale Kommunikation zwischen den Ebenen in einer standardisierten Form und ermöglicht die Komplexitätsreduzierung der angebundenen Schnittstellen.
 
-Das UCRM stellt die UCRM Client-API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme ([vgl. UCRI Gateway](#UCRI-Gateway)).
+Das UCRM stellt die UCRM Client-API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme (vgl. [UCRI Gateway](#UCRI-Gateway)).
 
 Die untereinander direkt oder über einen Broker kommunizierenden UCRM-Adapter bilden die Vermittlungsebene und kümmern sich somit um die technischen Aspekte der Kommunikation. Während sich die KTs auf die eigentliche Anwendungslogik fokussieren - also die Anwendungsebene.
 
 Zentrale Aufgabe der Vermittlungsebene ist die Zustellung von Meldungen zwischen Sender und Empfänger. Außerdem werden auf der Vermittlungsebene unterschiedliche querschnittliche Aufgaben übernommen.
-
-~~Verschiedene UCRMs kommunizieren mittels P2P-Protokoll miteinander.~~
 
 Einzelne Aufgaben der Vermittlungsebene sind:
 - Verwaltung der Kommunikationstopologie inkl. Adressierungskonzept, KT-Status-Monitoring und KT-Register
@@ -50,7 +48,7 @@ Eine UCRI2-Applikation wird durch folgende Artefakte definiert:
 Einzelne Applikationen werden separat und unabhängig von der Spezifikation der Vermittlungsebene (Transportschichtspezifikation)
 versioniert. Siehe [UCRI2 Versionierung](./versioning.md) Das erlaubt freie Weiterentwicklung jeder einzelnen App.
 
-## Sicherheitskonzept ~~Kommunikationsdomänen~~
+## Sicherheitskonzept
 
 Einzelne Sicherheitsaspekte werden im Folgenden im Hinblick auf eine P2P-Architektur betrachtet. Spezifika einer jeweiligen
 Broker-Architektur (nicht in Scope der vorliegenden Spezifikaiton) sind bei der Gestaltung der Inter-UCRM-Kommunikation 

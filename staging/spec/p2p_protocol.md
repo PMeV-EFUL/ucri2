@@ -39,23 +39,9 @@ Ein KT-System übergibt die ausgehenden Nachrichten an das UCRM-Modul m.H.v. Cli
 
 ![UCRI2 Zustellung von Nachrichten](ucri-send-receive.drawio.svg)
 
-~~Für die Zustellung von Nachrichten können unterschieldiche Routing-Algorithmen umgesetzt werden:~~
-~~- Routing durch Adressierungshierarchie~~
-~~- Routing-Tabellen~~
-
 ## Validierung von Nachrichten
 
 Nachrichten werden in UCRM m.H.v. Nachrichtenschemata validiert. Die Validierung erfolgt synchron beim Senden. KT-Register liefert Auskunft über die durch KT unterstützten Applikationsschemata.
-
-~~### Berechtigungskonzept~~
-
-~~Die UCRM API wird sowohl KT-seitig als auch für die Inter-CRM-Kommunikation verwendet.~~
-
-~~Es wird ein einfaches Berechtigungskonzept verwendet, das folgende Rollen vorsieht:~~
-~~- KT - für die Kommunikation von KT-Systemen zu UCRM~~
-~~- UCRM - für Inter-CRM-Kommunikation~~
-
-~~Die Rolle wird an die API-Implementierung mittels eines HTTP-Headers übergeben.~~
 
 ## KT-Register
 
@@ -90,7 +76,7 @@ Nachrichtensignaturen stellen sicher, dass eine Nachricht während der Übertrag
 - Für das Hashing wird die Nachricht zuerst gemäß JSON Canonicalization Scheme (JCS, [RFC 8785: JSON Canonicalization Scheme (JCS)](https://datatracker.ietf.org/doc/html/rfc8785)) in eine kanonische Form gebracht und diese kanonische Form dann mit SHA3-256 gehasht.
 - Für das Signieren und die Prüfung der Signatur wird das Verfahren nach dem IETF Standard  JSON Web Signature (JWS, [RFC 7517: JSON Web Key (JWK)](https://datatracker.ietf.org/doc/html/rfc7517)) in der Variante Compact JWS  in Kombination mit dem RSA-Verfahren RSASSA-PKCS1-v1_5 verwendet.
   
-~~Diese Schritte werden in den folgenden Unterkapiteln genauer dargestellt.~~
+Diese Schritte werden im Folgenden genauer dargestellt.
 
 **Hashing der Nachrichten**
 
