@@ -253,7 +253,8 @@
             "status": "rejected",
             "alternativeProposal": "Transport am nächsten Tag um 9:00 Uhr möglich"
         }
-    ]
+    ],
+    "$defs": {}
 }
 ```
 
