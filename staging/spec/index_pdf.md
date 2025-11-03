@@ -59,25 +59,25 @@ counter-increment: h4;
 content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "
 }
 
-ul {
+#toc ul {
 counter-reset: section;
 list-style-type: none;
 }
 
-ul li {
+#toc ul li {
 position: relative;
 }
 
-ul li::before {
+#toc ul li::before {
 counter-increment: section;
 content: counters(section, ".") ". ";
 }
 
-ul ul li::before {
+#toc ul ul li::before {
 content: counters(section, ".") ". ";
 }
 
-ul ul {
+#toc ul ul {
 counter-reset: section;
 }
 </style>
@@ -93,8 +93,10 @@ counter-reset: section;
 </b>
 </div>
 
+<div id="toc">
 <!-- toc -->
 <!-- tocstop -->
+</div>
 
 <div class="page-break"></div>
 

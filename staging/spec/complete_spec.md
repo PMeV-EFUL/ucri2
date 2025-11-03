@@ -59,25 +59,25 @@ counter-increment: h4;
 content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "
 }
 
-ul {
+#toc ul {
 counter-reset: section;
 list-style-type: none;
 }
 
-ul li {
+#toc ul li {
 position: relative;
 }
 
-ul li::before {
+#toc ul li::before {
 counter-increment: section;
 content: counters(section, ".") ". ";
 }
 
-ul ul li::before {
+#toc ul ul li::before {
 content: counters(section, ".") ". ";
 }
 
-ul ul {
+#toc ul ul {
 counter-reset: section;
 }
 </style>
@@ -92,6 +92,8 @@ counter-reset: section;
 <b> Inhaltsverzeichnis
 </b>
 </div>
+
+<div id="toc">
 
 <!-- toc -->
 
@@ -132,6 +134,8 @@ counter-reset: section;
 - [Applikationen](#applikationen)
 
 <!-- tocstop -->
+
+</div>
 
 <div class="page-break"></div>
 
@@ -497,8 +501,12 @@ Falls das UCRM eine unbekannte destination meldet, sollte der client über den /
 Um die verlässliche Zustellung sicherzustellen, kann ein Client sowohl einen timeout-Wert für die Zustellung der Nachricht (**timeout**-Feld) setzen als auch eine explizite Empfangsbestätigung (**ack**-Feld) anfragen. In diesen Fällen überträgt das UCRM dem Client entweder eine negative Quittierung (falls ein Timeout aufgetreten ist oder bei der Weiterleitung der Nachricht innerhalb der Transportschicht ein Fehler aufgetreten ist) oder eine positive Quittierung (falls dies durch das **ack**-Feld angefragt wurde und der Empfänger den Empfang der Nachricht per Messaging-Commit-Endpunkt bestätigt hat). Hierzu kommt die **message_delivery_status**-Nachricht aus der **transport-layer-messages**-App zum Einsatz.
 Bezüglich dieser Statusbenachrichtigungen gelten folgende Festlegungen:
 1. **message_delivery_status**-Nachrichten dürfen NUR durch UCRMs versendet werden, nicht durch clients. Dies muss durch das UCRM sichergestellt werden.
-2. Ein UCRM sollte für eine versendete Nachricht MAXIMAL eine  **message_delivery_status**-Nachricht an den KT zurückmelden.
+2. Ein UCRM sollte für eine versendete Nachricht MAXIMAL eine  **message_delivery_status**-Nachricht an den KT zurückmelden. Da  aber die Übermittlung der positiven Zustellungsquittierung an das sendende UCRM sich mit der Generierung des Timeouts überschneiden kann, ist es dennoch möglich, dass ein KT mehrere **message_delivery_status**-Nachrichten erhält. 
 3. Die Zuständigkeit für den Versand einer negativen Timeout-Quittierungs-Nachricht liegt IMMER bei dem UCRM, an welches der Sender angebunden ist. So wird sichergestellt, dass Timeout-Nachrichten auch dann generiert werden, wenn Übermittlungs-Probleme innerhalb der Transportschicht auftreten.
+
+**Wiederholter Nachrichtenversand**
+
+Falls ein KT eine Nachricht erneut versenden will (z.B. weil für den ersten Sendungsversuch ein Timeout gemeldet wurde), MUSS für die erneut versendete Nachricht die gleiche **messageId** verwendet werden. So wird sichergestellt, dass die duplizierte Nachricht anhand der **messageId** durch den empfangenden KT ausgefiltert werden kann.
 
 ### /messaging/receive - HTTP POST
 Über den Messaging-Receive-Endpunkt können Nachrichten, die an den KT (bzw. eine Liste von OIDs im Feld **destinations**) adressiert sind, abgerufen werden. Diese Operation ist idempotent, kann also mehrmals mit dem gleichen Ergebnis wiederholt werden.
