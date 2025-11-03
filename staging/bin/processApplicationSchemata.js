@@ -214,6 +214,14 @@ function removeSkipsFromMarkdown(markdown){
   return markdown.replaceAll(/(<!-- skip-start -->)([^<]*)(<!-- skip-end -->)/gms, "");
 }
 
+function rewriteLinksInMarkdown(markdown){
+  const wrongLinkMatches = markdown.match(/(\[[^\]]*\])(\([^\)]*\.md)\)/g);
+  if (wrongLinkMatches!==null && wrongLinkMatches.length > 0){
+    throw new Error(`A total of ${wrongLinkMatches.length} errorneous links to other markdown files were found (all links MUST contain a #ANCHOR to point to an anchored element like a #heading!):\n${wrongLinkMatches.join("\r\n")}`);
+  }
+  return markdown.replaceAll(/(\[[^\]]*\])(\([^\)]*\.md)(#[^\)]*\))/g, "$1($3");
+}
+
 async function generateSpecDocs(){
   let completeMarkdown=fs.readFileSync(`${specDocsPath}/index_pdf.md`, 'utf8');
   //include per-message docs as indicated by comments
@@ -232,6 +240,9 @@ async function generateSpecDocs(){
   //remove all markdown enclosed in skip-start and skip-end
   completeMarkdown=removeSkipsFromMarkdown(completeMarkdown);
 
+  //rewrite links to be relative to the currect document
+  completeMarkdown=rewriteLinksInMarkdown(completeMarkdown);
+
   // //remove backlinks
   // completeMarkdown=completeMarkdown.replaceAll("[Zu der Hauptseite](index.md)","");
   //insert table of contents (needs <!-- toc --><!-- tocstop --> in manual_documentation.md)
@@ -242,7 +253,7 @@ async function generateSpecDocs(){
   console.log("transforming merged docs to pdf...");
   //transform to PDF
   const outputFileNamePdf=`${specDocsOutputPath}/complete_spec.pdf`
-  await mdToPdf({ path: outputFileName }, { dest: outputFileNamePdf });
+  await mdToPdf({ path: outputFileName }, { dest: outputFileNamePdf ,as_html:false});
   //END step 6
 }
 

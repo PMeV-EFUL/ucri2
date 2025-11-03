@@ -31,7 +31,7 @@ Im Folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols im Hinbli
 Hersteller von UCRM-Modulen für Broker-basierte Architekturen müssen die Inter-UCRM-Kommunikation unter Berücksichtigung 
 von spezifischem Broker-Protokoll entsprechend anders umsetzen.
 
-Die REST APIs Client-API und P2P-API werden [im Kapitel API](./apis.md) detailliert beschrieben.
+Die REST APIs Client-API und P2P-API werden [im Kapitel API](./apis.md#api) detailliert beschrieben.
 
 ## Übermittlung von Nachrichten
 
