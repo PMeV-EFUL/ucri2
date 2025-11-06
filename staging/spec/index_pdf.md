@@ -152,6 +152,7 @@ In diesem Kapitel werden Gliederung der APIs in Funktionsbereiche, sowie Semanti
 Die Beschreibung der UCRI2-Applikationen wird in Form von JSON-Schemata samt begleitender Dokumentation separat geliefert.
 
 <!-- include architecture.md -->
+<!-- include addressing_concept.md -->
 <!-- include versioning.md -->
 
 <!-- include p2p_protocol.md -->
