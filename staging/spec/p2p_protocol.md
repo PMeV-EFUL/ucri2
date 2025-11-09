@@ -1,22 +1,17 @@
 
 # Kommunikationsprotokoll
 
+Im Folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols im Hinblick auf die Standard-UCRI2-Kommunikationsarchitektur betrachtet.
+Hersteller von spezialisierten UCRM-Modulen (siehe Kapitel [Systemintegration](./system_integration.md)) müssen entsprechende spezifische Kommunikationsprotokolle umsetzen.
+
 Aus der Sicht einer Leitstelle (KT-System) ist UCRI2 eine Client/Server Kommunikation gegen die UCRI2-Systemkomponente 
 Leitstellenmodul (UCRM). Ein KT-System (Client) baut eine Verbindung zum UCRM (Server) auf und konsumiert 
-die sogenannte **UCRI2 Client-API**. Die UCRI2 Client-API ist somit die einzige Schnitstelle, gegen die eine 
+die sogenannte **UCRI2-Client-API**. Die UCRI2-Client-API ist somit die einzige Schnitstelle, gegen die eine 
 Leitstellensoftware integriert werden muss, um mit anderen Leitstellen über UCRI2 kommunizieren zu können.
 
-Je nach Organisation der Verbindung und des Datenflusses zwischen den einzelnen UCRM auf der Vermittlungsebene werden 
-zwei Kommunikationstopologien unterschieden:
-- **Peer-to-Peer Topologie**: Dabei kommunizieren alle UCRM direkt miteinander. Jedes UCRM muss eine direkte 
-  Netzwerkverbindung zu jedem einzelnen Partner-UCRM aufbauen. Gleichzeitig bietet jedes UCRM eine Schnittstelle an - 
-  die sogenannte **UCRI2 P2P-API**, die von anderen Partner-UCRM konsumiert wird.
-- **Broker-Architektur**: Alle UCRM sind über eine individuelle Verbindung an eine zentrale Systemkomponente (Broker) 
-  angeschlossen. Um untereinander Daten auszutauschen, brauchen einzelne UCRM keine direkten Netzwerkverbindungen 
-  untereinander, die Kommunikation läuft immer über den Broker. Die Kommunikationsschnittstelle zwischen UCRM und 
-  dem Broker ist spezifisch für die jeweilige Broker-Technologie und wird deswegen in dieser Spezifikation nicht betrachtet.
-
-Die Kommunikationstopologien können auch kombiniert werden.
+Auf der Vermittlungsebene kommunizieren alle UCRM direkt miteinander. Jedes UCRM muss eine direkte 
+Netzwerkverbindung zu jedem einzelnen Partner-UCRM aufbauen. Gleichzeitig bietet jedes UCRM eine Schnittstelle an - 
+die sogenannte **UCRI2-P2P-API**, die von anderen Partner-UCRM konsumiert wird.
 
 Je nach Rolle in der Gesamtkommunikation ergibt sich damit folgende Relevanz der vorliegenden Spezifikation für 
 die beteiligten Systemkomponenten:
@@ -24,12 +19,6 @@ die beteiligten Systemkomponenten:
   Consumer-Perspektive umsetzen.
 - Ein UCRM muss die UCRI2 Client-API aus der Provider-Perspektive umsetzen. Außerdem muss ein UCRM, das an einem 
   Kommunikationssystem mit P2P-Topologie beteiligt ist, die UCRI2 P2P-API umsetzen (Provider- und Consumer-Perspektiven).
-  Im Falle einer Broker-Architekur muss das UCRM ein entsprechendes Broker-Kommunikationsprotokoll implementieren 
-  (nicht Teil dieser Spezifikation).
-
-Im Folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols im Hinblick auf die P2P-Topologie betrachtet.
-Hersteller von UCRM-Modulen für Broker-basierte Architekturen müssen die Inter-UCRM-Kommunikation unter Berücksichtigung 
-von spezifischem Broker-Protokoll entsprechend umsetzen.
 
 Die REST APIs Client-API und P2P-API werden [im Kapitel API](./apis.md#api) detailliert beschrieben.
 

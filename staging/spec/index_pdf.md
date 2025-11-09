@@ -153,7 +153,7 @@ Die Beschreibung der UCRI2-Applikationen wird in Form von JSON-Schemata samt beg
 
 **Systemintegration**
 
-Ein wichtiges Ziel der UCRI2-Spezifikaiton, Interoperabilität in komplexen IT-Landschaften sicherzustellen. In diesem Kapitel wird anhand von verschiedenen Integrationsszenarien erläutert, wie konkrete Projektanforderungen mit Hilfe von spezialisierten UCRI2-Softwarekomponenten umgesetzt werden können.
+Ein wichtiges Ziel der UCRI2-Spezifikaiton ist es, Interoperabilität in komplexen IT-Landschaften sicherzustellen. In diesem Kapitel wird anhand von verschiedenen Integrationsszenarien erläutert, wie konkrete Projektanforderungen mit Hilfe von spezialisierten UCRI2-Softwarekomponenten umgesetzt werden können.
 
 <!-- include architecture.md -->
 <!-- include addressing_concept.md -->

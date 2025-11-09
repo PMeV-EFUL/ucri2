@@ -3,6 +3,7 @@
 <!-- skip-end -->
 
 # Systemarchitektur
+
 Im Gegensatz zu UCRI Version 1, welche 1:1-Kommunikation zwischen Leitstellen spezifiziert, ist UCRI 2 grundlegend für die n:m-Kommunikation verschiedener Teilnehmer entwickelt worden.
 
 ## Architekturstil Messaging
@@ -23,8 +24,7 @@ Es verringert die Anzahl der Abhängigkeiten zwischen den Komponenten, wodurch d
 Das andere wichtige Architekturmuster, das bei der Strukturierung der UCRI2-Schnittstelle Verwendung findet, ist das Adapter-Muster. Bei diesem Muster erfolgt die Kommunikation zwischen dem technischen System der KT (Anwendungsebene) und der Vermittlungsebene
 mittels einer Adapter-Komponente (UCRI Control Room Module - UCRM). Der Adapter ermöglicht bidirektionale Kommunikation zwischen den Ebenen in einer standardisierten Form und ermöglicht die Komplexitätsreduzierung der angebundenen Schnittstellen.
 
-!!!TODO Referenz kaputt #UCRI2-Gateway Anchor existiert nicht (mehr)!!!
-Das UCRM stellt die UCRM Client-API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme (vgl. [UCRI Gateway](#UCRI-Gateway)).
+Das UCRM stellt die UCRI2-Client-API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme.
 
 Die untereinander direkt oder über einen Broker kommunizierenden UCRM-Adapter bilden die Vermittlungsebene und kümmern sich somit um die technischen Aspekte der Kommunikation, während sich die KTs auf die eigentliche Anwendungslogik fokussieren - also die Anwendungsebene.
 
@@ -33,13 +33,13 @@ Zentrale Aufgabe der Vermittlungsebene ist die Zustellung von Meldungen zwischen
 Einzelne Aufgaben der Vermittlungsebene sind:
 - Verwaltung der Kommunikationstopologie inklusive Adressierungskonzept, KT-Status-Monitoring und KT-Register
 - Authentisierung, Autorisierung, Accounting
-!!!TODO was ist mit "Routing-Funktion" gemeint?!!!
-- Übermittlung von Nachrichten unter der Verwendung des UCRI-Adressierungskonzepts inkl. Routing-Funktion
+- Übermittlung von Nachrichten unter der Verwendung des UCRI-Adressierungskonzepts
 - Validierung von Anwendungsmeldungen
 
 Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert die Integrität der Daten.
 
 ## Anwendungsebene
+
 Die UCRI2-Anwendungsebene ist grundsätzlich getrennt von der Vermittlungsebene.
 Die Anwendungsebene ist dabei in mehrere unabhängige Applikationen, sogenannte UCRI2-Apps, aufgeteilt. 
 
@@ -53,14 +53,12 @@ versioniert (siehe [UCRI2 Versionierung](./versioning.md#versionierung)). Dies e
 
 ## Sicherheitskonzept
 
-Einzelne Sicherheitsaspekte werden im Folgenden im Hinblick auf eine P2P-Architektur betrachtet. Spezifika einer jeweiligen
-Broker-Architektur (nicht in Scope der vorliegenden Spezifikaiton) sind bei der Gestaltung der Inter-UCRM-Kommunikation
-zu berücksichtigen.
+Einzelne Sicherheitsaspekte werden im Folgenden im Hinblick auf die Standard-UCRI2-Kommunikationsarchitektur betrachtet. Spezifische Systemlösungen (siehe Kapitel [Systemintegration](./system_integration.md)) sollen entsprechende projektspezifische Sicherheitsanforderungen berücksichtigen.
 
 UCRI2 unterscheidet zwei Kommunikationsdomänen, siehe Abbildung:
 
 - Kommunikation zwischen einem Leitstellensystem (KT-System) und einem UCRI Leitstellenmodul (UCRM). Diese Kommunikation findet anhand der UCRI2 Client-API statt und erfolgt typischerweise innerhalb einer durch einen Leitstellenbetreiber kontrollierten Infrastruktur.
-- Kommunikation zwischen zwei UCRM. Die Inter-UCRM-Kommunikation in einer P2P-Architektur verwendet die UCRI2 P2P-API. Bei einer Broker-Architektur (nicht abgebildet) findet Inter-UCRM-Kommunikation über das brokerspezifische Protokoll statt. Die Inter-UCRM-Kommunikation kann über das öffentliche Internet stattfinden und setzt in diesem Falle besondere Sicherheitsmaßnahmen voraus.
+- Kommunikation zwischen zwei UCRM. Die Inter-UCRM-Kommunikation in einer P2P-Architektur verwendet die UCRI2 P2P-API. Die Inter-UCRM-Kommunikation kann über das öffentliche Internet stattfinden und setzt in diesem Falle besondere Sicherheitsmaßnahmen voraus.
 
 ![UCRI2 Kommunikationsdomäne](ucrm-protocol.drawio.svg)
 
@@ -74,7 +72,6 @@ Beide API-Implementierungen verwenden in beiden Kommunikationsdomänen OAuth 2.0
 Bei einer P2P-Architektur wird mTLS als Sicherung der Inter-UCRM-Kommunikation zwischen zwei UCRM verwendet. Sowohl Client als auch Server bauen eine gegenseitige Vertrauensbeziehung über digitale Zertifikate auf.
 Dabei kann der Paketfilter auf der Seite des nicht vertrauenswürdigen Netzes die mTLS-Verbindung terminieren.
 Im Paketfilter kann eine Liste von zugelassenen Domainnamen implementiert (White Listing) und somit die Kommunikation auf eine geschlossene Gruppe der Teilnehmer beschränkt werden.
-Auch im Falle einer Broker-Architekur (nicht abgebildet) sollten entsprechende Mechanismen zur Herrstellung der gegenseitigen Vertrauensbeziehung implementiert werden.
 
 Die Kommunikation zwischen einem KT-System und dem UCRM kann je nach lokalen Sicherheitsanforderungen wahlweise per TLS oder mTLS erfolgen.
 

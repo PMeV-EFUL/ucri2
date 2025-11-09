@@ -56,9 +56,3 @@ Die OID-Adresse der einzelnen Kommunikationsteilnehmer (KT) wird nach dem [amtli
 | 10 | Kommunikationsteilnehmer | 1 - z.B. ELS, fortlaufende Nummerierung von KT                                                                                   |
 
 Beispiel OID Feuerwehr ELS in Ratingen: <Root-OID>.1.276.5.1.1.58.28.1.1
-
-### !!!TODO verschieben/wird neu geschrieben!? !!! UCRI Gateway
-
-Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wird am Übergang zu Gruppen von KT eingesetzt, die auf der Vermittlungsebene nicht direkt erreichbar sind und über eine proprietäres Leitstellenprotokoll angebunden werden können (Leitstellenverbunde). Das Gateway stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und UCRI-internen KT-Adressen.
-
-![UCRI Komponenten](ucri-components.drawio.svg)
