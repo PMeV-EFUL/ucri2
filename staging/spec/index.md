@@ -13,7 +13,7 @@ Die Ziele für die Entwicklung von UCRI2 sind:
   - Einfache Erweiterbarkeit
   - Technische Komponenten müssen bei fachlichen Erweiterungen nicht angepasst werden
   - Fachliche Erweiterungen können ohne Anpassungen der Infrastruktur erfolgen
-- Messaging/Routing basierte Architektur
+- Messaging-basierte Architektur
   - Einfaches Zusammenspiel mehrerer Hersteller
   - Unterstützung zentraler als dezentraler Anbindungen
 - Durchgängige Standardisierung
