@@ -16,10 +16,6 @@ Die Adressierung von einzelnen KT kann hierarchisch organisiert werden und spieg
 
 ![OID-Hierarchie](ucri-oid-hierarchy.drawio.svg)
 
-!!!TODO wir haben in 2.0.0 keine solche Routing-Funktion, oder? !!!
-Diese Struktur ermöglicht der Implementierung einer einfachen und einheitlichen Routing-Funktion, die in jeder Systemkomponente (Leitstellenmodul - UCRM, evtl. Messagebroker, UCRI-Gateway) die Weiterleitung von übermittelten Nachrichten unterstützt.
-
-!!!TODO eventuell verschieben, Gateway und Bridge werden ja noch von Alexander beschrieben?! !!!
 Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu externen Systemen eingesetzt und stellt eine Funktion zum Mapping zwischen externe Quell- bzw. Zieladressen und internen OID bereit. Ein externes System bekommt dabei einen entsprechend reservierten OID-Bereich (Unterbaum) und das Gateway bekommt die Wurzel-OID-Adresse dieses Unterbaums.
 
 ### Beispielhafte OID-Nomenklatur
