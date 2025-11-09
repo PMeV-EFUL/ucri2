@@ -38,6 +38,12 @@ Der UCRI2-Hub dient als eine zentrale Komponente, die als Vermittler zwischen me
 
 Im Folgenden werden unterschiedliche Integrationsszenarien unter Verwendung von spezialisierten UCRM-Modulen vorgestellt.
 
+**Ein UCRI2-Hub als Vermittler**
+
+Im einfachsten Fall werden Leitstellen über einen zentralen UCRI2-Hub verbunden. Die ELS-Software wird über UCRI2 Client-API an dieses Modul angebunden. Somit können entkoppelte ELS miteinander kommunizieren. Der UCRI2-Hub unterstützt keine Protokolle der Vermittlungsebene und kann somit nicht mit anderen UCRMs verbunden werden. 
+
+![Ein UCRI2-Hub als Vermittler](ucri-hub.drawio.svg)
+
 **Der Standard-UCRI2-Verbund**
 
 In einem Standard-UCRI2-Verbund werden Leitstellen über klassische UCRI2-UCRM-Module verbunden. Typischerweise wird in der Infrastruktur einer Leitstelle ein UCRI2-UCRM-Modul etabliert. Die ELS-Software wird über UCRI2 Client-API an dieses Modul angebunden. Die UCRI2-UCRM-Module unterschiedlicher Kommunikationsteilnehmer werden über UCRI2 P2P-API miteinander verbunden. 
@@ -50,10 +56,22 @@ In diesem Szenario wird ein bestehendes Leitstellenkommunikationssystem in ein U
 
 ![Anbindung an Verbund mit PVI](ucri-pvi-integration.drawio.svg)
 
-**Verbund mit Anbindung an KV-Verbund (ohne KV-Adapter)**
+**Verbund mit Anbindung an KV-Verbund ohne KV-Adapter**
 
 Ein wichtiger Anwendungsfall für die UCRI2-Spezifikaiton ist Kommunikation zwischen 110/112- und KV-Leitstellen.
 
 Die Ausgangssituation für dieses Integrationsszenario ist ein bestehendes Standard-UCRI2-Verbund und eine Anforderung eine bestimmte Leitstelle aus dem Verbund mit einer KV-Leitstelle zu verbinden. Dabei soll aktuelle Entwicklung berücksichtigt werden, wonach die KVs über eine normierte Vermittlungsarchitektur auf Basis einer [Matrix-Infrastruktur](https://matrix.org/) kommunizieren müssen.
 
-![Anbindung an Verbund mit PVI](ucri-matrix-integration-wo-adapter.drawio.svg)
+Für die Integration zwischen Leitstellen wird auf beiden Seiten ein Matrix-Connector - ein UCRI2-Connector zur Anbindung an eine Matrix-Infrastruktur eingesetzt. Sowohl ELS als auch KV-Software verwenden dabei die UCRI2 Client-API des eigenen Matrix-Connectors. Die Nachrichtenübermittlung erfolgt dabei über Matrix-Protokoll. Der Matrix-Connector unterstützt das Mapping zwischen UCRI2- und Matrix-Adressierungsschemata.
+
+Ein Problem dieses Integrationsschemas ist, dass jede Leitstelle, die mit KVs integriert werden soll, braucht außer UCRM-Modul zusätzlich einen eigenen Matrix-Connector. Die Lösung dieses Problems besteht in der Anbindung des gesamten UCRI2-Verbundes an die Matrix-Infrastruktur, siehe nächstes Integrationsszenario.
+
+![Verbund mit Anbindung an KV-Verbund ohne KV-Adapter](ucri-matrix-integration-wo-adapter.drawio.svg)
+
+**Verbund mit Anbindung an KV-Verbund mit KV-Adapter**
+
+In diesem Szenarion wird der Gesamt-UCRI2-Verbund an die Matrix-Infrastruktur mit Hilfe eines Matrix-Adapters angebunden. Somit können alle an dem Verbund beteiligten ELS mit KVs kommunizieren ohne einen eigenen Matrix-Connector einsetzen zu müssen.
+
+Der Matrix-Adapter unterstützt das UCRI2 P2P-Protokoll und wird als Teil eines bestehenden UCRI2 P2P-Netzes etabliert. Auf der anderen Seite unterstützt der Matrix-Adapter das Matrix-Protokoll und kann somit mit UCRI2 Matrix-Connectors anderer Teilnehmer einer Matrix-Infrastruktur kommunizieren. Auf dieser Weise werden UCRI2-Domäne, die auf unterschiedlichen Vermittlungstechnologien basieren, zu einem übergeordneten UCRI2-Kommunikationsverbund organisiert, in dem alle Teilnehmer untereinander transparent mit Hilfe von standardisierten UCRI2-Anwendungen kommunizieren können.
+
+![Verbund mit Anbindung an KV-Verbund mit KV-Adapter](ucri-matrix-integration-with-adapter.drawio.svg)

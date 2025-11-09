@@ -151,6 +151,10 @@ In diesem Kapitel werden die Gliederung der APIs in Funktionsbereiche sowie die 
 
 Die Beschreibung der UCRI2-Applikationen wird in Form von JSON-Schemata samt begleitender Dokumentation separat zur Verfügung gestellt.
 
+**Systemintegration**
+
+Ein wichtiges Ziel der UCRI2-Spezifikaiton, Interoperabilität in komplexen IT-Landschaften sicherzustellen. In diesem Kapitel wird anhand von verschiedenen Integrationsszenarien erläutert, wie konkrete Projektanforderungen mit Hilfe von spezialisierten UCRI2-Softwarekomponenten umgesetzt werden können.
+
 <!-- include architecture.md -->
 <!-- include addressing_concept.md -->
 <!-- include versioning.md -->
@@ -163,3 +167,5 @@ Die Beschreibung der UCRI2-Applikationen wird in Form von JSON-Schemata samt beg
 <!-- include error_handling.md -->
 
 <!-- include applications.md -->
+
+<!-- include system_integration.md -->
