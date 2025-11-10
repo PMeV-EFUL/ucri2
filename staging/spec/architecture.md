@@ -53,7 +53,7 @@ versioniert (siehe [UCRI2 Versionierung](./versioning.md#versionierung)). Dies e
 
 ## Sicherheitskonzept
 
-Einzelne Sicherheitsaspekte werden im Folgenden im Hinblick auf die Standard-UCRI2-Kommunikationsarchitektur betrachtet. Spezifische Systemlösungen (siehe Kapitel [Systemintegration](./system_integration.md)) sollen entsprechende projektspezifische Sicherheitsanforderungen berücksichtigen.
+Einzelne Sicherheitsaspekte werden im Folgenden im Hinblick auf die Standard-UCRI2-Kommunikationsarchitektur betrachtet. Spezifische Systemlösungen (siehe Kapitel [Systemintegration](./system_integration.md#systemintegration)) sollen entsprechende projektspezifische Sicherheitsanforderungen berücksichtigen.
 
 UCRI2 unterscheidet zwei Kommunikationsdomänen, siehe Abbildung:
 

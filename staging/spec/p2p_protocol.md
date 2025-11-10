@@ -2,7 +2,7 @@
 # Kommunikationsprotokoll
 
 Im Folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols im Hinblick auf die Standard-UCRI2-Kommunikationsarchitektur betrachtet.
-Hersteller von spezialisierten UCRM-Modulen (siehe Kapitel [Systemintegration](./system_integration.md)) müssen entsprechende spezifische Kommunikationsprotokolle umsetzen.
+Hersteller von spezialisierten UCRM-Modulen (siehe Kapitel [Systemintegration](./system_integration.md#systemintegration)) müssen entsprechende spezifische Kommunikationsprotokolle umsetzen.
 
 Aus der Sicht einer Leitstelle (KT-System) ist UCRI2 eine Client/Server Kommunikation gegen die UCRI2-Systemkomponente 
 Leitstellenmodul (UCRM). Ein KT-System (Client) baut eine Verbindung zum UCRM (Server) auf und konsumiert 

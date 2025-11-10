@@ -106,7 +106,6 @@ counter-reset: section;
   * [Adressierungskonzept](#adressierungskonzept)
     + [Beispielhafte OID-Hierarchie](#beispielhafte-oid-hierarchie)
     + [Beispielhafte OID-Nomenklatur](#beispielhafte-oid-nomenklatur)
-    + [!!!TODO verschieben/wird neu geschrieben!? !!! UCRI Gateway](#todo-verschiebenwird-neu-geschrieben--ucri-gateway)
   * [Versionierung](#versionierung)
     + [Transportschicht-Versionierung](#transportschicht-versionierung)
     + [App-Versionierung](#app-versionierung)
@@ -136,6 +135,9 @@ counter-reset: section;
     + [Fehlercodes für Antworten mit HTTP-Statuscode 401](#fehlercodes-fur-antworten-mit-http-statuscode-401)
     + [Fehlercodes für Antworten mit HTTP-Statuscode 500](#fehlercodes-fur-antworten-mit-http-statuscode-500)
 - [Applikationen](#applikationen)
+- [Systemintegration](#systemintegration)
+  * [Integrationsmuster](#integrationsmuster)
+  * [Integrationsszenarien](#integrationsszenarien)
 
 <!-- tocstop -->
 
@@ -158,7 +160,7 @@ Die Ziele für die Entwicklung von UCRI2 sind:
   - Einfache Erweiterbarkeit
   - Technische Komponenten müssen bei fachlichen Erweiterungen nicht angepasst werden
   - Fachliche Erweiterungen können ohne Anpassungen der Infrastruktur erfolgen
-- Messaging/Routing basierte Architektur
+- Messaging-basierte Architektur
   - Einfaches Zusammenspiel mehrerer Hersteller
   - Unterstützung zentraler als dezentraler Anbindungen
 - Durchgängige Standardisierung
@@ -194,9 +196,14 @@ In diesem Kapitel werden die Gliederung der APIs in Funktionsbereiche sowie die 
 
 Die Beschreibung der UCRI2-Applikationen wird in Form von JSON-Schemata samt begleitender Dokumentation separat zur Verfügung gestellt.
 
+**Systemintegration**
+
+Ein wichtiges Ziel der UCRI2-Spezifikaiton ist es, Interoperabilität in komplexen IT-Landschaften sicherzustellen. In diesem Kapitel wird anhand von verschiedenen Integrationsszenarien erläutert, wie konkrete Projektanforderungen mit Hilfe von spezialisierten UCRI2-Softwarekomponenten umgesetzt werden können.
+
 
 
 # Systemarchitektur
+
 Im Gegensatz zu UCRI Version 1, welche 1:1-Kommunikation zwischen Leitstellen spezifiziert, ist UCRI 2 grundlegend für die n:m-Kommunikation verschiedener Teilnehmer entwickelt worden.
 
 ## Architekturstil Messaging
@@ -217,8 +224,7 @@ Es verringert die Anzahl der Abhängigkeiten zwischen den Komponenten, wodurch d
 Das andere wichtige Architekturmuster, das bei der Strukturierung der UCRI2-Schnittstelle Verwendung findet, ist das Adapter-Muster. Bei diesem Muster erfolgt die Kommunikation zwischen dem technischen System der KT (Anwendungsebene) und der Vermittlungsebene
 mittels einer Adapter-Komponente (UCRI Control Room Module - UCRM). Der Adapter ermöglicht bidirektionale Kommunikation zwischen den Ebenen in einer standardisierten Form und ermöglicht die Komplexitätsreduzierung der angebundenen Schnittstellen.
 
-!!!TODO Referenz kaputt #UCRI2-Gateway Anchor existiert nicht (mehr)!!!
-Das UCRM stellt die UCRM Client-API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme (vgl. [UCRI Gateway](#UCRI-Gateway)).
+Das UCRM stellt die UCRI2-Client-API bereit - die einzige Kommunikationsschnittstelle für direkt verbundene Kommunikationsteilnehmer wie Leitstellensysteme oder andere technische Knoten, sowie weitere externe Systeme.
 
 Die untereinander direkt oder über einen Broker kommunizierenden UCRM-Adapter bilden die Vermittlungsebene und kümmern sich somit um die technischen Aspekte der Kommunikation, während sich die KTs auf die eigentliche Anwendungslogik fokussieren - also die Anwendungsebene.
 
@@ -227,13 +233,13 @@ Zentrale Aufgabe der Vermittlungsebene ist die Zustellung von Meldungen zwischen
 Einzelne Aufgaben der Vermittlungsebene sind:
 - Verwaltung der Kommunikationstopologie inklusive Adressierungskonzept, KT-Status-Monitoring und KT-Register
 - Authentisierung, Autorisierung, Accounting
-!!!TODO was ist mit "Routing-Funktion" gemeint?!!!
-- Übermittlung von Nachrichten unter der Verwendung des UCRI-Adressierungskonzepts inkl. Routing-Funktion
+- Übermittlung von Nachrichten unter der Verwendung des UCRI-Adressierungskonzepts
 - Validierung von Anwendungsmeldungen
 
 Die Vermittlungsebene ist frei von Fachlichkeit. Sie realisiert nur den Datentransport und sichert die Integrität der Daten.
 
 ## Anwendungsebene
+
 Die UCRI2-Anwendungsebene ist grundsätzlich getrennt von der Vermittlungsebene.
 Die Anwendungsebene ist dabei in mehrere unabhängige Applikationen, sogenannte UCRI2-Apps, aufgeteilt. 
 
@@ -247,14 +253,12 @@ versioniert (siehe [UCRI2 Versionierung](#versionierung)). Dies erlaubt die frei
 
 ## Sicherheitskonzept
 
-Einzelne Sicherheitsaspekte werden im Folgenden im Hinblick auf eine P2P-Architektur betrachtet. Spezifika einer jeweiligen
-Broker-Architektur (nicht in Scope der vorliegenden Spezifikaiton) sind bei der Gestaltung der Inter-UCRM-Kommunikation
-zu berücksichtigen.
+Einzelne Sicherheitsaspekte werden im Folgenden im Hinblick auf die Standard-UCRI2-Kommunikationsarchitektur betrachtet. Spezifische Systemlösungen (siehe Kapitel [Systemintegration](#systemintegration)) sollen entsprechende projektspezifische Sicherheitsanforderungen berücksichtigen.
 
 UCRI2 unterscheidet zwei Kommunikationsdomänen, siehe Abbildung:
 
 - Kommunikation zwischen einem Leitstellensystem (KT-System) und einem UCRI Leitstellenmodul (UCRM). Diese Kommunikation findet anhand der UCRI2 Client-API statt und erfolgt typischerweise innerhalb einer durch einen Leitstellenbetreiber kontrollierten Infrastruktur.
-- Kommunikation zwischen zwei UCRM. Die Inter-UCRM-Kommunikation in einer P2P-Architektur verwendet die UCRI2 P2P-API. Bei einer Broker-Architektur (nicht abgebildet) findet Inter-UCRM-Kommunikation über das brokerspezifische Protokoll statt. Die Inter-UCRM-Kommunikation kann über das öffentliche Internet stattfinden und setzt in diesem Falle besondere Sicherheitsmaßnahmen voraus.
+- Kommunikation zwischen zwei UCRM. Die Inter-UCRM-Kommunikation in einer P2P-Architektur verwendet die UCRI2 P2P-API. Die Inter-UCRM-Kommunikation kann über das öffentliche Internet stattfinden und setzt in diesem Falle besondere Sicherheitsmaßnahmen voraus.
 
 ![UCRI2 Kommunikationsdomäne](ucrm-protocol.drawio.svg)
 
@@ -268,7 +272,6 @@ Beide API-Implementierungen verwenden in beiden Kommunikationsdomänen OAuth 2.0
 Bei einer P2P-Architektur wird mTLS als Sicherung der Inter-UCRM-Kommunikation zwischen zwei UCRM verwendet. Sowohl Client als auch Server bauen eine gegenseitige Vertrauensbeziehung über digitale Zertifikate auf.
 Dabei kann der Paketfilter auf der Seite des nicht vertrauenswürdigen Netzes die mTLS-Verbindung terminieren.
 Im Paketfilter kann eine Liste von zugelassenen Domainnamen implementiert (White Listing) und somit die Kommunikation auf eine geschlossene Gruppe der Teilnehmer beschränkt werden.
-Auch im Falle einer Broker-Architekur (nicht abgebildet) sollten entsprechende Mechanismen zur Herrstellung der gegenseitigen Vertrauensbeziehung implementiert werden.
 
 Die Kommunikation zwischen einem KT-System und dem UCRM kann je nach lokalen Sicherheitsanforderungen wahlweise per TLS oder mTLS erfolgen.
 
@@ -305,10 +308,6 @@ Die Adressierung von einzelnen KT kann hierarchisch organisiert werden und spieg
 
 ![OID-Hierarchie](ucri-oid-hierarchy.drawio.svg)
 
-!!!TODO wir haben in 2.0.0 keine solche Routing-Funktion, oder? !!!
-Diese Struktur ermöglicht der Implementierung einer einfachen und einheitlichen Routing-Funktion, die in jeder Systemkomponente (Leitstellenmodul - UCRM, evtl. Messagebroker, UCRI-Gateway) die Weiterleitung von übermittelten Nachrichten unterstützt.
-
-!!!TODO eventuell verschieben, Gateway und Bridge werden ja noch von Alexander beschrieben?! !!!
 Die Systemkomponente Gateway stellt einen speziellen KT dar. Das Gateway wird am Übergang zu externen Systemen eingesetzt und stellt eine Funktion zum Mapping zwischen externe Quell- bzw. Zieladressen und internen OID bereit. Ein externes System bekommt dabei einen entsprechend reservierten OID-Bereich (Unterbaum) und das Gateway bekommt die Wurzel-OID-Adresse dieses Unterbaums.
 
 ### Beispielhafte OID-Nomenklatur
@@ -345,12 +344,6 @@ Die OID-Adresse der einzelnen Kommunikationsteilnehmer (KT) wird nach dem [amtli
 | 10 | Kommunikationsteilnehmer | 1 - z.B. ELS, fortlaufende Nummerierung von KT                                                                                   |
 
 Beispiel OID Feuerwehr ELS in Ratingen: <Root-OID>.1.276.5.1.1.58.28.1.1
-
-### !!!TODO verschieben/wird neu geschrieben!? !!! UCRI Gateway
-
-Die Systemkomponente Gateway stellt einen spezialisierten KT dar. Das Gateway wird am Übergang zu Gruppen von KT eingesetzt, die auf der Vermittlungsebene nicht direkt erreichbar sind und über eine proprietäres Leitstellenprotokoll angebunden werden können (Leitstellenverbunde). Das Gateway stellt eine Gateway-Funktion bereit zum Mapping zwischen externe Quell- bzw. Zieladressen und UCRI-internen KT-Adressen.
-
-![UCRI Komponenten](ucri-components.drawio.svg)
 
 ## Versionierung
 Die Versionierung für die Vermittlungsebene (UCRI2-Transportschicht) und die UCRI2-Apps erfolgen voneinander getrennt.
@@ -393,22 +386,17 @@ Das UCRI2-Protokoll beinhaltet ein KT-Register (siehe [KT-Register](#kt-register
 
 # Kommunikationsprotokoll
 
+Im Folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols im Hinblick auf die Standard-UCRI2-Kommunikationsarchitektur betrachtet.
+Hersteller von spezialisierten UCRM-Modulen (siehe Kapitel [Systemintegration](#systemintegration)) müssen entsprechende spezifische Kommunikationsprotokolle umsetzen.
+
 Aus der Sicht einer Leitstelle (KT-System) ist UCRI2 eine Client/Server Kommunikation gegen die UCRI2-Systemkomponente 
 Leitstellenmodul (UCRM). Ein KT-System (Client) baut eine Verbindung zum UCRM (Server) auf und konsumiert 
-die sogenannte **UCRI2 Client-API**. Die UCRI2 Client-API ist somit die einzige Schnitstelle, gegen die eine 
+die sogenannte **UCRI2-Client-API**. Die UCRI2-Client-API ist somit die einzige Schnitstelle, gegen die eine 
 Leitstellensoftware integriert werden muss, um mit anderen Leitstellen über UCRI2 kommunizieren zu können.
 
-Je nach Organisation der Verbindung und des Datenflusses zwischen den einzelnen UCRM auf der Vermittlungsebene werden 
-zwei Kommunikationstopologien unterschieden:
-- **Peer-to-Peer Topologie**: Dabei kommunizieren alle UCRM direkt miteinander. Jedes UCRM muss eine direkte 
-  Netzwerkverbindung zu jedem einzelnen Partner-UCRM aufbauen. Gleichzeitig bietet jedes UCRM eine Schnittstelle an - 
-  die sogenannte **UCRI2 P2P-API**, die von anderen Partner-UCRM konsumiert wird.
-- **Broker-Architektur**: Alle UCRM sind über eine individuelle Verbindung an eine zentrale Systemkomponente (Broker) 
-  angeschlossen. Um untereinander Daten auszutauschen, brauchen einzelne UCRM keine direkten Netzwerkverbindungen 
-  untereinander, die Kommunikation läuft immer über den Broker. Die Kommunikationsschnittstelle zwischen UCRM und 
-  dem Broker ist spezifisch für die jeweilige Broker-Technologie und wird deswegen in dieser Spezifikation nicht betrachtet.
-
-Die Kommunikationstopologien können auch kombiniert werden.
+Auf der Vermittlungsebene kommunizieren alle UCRM direkt miteinander. Jedes UCRM muss eine direkte 
+Netzwerkverbindung zu jedem einzelnen Partner-UCRM aufbauen. Gleichzeitig bietet jedes UCRM eine Schnittstelle an - 
+die sogenannte **UCRI2-P2P-API**, die von anderen Partner-UCRM konsumiert wird.
 
 Je nach Rolle in der Gesamtkommunikation ergibt sich damit folgende Relevanz der vorliegenden Spezifikation für 
 die beteiligten Systemkomponenten:
@@ -416,12 +404,6 @@ die beteiligten Systemkomponenten:
   Consumer-Perspektive umsetzen.
 - Ein UCRM muss die UCRI2 Client-API aus der Provider-Perspektive umsetzen. Außerdem muss ein UCRM, das an einem 
   Kommunikationssystem mit P2P-Topologie beteiligt ist, die UCRI2 P2P-API umsetzen (Provider- und Consumer-Perspektiven).
-  Im Falle einer Broker-Architekur muss das UCRM ein entsprechendes Broker-Kommunikationsprotokoll implementieren 
-  (nicht Teil dieser Spezifikation).
-
-Im Folgenden werden einzelne Aspekte des UCRI2-Kommunikationsprotokols im Hinblick auf die P2P-Topologie betrachtet.
-Hersteller von UCRM-Modulen für Broker-basierte Architekturen müssen die Inter-UCRM-Kommunikation unter Berücksichtigung 
-von spezifischem Broker-Protokoll entsprechend umsetzen.
 
 Die REST APIs Client-API und P2P-API werden [im Kapitel API](#api) detailliert beschrieben.
 
@@ -727,4 +709,83 @@ Auf der Client-Schnittstelle und generell für von Clients gesendete Nachrichten
 Die konkreten UCRI2-App-Spezifikationen werden separat zur Verfügung gestellt. Hierbei gibt das Dokument "UCRI2-Apps im Überblick" einen Überblick über die verschiedenen Apps.
 
 Zusätzlich existieren für jede App in jeder Version jeweils eine PDF-Datei mit der textuellen App-Dokumentation sowie pro App-Nachricht jeweils eine JSON-Schema-Datei, welche die Nachrichtenstruktur spezifiziert.
+
+
+# Systemintegration
+
+Die UCRI2-Spezifikation bietet einen Standardrahmen für die Integration von Leitstellen-SW unterschiedlicher Hersteller.
+Sie hilft damit, Kompatibilitätsprobleme zu überwinden und dadurch die Interoperabilität in komplexen IT-Landschaften sicherzustellen.
+Gleichzeitig bleibt die Vermittlungsebene offen für nahtlose Integration von bestehenden Systemlösungen in neue Kommunikationssysteme.
+Das ermöglicht, bereits vorhandene Infrastrukturen weiterzuverwenden und so Entwicklungskosten und -zeiten zu reduzieren. 
+Dadurch wird eine nachhaltige und effiziente Systemlandschaft geschaffen, die sowohl Innovation als auch Kontinuität gewährleistet.
+
+In diesem Kapitel werden Integrationsmuster und dazugehörige Integrationsszenarien dargestellt.
+
+## Integrationsmuster
+
+Das zentrale Element der UCRI2-Spezifikation ist UCRM - eine Systemkomponente, die durch folgende Schnittstellen beschrieben wird:
+- Die **Client-API** wird vom **UCRM** angeboten und von **Clients** (Kommunikationsteilnehmern) konsumiert.
+- Die **P2P-API** wird von **UCRMs** angeboten, welche eine Verbindung mit anderen **UCRMs** auf Basis einer Peer-to-Peer-Topologie herstellen wollen.
+
+Je nach Systemlandschaft brauchen Systemintegratoren spezialisierte UCRM-Module, die unterschiedliche Integrationsszenarien unterstützen:
+
+![UCRI2-Integrationsmuster](ucrm-patterns.drawio.svg)
+
+**UCRI2-UCRM**
+
+Das klassische UCRI2-UCRM-Modul ist eine universelle Komponente, die als Vermittler in einem Standard-UCRI2-Verbund eingesetzt wird. Das Modul verbindet eine oder mehrere über UCRI2 Client-API angebundenen Leitstellen mit anderen Leitstellen, die über ein fremdes UCRI2-UCRM-Modul angebunden sind. Zwischen UCRMs wird das UCRI2 P2P-Protokoll verwendet, um die Nachrichten zu übermitteln und abdere UCRI2-spezifiachen Daten auszutauschen.
+
+**UCRI2-Adapter**
+
+Der UCRI2-Adapter dient dazu, ein bestehendes Leitstellenkommunikationssystem in ein UCRI2-Verbund zu integrieren. Das Modul stellt dabei eine Schnittstelle bereit, die das bestehende System erwartet. Der UCRI2-Adapter fungiert dabei als Vermittler, der ein Fremdkommunikationsprotokoll inklusive Mapping zwischen Adressierungsschemata in das UCRI2 P2P-Protokoll übersetzt.
+
+**UCRI2-Connector**
+
+Der UCRI2-Connector verbindet eine über UCRI2 Client-API angebundene Leitstelle mit einem fremden Nachrichtenvermittlungssystem. Der UCRI2-Connector kapselt dabei spezifische fremde Protokolle, Datenflüsse und Kommunikationsmechanismen inklusive Mapping zwischen Adressierungsschemata, um Integrtion über ein bestehendes fremdes Vermittlungssystem zu ermöglichen.
+
+**UCRI2-Hub**
+
+Der UCRI2-Hub dient als eine zentrale Komponente, die als Vermittler zwischen mehreren über UCRI2 Client-API angebundenen Leitstellen fungiert. Alle Nachrichten fließen über diesen zentralen Punkt, wodurch die Kommunikation zwischen den Teilnehmern entkoppelt wird. Der UCRI2-Hub unterstützt keine Protokolle der Vermittlungsebene und kann somit nicht mit anderen UCRMs verbunden werden. 
+
+## Integrationsszenarien
+
+Im Folgenden werden unterschiedliche Integrationsszenarien unter Verwendung von spezialisierten UCRM-Modulen vorgestellt.
+
+**Ein UCRI2-Hub als Vermittler**
+
+Im einfachsten Fall werden Leitstellen über einen zentralen UCRI2-Hub verbunden. Die ELS-Software wird über UCRI2 Client-API an dieses Modul angebunden. Somit können entkoppelte ELS miteinander kommunizieren. Der UCRI2-Hub unterstützt keine Protokolle der Vermittlungsebene und kann somit nicht mit anderen UCRMs verbunden werden. 
+
+![Ein UCRI2-Hub als Vermittler](ucri-hub.drawio.svg)
+
+**Der Standard-UCRI2-Verbund**
+
+In einem Standard-UCRI2-Verbund werden Leitstellen über klassische UCRI2-UCRM-Module verbunden. Typischerweise wird in der Infrastruktur einer Leitstelle ein UCRI2-UCRM-Modul etabliert. Die ELS-Software wird über UCRI2 Client-API an dieses Modul angebunden. Die UCRI2-UCRM-Module unterschiedlicher Kommunikationsteilnehmer werden über UCRI2 P2P-API miteinander verbunden. 
+
+![Standard-UCRI2-Verbund](ucri-standard-group.drawio.svg)
+
+**Anbindung an Verbund mit PVI**
+
+In diesem Szenario wird ein bestehendes Leitstellenkommunikationssystem in ein UCRI2-Verbund aufgenommen. Die Anbindung erfolgt über einen PVI-Adapter - einen spezialisierten UCRI2-Adapter, der die Kommunikationsschnittstelle einer proprietären Vermittlungsinstanz unterstützt. Auf der anderen Seite spricht der PVI-Adapter das UCRI2 P2P-Protokoll und kann somit in die P2P-Topologie des Verbundes aufgenommen werden. Der PVI-Adapter übersetzt das PVI-Kommunikationsprotokoll in das UCRI2 P2P-Protokoll inklusive Mapping zwischen Adressierungsschemata.
+
+![Anbindung an Verbund mit PVI](ucri-pvi-integration.drawio.svg)
+
+**Verbund mit Anbindung an KV-Verbund ohne KV-Adapter**
+
+Ein wichtiger Anwendungsfall für die UCRI2-Spezifikaiton ist Kommunikation zwischen 110/112- und KV-Leitstellen.
+
+Die Ausgangssituation für dieses Integrationsszenario ist ein bestehendes Standard-UCRI2-Verbund und eine Anforderung eine bestimmte Leitstelle aus dem Verbund mit einer KV-Leitstelle zu verbinden. Dabei soll aktuelle Entwicklung berücksichtigt werden, wonach die KVs über eine normierte Vermittlungsarchitektur auf Basis einer [Matrix-Infrastruktur](https://matrix.org/) kommunizieren müssen.
+
+Für die Integration zwischen Leitstellen wird auf beiden Seiten ein Matrix-Connector - ein UCRI2-Connector zur Anbindung an eine Matrix-Infrastruktur eingesetzt. Sowohl ELS als auch KV-Software verwenden dabei die UCRI2 Client-API des eigenen Matrix-Connectors. Die Nachrichtenübermittlung erfolgt dabei über Matrix-Protokoll. Der Matrix-Connector unterstützt das Mapping zwischen UCRI2- und Matrix-Adressierungsschemata.
+
+Ein Problem dieses Integrationsschemas ist, dass jede Leitstelle, die mit KVs integriert werden soll, braucht außer UCRM-Modul zusätzlich einen eigenen Matrix-Connector. Die Lösung dieses Problems besteht in der Anbindung des gesamten UCRI2-Verbundes an die Matrix-Infrastruktur, siehe nächstes Integrationsszenario.
+
+![Verbund mit Anbindung an KV-Verbund ohne KV-Adapter](ucri-matrix-integration-wo-adapter.drawio.svg)
+
+**Verbund mit Anbindung an KV-Verbund mit KV-Adapter**
+
+In diesem Szenarion wird der Gesamt-UCRI2-Verbund an die Matrix-Infrastruktur mit Hilfe eines Matrix-Adapters angebunden. Somit können alle an dem Verbund beteiligten ELS mit KVs kommunizieren ohne einen eigenen Matrix-Connector einsetzen zu müssen.
+
+Der Matrix-Adapter unterstützt das UCRI2 P2P-Protokoll und wird als Teil eines bestehenden UCRI2 P2P-Netzes etabliert. Auf der anderen Seite unterstützt der Matrix-Adapter das Matrix-Protokoll und kann somit mit UCRI2 Matrix-Connectors anderer Teilnehmer einer Matrix-Infrastruktur kommunizieren. Auf dieser Weise werden UCRI2-Domäne, die auf unterschiedlichen Vermittlungstechnologien basieren, zu einem übergeordneten UCRI2-Kommunikationsverbund organisiert, in dem alle Teilnehmer untereinander transparent mit Hilfe von standardisierten UCRI2-Anwendungen kommunizieren können.
+
+![Verbund mit Anbindung an KV-Verbund mit KV-Adapter](ucri-matrix-integration-with-adapter.drawio.svg)
 
