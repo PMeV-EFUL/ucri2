@@ -18,5 +18,5 @@ Für beide APIs gelten folgende allgemeinen Festlegungen, welche in den jeweilig
 5. Die zur Übertragung von Fehlerzuständen genutzten Error-Objekte (vgl. `error.yaml`) werden im Unterkapitel [Fehlerbehandlung](./error_handling.md#fehlerbehandlung) für beide APIs gemeinsam dargestellt, da ein Großteil der genutzten Fehlercodes in beiden APIs vorkommt.
 6. Die Generierung und Prüfung von Nachrichtensignaturen wird im Kapitel [Kommunikationsprotokoll](./p2p_protocol.md#kommunikationsprotokoll) im Unterkapitel [Datenintergrität](./p2p_protocol.md#datenintegrität) beschrieben.
 7. Falls ein Request nicht der OpenAPI-Spezifikation entspricht, MUSS dieser vom UCRM zurückgewiesen werden (vgl. Kapitel [Fehlerbehandlung](./error_handling.md#fehlerbehandlung)).
-8. Ein UCRM MUSS die **Client-API** vollständig unterstützen.
+8. Ein UCRM, welches die **Client-API** implementiert, MUSS diese vollständig unterstützen.
 9. Ein UCRM, welches die **P2P-API** implementiert, MUSS diese vollständig unterstützen.
