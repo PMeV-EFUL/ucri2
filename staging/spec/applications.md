@@ -1,5 +1,9 @@
+<!-- skip-start -->
 [Zu der Hauptseite](index.md)
+<!-- skip-end -->
 
-# UCRI2 Anwendungen
+# Applikationen
 
-Detaillierte Beschreibung der UCRI2 Anwendungen befindet sich in dem Verzeichnis [docs/apps](../apps). Hierbei gibt das Dokument "UCRI2 App im Überblick" einen Überblick über die verschiedenen Apps und die PDF-Dateien in den Unterordnern beinhalten die detaillierte Dokumentation für verschiedenen Apps. 
+Die konkreten UCRI2-App-Spezifikationen werden separat zur Verfügung gestellt. Hierbei gibt das Dokument "UCRI2-Apps im Überblick" einen Überblick über die verschiedenen Apps.
+
+Zusätzlich existieren für jede App in jeder Version jeweils eine PDF-Datei mit der textuellen App-Dokumentation sowie pro App-Nachricht jeweils eine JSON-Schema-Datei, welche die Nachrichtenstruktur spezifiziert.
