@@ -37,7 +37,7 @@ Wird die Transportanforderung abgelehnt, so kann ein Alternativ-Vorschlag der Ab
 
 Diese App sieht zwei Rollen vor, die der terminsuchenden Stelle (A) und der terminvergebenden Stelle (B).
 
-## Schema-Beschreibung
+## Ablauf-Beschreibung
 
 1.  A->B: Einsatz mit Patient und Zieltermin übergeben
 2.  B->A: Übergabe bestätigen

@@ -118,11 +118,13 @@ pdf_options:
 <!-- tocstop -->
 
 # Überblick
-Der Anwendungsfall Patientendatentransfer ist der Sonderfall der Einsatzübergabe zwischen einer 112-Leitstelle und einer 116117-Leitstelle. Hierbei ist die Richtung der Einsatzübergabe entscheidend - eine Übergabe von 116117 an 112 (Notfall-Eskalation) gleicht der regulären Einsatzübergabe und wird daher über den Use Case Einsatzübergabe (mit Patientendatenübermittlung) abgebildet. Nur die Richtung von der 112 an die 116117 (Deeskalation eines nicht-Notfalls) besitzt spezifische Eigenschaften, die einen dedizierten Use case hierfür notwendig machen:
+Der Anwendungsfall Patientendatentransfer ist der Sonderfall der Einsatzübergabe zwischen einer 112-Leitstelle und einer 116117-Leitstelle. Hierbei ist die Richtung der Einsatzübergabe entscheidend - eine Übergabe von 116117 an 112 (Notfall-Eskalation) gleicht der regulären Einsatzübergabe und wird daher über den Use Case Einsatzübergabe (mit Patientendaten) abgebildet. Nur die Richtung von der 112 an die 116117 (Deeskalation eines nicht-Notfalls) besitzt spezifische Eigenschaften, die einen dedizierten Use case hierfür notwendig machen. Zusätzlich ist dieser Use Case für die Übergabe zwischen 116-117-Leitstellen anwendbar:
 
 - Die Adressinformationen beschreiben keinen Einsatzort, sondern die Adresse des Patienten als Stammdateninformation
 
 Wie bei der Einsatzübergabe wird auch der Patiententransfer durch die Empfänger-Leitstelle bestätigt oder abgelehnt.
+
+Hinweis außerhalb der UCRI-Spezifikation: Neben den Datenanforderungen sind auch die Zeitrandbedingungen für die Einsatzübergabe gesondert zu betrachten. Bei der Einsatzübergabe zwischen 112-Leitstellen gelten die entsprechenden Hilfsfristen- und Reaktionszeiten gemäß der gesetzlichen Vorgaben. Bei der Einsatzübergabe von 112 in Richtung 116117 entfallen diese Reaktionszeiten.
 
 Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
 Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
@@ -1815,65 +1817,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         }
     ],
     "$defs": {
-        "person.schema.json": {
-            "title": "Person",
-            "description": "Eine Person. Obligat ist der Nachname.",
-            "required": [
-                "name"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "title": "Nachname",
-                    "description": "Der Nachname.",
-                    "type": "string"
-                },
-                "surname": {
-                    "title": "Vorname",
-                    "description": "Der Vorname.",
-                    "type": "string"
-                },
-                "phone": {
-                    "title": "Telefonnummer",
-                    "description": "Die Telefonnummer.",
-                    "type": "string"
-                },
-                "email": {
-                    "title": "Email-Adresse",
-                    "description": "Die Email-Adresse.",
-                    "type": "string"
-                },
-                "address": {
-                    "$ref": "#/$defs/address.schema.json",
-                    "title": "MeldeAdresse",
-                    "description": "Die Meldeadresse."
-                },
-                "additionalInformation": {
-                    "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
-                    "type": "string"
-                }
-            },
-            "examples": [
-                {
-                    "name": "Mustermann",
-                    "surname": "Hans",
-                    "phone": "+49 30 123456",
-                    "email": "hans.mustermann@example.com",
-                    "address": {
-                        "street": "Musterstrasse",
-                        "houseNumber": "15b",
-                        "postalCode": "12345",
-                        "city": "Musterhausen",
-                        "cityDistrict": "Musterberg",
-                        "state": "Brandenburg",
-                        "country": "DE"
-                    },
-                    "additionalInformation": "weitere Informationen"
-                }
-            ],
-            "unevaluatedProperties": false
-        },
         "address.schema.json": {
             "title": "Adresse",
             "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
@@ -1938,6 +1881,65 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 }
             ]
         },
+        "person.schema.json": {
+            "title": "Person",
+            "description": "Eine Person. Obligat ist der Nachname.",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Nachname",
+                    "description": "Der Nachname.",
+                    "type": "string"
+                },
+                "surname": {
+                    "title": "Vorname",
+                    "description": "Der Vorname.",
+                    "type": "string"
+                },
+                "phone": {
+                    "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
+                    "type": "string"
+                },
+                "email": {
+                    "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
+                    "type": "string"
+                },
+                "address": {
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Mustermann",
+                    "surname": "Hans",
+                    "phone": "+49 30 123456",
+                    "email": "hans.mustermann@example.com",
+                    "address": {
+                        "street": "Musterstrasse",
+                        "houseNumber": "15b",
+                        "postalCode": "12345",
+                        "city": "Musterhausen",
+                        "cityDistrict": "Musterberg",
+                        "state": "Brandenburg",
+                        "country": "DE"
+                    },
+                    "additionalInformation": "weitere Informationen"
+                }
+            ],
+            "unevaluatedProperties": false
+        },
         "notification.schema.json": {
             "unevaluatedProperties": false,
             "title": "Einsatzbezogene Text-Benachrichtigung",
@@ -1976,6 +1978,86 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
+                }
+            ]
+        },
+        "healthInsuranceInformation.schema.json": {
+            "title": "Informationen zum Versicherungsverhältnis",
+            "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
+            "required": [],
+            "type": "object",
+            "properties": {
+                "healthInsuranceCompany": {
+                    "title": "Name der Krankenversicherung",
+                    "description": "Der Name der Krankenversicherung.",
+                    "type": "string"
+                },
+                "healthInsuranceCompanyNumber": {
+                    "title": "IK der Krankenversicherung",
+                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 9,
+                    "maxLength": 9
+                },
+                "insuranceNumber": {
+                    "title": "Versichertennummer (Alphanumerisch)",
+                    "description": "Die Versichertennummer",
+                    "type": "string"
+                }
+            },
+            "unevaluatedProperties": false,
+            "examples": [
+                {
+                    "healthInsuranceCompany": "Musterkasse",
+                    "healthInsuranceCompanyNumber": "101234567",
+                    "insuranceNumber": "S123456789"
+                }
+            ]
+        },
+        "initialAssessment.schema.json": {
+            "title": "Ersteinschätzung",
+            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
+            "required": [],
+            "type": "object",
+            "minProperties": 1,
+            "properties": {
+                "rmi": {
+                    "title": "Rückmeldeindikator",
+                    "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 3,
+                    "maxLength": 3
+                },
+                "rmc": {
+                    "title": "Rückmeldecode",
+                    "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 1
+                },
+                "pzc": {
+                    "title": "Patientenzuweisungscode",
+                    "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 6,
+                    "maxLength": 6
+                },
+                "additionalInformation": {
+                    "type": "string",
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
+                }
+            },
+            "unevaluatedProperties": false,
+            "examples": [
+                {
+                    "rmi": "360",
+                    "rmc": "360543215",
+                    "pzc": "360401",
+                    "additionalInformation": "unspezifischer Notfall"
                 }
             ]
         },
@@ -2101,86 +2183,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 }
             ],
             "unevaluatedProperties": false
-        },
-        "healthInsuranceInformation.schema.json": {
-            "title": "Informationen zum Versicherungsverhältnis",
-            "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
-            "required": [],
-            "type": "object",
-            "properties": {
-                "healthInsuranceCompany": {
-                    "title": "Name der Krankenversicherung",
-                    "description": "Der Name der Krankenversicherung.",
-                    "type": "string"
-                },
-                "healthInsuranceCompanyNumber": {
-                    "title": "IK der Krankenversicherung",
-                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 9,
-                    "maxLength": 9
-                },
-                "insuranceNumber": {
-                    "title": "Versichertennummer (Alphanumerisch)",
-                    "description": "Die Versichertennummer",
-                    "type": "string"
-                }
-            },
-            "unevaluatedProperties": false,
-            "examples": [
-                {
-                    "healthInsuranceCompany": "Musterkasse",
-                    "healthInsuranceCompanyNumber": "101234567",
-                    "insuranceNumber": "S123456789"
-                }
-            ]
-        },
-        "initialAssessment.schema.json": {
-            "title": "Ersteinschätzung",
-            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
-            "required": [],
-            "type": "object",
-            "minProperties": 1,
-            "properties": {
-                "rmi": {
-                    "title": "Rückmeldeindikator",
-                    "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 3,
-                    "maxLength": 3
-                },
-                "rmc": {
-                    "title": "Rückmeldecode",
-                    "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 1
-                },
-                "pzc": {
-                    "title": "Patientenzuweisungscode",
-                    "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 6,
-                    "maxLength": 6
-                },
-                "additionalInformation": {
-                    "type": "string",
-                    "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
-                }
-            },
-            "unevaluatedProperties": false,
-            "examples": [
-                {
-                    "rmi": "360",
-                    "rmc": "360543215",
-                    "pzc": "360401",
-                    "additionalInformation": "unspezifischer Notfall"
-                }
-            ]
         }
     }
 }
@@ -2601,9 +2603,4 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$defs": {}
 }
 ```
-
-
-
-
-
 

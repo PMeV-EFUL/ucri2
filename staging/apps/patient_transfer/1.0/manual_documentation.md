@@ -44,7 +44,7 @@ Diese App sieht zwei Rollen vor, die der abgebenden Stelle (A) und der annehmend
 
 1. A->B: Einsatz übergeben
 2. B->A: Einsatz annehmen oder ablehnen
-3. B->A: (optional) Einsatzendemeldung (einsatzbezogene Textnachricht) senden (falls Einsatz angenommen wurde)
+3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
 # Partielle Umsetzung
 <!-- include ../../general_incident_partial_implementation_notes.md -->

@@ -115,8 +115,8 @@ pdf_options:
 # Überblick
 Bei der Einsatzübergabe entscheidet der Disponent einer Leitstelle (A), dass der Einsatz nicht in seinen Zuständigkeitsbereich fällt, sondern in den Zuständigkeitsbereich der Leitstelle (B). Die Leitstelle (B) kann sowohl aus organisatorischen Gründen - beispielsweise die Einsatzübergabe von einer Rettungsleitstelle an eine Polizeileitstelle als auch aus geografischen Gründen (Nachbarleitstelle) erfolgen. Dieser Use Case beschränkt sich bewusst auf die Kernelemente eines Einsatzes ohne jegliche strukturierte Datenobjekte für beteiligte Personen um mit den hier übermittelten Einsatzbasisdaten eine möglichst große Interoperabilität der am Markt befindlichen Systeme zu erreichen.
 Die Einsatzübergabe via UCRI verfolgt das Ziel einer gesicherten Übergabe der Verantwortung/Zuständigkeit mit einer Datenübergabe ohne Medienbruch und mit minimalem Zeitverzug.
-Dementsprechend wird die Übergabe durch einen Disponenten der empfangenen Leitstelle (B) bestätigt (oder abgelehnt) und ist als Transaktion erst mit Empfang dieser Quittung in der Leitstelle (A) für diese abgeschlossen.
-UCRI regelt nicht, wie der Einsatz in der abgebenden Leitstelle (A) behandelt wird. Technisch und fachlich kann es durchaus möglich sein, dass der Einsatz dann auch in Leitstelle (A) noch für Nachdokumentationen offen bleibt.
+Dementsprechend wird die Übergabe durch einen Disponenten der empfangenen Leitstelle (B) fachlich, aktiv bestätigt (oder abgelehnt) und ist als Transaktion erst mit Empfang dieser Übernahmequittung in der Leitstelle (A) für diese abgeschlossen.  
+UCRI regelt nicht, wie der Einsatz in der abgebenden Leitstelle (A) behandelt wird. Technisch und fachlich kann es durchaus möglich sinnvoll  sein, dass der Einsatz dann auch in Leitstelle (A) noch für Nachdokumentationen offen bleibt.
 
 Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
 Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
@@ -1653,65 +1653,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         }
     ],
     "$defs": {
-        "person.schema.json": {
-            "title": "Person",
-            "description": "Eine Person. Obligat ist der Nachname.",
-            "required": [
-                "name"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "title": "Nachname",
-                    "description": "Der Nachname.",
-                    "type": "string"
-                },
-                "surname": {
-                    "title": "Vorname",
-                    "description": "Der Vorname.",
-                    "type": "string"
-                },
-                "phone": {
-                    "title": "Telefonnummer",
-                    "description": "Die Telefonnummer.",
-                    "type": "string"
-                },
-                "email": {
-                    "title": "Email-Adresse",
-                    "description": "Die Email-Adresse.",
-                    "type": "string"
-                },
-                "address": {
-                    "$ref": "#/$defs/address.schema.json",
-                    "title": "MeldeAdresse",
-                    "description": "Die Meldeadresse."
-                },
-                "additionalInformation": {
-                    "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
-                    "type": "string"
-                }
-            },
-            "examples": [
-                {
-                    "name": "Mustermann",
-                    "surname": "Hans",
-                    "phone": "+49 30 123456",
-                    "email": "hans.mustermann@example.com",
-                    "address": {
-                        "street": "Musterstrasse",
-                        "houseNumber": "15b",
-                        "postalCode": "12345",
-                        "city": "Musterhausen",
-                        "cityDistrict": "Musterberg",
-                        "state": "Brandenburg",
-                        "country": "DE"
-                    },
-                    "additionalInformation": "weitere Informationen"
-                }
-            ],
-            "unevaluatedProperties": false
-        },
         "address.schema.json": {
             "title": "Adresse",
             "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
@@ -1776,6 +1717,65 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 }
             ]
         },
+        "person.schema.json": {
+            "title": "Person",
+            "description": "Eine Person. Obligat ist der Nachname.",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Nachname",
+                    "description": "Der Nachname.",
+                    "type": "string"
+                },
+                "surname": {
+                    "title": "Vorname",
+                    "description": "Der Vorname.",
+                    "type": "string"
+                },
+                "phone": {
+                    "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
+                    "type": "string"
+                },
+                "email": {
+                    "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
+                    "type": "string"
+                },
+                "address": {
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Mustermann",
+                    "surname": "Hans",
+                    "phone": "+49 30 123456",
+                    "email": "hans.mustermann@example.com",
+                    "address": {
+                        "street": "Musterstrasse",
+                        "houseNumber": "15b",
+                        "postalCode": "12345",
+                        "city": "Musterhausen",
+                        "cityDistrict": "Musterberg",
+                        "state": "Brandenburg",
+                        "country": "DE"
+                    },
+                    "additionalInformation": "weitere Informationen"
+                }
+            ],
+            "unevaluatedProperties": false
+        },
         "notification.schema.json": {
             "unevaluatedProperties": false,
             "title": "Einsatzbezogene Text-Benachrichtigung",
@@ -1814,6 +1814,65 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
+                }
+            ]
+        },
+        "coordinate.schema.json": {
+            "title": "WGS84-Koordinate",
+            "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",
+            "required": [
+                "lat",
+                "lon"
+            ],
+            "type": "object",
+            "properties": {
+                "lat": {
+                    "title": "Breitengrad",
+                    "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                },
+                "lon": {
+                    "title": "Längengrad",
+                    "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                }
+            },
+            "unevaluatedProperties": false,
+            "examples": [
+                {
+                    "lat": 65.453323,
+                    "lon": 14.542343
+                }
+            ]
+        },
+        "missionObject.schema.json": {
+            "title": "Einsatz-Zielobjekt",
+            "description": "Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Objektname",
+                    "description": "Der Name des Objekts.",
+                    "type": "string"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
+                }
+            },
+            "unevaluatedProperties": false,
+            "examples": [
+                {
+                    "name": "Krankenhaus Musterstift",
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -1896,65 +1955,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     },
                     "floor": "3. OG",
                     "room": "412",
-                    "additionalInformation": "Weitere Informationen"
-                }
-            ]
-        },
-        "coordinate.schema.json": {
-            "title": "WGS84-Koordinate",
-            "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",
-            "required": [
-                "lat",
-                "lon"
-            ],
-            "type": "object",
-            "properties": {
-                "lat": {
-                    "title": "Breitengrad",
-                    "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
-                    "type": "number",
-                    "minimum": -90,
-                    "maximum": 90
-                },
-                "lon": {
-                    "title": "Längengrad",
-                    "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
-                    "type": "number",
-                    "minimum": -180,
-                    "maximum": 180
-                }
-            },
-            "unevaluatedProperties": false,
-            "examples": [
-                {
-                    "lat": 65.453323,
-                    "lon": 14.542343
-                }
-            ]
-        },
-        "missionObject.schema.json": {
-            "title": "Einsatz-Zielobjekt",
-            "description": "Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts",
-            "required": [
-                "name"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "title": "Objektname",
-                    "description": "Der Name des Objekts.",
-                    "type": "string"
-                },
-                "additionalInformation": {
-                    "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
-                    "type": "string"
-                }
-            },
-            "unevaluatedProperties": false,
-            "examples": [
-                {
-                    "name": "Krankenhaus Musterstift",
                     "additionalInformation": "Weitere Informationen"
                 }
             ]
@@ -2378,8 +2378,4 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$defs": {}
 }
 ```
-
-
-
-
 
