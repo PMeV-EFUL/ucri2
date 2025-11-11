@@ -477,14 +477,7 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
             "destination": "1.2.3.4.5.6.7",
             "statusCode": 200
         }
-    ],
-    "$defs": {}
+    ]
 }
 ```
-
-
-
-
-
-
 

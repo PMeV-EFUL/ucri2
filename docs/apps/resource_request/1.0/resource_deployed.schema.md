@@ -251,8 +251,7 @@
             "resourceType": "KTW",
             "deployedAt": "2025-06-11T10:30:00Z"
         }
-    ],
-    "$defs": {}
+    ]
 }
 ```
 

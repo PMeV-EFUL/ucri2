@@ -21,6 +21,7 @@ const stagedAppsPath="../apps";
 const bundledAppsPath="../../apps";
 const docsPath="../../docs/apps";
 const specDocsPath="../spec";
+const appOverviewPath="../apps_overview";
 const specDocsOutputPath="../../docs/spec";
 
 const missingPropertyMessages=[]
@@ -53,6 +54,10 @@ function checkForMissingProperties(path,obj) {
 async function process(){
   console.log("STEP 0: generating merged docs for spec...");
   await generateSpecDocs();
+
+  console.log("STEP 0b: generating apps overview pdf...");
+  await generateAppOverview();
+
 
   const schemaDirs=collectInputSchemata();
   console.log(`Processing the following app/version directories with schema files:\n ${JSON.stringify(schemaDirs,null,2)}`);
@@ -220,6 +225,13 @@ function rewriteLinksInMarkdown(markdown){
     throw new Error(`A total of ${wrongLinkMatches.length} errorneous links to other markdown files were found (all links MUST contain a #ANCHOR to point to an anchored element like a #heading!):\n${wrongLinkMatches.join("\r\n")}`);
   }
   return markdown.replaceAll(/(\[[^\]]*\])(\([^\)]*\.md)(#[^\)]*\))/g, "$1($3");
+}
+
+async function generateAppOverview(){
+  console.log("transforming app overview docs to pdf...");
+  //transform to PDF
+  const outputFileNamePdf=`${docsPath}/UCRI2 Apps im Überblick.pdf`
+  await mdToPdf({ path: `${appOverviewPath}/overview.md` }, { dest: outputFileNamePdf ,as_html:false});
 }
 
 async function generateSpecDocs(){

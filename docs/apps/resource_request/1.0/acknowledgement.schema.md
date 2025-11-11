@@ -212,8 +212,7 @@
             "acknowledgedAt": "2025-06-11T10:16:00Z",
             "comment": "Nicht genügend Ressourcen verfügbar."
         }
-    ],
-    "$defs": {}
+    ]
 }
 ```
 

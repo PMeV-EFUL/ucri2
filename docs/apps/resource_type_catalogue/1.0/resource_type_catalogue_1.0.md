@@ -27,6 +27,7 @@ pdf_options:
 <!-- toc -->
 
 - [Überblick](#uberblick)
+- [Ablaufbeschreibung](#ablaufbeschreibung)
 - [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
@@ -84,6 +85,10 @@ System mit dem Hinweis zur Anzeige gebracht werden, dass ein
 unbekannter Einsatzmitteltyp angefordert wird, damit der Disponent nach
 Klärung den richtigen Einsatzmitteltyp zuordnen kann. Einsätze dürfen auf
 keinen Fall wegen unbekanntem Einsatzmitteltyp unberücksichtigt bleiben.
+
+# Ablaufbeschreibung
+1.	A->B: Einsatzmitteltyp-Katalog-Anfrage senden
+2.	B->A: Einsatzmitteltyp-Katalog übertragen
 
 # Partielle Umsetzung
 Ein Teilnehmer, der ausschliesslich Abfragen durchführen will, muss die Antwortnachricht (response) nicht unterstützen.
@@ -467,9 +472,4 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$defs": {}
 }
 ```
-
-
-
-
-
 

@@ -144,7 +144,7 @@ pdf_options:
 <!-- tocstop -->
 
 # Überblick
-Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mit Patientendaten explizit dafür gedacht Einsätze zwischen Systemen übertragen zu können, die explizit mit Patientendaten arbeiten und mit den dafür spezifischen Zusatzinformationen von Patienten sinnvoll umgehen können. Typische Einsatzzwecke sind Einsatzübergaben an Rettungsdienstleitstellen.
+Im Gegensatz zur Einsatzübergabe ohne Personendaten ist die Einsatzübergabe mit Patientendaten explizit dafür gedacht Einsätze zwischen Systemen übertragen zu können, die explizit mit Patientendaten arbeiten und mit den dafür spezifischen Zusatzinformationen von Patienten sinnvoll umgehen können. Typische Einsatzzwecke sind Einsatzübergaben Rettungsdienstleitstellen – sowohl von Rettungsleitstellen, als auch von 116117-Leitstellen aus.
 
 Falls für gesendete Nachrichten eine technische Empfangsquittierung gewünscht ist, ist hierzu die entsprechende Funktion der UCRI2-Transportschicht zu nutzen.
 Daher sind in dieser App keine eigenen Nachrichten zur technischen Empfangsquittierung definiert.
@@ -154,7 +154,7 @@ Diese App sieht zwei Rollen vor, die der abgebenden Stelle (A) und der annehmend
 # Ablaufbeschreibung
 
 1. A->B: Einsatz übergeben
-2. B->A: Einsatz annehmen oder ablehnen
+2. B->A: Fachliche Bestätigung durch den Disponenten: Einsatz annehmen oder ablehnen
 3. B->A: (optional) Einsatzendemeldung senden (falls Einsatz angenommen wurde)
 
 # Partielle Umsetzung
@@ -2482,65 +2482,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
         }
     ],
     "$defs": {
-        "person.schema.json": {
-            "title": "Person",
-            "description": "Eine Person. Obligat ist der Nachname.",
-            "required": [
-                "name"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "title": "Nachname",
-                    "description": "Der Nachname.",
-                    "type": "string"
-                },
-                "surname": {
-                    "title": "Vorname",
-                    "description": "Der Vorname.",
-                    "type": "string"
-                },
-                "phone": {
-                    "title": "Telefonnummer",
-                    "description": "Die Telefonnummer.",
-                    "type": "string"
-                },
-                "email": {
-                    "title": "Email-Adresse",
-                    "description": "Die Email-Adresse.",
-                    "type": "string"
-                },
-                "address": {
-                    "$ref": "#/$defs/address.schema.json",
-                    "title": "MeldeAdresse",
-                    "description": "Die Meldeadresse."
-                },
-                "additionalInformation": {
-                    "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
-                    "type": "string"
-                }
-            },
-            "examples": [
-                {
-                    "name": "Mustermann",
-                    "surname": "Hans",
-                    "phone": "+49 30 123456",
-                    "email": "hans.mustermann@example.com",
-                    "address": {
-                        "street": "Musterstrasse",
-                        "houseNumber": "15b",
-                        "postalCode": "12345",
-                        "city": "Musterhausen",
-                        "cityDistrict": "Musterberg",
-                        "state": "Brandenburg",
-                        "country": "DE"
-                    },
-                    "additionalInformation": "weitere Informationen"
-                }
-            ],
-            "unevaluatedProperties": false
-        },
         "address.schema.json": {
             "title": "Adresse",
             "description": "Eine postalische Adresse. Obligat ist nur der Strassenname, weitere Angaben sollten aber möglichst gemacht werden, um die Adresse eindeutig zu machen.",
@@ -2605,6 +2546,65 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 }
             ]
         },
+        "person.schema.json": {
+            "title": "Person",
+            "description": "Eine Person. Obligat ist der Nachname.",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Nachname",
+                    "description": "Der Nachname.",
+                    "type": "string"
+                },
+                "surname": {
+                    "title": "Vorname",
+                    "description": "Der Vorname.",
+                    "type": "string"
+                },
+                "phone": {
+                    "title": "Telefonnummer",
+                    "description": "Die Telefonnummer.",
+                    "type": "string"
+                },
+                "email": {
+                    "title": "Email-Adresse",
+                    "description": "Die Email-Adresse.",
+                    "type": "string"
+                },
+                "address": {
+                    "$ref": "#/$defs/address.schema.json",
+                    "title": "MeldeAdresse",
+                    "description": "Die Meldeadresse."
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Mustermann",
+                    "surname": "Hans",
+                    "phone": "+49 30 123456",
+                    "email": "hans.mustermann@example.com",
+                    "address": {
+                        "street": "Musterstrasse",
+                        "houseNumber": "15b",
+                        "postalCode": "12345",
+                        "city": "Musterhausen",
+                        "cityDistrict": "Musterberg",
+                        "state": "Brandenburg",
+                        "country": "DE"
+                    },
+                    "additionalInformation": "weitere Informationen"
+                }
+            ],
+            "unevaluatedProperties": false
+        },
         "notification.schema.json": {
             "unevaluatedProperties": false,
             "title": "Einsatzbezogene Text-Benachrichtigung",
@@ -2643,6 +2643,65 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                     "message": "NEF wurde durch Einsatzkräfte vor Ort nachalarmiert",
                     "category": "information",
                     "silent": true
+                }
+            ]
+        },
+        "coordinate.schema.json": {
+            "title": "WGS84-Koordinate",
+            "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",
+            "required": [
+                "lat",
+                "lon"
+            ],
+            "type": "object",
+            "properties": {
+                "lat": {
+                    "title": "Breitengrad",
+                    "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                },
+                "lon": {
+                    "title": "Längengrad",
+                    "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                }
+            },
+            "unevaluatedProperties": false,
+            "examples": [
+                {
+                    "lat": 65.453323,
+                    "lon": 14.542343
+                }
+            ]
+        },
+        "missionObject.schema.json": {
+            "title": "Einsatz-Zielobjekt",
+            "description": "Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Objektname",
+                    "description": "Der Name des Objekts.",
+                    "type": "string"
+                },
+                "additionalInformation": {
+                    "title": "Zusatzinformationen",
+                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
+                    "type": "string"
+                }
+            },
+            "unevaluatedProperties": false,
+            "examples": [
+                {
+                    "name": "Krankenhaus Musterstift",
+                    "additionalInformation": "Weitere Informationen"
                 }
             ]
         },
@@ -2729,62 +2788,83 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 }
             ]
         },
-        "coordinate.schema.json": {
-            "title": "WGS84-Koordinate",
-            "description": "Eine WGS84-Koordinate. Obligat sind sowohl Breiten- als auch Längengrad.",
-            "required": [
-                "lat",
-                "lon"
-            ],
+        "healthInsuranceInformation.schema.json": {
+            "title": "Informationen zum Versicherungsverhältnis",
+            "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
+            "required": [],
             "type": "object",
             "properties": {
-                "lat": {
-                    "title": "Breitengrad",
-                    "description": "Breitengrad in Grad gemäß WGS84-Spezifikation",
-                    "type": "number",
-                    "minimum": -90,
-                    "maximum": 90
+                "healthInsuranceCompany": {
+                    "title": "Name der Krankenversicherung",
+                    "description": "Der Name der Krankenversicherung.",
+                    "type": "string"
                 },
-                "lon": {
-                    "title": "Längengrad",
-                    "description": "Längengrad in Grad gemäß WGS84-Spezifikation",
-                    "type": "number",
-                    "minimum": -180,
-                    "maximum": 180
+                "healthInsuranceCompanyNumber": {
+                    "title": "IK der Krankenversicherung",
+                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 9,
+                    "maxLength": 9
+                },
+                "insuranceNumber": {
+                    "title": "Versichertennummer (Alphanumerisch)",
+                    "description": "Die Versichertennummer",
+                    "type": "string"
                 }
             },
             "unevaluatedProperties": false,
             "examples": [
                 {
-                    "lat": 65.453323,
-                    "lon": 14.542343
+                    "healthInsuranceCompany": "Musterkasse",
+                    "healthInsuranceCompanyNumber": "101234567",
+                    "insuranceNumber": "S123456789"
                 }
             ]
         },
-        "missionObject.schema.json": {
-            "title": "Einsatz-Zielobjekt",
-            "description": "Ein Einsatz-Zielobjekt. Obligat ist der Name des Objekts",
-            "required": [
-                "name"
-            ],
+        "initialAssessment.schema.json": {
+            "title": "Ersteinschätzung",
+            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
+            "required": [],
             "type": "object",
+            "minProperties": 1,
             "properties": {
-                "name": {
-                    "title": "Objektname",
-                    "description": "Der Name des Objekts.",
-                    "type": "string"
+                "rmi": {
+                    "title": "Rückmeldeindikator",
+                    "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 3,
+                    "maxLength": 3
+                },
+                "rmc": {
+                    "title": "Rückmeldecode",
+                    "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 1
+                },
+                "pzc": {
+                    "title": "Patientenzuweisungscode",
+                    "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
+                    "type": "string",
+                    "pattern": "^[0-9]*$",
+                    "minLength": 6,
+                    "maxLength": 6
                 },
                 "additionalInformation": {
+                    "type": "string",
                     "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen, welche nicht in anderen Feldern dargestellt werden können.",
-                    "type": "string"
+                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
                 }
             },
             "unevaluatedProperties": false,
             "examples": [
                 {
-                    "name": "Krankenhaus Musterstift",
-                    "additionalInformation": "Weitere Informationen"
+                    "rmi": "360",
+                    "rmc": "360543215",
+                    "pzc": "360401",
+                    "additionalInformation": "unspezifischer Notfall"
                 }
             ]
         },
@@ -2910,86 +2990,6 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
                 }
             ],
             "unevaluatedProperties": false
-        },
-        "healthInsuranceInformation.schema.json": {
-            "title": "Informationen zum Versicherungsverhältnis",
-            "description": "Informationen zum Versicherungsverhältnis. Obligat sind Name und IK der Krankenversicherung sowie die Versichertennummer.",
-            "required": [],
-            "type": "object",
-            "properties": {
-                "healthInsuranceCompany": {
-                    "title": "Name der Krankenversicherung",
-                    "description": "Der Name der Krankenversicherung.",
-                    "type": "string"
-                },
-                "healthInsuranceCompanyNumber": {
-                    "title": "IK der Krankenversicherung",
-                    "description": "Das Institutskennzeichen der Krankenversicherung als neunstellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 9,
-                    "maxLength": 9
-                },
-                "insuranceNumber": {
-                    "title": "Versichertennummer (Alphanumerisch)",
-                    "description": "Die Versichertennummer",
-                    "type": "string"
-                }
-            },
-            "unevaluatedProperties": false,
-            "examples": [
-                {
-                    "healthInsuranceCompany": "Musterkasse",
-                    "healthInsuranceCompanyNumber": "101234567",
-                    "insuranceNumber": "S123456789"
-                }
-            ]
-        },
-        "initialAssessment.schema.json": {
-            "title": "Ersteinschätzung",
-            "description": "Eine Ersteinschätzung eines Patienten. Mindestens eine Eigenschaft (rmi, rmc, pzc oder additionalInformation) muss vorhanden sein.",
-            "required": [],
-            "type": "object",
-            "minProperties": 1,
-            "properties": {
-                "rmi": {
-                    "title": "Rückmeldeindikator",
-                    "description": "Der Rückmeldeindikator als dreistellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 3,
-                    "maxLength": 3
-                },
-                "rmc": {
-                    "title": "Rückmeldecode",
-                    "description": "Der Rückmeldecode als mindestens einstellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 1
-                },
-                "pzc": {
-                    "title": "Patientenzuweisungscode",
-                    "description": "Der Patientenzuweisungscode als sechsstellige Zeichenkette, die nur aus Ziffern besteht.",
-                    "type": "string",
-                    "pattern": "^[0-9]*$",
-                    "minLength": 6,
-                    "maxLength": 6
-                },
-                "additionalInformation": {
-                    "type": "string",
-                    "title": "Zusatzinformationen",
-                    "description": "Zusätzliche Freitext-Informationen zur Ersteinschätzung, welche nicht in anderen Feldern dargestellt werden können."
-                }
-            },
-            "unevaluatedProperties": false,
-            "examples": [
-                {
-                    "rmi": "360",
-                    "rmc": "360543215",
-                    "pzc": "360401",
-                    "additionalInformation": "unspezifischer Notfall"
-                }
-            ]
         }
     }
 }
@@ -3410,8 +3410,4 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$defs": {}
 }
 ```
-
-
-
-
 

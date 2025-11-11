@@ -27,6 +27,7 @@ pdf_options:
 <!-- toc -->
 
 - [Überblick](#uberblick)
+- [Ablaufbeschreibung](#ablaufbeschreibung)
 - [Partielle Umsetzung](#partielle-umsetzung)
 - [App-Nachrichten](#app-nachrichten)
     + [Verwendete Datentypen](#verwendete-datentypen)
@@ -87,6 +88,10 @@ Anzeige gebracht werden, dass das Stichwort dem System unbekannt ist,
 damit der Disponent z. B. ein passendes vorhandenes Stichwort auswählt
 oder die Klärung einleitet. Einsätze dürfen auf keinen Fall wegen
 unbekannter Stichworte unberücksichtigt bleiben.
+
+# Ablaufbeschreibung
+1. A->B: Stichwort-Katalog-Anfrage senden
+2. B->A: Stichwort-Katalog übertragen
 
 
 # Partielle Umsetzung
@@ -502,9 +507,4 @@ JSON-Listen (arrays) werden über "type: array" beschrieben. Hierbei wird der Ty
     "$defs": {}
 }
 ```
-
-
-
-
-
 

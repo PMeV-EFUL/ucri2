@@ -62,6 +62,10 @@ damit der Disponent z. B. ein passendes vorhandenes Stichwort auswählt
 oder die Klärung einleitet. Einsätze dürfen auf keinen Fall wegen
 unbekannter Stichworte unberücksichtigt bleiben.
 
+# Ablaufbeschreibung
+1. A->B: Stichwort-Katalog-Anfrage senden
+2. B->A: Stichwort-Katalog übertragen
+
 
 # Partielle Umsetzung
 Ein Teilnehmer, der ausschliesslich Abfragen durchführen will, muss die Antwortnachricht (response) nicht unterstützen.

@@ -59,6 +59,10 @@ unbekannter Einsatzmitteltyp angefordert wird, damit der Disponent nach
 Klärung den richtigen Einsatzmitteltyp zuordnen kann. Einsätze dürfen auf
 keinen Fall wegen unbekanntem Einsatzmitteltyp unberücksichtigt bleiben.
 
+# Ablaufbeschreibung
+1.	A->B: Einsatzmitteltyp-Katalog-Anfrage senden
+2.	B->A: Einsatzmitteltyp-Katalog übertragen
+
 # Partielle Umsetzung
 Ein Teilnehmer, der ausschliesslich Abfragen durchführen will, muss die Antwortnachricht (response) nicht unterstützen.
 
