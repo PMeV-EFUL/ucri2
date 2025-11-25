@@ -38,7 +38,21 @@
         "title": "Angeforderte Ressource",
         "description": "Eine angeforderte Ressource.",
         "type": "object",
-        "required": ["resourceRequestId", "resourceType", "resourceName"],
+        "required": ["resourceRequestId"],
+        "oneOf": [
+          {
+            "required": ["resourceType"],
+            "not": {
+              "required": ["resourceName"]
+            }
+          },
+          {
+            "required": ["resourceName"],
+            "not": {
+              "required": ["resourceType"]
+            }
+          }
+        ],
         "properties": {
           "resourceRequestId": {
             "title": "Resource Request ID",
@@ -143,12 +157,10 @@
     "requestedResources": [
       {
         "resourceRequestId": "10002003",
-        "resourceType": "KTW",
-        "resourceName": "KTW-1"
+        "resourceType": "KTW"
       },
       {
         "resourceRequestId": "10002005",
-        "resourceType": "RTW",
         "resourceName": "RTW-3"
       }
     ]
