@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/mobile_device_callout/0.1/mobile_device_CalloutAvailability.schema.json",
+  "unevaluatedProperties": false,
+  "title": "L2MD-Nachricht CalloutAvailability - Verfügbarkeitsstatus",
+  "description": "Verfügbarkeitsstatus",
+  "required": [
+    "availabilitystatus"
+  ],
+  "type": "object",
+  "properties": {
+    "availabilitystatus": {
+      "type": "array",
+      "title": "Verfügbarkeitsstatus",
+      "description": "Status der Verfügbarkeit eines Endgerätes",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "title": "Liste der Verfügbarkeitsmeldungen",
+        "description": "Liste der Verfügbarkeitsmeldungen",
+        "required": [
+          "mobileDevice",
+          "status"
+        ],
+        "properties": {
+          "mobileDevice": {
+            "title": "Endgerätekennung",
+            "description": "Eindeutige Kennung des abzufragenden Endgerätes",
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "title": "Verfügbarkeitsstatus",
+            "description": "Status der Verfügbarkeit des Endgerätes"
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "availabilitystatus": [
+        {
+          "mobileDevice": "123456",
+          "status": "1"
+        },
+        {
+          "mobileDevice": "sip:1235@fw.com",
+          "status": "on"
+        }
+      ]
+    }
+  ]
+}

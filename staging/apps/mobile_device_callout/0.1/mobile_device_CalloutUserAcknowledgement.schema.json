@@ -1,0 +1,46 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/mobile_device_callout/0.1/mobile_device_CalloutAcknowledgement.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "unevaluatedProperties": false,
+  "title": "L2MD-Nachricht CalloutAcknowledgement",
+  "description": "Alarmierungsantwort des mobilen Endgerätes",
+  "required": [ "acknowledgement" ],
+  "type": "object",
+  "properties": {
+      "acknowledgement": {
+     "type": "array",
+      "title": "Alarmierungsantwort",
+      "description": "Antwort eines alarmierten Endgerätes",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "title": "Liste der Antworten",
+        "description": "Liste der Antworten",
+        "required": ["mobileDevice", "answer"],
+        "properties": {
+          "mobileDevice": {
+			"title": "Endgerätekennung",
+			"description": "Eindeutige Kennung des antwortenden Endgerätes",
+			"type": "string"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Alarmierungsantwort",
+            "description": "Antwort des Endgerätes"
+          }
+        }
+      }
+    }
+
+  },
+  "examples": [{
+    "acknowledgement": [{
+		"mobileDevice": "123456",
+		"answer": "1"
+		},{
+		"mobileDevice": "sip:1235@fw.com",
+		"answer": "komme"
+		}
+	]
+  }]
+}

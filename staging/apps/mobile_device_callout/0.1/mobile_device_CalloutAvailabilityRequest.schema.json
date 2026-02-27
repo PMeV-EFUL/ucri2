@@ -1,0 +1,25 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/apps/mobile_device_callout/0.1/mobile_device_CalloutAvailabilityRequest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "unevaluatedProperties": false,
+  "title": "L2MD-Nachricht CalloutAvailabilityRequest - Abfrage der Verfügbarkeit mobiler Endgeräte",
+  "description": "Abfrage der Verfügbarkeit mobiler Endgeräte",
+  "required": [ "mobileDevices" ],
+  "type": "object",
+  "properties": {
+    "mobileDevices": {
+      "title": "Liste abzufragender mobiler Endgeräte",
+      "description": "Liste eindeutiger Kennungen der abzufragenden mobilen Endgeräte",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Kennung des abzufragenden mobilen Endgerätes",
+        "description": "Eindeutige Kennung des abzufragenden Endgerätes",
+        "type": "string"
+      }
+    }
+  },
+  "examples": [{
+    "mobileDevices": [ "122334", "122335", "sip:1234@fw.com" ]
+  }]
+}
