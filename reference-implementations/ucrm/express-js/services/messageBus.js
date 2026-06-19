@@ -371,6 +371,7 @@ function sendReceiveResponse(destinations,maxMessageCount,response){
         }
         //this works because each message only has a single destination for now...
         message.destination = destinationId;
+        delete message.destinations;
       }
       messagesToReturn = messagesToReturn.concat(filteredMessagesForDestination);
     }
