@@ -458,7 +458,7 @@ export async function confirmMessages(messageRef,username) {
       if (message.payload.appId!=TRANSPORT_LAYER_APPID && message.ack!=="NONE"){
         let originalSource = message.source;
         console.log(`sending delivery success message for messageId ${message.messageId} back to message source ${originalSource}...`);
-        let originalDestination = message.destinations[0];
+        let originalDestination = message.destination;
         const successMessage={
           "refMessageId": message.messageId,
           "destination": originalDestination,
