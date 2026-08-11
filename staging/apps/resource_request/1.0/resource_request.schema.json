@@ -40,18 +40,8 @@
         "type": "object",
         "required": ["resourceRequestId"],
         "oneOf": [
-          {
-            "required": ["resourceType"],
-            "not": {
-              "required": ["resourceName"]
-            }
-          },
-          {
-            "required": ["resourceName"],
-            "not": {
-              "required": ["resourceType"]
-            }
-          }
+          { "required": ["resourceType"] },
+          { "required": ["resourceName"] }
         ],
         "properties": {
           "resourceRequestId": {
