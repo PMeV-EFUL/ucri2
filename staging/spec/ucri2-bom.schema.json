@@ -1,0 +1,121 @@
+{
+  "$id": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/staging/spec/ucri2-bom.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UCRI2-Spezifikations-Bundle (BOM)",
+  "description": "Beschreibt ein UCRI2-Spezifikations-Bundle, welches eine konkrete Version der UCRI2-Transportschicht mit einem Satz konkreter UCRI2-App-Versionen zu einem prüfbaren Interoperabilitätsstand zusammenfasst. Alle Versionsangaben sind exakt; Versionsbereiche oder Platzhalter sind nicht zulässig.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "bomVersion",
+    "calendarLabel",
+    "transportLayerVersion",
+    "apps"
+  ],
+  "properties": {
+    "$schema": {
+      "title": "Schema-Referenz",
+      "description": "Verweis auf das Schema, gegen welches dieses Bundle validiert wird. Dient ausschließlich der Werkzeugunterstützung.",
+      "type": "string",
+      "format": "uri"
+    },
+    "bomVersion": {
+      "title": "Bundle-Version",
+      "description": "Eigenständige Version des Spezifikations-Bundles nach Semantic Versioning 2.0.0. Sie ist von der Transportschicht-Version entkoppelt und leitet sich aus den Versionssprüngen der enthaltenen Artefakte ab.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$",
+      "examples": [ "1.0.0" ]
+    },
+    "calendarLabel": {
+      "title": "Kalendarisches Label",
+      "description": "Rein kommunikatives Label des Bundles, z.B. für Beschaffung und Betrieb. Trägt keine Kompatibilitätsaussage; maßgeblich ist stets die Bundle-Version.",
+      "type": "string",
+      "minLength": 1,
+      "examples": [ "UCRI2 Release 2026.1" ]
+    },
+    "transportLayerVersion": {
+      "title": "Transportschicht-Version",
+      "description": "Exakte Version der UCRI2-Transportschicht nach Semantic Versioning 2.0.0, die Bestandteil dieses Bundles ist.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$",
+      "examples": [ "2.0.0" ]
+    },
+    "apps": {
+      "title": "Enthaltene UCRI2-Apps",
+      "description": "Liste der UCRI2-Apps, die Bestandteil dieses Bundles sind. Jede App darf höchstens einmal enthalten sein.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/bomAppEntry" }
+    }
+  },
+  "$defs": {
+    "bomAppEntry": {
+      "title": "BOM-Eintrag einer UCRI2-App",
+      "description": "Verweist auf genau eine UCRI2-App in genau einer Version.",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "appId",
+        "appVersion",
+        "sourceRef",
+        "mandatory"
+      ],
+      "properties": {
+        "appId": {
+          "title": "App-ID",
+          "description": "Eindeutiger Bezeichner der UCRI2-App, entspricht dem Verzeichnisnamen der App.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "examples": [ "incident_transfer_with_patient" ]
+        },
+        "appVersion": {
+          "title": "Vollständige App-Version",
+          "description": "Exakte Version der App nach Semantic Versioning 2.0.0 inklusive PATCH-Stelle. Auf der Leitung, im KT-Register, in den Schema-$ids sowie in den Verzeichnisnamen wird demgegenüber die verkürzte Form MAJOR.MINOR verwendet.",
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$",
+          "examples": [ "1.0.0" ]
+        },
+        "sourceRef": {
+          "title": "Quellreferenz",
+          "description": "Eindeutiger Git-Tag oder Commit-Hash im UCRI2-Repository, unter dem der zu dieser App-Version gehörende Schemastand abgerufen werden kann. Löst den exakten Stand auch dann eindeutig auf, wenn sich die verkürzte Versionsangabe MAJOR.MINOR nicht geändert hat.",
+          "type": "string",
+          "minLength": 1,
+          "examples": [ "v2.0.0" ]
+        },
+        "mandatory": {
+          "title": "Obligatorische Unterstützung",
+          "description": "Gibt an, ob jedes System, welches dieses Bundle implementiert, die App in der angegebenen Version zwingend unterstützen muss (true) oder ob die Unterstützung von der fachlichen Rolle des Systems abhängt (false).",
+          "type": "boolean"
+        }
+      },
+      "examples": [
+        {
+          "appId": "transport_layer_messages",
+          "appVersion": "1.0.0",
+          "sourceRef": "v2.0.0",
+          "mandatory": true
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "bomVersion": "1.0.0",
+      "calendarLabel": "UCRI2 Release 2026.1",
+      "transportLayerVersion": "2.0.0",
+      "apps": [
+        {
+          "appId": "transport_layer_messages",
+          "appVersion": "1.0.0",
+          "sourceRef": "v2.0.0",
+          "mandatory": true
+        },
+        {
+          "appId": "notification_text",
+          "appVersion": "1.0.0",
+          "sourceRef": "v2.0.0",
+          "mandatory": false
+        }
+      ]
+    }
+  ]
+}

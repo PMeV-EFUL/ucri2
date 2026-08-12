@@ -1,0 +1,68 @@
+{
+  "$schema": "https://github.com/PMeV-EFUL/ucri2/raw/refs/heads/main/staging/spec/ucri2-bom.schema.json",
+  "bomVersion": "1.0.0",
+  "calendarLabel": "UCRI2 Release 2026.1",
+  "transportLayerVersion": "2.0.0",
+  "apps": [
+    {
+      "appId": "transport_layer_messages",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": true
+    },
+    {
+      "appId": "classification_catalogue",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "incident_transfer",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "incident_transfer_police",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "incident_transfer_with_patient",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "notification_text",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "patient_transfer",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "patient_transport",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "resource_request",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    },
+    {
+      "appId": "resource_type_catalogue",
+      "appVersion": "1.0.0",
+      "sourceRef": "v2.0.0",
+      "mandatory": false
+    }
+  ]
+}
