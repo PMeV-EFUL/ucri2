@@ -27,7 +27,9 @@ pdf_options:
 <!-- toc -->
 <!-- tocstop -->
 # Überblick
-Der Use Case Einsatzmittelanforderung dient dazu, Einsatzmittel einer anderen Leitstelle als Unterstützung zur Einsatzbewältigung anzufordern. Beispiel: Leitstelle A bekommt einen Verkehrsunfall mit mehreren Verletzten im Grenzgebiet zu Leitstelle B gemeldet. Es werden 5 RTWs benötigt, Leitstelle A kann jedoch nur 4 RTWs im näheren Umfeld disponieren. Leitstelle A fordert bei Leitstelle B einen RTW zur Unterstützung an. Leitstelle B bestätigt die Unterstützung und entsendet entsprechende Einsatzmittel an A.
+Der Use Case Einsatzmittelanforderung dient dazu, Einsatzmittel einer anderen Leitstelle als Unterstützung zur Einsatzbewältigung anzufordern. Es ist damit möglich ein ganz konkretes Einsatzmittel anzufordern oder einen bestimmten Einsatzmitteltyp.
+
+Beispiel: Leitstelle A bekommt einen Verkehrsunfall mit mehreren Verletzten im Grenzgebiet zu Leitstelle B gemeldet. Es werden 5 RTWs benötigt, Leitstelle A kann jedoch nur 4 RTWs im näheren Umfeld disponieren. Leitstelle A fordert bei Leitstelle B einen RTW zur Unterstützung an. Leitstelle B bestätigt die Unterstützung und entsendet entsprechende Einsatzmittel an A.
 
 Die nachfolgenden Abbildungen verdeutlichen die Unterschiede zur Einsatz übergabe
 Bei der Einsatzmittelanforderung verbleibt die Verantwortung für die Einsatzbewältigung in der anfordernden Leitstelle. Die Verantwortlichkeit resultiert i.A. wesentlich aus der örtlichen Zuständigkeit.
@@ -40,7 +42,7 @@ Bei der Einsatzübergabe wird die Verantwortung an die zuständige Leitstelle ab
 
 # Ablaufbeschreibung
 
-1. A->B Einsatzmittelanforderung (Konkretes Einsatzmittel oder allgemeine Anfrage z.B. RTW)
+1. A->B Einsatzmittelanforderung (Konkretes Einsatzmittel via Name oder allgemeine Anfrage für einen konkreten Einsatzmitteltyp RTW)
 2. B->A Einsatzmittelanforderung vorläufig angenommen oder abgelehnt 
 3. B->A Einsatzmittelbereitstellung 
 4. B->A Bereitgestelltes EM ausgerückt 
